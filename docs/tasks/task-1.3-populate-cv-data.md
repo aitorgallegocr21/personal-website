@@ -21,5 +21,5 @@ Ensure `src/data/cv-data.ts` exports `cvData: ResumeData` with zero TypeScript e
    - `education`: DAM and SMR details.
 
 ## Acceptance Criteria
-- [ ] Export `const cvData: ResumeData`.
-- [ ] Strict TypeScript validation (`npm run check`) succeeds with 0 errors.
+- [x] Export `const cvData: ResumeData`.
+- [x] Strict TypeScript validation (`npm run check`) succeeds with 0 errors.

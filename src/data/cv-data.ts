@@ -1,15 +1,15 @@
-import type { ResumeData } from '../types/resume';
+import type { ResumeData } from '@/types/resume';
 
 export const cvData: ResumeData = {
   personal: {
     name: "Aitor Gallego-Casilda Romero",
     title: "Desarrollador de Software Junior | Backend & Sistemas",
     email: "aitorgallegocr21@gmail.com",
-    phone: "+34 611 04 93 14",
+    phone: import.meta.env.PUBLIC_PHONE || undefined,
     location: "Herencia, Ciudad Real, España",
-    website: "https://tuportfolio.dev", // Reemplazar al desplegar
-    github: "https://github.com/aitorgcr", // Ajustar a tu slug real
-    linkedin: "https://linkedin.com/in/aitor-gallego-casilda", // Ajustar a tu slug real
+    website: "https://tuportfolio.dev",
+    github: "https://github.com/aitorgcr",
+    linkedin: "https://linkedin.com/in/aitor-gallego-casilda",
   },
 
   about: {
