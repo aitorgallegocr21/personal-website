@@ -20,5 +20,5 @@ Structure and review `docs/DOSSIER_PROFESIONAL.md` as the complete historical so
    - Detailed descriptions, technical stacks, architecture choices, and impact metrics.
 
 ## Acceptance Criteria
-- [ ] Comprehensive data documented with exact dates, titles, and technologies.
-- [ ] Clear distinction between CV-ready highlights and extended portfolio notes.
+- [x] Comprehensive data documented with exact dates, titles, and technologies.
+- [x] Clear distinction between CV-ready highlights and extended portfolio notes.
