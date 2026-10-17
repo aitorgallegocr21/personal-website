@@ -19,6 +19,6 @@ Assemble `src/pages/cv.astro` utilizing `PrintLayout`, `CVHeader`, `CVExperience
    - Height budget must not exceed 277mm (297mm minus 20mm margins).
 
 ## Acceptance Criteria
-- [ ] Route `/cv` renders without errors.
-- [ ] Document fits inside 1 single page in Chrome/Firefox Print Preview (`Ctrl + P`).
-- [ ] `npm run build` generates `/cv/index.html` cleanly.
+- [x] Route `/cv` renders without errors.
+- [x] Document fits inside 1 single page in Chrome/Firefox Print Preview (`Ctrl + P`).
+- [x] `npm run build` generates `/cv/index.html` cleanly.

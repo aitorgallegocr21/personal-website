@@ -12,12 +12,12 @@ const featuredCertificates = cvData.certificates.filter((cert) => cert.featuredI
 
 {
   featuredCertificates.length > 0 && (
-    <section class="mb-3.5">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-1 mb-2">
+    <section class="mb-3 break-inside-avoid">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5">
         {title}
       </h2>
 
-      <div class="space-y-2">
+      <div class="space-y-1.5">
         {featuredCertificates.map((cert) => (
           <article class="break-inside-avoid text-[11px]">
             <div class="flex items-baseline justify-between gap-2">
@@ -41,16 +41,6 @@ const featuredCertificates = cvData.certificates.filter((cert) => cert.featuredI
               <p class="text-zinc-600 leading-snug mt-0.5 text-pretty">
                 {cert.summary}
               </p>
-            )}
-
-            {cert.skills && cert.skills.length > 0 && (
-              <div class="mt-1 flex flex-wrap gap-1">
-                {cert.skills.map((skill) => (
-                  <span class="text-[9.5px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded border border-zinc-200/60">
-                    {skill}
-                  </span>
-                ))}
-              </div>
             )}
           </article>
         ))}

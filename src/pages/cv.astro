@@ -1,0 +1,18 @@
+---
+import PrintLayout from '@/layouts/PrintLayout.astro';
+import CVHeader from '@/components/cv/CVHeader.astro';
+import CVExperience from '@/components/cv/CVExperience.astro';
+import CVSkills from '@/components/cv/CVSkills.astro';
+import CVEducation from '@/components/cv/CVEducation.astro';
+import CVCertificates from '@/components/cv/CVCertificates.astro';
+---
+
+<PrintLayout>
+  <div class="space-y-3">
+    <CVHeader />
+    <CVExperience />
+    <CVSkills />
+    <CVEducation />
+    <CVCertificates />
+  </div>
+</PrintLayout>
