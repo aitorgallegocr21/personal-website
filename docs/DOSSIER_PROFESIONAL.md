@@ -102,4 +102,4 @@ Programa formativo intensivo de más de 120 horas lectivas cursadas en inglés, 
 ---
 
 ### B. Otras Certificaciones
-- **Iniciación al Desarrollo con IA** - BIG School.[cite: 3]
+- **Iniciación al Desarrollo con IA** - BIG School.
