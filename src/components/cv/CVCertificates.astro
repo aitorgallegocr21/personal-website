@@ -1,0 +1,60 @@
+---
+import { cvData } from '@/data/cv-data';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Certificaciones & Especialización' } = Astro.props;
+
+const featuredCertificates = cvData.certificates.filter((cert) => cert.featuredInCV);
+---
+
+{
+  featuredCertificates.length > 0 && (
+    <section class="mb-3.5">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-1 mb-2">
+        {title}
+      </h2>
+
+      <div class="space-y-2">
+        {featuredCertificates.map((cert) => (
+          <article class="break-inside-avoid text-[11px]">
+            <div class="flex items-baseline justify-between gap-2">
+              <div class="min-w-0">
+                <h3 class="font-semibold text-zinc-900 inline">
+                  {cert.title}
+                </h3>
+                <span class="text-zinc-700 font-medium"> · {cert.issuer}</span>
+                {cert.platform && (
+                  <span class="text-zinc-500 font-normal"> ({cert.platform})</span>
+                )}
+              </div>
+              {cert.hours && (
+                <span class="font-mono text-zinc-500 text-[10.5px] shrink-0">
+                  {cert.hours}
+                </span>
+              )}
+            </div>
+
+            {cert.summary && (
+              <p class="text-zinc-600 leading-snug mt-0.5 text-pretty">
+                {cert.summary}
+              </p>
+            )}
+
+            {cert.skills && cert.skills.length > 0 && (
+              <div class="mt-1 flex flex-wrap gap-1">
+                {cert.skills.map((skill) => (
+                  <span class="text-[9.5px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded border border-zinc-200/60">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}

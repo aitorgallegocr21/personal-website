@@ -17,5 +17,5 @@ Build `src/components/cv/CVCertificates.astro` to highlight high-impact training
    - Apply `break-inside-avoid`.
 
 ## Acceptance Criteria
-- [ ] Only featured certificates displayed.
-- [ ] Clear typography matching Swiss print scale (`text-[11px]`).
+- [x] Only featured certificates displayed.
+- [x] Clear typography matching Swiss print scale (`text-[11px]`).

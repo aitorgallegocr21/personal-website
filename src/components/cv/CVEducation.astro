@@ -1,0 +1,46 @@
+---
+import { cvData } from '@/data/cv-data';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Educación & Formación Reglada' } = Astro.props;
+const { education } = cvData;
+---
+
+{
+  education && education.length > 0 && (
+    <section class="mb-3.5">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-1 mb-2">
+        {title}
+      </h2>
+
+      <div class="space-y-2">
+        {education.map((edu) => (
+          <article class="break-inside-avoid text-[11px]">
+            <div class="flex items-baseline justify-between gap-2">
+              <div class="min-w-0">
+                <h3 class="font-semibold text-zinc-900 inline">
+                  {edu.degree}
+                </h3>
+                <span class="text-zinc-700 font-medium"> · {edu.institution}</span>
+              </div>
+              <span class="font-mono text-zinc-500 text-[10.5px] shrink-0">
+                {edu.period}
+              </span>
+            </div>
+
+            {edu.details && edu.details.length > 0 && (
+              <ul class="mt-0.5 space-y-0.5 text-zinc-600 leading-snug list-disc list-outside ml-3.5">
+                {edu.details.map((detail) => (
+                  <li>{detail}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
