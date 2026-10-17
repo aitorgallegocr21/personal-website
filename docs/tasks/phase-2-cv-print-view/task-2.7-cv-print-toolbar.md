@@ -19,6 +19,6 @@ Add a floating utility bar on `/cv` with an action button triggering browser pri
    - Enforce `print:hidden` so neither the bar nor its shadow renders on physical paper or generated PDF.
 
 ## Acceptance Criteria
-- [ ] Bar is visible and clickable on screen.
-- [ ] Bar is 100% hidden when opening Print Preview (`print:hidden`).
-- [ ] Zero hydration footprint beyond simple inline script.
+- [x] Bar is visible and clickable on screen.
+- [x] Bar is 100% hidden when opening Print Preview (`print:hidden`).
+- [x] Zero hydration footprint beyond simple inline script.
