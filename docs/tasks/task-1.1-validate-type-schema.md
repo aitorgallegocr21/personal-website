@@ -29,6 +29,6 @@ Ensure `src/types/resume.ts` defines complete, strictly-typed TypeScript interfa
    - Must contain `personal`, `about`, `skills`, `experience`, `projects`, `certificates`, `education`, and optional `languages`.
 
 ## Acceptance Criteria
-- [ ] TypeScript compilation (`npm run check`) passes with 0 errors.
-- [ ] No `any` type in `src/types/resume.ts`.
-- [ ] Types exported and ready for consumption in `src/data/cv-data.ts`.
+- [x] TypeScript compilation (`npm run check`) passes with 0 errors.
+- [x] No `any` type in `src/types/resume.ts`.
+- [x] Types exported and ready for consumption in `src/data/cv-data.ts`.

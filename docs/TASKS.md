@@ -16,7 +16,7 @@
 - [x] Translate agent system documentation (`AGENTS.md`, `TASKS.md`, `DESIGN_SYSTEM.md`) to English.
 
 ## Phase 1: Data Architecture & Base Types
-- [ ] [1.1 Validate strict type schema](tasks/task-1.1-validate-type-schema.md) in `src/types/resume.ts`.
+- [x] [1.1 Validate strict type schema](tasks/task-1.1-validate-type-schema.md) in `src/types/resume.ts`.
 - [ ] [1.2 Consolidate comprehensive dossier](tasks/task-1.2-consolidate-dossier.md) in `docs/DOSSIER_PROFESIONAL.md`.
 - [ ] [1.3 Populate and export cv-data.ts](tasks/task-1.3-populate-cv-data.md) without TypeScript errors.
 - [ ] [1.4 Configure PUBLIC_PHONE injection & sanitize cv-data.ts](tasks/task-1.4-env-phone-injection.md) via `import.meta.env`.

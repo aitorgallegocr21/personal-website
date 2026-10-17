@@ -46,6 +46,13 @@ export interface Education {
   details?: string[];
 }
 
+export type CertificateCategory =
+  | 'Java & Backend'
+  | 'Frontend'
+  | 'Bases de Datos'
+  | 'Inteligencia Artificial'
+  | 'Metodologías & Otros';
+
 export interface Certificate {
   id: string;
   title: string;
@@ -53,10 +60,15 @@ export interface Certificate {
   platform?: string;
   date?: string;
   hours?: string;
-  category: 'Java & Backend' | 'Frontend' | 'Bases de Datos' | 'Inteligencia Artificial';
+  category: CertificateCategory;
   summary: string;
   skills: string[];
-  featuredInCV: boolean; // Flag para decidir si entra en el resumen del PDF A4 o queda en la web
+  featuredInCV: boolean;
+}
+
+export interface Language {
+  language: string;
+  level: string;
 }
 
 export interface ResumeData {
@@ -70,5 +82,5 @@ export interface ResumeData {
   projects: Project[];
   certificates: Certificate[];
   education: Education[];
-  languages?: { language: string; level: string }[];
+  languages?: Language[];
 }
