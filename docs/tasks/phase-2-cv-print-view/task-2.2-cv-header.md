@@ -19,5 +19,5 @@ Build `src/components/cv/CVHeader.astro` to display candidate identity, professi
    - Display `cvData.about.shortSummary` in `text-[11.5px] text-zinc-700 leading-snug`.
 
 ## Acceptance Criteria
-- [ ] Header consumes only typed data from SSOT.
-- [ ] Layout height remains ultra-compact (<70mm) to reserve room for experience and skills.
+- [x] Header consumes only typed data from SSOT.
+- [x] Layout height remains ultra-compact (<70mm) to reserve room for experience and skills.
