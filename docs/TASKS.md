@@ -1,35 +1,42 @@
-# Backlog de Tareas - Portfolio & CV SSOT
+# Tasks Backlog - Portfolio & SSOT CV
 
-> **Regla para agentes:** Tomar una única microtarea por ciclo. Tras implementarla y verificarla con `npm run build`, marcar la casilla `[x]`, actualizar la documentación si aplica y realizar el commit correspondiente.
+> **Agent Directive:** Take exactly one micro-task per cycle. Once implemented and verified with `npm run build`, check the box `[x]`, update documentation if needed, and run the corresponding semantic git commit.
 
 ---
 
-## Fase 1: Arquitectura de Datos y Tipos Base
-- [x] Inicializar repositorio Astro con Tailwind CSS y TypeScript estricto.
-- [x] Configurar directrices operativas en `AGENTS.md`.
-- [ ] Validar esquema estricto de tipos en `src/types/resume.ts`.
-- [ ] Consolidar dossier exhaustivo en `docs/DOSSIER_PROFESIONAL.md`.
-- [ ] Rellenar y exportar `src/data/cv-data.ts` sin errores de compilación TypeScript.
-- [ ] Configurar inyección de `PUBLIC_PHONE` vía `import.meta.env` con fallback seguro y crear `.env.example`.
-- [ ] Implementar técnica anti-scraping (ofuscación CSS / click-to-reveal) para el teléfono en componentes web.
+## Phase 0: Project Setup & Tooling
+- [x] Initialize Astro repository with Tailwind CSS and strict TypeScript.
+- [x] Configure agent operating guidelines in `AGENTS.md`.
+- [x] Configure TypeScript path aliases (`@/*`, `@components/*`, `@layouts/*`, `@data/*`, `@types/*`, `@styles/*`).
+- [x] Configure environment variable typings in `src/env.d.ts`.
+- [x] Set up base project directory tree (`components/cv`, `components/portfolio`, `components/ui`, `layouts`).
+- [x] Configure A4 print rules and exact color reproduction in `src/styles/global.css`.
+- [x] Translate agent system documentation (`AGENTS.md`, `TASKS.md`, `DESIGN_SYSTEM.md`) to English.
 
-## Fase 2: Motor de Impresión y Vista CV (/cv)
-- [ ] Crear layout de impresión `src/layouts/PrintLayout.astro` con `@page { size: A4; margin: 10mm 12mm; }`.
-- [ ] Crear componente `src/components/cv/CVHeader.astro` (nombre, títulos, datos de contacto, enlaces).
-- [ ] Crear componente `src/components/cv/CVExperience.astro` (filtrando `featuredInCV: true`, `break-inside-avoid`).
-- [ ] Crear componente `src/components/cv/CVSkills.astro` (categorías compactas, badges minimalistas).
-- [ ] Crear componente `src/components/cv/CVCertificates.astro` (agrupaciones formativas de NTT Data y otros).
-- [ ] Ensamblar `src/pages/cv.astro` y verificar que el contenido quepa en exactamente 1 página A4 sin scroll huérfano.
-- [ ] Agregar barra de utilidades flotante con botón de imprimir (`window.print()`) oculta con `print:hidden`.
+## Phase 1: Data Architecture & Base Types
+- [ ] Validate strict type schema in `src/types/resume.ts`.
+- [ ] Consolidate comprehensive dossier in `docs/DOSSIER_PROFESIONAL.md`.
+- [ ] Complete and export `src/data/cv-data.ts` without TypeScript compilation errors.
+- [ ] Configure `PUBLIC_PHONE` injection via `import.meta.env` with safe fallback and sanitize `src/data/cv-data.ts`.
+- [ ] Implement anti-scraping technique (CSS obfuscation / click-to-reveal) for phone numbers in web views.
 
-## Fase 3: Portfolio Web Interactivo (/)
-- [ ] Crear layout principal `src/layouts/BaseLayout.astro` (meta tags, Open Graph, SEO, fuentes).
-- [ ] Crear componente `Hero.astro` con biografía extendida y enlaces a perfiles.
-- [ ] Crear sección `ProjectsGrid.astro` con cards interactivas, links a GitHub/demos y badges de tecnología.
-- [ ] Crear sección de trayectoria formativa y laboral completa (incluyendo experiencia de tenis y hostelería).
-- [ ] Crear visor o modal interactivo de certificaciones por categorías.
+## Phase 2: Print Engine & CV View (/cv)
+- [ ] Create print layout `src/layouts/PrintLayout.astro` with `@page { size: A4; margin: 10mm 12mm; }`.
+- [ ] Create component `src/components/cv/CVHeader.astro` (name, title, contact details, links).
+- [ ] Create component `src/components/cv/CVExperience.astro` (filtering `featuredInCV: true`, `break-inside-avoid`).
+- [ ] Create component `src/components/cv/CVSkills.astro` (compact categories, minimalist badges).
+- [ ] Create component `src/components/cv/CVCertificates.astro` (training groups from NTT Data and others).
+- [ ] Assemble `src/pages/cv.astro` and verify content fits strictly into 1 A4 page with no orphan scroll.
+- [ ] Add floating utility toolbar with print trigger (`window.print()`) hidden with `print:hidden`.
 
-## Fase 4: Automatización y Despliegue
-- [ ] Configurar script de verificación de tipos estricta (`astro check`).
-- [ ] Configurar GitHub Action de CI para validar compilación en cada Push.
-- [ ] Configurar despliegue estático en Cloudflare Pages o GitHub Pages.
+## Phase 3: Interactive Web Portfolio (/)
+- [ ] Create root layout `src/layouts/BaseLayout.astro` (meta tags, Open Graph, SEO, font links).
+- [ ] Create `Hero.astro` component with full bio and social links.
+- [ ] Create `ProjectsGrid.astro` section with interactive cards, GitHub/demo links, and tech badges.
+- [ ] Create complete timeline section covering education and work experience (including coaching and hospitality).
+- [ ] Create interactive certifications modal/viewer filtered by categories.
+
+## Phase 4: Automation & Deployment
+- [ ] Configure strict type check script (`astro check`).
+- [x] Configure GitHub Actions CI workflow to validate compilation on push/PR (`.github/workflows/ci.yml`).
+- [ ] Configure static deployment pipeline (Cloudflare Pages or GitHub Pages).
