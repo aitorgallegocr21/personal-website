@@ -17,6 +17,6 @@ Implement client-side anti-scraping obfuscation for phone numbers displayed on t
    - Create `src/components/ui/PhoneContact.astro` (or utility) supporting both modes.
 
 ## Acceptance Criteria
-- [ ] Obfuscated presentation on web view.
-- [ ] Clean semantic `tel:` link in print view.
-- [ ] Unit build verification passing without errors.
+- [x] Obfuscated presentation on web view.
+- [x] Clean semantic `tel:` link in print view.
+- [x] Unit build verification passing without errors.

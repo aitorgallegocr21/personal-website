@@ -20,7 +20,7 @@
 - [x] [1.2 Consolidate comprehensive dossier](tasks/task-1.2-consolidate-dossier.md) in `docs/DOSSIER_PROFESIONAL.md`.
 - [x] [1.3 Populate and export cv-data.ts](tasks/task-1.3-populate-cv-data.md) without TypeScript errors.
 - [x] [1.4 Configure PUBLIC_PHONE injection & sanitize cv-data.ts](tasks/task-1.4-env-phone-injection.md) via `import.meta.env`.
-- [ ] [1.5 Implement anti-scraping technique](tasks/task-1.5-anti-scraping-phone.md) for phone numbers in web views.
+- [x] [1.5 Implement anti-scraping technique](tasks/task-1.5-anti-scraping-phone.md) for phone numbers in web views.
 
 ## Phase 2: Print Engine & CV View (/cv)
 - [ ] [2.1 Create print layout](tasks/task-2.1-print-layout.md) in `src/layouts/PrintLayout.astro`.
