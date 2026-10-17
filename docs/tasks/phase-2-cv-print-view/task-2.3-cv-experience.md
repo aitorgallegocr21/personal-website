@@ -20,6 +20,6 @@ Build `src/components/cv/CVExperience.astro` displaying professional experience 
    - Apply `break-inside-avoid` to the container of each job entry.
 
 ## Acceptance Criteria
-- [ ] Only featured items render in CV view.
-- [ ] No hardcoded text; consumes SSOT.
-- [ ] Clean bullet alignment and typography.
+- [x] Only featured items render in CV view.
+- [x] No hardcoded text; consumes SSOT.
+- [x] Clean bullet alignment and typography.
