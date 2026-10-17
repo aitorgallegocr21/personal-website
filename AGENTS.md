@@ -80,3 +80,29 @@ En CADA tarea o modificación que el agente ejecute, debe seguir estrictamente e
 4. **Técnicas de Protección contra Bots (Anti-Scraping):**
    - En la vista web interactiva (`/`), ofuscar visualmente el teléfono mediante clases CSS Tailwind (`[direction:rtl] [unicode-bidi:bidi-override]`) o exponerlo mediante interacción de usuario.
    - En la vista de impresión (`/cv`), asegurar que el elemento renderice con enlaces semánticos `tel:` limpios para el PDF final.
+
+---
+
+---
+
+## 7. Protocolo de Ejecución Autónoma y Ahorro de Tokens
+
+Cuando el usuario pida avanzar en el proyecto (incluso con mensajes mínimos como *"siguiente tarea"* o *"haz la tarea X"*), debes ejecutar de forma obligatoria y secuencial este protocolo:
+
+1. **Selección estricta de alcance:** 
+   - Localiza la siguiente casilla pendiente `[ ]` en `docs/TASKS.md` (o la indicada por el usuario).
+   - No toques ni crees archivos que no pertenezcan al alcance directo de esa tarea.
+2. **Consulta puntual de contexto (JIT):**
+   - Si es un componente visual, respeta estrictamente `docs/DESIGN_SYSTEM.md`.
+   - Si requiere datos o tipos, lee exclusivamente `src/types/resume.ts`. Nunca quemes texto estático (SSOT).
+3. **Verificación obligatoria de compilación:**
+   - Antes de dar por finalizada la respuesta, valida mentalmente o mediante herramientas que el código no arroje fallos de TypeScript ni de Astro (`npm run check` / `npm run build`).
+4. **Cierre de ciclo automático:**
+   - En el mismo turno, actualiza `docs/TASKS.md` marcando la tarea como completada `[x]`.
+   - Si la tarea introdujo rutas o cambios de uso, actualiza `README.md` o la documentación correspondiente.
+5. **Formato de respuesta ultra-conciso:**
+   - Prohibido escribir introducciones, resúmenes largos o prosa innecesaria.
+   - Muestra únicamente el código nuevo o modificado, confirma que `docs/TASKS.md` ha sido actualizado y proporciona el comando de Git con el mensaje semántico correspondiente[cite: 1]:
+     ```bash
+     git add . && git commit -m "tipo(alcance): mensaje descriptivo"
+     ```
