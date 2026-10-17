@@ -1,0 +1,55 @@
+---
+interface Props {
+  phone?: string;
+  mode?: 'web' | 'print' | 'auto';
+  class?: string;
+  className?: string;
+}
+
+const { phone, mode = 'auto', class: classProp, className } = Astro.props;
+const appliedClass = classProp || className || '';
+
+if (!phone) {
+  return null;
+}
+
+const cleanPhone = phone.replace(/[^\d+]/g, '');
+const reversedPhone = phone.split('').reverse().join('');
+---
+
+{
+  mode === 'print' && (
+    <a href={`tel:${cleanPhone}`} class:list={['text-inherit hover:underline', appliedClass]}>
+      <slot />
+      <span>{phone}</span>
+    </a>
+  )
+}
+
+{
+  mode === 'web' && (
+    <span class:list={['inline-flex items-center gap-1.5', appliedClass]}>
+      <slot />
+      <span class="inline-block select-all [direction:rtl] [unicode-bidi:bidi-override]" title="Teléfono de contacto">
+        {reversedPhone}
+      </span>
+    </span>
+  )
+}
+
+{
+  mode === 'auto' && (
+    <span class:list={['inline-flex items-center gap-1.5', appliedClass]}>
+      <slot />
+      <span
+        class="inline-block select-all [direction:rtl] [unicode-bidi:bidi-override] print:hidden"
+        title="Teléfono de contacto"
+      >
+        {reversedPhone}
+      </span>
+      <a href={`tel:${cleanPhone}`} class="hidden print:inline text-inherit hover:underline">
+        {phone}
+      </a>
+    </span>
+  )
+}

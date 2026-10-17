@@ -1,0 +1,32 @@
+---
+import { Printer, ArrowLeft } from 'lucide-astro';
+---
+
+<aside
+  class="fixed bottom-6 right-6 z-50 flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/90 text-white shadow-xl border border-zinc-800 print:hidden backdrop-blur-sm"
+  aria-label="Acciones del CV"
+>
+  <a
+    href="/"
+    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/80 transition-colors"
+  >
+    <ArrowLeft class="w-3.5 h-3.5" />
+    <span>Portfolio</span>
+  </a>
+
+  <button
+    id="print-cv-btn"
+    type="button"
+    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-900 hover:bg-white transition-colors cursor-pointer shadow-sm"
+  >
+    <Printer class="w-3.5 h-3.5" />
+    <span>Descargar / Imprimir PDF</span>
+  </button>
+</aside>
+
+<script>
+  const printBtn = document.getElementById('print-cv-btn');
+  printBtn?.addEventListener('click', () => {
+    window.print();
+  });
+</script>

@@ -1,0 +1,107 @@
+---
+import { cvData } from '@/data/cv-data';
+import PhoneContact from '@/components/ui/PhoneContact.astro';
+import { MapPin, Mail, Github, Linkedin, Phone, Globe } from 'lucide-astro';
+
+const { personal, about } = cvData;
+
+const formatUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+---
+
+<header class="mb-4 pb-3 border-b border-zinc-200">
+  <div class="flex flex-col gap-0.5">
+    <h1 class="text-2xl font-bold tracking-tight text-zinc-900 leading-none">
+      {personal.name}
+    </h1>
+    <p class="text-sm font-medium text-zinc-600">
+      {personal.title}
+    </p>
+  </div>
+
+  <ul class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs text-zinc-600 font-mono">
+    {
+      personal.location && (
+        <li class="inline-flex items-center gap-1">
+          <MapPin class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+          <span>{personal.location}</span>
+        </li>
+      )
+    }
+
+    {
+      personal.email && (
+        <li class="inline-flex items-center gap-1">
+          <Mail class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+          <a href={`mailto:${personal.email}`} class="hover:text-zinc-900 hover:underline">
+            {personal.email}
+          </a>
+        </li>
+      )
+    }
+
+    {
+      personal.phone && (
+        <li class="inline-flex items-center gap-1">
+          <Phone class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+          <PhoneContact phone={personal.phone} mode="auto" />
+        </li>
+      )
+    }
+
+    {
+      personal.github && (
+        <li class="inline-flex items-center gap-1">
+          <Github class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+          <a
+            href={personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-zinc-900 hover:underline"
+          >
+            {formatUrl(personal.github)}
+          </a>
+        </li>
+      )
+    }
+
+    {
+      personal.linkedin && (
+        <li class="inline-flex items-center gap-1">
+          <Linkedin class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+          <a
+            href={personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-zinc-900 hover:underline"
+          >
+            {formatUrl(personal.linkedin)}
+          </a>
+        </li>
+      )
+    }
+
+    {
+      personal.website && (
+        <li class="inline-flex items-center gap-1">
+          <Globe class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+          <a
+            href={personal.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-zinc-900 hover:underline"
+          >
+            {formatUrl(personal.website)}
+          </a>
+        </li>
+      )
+    }
+  </ul>
+
+  {
+    about.shortSummary && (
+      <p class="text-[11.5px] text-zinc-700 leading-snug mt-2 max-w-prose text-pretty">
+        {about.shortSummary}
+      </p>
+    )
+  }
+</header>
