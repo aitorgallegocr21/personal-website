@@ -19,7 +19,7 @@
 - [x] [1.1 Validate strict type schema](tasks/task-1.1-validate-type-schema.md) in `src/types/resume.ts`.
 - [x] [1.2 Consolidate comprehensive dossier](tasks/task-1.2-consolidate-dossier.md) in `docs/DOSSIER_PROFESIONAL.md`.
 - [x] [1.3 Populate and export cv-data.ts](tasks/task-1.3-populate-cv-data.md) without TypeScript errors.
-- [ ] [1.4 Configure PUBLIC_PHONE injection & sanitize cv-data.ts](tasks/task-1.4-env-phone-injection.md) via `import.meta.env`.
+- [x] [1.4 Configure PUBLIC_PHONE injection & sanitize cv-data.ts](tasks/task-1.4-env-phone-injection.md) via `import.meta.env`.
 - [ ] [1.5 Implement anti-scraping technique](tasks/task-1.5-anti-scraping-phone.md) for phone numbers in web views.
 
 ## Phase 2: Print Engine & CV View (/cv)

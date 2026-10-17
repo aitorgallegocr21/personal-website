@@ -21,6 +21,6 @@ Decouple phone number from git tracking by reading `import.meta.env.PUBLIC_PHONE
    - Ensure real `.env` remains in `.gitignore`.
 
 ## Acceptance Criteria
-- [ ] No hardcoded phone number in `src/data/cv-data.ts`.
-- [ ] Safe fallback when environment variable is unset.
-- [ ] `npm run build` succeeds without `PUBLIC_PHONE` being mandatory.
+- [x] No hardcoded phone number in `src/data/cv-data.ts`.
+- [x] Safe fallback when environment variable is unset.
+- [x] `npm run build` succeeds without `PUBLIC_PHONE` being mandatory.
