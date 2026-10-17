@@ -18,6 +18,6 @@ Build `src/components/cv/CVSkills.astro` to present technical skills grouped int
    - Keep total height under 25mm to avoid pushing content onto page 2.
 
 ## Acceptance Criteria
-- [ ] Renders all skill groups from `cvData.skills`.
-- [ ] Responsive/fluid within A4 constraints.
-- [ ] Zero TypeScript errors.
+- [x] Renders all skill groups from `cvData.skills`.
+- [x] Responsive/fluid within A4 constraints.
+- [x] Zero TypeScript errors.
