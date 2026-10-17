@@ -6,7 +6,7 @@
 Build a pixel-perfect, printable A4 CV view (`/cv`) strictly driven by `cvData`, fitting on exactly 1 A4 page with zero vertical overflow, clean typographic hierarchy, and print-ready utility controls.
 
 ## Tasks
-- [ ] [2.1 Create print layout](task-2.1-print-layout.md) in `src/layouts/PrintLayout.astro`.
+- [x] [2.1 Create print layout](task-2.1-print-layout.md) in `src/layouts/PrintLayout.astro`.
 - [ ] [2.2 Create CV Header component](task-2.2-cv-header.md) in `src/components/cv/CVHeader.astro`.
 - [ ] [2.3 Create CV Experience component](task-2.3-cv-experience.md) with `break-inside-avoid`.
 - [ ] [2.4 Create CV Skills component](task-2.4-cv-skills.md) with compact categories.

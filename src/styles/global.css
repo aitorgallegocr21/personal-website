@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @page {
-  size: A4;
+  size: A4 portrait;
   margin: 10mm 12mm;
 }
 

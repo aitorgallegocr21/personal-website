@@ -25,5 +25,5 @@ Create `src/layouts/PrintLayout.astro` specialized for paper and PDF export with
    - Max width matching A4 printable boundaries (`max-w-[210mm] mx-auto p-0`).
 
 ## Acceptance Criteria
-- [ ] Layout compiles without errors in `astro check`.
-- [ ] Pure white canvas with high-contrast text (`text-zinc-900`).
+- [x] Layout compiles without errors in `astro check`.
+- [x] Pure white canvas with high-contrast text (`text-zinc-900`).
