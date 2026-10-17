@@ -1,5 +1,7 @@
 # AGENTS.md - Protocolo y Arquitectura del Proyecto
 
+> 🌐 **Language:** English | [Leer en Español](README.es.md)
+
 ## 1. Misión del Proyecto
 Construir y mantener el portfolio personal y el generador de CV imprimible en PDF con arquitectura de Fuente Única de Verdad (SSOT), rendimiento web máximo (0 KB de JS innecesario) y diseño responsive y de impresión optimizado con Astro, TypeScript y Tailwind CSS.
 
@@ -61,3 +63,20 @@ En CADA tarea o modificación que el agente ejecute, debe seguir estrictamente e
 - `astro dev --background`: Inicia el servidor en segundo plano (`astro dev stop`, `astro dev status`, `astro dev logs`).
 - `npm run build`: Comprueba tipos con TypeScript (`astro check`) y compila a HTML/CSS estático en `/dist`.
 - `npm run preview`: Previsualiza la build de producción localmente.
+
+---
+
+## 6. Privacidad, Variables de Entorno y Anti-Scraping
+1. **Cero Datos Sensibles en Texto Plano:** Queda estrictamente PROHIBIDO escribir números de teléfono personales o direcciones residenciales exactas en archivos versionados en Git (`cv-data.ts`, componentes o markdown).
+2. **Inyección en Build-Time:**
+   - El número de teléfono debe consumirse obligatoriamente mediante variable de entorno: `import.meta.env.PUBLIC_PHONE`.
+   - Si `PUBLIC_PHONE` no está definido en el entorno, el campo debe resolverse como `undefined` y los componentes deben omitir limpiamente el renderizado del teléfono sin provocar fallos de compilación.
+3. **Plantilla Segura `.env.example`:**
+   - Mantener siempre un archivo `.env.example` en la raíz con:
+     ```bash
+     PUBLIC_PHONE="+34 000 00 00 00"
+     ```
+   - El archivo real `.env` NUNCA debe incluirse en commits (bloqueado por `.gitignore`).
+4. **Técnicas de Protección contra Bots (Anti-Scraping):**
+   - En la vista web interactiva (`/`), ofuscar visualmente el teléfono mediante clases CSS Tailwind (`[direction:rtl] [unicode-bidi:bidi-override]`) o exponerlo mediante interacción de usuario.
+   - En la vista de impresión (`/cv`), asegurar que el elemento renderice con enlaces semánticos `tel:` limpios para el PDF final.

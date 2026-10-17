@@ -10,6 +10,8 @@
 - [ ] Validar esquema estricto de tipos en `src/types/resume.ts`.
 - [ ] Consolidar dossier exhaustivo en `docs/DOSSIER_PROFESIONAL.md`.
 - [ ] Rellenar y exportar `src/data/cv-data.ts` sin errores de compilación TypeScript.
+- [ ] Configurar inyección de `PUBLIC_PHONE` vía `import.meta.env` con fallback seguro y crear `.env.example`.
+- [ ] Implementar técnica anti-scraping (ofuscación CSS / click-to-reveal) para el teléfono en componentes web.
 
 ## Fase 2: Motor de Impresión y Vista CV (/cv)
 - [ ] Crear layout de impresión `src/layouts/PrintLayout.astro` con `@page { size: A4; margin: 10mm 12mm; }`.
