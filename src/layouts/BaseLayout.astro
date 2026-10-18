@@ -59,8 +59,43 @@ const ogImageURL = new URL(image, canonicalURL);
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Theme & Palette Engine Initialization (Zero-FOUC) -->
+    <script is:inline>
+      (function () {
+        try {
+          const PALETTES = ['emerald', 'sky', 'violet', 'rose', 'amber'];
+          const storedTheme = localStorage.getItem('portfolio-theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = storedTheme === 'light' || storedTheme === 'dark'
+            ? storedTheme
+            : (prefersDark ? 'dark' : 'light');
+
+          const storedPalette = localStorage.getItem('portfolio-palette');
+          const todayIndex = new Date().getDay() % PALETTES.length;
+          const palette = storedPalette && PALETTES.includes(storedPalette)
+            ? storedPalette
+            : PALETTES[todayIndex];
+
+          const root = document.documentElement;
+          if (theme === 'dark') {
+            root.classList.add('dark');
+            root.classList.remove('light');
+          } else {
+            root.classList.add('light');
+            root.classList.remove('dark');
+          }
+          root.setAttribute('data-theme', theme);
+          root.setAttribute('data-palette', palette);
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.setAttribute('data-palette', 'emerald');
+        }
+      })();
+    </script>
   </head>
-  <body class="bg-zinc-950 text-zinc-100 min-h-screen font-sans selection:bg-emerald-500/20 selection:text-emerald-400 antialiased flex flex-col">
+  <body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen font-sans selection:bg-[var(--color-accent-subtle)] selection:text-[var(--color-accent)] antialiased flex flex-col transition-colors duration-200">
     <Navbar />
     <main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <slot />
