@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-- [ ] **[Phase 4: Automation & Deployment](tasks/phase-4-ci-deployment/index.md)** — Strict check scripts, CI workflow verification, and production static hosting.
+*(Ninguna fase activa - Todas las fases del roadmap completadas)*
 
 ---
 
@@ -17,6 +17,7 @@
 ---
 
 ## Completed Phases (Archive & Changelog)
+- [x] **[Phase 4: Automation & Deployment](tasks/phase-4-ci-deployment/index.md)** — *Completed 2026-10-18* (Strict type checking, CI verification, and GitHub Pages automated deployment pipeline).
 - [x] **[Phase 3: Interactive Web Portfolio (/)](tasks/phase-3-portfolio-web/index.md)** — *Completed 2026-10-18* (BaseLayout, Hero, ProjectsGrid Bento, Timeline, Certifications viewer, 0 KB client JS overhead).
 - [x] **[Phase 2: Print Engine & CV View (/cv)](tasks/phase-2-cv-print-view/index.md)** — *Completed 2026-10-17* (A4 PrintLayout, CVHeader, CVExperience, CVSkills, CVEducation, CVCertificates, CVPrintBar, strict 1-page fit).
 - [x] **[Phase 1: Data Architecture & Base Types](tasks/phase-1-data-architecture/index.md)** — *Completed 2026-10-17* (Strict schema, master dossier, SSOT cv-data, env phone injection, anti-scraping).

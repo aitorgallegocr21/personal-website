@@ -16,5 +16,5 @@ Configure automated static hosting deployment on GitHub Pages or Cloudflare Page
    - Ensure static assets in `_astro/` have immutable cache headers.
 
 ## Acceptance Criteria
-- [ ] Deployed production site loads under 1 second.
-- [ ] Lighthouse Performance score > 98.
+- [x] Deployed production site loads under 1 second.
+- [x] Lighthouse Performance score > 98.
