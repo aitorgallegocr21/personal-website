@@ -15,5 +15,5 @@ Configure and verify strict typecheck scripts (`npm run check` and `npm run buil
    - Execute both locally and confirm 0 errors.
 
 ## Acceptance Criteria
-- [ ] `npm run check` exits with code 0.
-- [ ] Typecheck runs as a mandatory prerequisite for all builds.
+- [x] `npm run check` exits with code 0.
+- [x] Typecheck runs as a mandatory prerequisite for all builds.
