@@ -41,8 +41,14 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 ## 4. View-Specific Guidelines
 
 ### A. Web Portfolio View (`/` -> `src/pages/index.astro`)
-- Oriented towards recruiters and engineering leads: interactive, demo/repo links, sleek dark UI.
-- Use pure Astro components (`.astro`). Only use `client:*` directives when genuine client-side interactivity is required.
+- Oriented towards recruiters and engineering leads: interactive, demo/repo links, sleek dual UI (dark/light mode).
+- Use pure Astro components (`.astro`). Only use client scripts or minimal vanilla JS when genuine client-side interactivity is required (theming, modals, copy feedback).
+- **Theming & Color Palettes:** Consume CSS custom properties (`--color-accent`, etc.) defined in `src/styles/global.css`. Never hardcode static color classes (`text-emerald-400`, `bg-emerald-500`) when semantic accent tokens apply.
+- **Dynamic Calculation Rule:** Never hardcode age or dynamic periods in biographical copy. Compute dynamically from `birthDate` in `src/data/cv-data.ts`.
+- **Static Assets Convention:**
+  - Avatars and portraits: `public/images/`
+  - Project screenshots / previews: `public/images/projects/`
+  - Certificate documents / diplomas: `public/docs/certificates/`
 
 ### B. Printable CV View (`/cv` -> `src/pages/cv.astro`)
 - **Target:** Exactly fit 1 A4 page (or maximum 2 pages if career length strictly justifies it), with zero orphan lines or vertical overflow.
@@ -55,7 +61,8 @@ On EVERY task or change executed by an agent, strictly follow this loop:
   ```
 - **Page Break Avoidance:** Always apply `break-inside-avoid` to experience cards, projects, and education items.
 - **Non-printable Elements:** Use `print:hidden` on navigation, action buttons (e.g., print floating bar), and footer.
-- **Typography & Density:** Use compact scale (`text-xs` / `text-sm`), tight margins, and clean semantic `<a>` links.
+- **Typography & Density:** Use compact scale (`text-xs` / `text-sm`), tight margins, and clean semantic `<a>` links showing handles rather than lengthy URLs.
+- **Print Palette Customization:** Support real-time accent switching in `CVPrintBar.astro` that applies instantly to print styles before PDF generation.
 
 ---
 

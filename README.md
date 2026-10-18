@@ -9,10 +9,12 @@ Personal portfolio and automated single-page curriculum vitae generator built wi
 ## Key Features
 
 - **Single Source of Truth (SSOT):** All professional data, project achievements, technical skills, and educational background are centralized in `src/data/cv-data.ts`. Both the web portfolio and the printable CV consume the exact same typed dataset.
-- **Zero JavaScript Runtime:** Static Site Generation (SSG) with 0 KB of client-side JavaScript by default, achieving top performance and instant load times.
-- **Pixel-Perfect A4 PDF Export:** Dedicated print route (`/cv`) styled with CSS `@media print` rules, margin presets, and page-break guards (`break-inside-avoid`) for seamless physical printing or PDF generation (`Cmd + P` / `Ctrl + P`).
+- **Dynamic Theming & Daily Rotation:** Multi-accent color palette switcher (Emerald, Sky, Violet, Rose, Amber) with daily automated rotation, dark/light theme switch, and smooth 60fps CSS transitions.
+- **Interactive Portrait & Modern Bento:** 3D tilt profile card with availability badge, project screenshot previews, and "Current Project" indicators.
+- **In-Page Certificate Viewer:** Accessible modal to inspect and download verified course credentials and academic titles without leaving the page.
+- **Pixel-Perfect A4 PDF Export:** Dedicated print route (`/cv`) with interactive color picker in print bar, styled with CSS `@media print` rules, margin presets, and page-break guards (`break-inside-avoid`).
 - **Strictly Typed Architecture:** End-to-end type safety using TypeScript interfaces without any loose `any` declarations.
-- **Spec-Driven Agent Workflow:** Comprehensive developer and AI-agent protocols specified in `AGENTS.md` to guarantee clean iterations and automated commits.
+- **Spec-Driven Agent Workflow:** Comprehensive developer and AI-agent protocols specified in `AGENTS.md` and custom Antigravity workspace skills.
 
 ---
 
@@ -22,7 +24,7 @@ Personal portfolio and automated single-page curriculum vitae generator built wi
 - **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict Mode)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Linting & Formatting:** Prettier with `prettier-plugin-tailwindcss`, `@astrojs/check`
-- **Deployment:** Cloudflare Pages / GitHub Pages
+- **Deployment:** GitHub Pages (Automated via GitHub Actions)
 
 ---
 
@@ -30,9 +32,12 @@ Personal portfolio and automated single-page curriculum vitae generator built wi
 
 ```text
 .
-├── docs/                   # Full professional dossier and task backlog
+├── .agents/skills/         # Workspace skills for Antigravity AI pair programming
+├── docs/                   # Full professional dossier, design system and task backlog
+│   ├── DESIGN_SYSTEM.md
 │   ├── DOSSIER_PROFESIONAL.md
-│   └── TASKS.md
+│   ├── tasks/              # Phase-by-phase task specifications
+│   └── TASKS.md            # Active sprint and roadmap index
 ├── src/
 │   ├── components/         # Modular Astro components
 │   │   ├── cv/             # A4 print-optimized components
@@ -48,7 +53,11 @@ Personal portfolio and automated single-page curriculum vitae generator built wi
 │   ├── styles/             # Global CSS and print stylesheets
 │   └── types/
 │       └── resume.ts       # TypeScript schemas and data models
-├── public/                 # Static assets and generated PDF outputs
+├── public/                 # Static assets and user documents
+│   ├── docs/certificates/  # Official diplomas and certificate PDFs
+│   ├── images/             # Avatars and portrait photos
+│   │   └── projects/       # Project screenshots and previews
+│   └── _headers            # Static immutable cache rules
 ├── AGENTS.md               # Agent directives and development protocol
 ├── README.md               # English project documentation
 └── README.es.md            # Spanish project documentation
