@@ -1,0 +1,53 @@
+---
+import { cvData } from '@/data/cv-data';
+import { FileDown } from 'lucide-astro';
+
+const { personal } = cvData;
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-zinc-950/75 backdrop-blur-md">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+    <a
+      href="/"
+      class="group flex items-center gap-2.5 font-semibold text-zinc-100 hover:text-white transition-colors"
+      aria-label={`Inicio - ${personal.name}`}
+    >
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"></span>
+      <span class="text-sm sm:text-base font-bold tracking-tight">{personal.name}</span>
+    </a>
+
+    <nav class="flex items-center gap-1 sm:gap-3 text-xs sm:text-sm font-medium text-zinc-400">
+      <a
+        href="#proyectos"
+        class="px-2.5 py-1.5 rounded-md hover:text-zinc-100 hover:bg-zinc-900/60 transition-colors"
+      >
+        Proyectos
+      </a>
+      <a
+        href="#trayectoria"
+        class="px-2.5 py-1.5 rounded-md hover:text-zinc-100 hover:bg-zinc-900/60 transition-colors"
+      >
+        Trayectoria
+      </a>
+      <a
+        href="#certificaciones"
+        class="px-2.5 py-1.5 rounded-md hover:text-zinc-100 hover:bg-zinc-900/60 transition-colors"
+      >
+        Certificaciones
+      </a>
+      <a
+        href="#contacto"
+        class="px-2.5 py-1.5 rounded-md hover:text-zinc-100 hover:bg-zinc-900/60 transition-colors"
+      >
+        Contacto
+      </a>
+      <a
+        href="/cv"
+        class="inline-flex items-center gap-1.5 ml-1 sm:ml-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-200 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-xs"
+      >
+        <FileDown class="w-3.5 h-3.5 text-emerald-400" />
+        <span>CV PDF</span>
+      </a>
+    </nav>
+  </div>
+</header>

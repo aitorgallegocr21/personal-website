@@ -19,5 +19,5 @@ Create `src/layouts/BaseLayout.astro` providing meta tags, Open Graph, SEO, font
    - Clean footer referencing Astro, Tailwind, and current year.
 
 ## Acceptance Criteria
-- [ ] Valid HTML5 shell with responsive viewport and theme-color meta tags.
-- [ ] Zero TypeScript or Astro build errors.
+- [x] Valid HTML5 shell with responsive viewport and theme-color meta tags.
+- [x] Zero TypeScript or Astro build errors.

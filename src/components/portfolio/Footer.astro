@@ -1,0 +1,69 @@
+---
+import { cvData } from '@/data/cv-data';
+import { Github, Linkedin, Mail, FileText } from 'lucide-astro';
+
+const { personal } = cvData;
+const currentYear = new Date().getFullYear();
+---
+
+<footer id="contacto" class="mt-20 border-t border-zinc-800/80 bg-zinc-950/40 scroll-mt-20">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs sm:text-sm text-zinc-500">
+    <div class="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
+      <p>
+        &copy; {currentYear} <span class="text-zinc-300 font-medium">{personal.name}</span>. Todos los derechos reservados.
+      </p>
+      <p class="text-xs text-zinc-600">
+        Construido con <span class="text-zinc-400">Astro</span> &amp; <span class="text-zinc-400">Tailwind CSS</span>.
+      </p>
+    </div>
+
+    <ul class="flex items-center gap-4 text-zinc-400">
+      {personal.github && (
+        <li>
+          <a
+            href={personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-lg hover:text-zinc-100 hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
+            aria-label="GitHub"
+          >
+            <Github class="w-4 h-4" />
+          </a>
+        </li>
+      )}
+      {personal.linkedin && (
+        <li>
+          <a
+            href={personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-lg hover:text-zinc-100 hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
+            aria-label="LinkedIn"
+          >
+            <Linkedin class="w-4 h-4" />
+          </a>
+        </li>
+      )}
+      {personal.email && (
+        <li>
+          <a
+            href={`mailto:${personal.email}`}
+            class="p-2 rounded-lg hover:text-zinc-100 hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
+            aria-label="Email"
+          >
+            <Mail class="w-4 h-4" />
+          </a>
+        </li>
+      )}
+      <li>
+        <a
+          href="/cv"
+          class="p-2 rounded-lg hover:text-zinc-100 hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
+          aria-label="Curriculum Vitae"
+        >
+          <FileText class="w-4 h-4" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

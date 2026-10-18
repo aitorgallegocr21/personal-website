@@ -21,5 +21,5 @@ Create `src/components/portfolio/Hero.astro` featuring candidate introduction, a
    - Social links to GitHub and LinkedIn.
 
 ## Acceptance Criteria
-- [ ] Uses only SSOT data.
-- [ ] Includes working copy-to-clipboard functionality with zero third-party dependencies.
+- [x] Uses only SSOT data.
+- [x] Includes working copy-to-clipboard functionality with zero third-party dependencies.
