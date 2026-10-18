@@ -7,16 +7,17 @@
 ---
 
 ## Active Phase
-- [ ] **[Phase 3: Interactive Web Portfolio (/)](tasks/phase-3-portfolio-web/index.md)** — Base layout, Hero section, Bento projects grid, career timeline, and certifications viewer.
-
----
-
-## Upcoming Phases
 - [ ] **[Phase 4: Automation & Deployment](tasks/phase-4-ci-deployment/index.md)** — Strict check scripts, CI workflow verification, and production static hosting.
 
 ---
 
+## Upcoming Phases
+*(Ninguna fase pendiente - Todas planificadas)*
+
+---
+
 ## Completed Phases (Archive & Changelog)
+- [x] **[Phase 3: Interactive Web Portfolio (/)](tasks/phase-3-portfolio-web/index.md)** — *Completed 2026-10-18* (BaseLayout, Hero, ProjectsGrid Bento, Timeline, Certifications viewer, 0 KB client JS overhead).
 - [x] **[Phase 2: Print Engine & CV View (/cv)](tasks/phase-2-cv-print-view/index.md)** — *Completed 2026-10-17* (A4 PrintLayout, CVHeader, CVExperience, CVSkills, CVEducation, CVCertificates, CVPrintBar, strict 1-page fit).
 - [x] **[Phase 1: Data Architecture & Base Types](tasks/phase-1-data-architecture/index.md)** — *Completed 2026-10-17* (Strict schema, master dossier, SSOT cv-data, env phone injection, anti-scraping).
 - [x] **[Phase 0: Project Setup & Tooling](tasks/phase-0-tooling-and-english-docs/index.md)** — *Completed 2026-10-17* (Astro + Tailwind v4 + TS strict, aliases, print styles, English docs).

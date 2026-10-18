@@ -18,5 +18,5 @@ Build `src/components/portfolio/Certifications.astro` providing a categorised vi
    - Lightweight CSS-based filtering or clean semantic grid. 0 unnecessary client JS bundle weight.
 
 ## Acceptance Criteria
-- [ ] Renders all verified certificates with issuer badges.
-- [ ] Passes `npm run build` with 0 warnings.
+- [x] Renders all verified certificates with issuer badges.
+- [x] Passes `npm run build` with 0 warnings.

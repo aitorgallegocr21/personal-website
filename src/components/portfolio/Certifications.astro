@@ -1,0 +1,161 @@
+---
+import { cvData } from '@/data/cv-data';
+import { Award, CheckCircle2 } from 'lucide-astro';
+
+const { certificates } = cvData;
+
+const categories = [
+  'Todas',
+  'Java & Backend',
+  'Frontend',
+  'Bases de Datos',
+  'Inteligencia Artificial',
+] as const;
+---
+
+<section id="certificaciones" class="py-12 sm:py-16 scroll-mt-20">
+  <div class="mb-8">
+    <div class="inline-flex items-center gap-2 font-mono text-xs text-emerald-400 font-semibold tracking-wider uppercase mb-1">
+      <span>// Certificaciones &amp; Acreditaciones</span>
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">
+      Certificaciones Técnicas
+    </h2>
+    <p class="text-sm sm:text-base text-zinc-400 mt-1 max-w-xl">
+      Especializaciones formativas y competencias técnicas avaladas por NTT DATA y entidades del sector tecnológico.
+    </p>
+  </div>
+
+  <!-- Category filter buttons -->
+  <div class="flex flex-wrap items-center gap-2 mb-8" role="tablist" aria-label="Filtrar certificaciones por categoría">
+    {
+      categories.map((cat, index) => {
+        const count =
+          cat === 'Todas'
+            ? certificates.length
+            : certificates.filter((c) => c.category === cat).length;
+
+        return (
+          <button
+            type="button"
+            class:list={[
+              'cert-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer border',
+              index === 0
+                ? 'active bg-zinc-100 text-zinc-900 border-zinc-100 font-semibold shadow-xs'
+                : 'bg-zinc-900/60 text-zinc-400 border-zinc-800 hover:text-zinc-200 hover:border-zinc-700 hover:bg-zinc-800/80',
+            ]}
+            data-filter={cat}
+          >
+            <span>{cat}</span>
+            <span
+              class:list={[
+                'cert-filter-count text-[10px] px-1.5 py-0.2 rounded-full font-mono',
+                index === 0 ? 'bg-zinc-300 text-zinc-900' : 'bg-zinc-800 text-zinc-400',
+              ]}
+            >
+              {count}
+            </span>
+          </button>
+        );
+      })
+    }
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" id="certifications-grid">
+    {
+      certificates.map((cert) => (
+        <article
+          class="cert-card group relative flex flex-col justify-between rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-900/70 hover:shadow-xl hover:shadow-zinc-950/40"
+          data-category={cert.category}
+        >
+          <div>
+            <!-- Top badges row: Issuer & Category/Hours -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <Award class="w-3.5 h-3.5" />
+                <span>{cert.issuer}</span>
+              </span>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400">
+                {cert.hours && <span>{cert.hours}</span>}
+                {cert.hours && cert.platform && <span>·</span>}
+                {cert.platform && <span>{cert.platform}</span>}
+              </div>
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-base sm:text-lg font-semibold text-zinc-100 group-hover:text-white transition-colors mb-2">
+              {cert.title}
+            </h3>
+
+            <!-- Summary -->
+            {cert.summary && (
+              <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4">
+                {cert.summary}
+              </p>
+            )}
+          </div>
+
+          <!-- Skills tags -->
+          {cert.skills && cert.skills.length > 0 && (
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-800/60">
+              {cert.skills.map((skill) => (
+                <span class="inline-flex items-center gap-1 font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-800/40 text-zinc-400 border border-zinc-800 group-hover:border-zinc-700/60 transition-colors">
+                  <CheckCircle2 class="w-2.5 h-2.5 text-emerald-500/80" />
+                  <span>{skill}</span>
+                </span>
+              ))}
+            </div>
+          )}
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.cert-filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.cert-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      if (!filter) return;
+
+      // Update active button classes
+      buttons.forEach((b) => {
+        const isCurrent = b === btn;
+        b.classList.toggle('active', isCurrent);
+        b.classList.toggle('bg-zinc-100', isCurrent);
+        b.classList.toggle('text-zinc-900', isCurrent);
+        b.classList.toggle('border-zinc-100', isCurrent);
+        b.classList.toggle('shadow-xs', isCurrent);
+        b.classList.toggle('font-semibold', isCurrent);
+
+        b.classList.toggle('bg-zinc-900/60', !isCurrent);
+        b.classList.toggle('text-zinc-400', !isCurrent);
+        b.classList.toggle('border-zinc-800', !isCurrent);
+        b.classList.toggle('font-medium', !isCurrent);
+
+        const countSpan = b.querySelector('.cert-filter-count');
+        if (countSpan) {
+          countSpan.classList.toggle('bg-zinc-300', isCurrent);
+          countSpan.classList.toggle('text-zinc-900', isCurrent);
+          countSpan.classList.toggle('bg-zinc-800', !isCurrent);
+          countSpan.classList.toggle('text-zinc-400', !isCurrent);
+        }
+      });
+
+      // Show/hide cards
+      cards.forEach((card) => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'Todas' || category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

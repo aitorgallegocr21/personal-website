@@ -1,6 +1,6 @@
 # Phase 3: Interactive Web Portfolio (/)
 
-**Status:** In Progress
+**Status:** Completed (2026-10-18)
 
 ## Objective
 Build a fast, recruiter-oriented interactive web portfolio (`/`) with 0 KB unnecessary client JS, sleek dark aesthetics, Bento project showcases, full career timeline, and categorized certifications viewer.
@@ -10,4 +10,4 @@ Build a fast, recruiter-oriented interactive web portfolio (`/`) with 0 KB unnec
 - [x] [3.2 Create Hero.astro component](task-3.2-hero-section.md) with bio and action triggers.
 - [x] [3.3 Create ProjectsGrid.astro section](task-3.3-projects-grid.md) with Bento cards and tags.
 - [x] [3.4 Create Career & Education Timeline](task-3.4-career-timeline.md) covering full path.
-- [ ] [3.5 Create Certifications Viewer](task-3.5-certifications-viewer.md) by category.
+- [x] [3.5 Create Certifications Viewer](task-3.5-certifications-viewer.md) by category.
