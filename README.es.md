@@ -9,10 +9,12 @@ Sitio web personal y generador automatizado de currículum vitae en formato PDF 
 ## Características Principales
 
 - **Fuente Única de Verdad (SSOT):** Todos los datos biográficos, experiencia, proyectos, habilidades técnicas y formación académica residen en `src/data/cv-data.ts`. Tanto la web interactiva como el CV descargable leen el mismo conjunto de datos tipado.
-- **Cero JavaScript en el Cliente:** Generación estática pura (SSG) sin descarga de frameworks en tiempo de ejecución (0 KB JS), obteniendo la máxima velocidad de carga y puntuación perfecta en Google Lighthouse.
-- **Exportación A4 Perfecta a PDF:** Ruta de impresión dedicada (`/cv`) diseñada con reglas CSS `@media print`, márgenes estandarizados y prevención de saltos de línea huérfanos (`break-inside-avoid`) para imprimir o guardar en PDF (`Ctrl + P` / `Cmd + P`).
+- **Motor de Theming Dinámico & Rotación Diaria:** Selector de paleta cromática multi-acento (Esmeralda, Sky, Violeta, Rosa, Ámbar) con rotación automática por día de la semana, alternador de modo claro/oscuro y transiciones CSS fluidas a 60 FPS.
+- **Retrato Interactivo & Bento Moderno:** Tarjeta de perfil con micro-interacción 3D tilt, indicador de disponibilidad pulsante, capturas de proyectos e insignia de "Proyecto Actual".
+- **Visor Modal de Certificados:** Componente accesible para previsualizar y descargar credenciales oficiales y títulos académicos sin abandonar la página.
+- **Exportación A4 Perfecta a PDF:** Ruta de impresión dedicada (`/cv`) con selector dinámico de color en la barra de acciones, maquetación matemática a 1 página y protección ante saltos huérfanos (`break-inside-avoid`).
 - **Arquitectura Tipada Estricta:** Comprobación estática integral mediante interfaces de TypeScript, sin uso de tipos laxos como `any`.
-- **Desarrollo Guiado por Especificaciones para Agentes:** Normas arquitectónicas, de ahorro de contexto y de commits semánticos consolidadas en `AGENTS.md`.
+- **Desarrollo Guiado por Especificaciones para Agentes:** Normas arquitectónicas, de ahorro de contexto y de commits semánticos consolidadas en `AGENTS.md` y skills especializadas de Antigravity.
 
 ---
 
@@ -22,7 +24,7 @@ Sitio web personal y generador automatizado de currículum vitae en formato PDF 
 - **Lenguaje:** [TypeScript](https://www.typescriptlang.org/) (Modo Estricto)
 - **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
 - **Herramientas de Calidad:** Prettier con plugin oficial de Tailwind, `@astrojs/check`
-- **Despliegue:** Cloudflare Pages / GitHub Pages
+- **Despliegue:** GitHub Pages (Automatizado mediante GitHub Actions)
 
 ---
 
@@ -30,9 +32,12 @@ Sitio web personal y generador automatizado de currículum vitae en formato PDF 
 
 ```text
 .
-├── docs/                   # Dossier profesional maestro y backlog de tareas
+├── .agents/skills/         # Skills de workspace para pair programming con Antigravity
+├── docs/                   # Dossier profesional, sistema de diseño y backlog
+│   ├── DESIGN_SYSTEM.md
 │   ├── DOSSIER_PROFESIONAL.md
-│   └── TASKS.md
+│   ├── tasks/              # Especificaciones detalladas de cada tarea
+│   └── TASKS.md            # Índice de sprints y fases del roadmap
 ├── src/
 │   ├── components/         # Componentes modulares Astro
 │   │   ├── cv/             # Componentes compactos optimizados para impresión A4
@@ -48,7 +53,11 @@ Sitio web personal y generador automatizado de currículum vitae en formato PDF 
 │   ├── styles/             # Estilos globales y reglas de impresión
 │   └── types/
 │       └── resume.ts       # Esquema TypeScript y contratos de datos
-├── public/                 # Assets estáticos y PDF exportado
+├── public/                 # Documentos de usuario y assets estáticos
+│   ├── docs/certificates/  # Diplomas y certificados oficiales en PDF
+│   ├── images/             # Avatares y fotos de perfil
+│   │   └── projects/       # Capturas y vistas previas de proyectos
+│   └── _headers            # Reglas de caché inmutable
 ├── AGENTS.md               # Protocolo y directrices para agentes de IA
 ├── README.md               # Documentación principal en inglés
 └── README.es.md            # Documentación en español

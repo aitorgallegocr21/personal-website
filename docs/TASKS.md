@@ -7,12 +7,12 @@
 ---
 
 ## Active Phase
-*(Ninguna fase activa - Todas las fases del roadmap completadas)*
+- [ ] **[Phase 5: Visual Identity, Theming & Interactive Portfolio](tasks/phase-5-visual-theming-portfolio/index.md)** — Dynamic color palettes with daily rotation, dark/light mode, interactive 3D portrait, project previews, contact section, and in-page certificate viewer.
 
 ---
 
 ## Upcoming Phases
-*(Ninguna fase pendiente - Todas planificadas)*
+- [ ] **[Phase 6: Printable CV Redesign & PDF Engine V2](tasks/phase-6-cv-redesign/index.md)** — Editorial A4 redesign, avatar container, clean handles, and interactive print palette switcher.
 
 ---
 

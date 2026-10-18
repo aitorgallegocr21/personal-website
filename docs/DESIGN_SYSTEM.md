@@ -30,7 +30,43 @@ UI/UX design specification inspired by modern engineering tools (Linear, Raycast
 | **Tech Accent** | `text-emerald-400` | `#34d399` | Availability status indicator |
 | **Accent Fill** | `bg-emerald-500/10` | `rgba(16, 185, 129, 0.1)` | Pill badge background |
 
-### B. Print / PDF View (Swiss Minimalist - Light Mode)
+### B. Web View (Light Mode)
+
+| Semantic Token | Tailwind Class | Hex / Channel | Purpose |
+|---|---|---|---|
+| **Primary Background** | `bg-zinc-50` | `#fafafa` | Canvas background |
+| **Card Surface** | `bg-white/80` | `rgba(255, 255, 255, 0.8)` | Clean card surface with `backdrop-blur-sm` |
+| **Hover Surface** | `hover:bg-white` | `#ffffff` | Elevated hover state |
+| **Base Border** | `border-zinc-200` | `#e4e4e7` | Separation borders |
+| **Hover Border** | `hover:border-zinc-300` | `#d4d4d8` | Active border on card hover |
+| **Primary Text** | `text-zinc-900` | `#18181b` | Main headings and active titles |
+| **Secondary Text** | `text-zinc-600` | `#52525b` | Descriptive paragraphs |
+| **Tertiary Text** | `text-zinc-400` | `#a1a1aa` | Dates, secondary badges |
+
+### C. Dynamic Accent Palette Engine (Tokens & Presets)
+
+The system supports real-time accent shifting across both Dark and Light modes using CSS custom properties:
+
+```css
+:root {
+  /* Dynamic Accent Tokens */
+  --accent-hue: 160; /* Computed dynamically or per preset */
+  --color-accent: var(--palette-accent);
+  --color-accent-hover: var(--palette-accent-hover);
+  --color-accent-subtle: var(--palette-accent-subtle);
+  --color-accent-glow: var(--palette-accent-glow);
+}
+```
+
+| Palette Preset | Key Hue / Role | Accent Hex | Subtle Bg Fill | Glow Shadow |
+|---|---|---|---|---|
+| **Emerald** (Default) | Tech & Reliability | `#34d399` / `#10b981` | `rgba(16, 185, 129, 0.1)` | `rgba(52, 211, 153, 0.25)` |
+| **Sky** | Logic & Clarity | `#38bdf8` / `#0284c7` | `rgba(2, 132, 199, 0.1)` | `rgba(56, 189, 248, 0.25)` |
+| **Violet** | Modern & Creative | `#a78bfa` / `#7c3aed` | `rgba(124, 58, 237, 0.1)` | `rgba(167, 139, 250, 0.25)` |
+| **Rose** | Bold & High-Contrast | `#fb7185` / `#e11d48` | `rgba(225, 29, 72, 0.1)` | `rgba(251, 113, 133, 0.25)` |
+| **Amber** | Energetic & Warm | `#fbbf24` / `#d97706` | `rgba(217, 119, 6, 0.1)` | `rgba(251, 191, 36, 0.25)` |
+
+### D. Print / PDF View (Swiss Minimalist - A4 Print Layout)
 
 | Semantic Token | Tailwind Class | Purpose |
 |---|---|---|
@@ -39,6 +75,7 @@ UI/UX design specification inspired by modern engineering tools (Linear, Raycast
 | **Secondary Text** | `text-zinc-700` | Body and descriptive paragraphs |
 | **Tertiary Text** | `text-zinc-500` | Dates, companies, institutions |
 | **Dividers** | `border-zinc-200` | Thin horizontal separation lines |
+| **Print Accent** | `text-accent-print` | Configurable accent header/rule |
 
 ---
 
@@ -151,6 +188,47 @@ UI/UX design specification inspired by modern engineering tools (Linear, Raycast
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
   </svg>
 </a>
+```
+
+---
+
+### E. Interactive Profile Portrait with Dynamic Glow
+```html
+<div class="relative group perspective-[1000px] w-48 h-48 sm:w-56 sm:h-56">
+  <!-- Dynamic glow backdrop -->
+  <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] opacity-30 blur-lg transition duration-500 group-hover:opacity-70"></div>
+  
+  <!-- Image frame with subtle 3D tilt -->
+  <div class="relative w-full h-full rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-transform duration-300 ease-out group-hover:scale-[1.02]">
+    <img src="/images/avatar.webp" alt="Aitor Gallego" class="w-full h-full object-cover" />
+    
+    <!-- Floating status pill -->
+    <div class="absolute bottom-2.5 inset-x-2.5 px-2.5 py-1 rounded-lg backdrop-blur-md bg-zinc-950/75 border border-zinc-800 flex items-center gap-1.5 text-[11px] font-mono text-zinc-300">
+      <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+      <span>19 años · Open to work</span>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+### F. In-Page Certificate Viewer Modal
+```html
+<dialog id="cert-modal" class="backdrop:backdrop-blur-md backdrop:bg-zinc-950/70 p-0 rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl max-w-3xl w-[92vw] overflow-hidden">
+  <!-- Header bar with title and actions -->
+  <div class="flex items-center justify-between px-5 py-3.5 border-b border-zinc-800 bg-zinc-950/50">
+    <h4 id="cert-modal-title" class="text-sm font-semibold text-zinc-100">Document Title</h4>
+    <div class="flex items-center gap-2">
+      <a id="cert-modal-download" href="#" download class="px-2.5 py-1 text-xs font-medium rounded-md bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors">Descargar</a>
+      <button id="cert-modal-close" class="p-1 rounded-md text-zinc-400 hover:text-white transition-colors" aria-label="Cerrar">✕</button>
+    </div>
+  </div>
+  <!-- Embedded document preview container -->
+  <div class="p-4 bg-zinc-950/80 min-h-[350px] flex items-center justify-center">
+    <iframe id="cert-modal-frame" src="" class="w-full h-[60vh] rounded-lg border border-zinc-800" title="Vista previa"></iframe>
+  </div>
+</dialog>
 ```
 
 ---
