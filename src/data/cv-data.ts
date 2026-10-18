@@ -11,7 +11,7 @@ export const cvData: ResumeData = {
     github: "https://github.com/aitorgcr",
     linkedin: "https://linkedin.com/in/aitor-gallego-casilda",
     birthDate: "2007-02-21",
-    avatarUrl: "/images/avatar.jpg",
+    avatarUrl: "/images/avatar.webp",
   },
 
   about: {

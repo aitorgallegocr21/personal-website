@@ -1,96 +1,116 @@
 ---
 import { cvData } from '@/data/cv-data';
+import { calculateAge } from '@/utils/date';
 import { FileText, Github, Linkedin, Copy, MapPin, ArrowUpRight } from 'lucide-astro';
+import ProfilePortrait from '@/components/portfolio/ProfilePortrait.astro';
 
 const { personal, about } = cvData;
+const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
 ---
 
-<section class="py-12 sm:py-20 flex flex-col items-start gap-6">
-  <!-- Status Badge -->
-  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)]">
-    <span class="relative flex h-2 w-2">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
-      <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
-    </span>
-    <span>Disponible para proyectos &amp; prácticas</span>
-  </div>
+<section class="py-10 sm:py-16 md:py-20 flex flex-col-reverse md:flex-row items-center md:items-start justify-between gap-8 md:gap-12">
+  <!-- Left column: Bio, Details & Actions -->
+  <div class="flex-1 flex flex-col items-start gap-6 w-full">
+    <!-- Status Badge with Dynamic Age & Availability -->
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] shadow-xs">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
+      </span>
+      <span class="font-semibold text-zinc-900 dark:text-zinc-100">{age} años</span>
+      <span class="text-zinc-400 dark:text-zinc-600">·</span>
+      <span>Estudiante DAM &amp; Jr Backend</span>
+      <span class="text-zinc-400 dark:text-zinc-600">·</span>
+      <span class="text-zinc-700 dark:text-zinc-300 font-semibold">Disponible</span>
+    </div>
 
-  <!-- Main Info -->
-  <div class="space-y-3">
-    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
-      {personal.name}
-    </h1>
-    <p class="text-xl font-medium text-zinc-600 dark:text-zinc-300">
-      {personal.title}
+    <!-- Main Info -->
+    <div class="space-y-3">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+        {personal.name}
+      </h1>
+      <p class="text-xl font-medium text-zinc-600 dark:text-zinc-300">
+        {personal.title}
+      </p>
+      {personal.location && (
+        <div class="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+          <MapPin class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+          <span>{personal.location}</span>
+        </div>
+      )}
+    </div>
+
+    <!-- Bio Narrative -->
+    <p class="text-zinc-600 dark:text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+      {about.fullBio}
     </p>
-    {personal.location && (
-      <div class="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-        <MapPin class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-        <span>{personal.location}</span>
-      </div>
-    )}
+
+    <!-- Actions & Triggers -->
+    <div class="flex flex-wrap items-center gap-3 pt-2">
+      <!-- Printable CV link -->
+      <a
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] hover:opacity-90 transition-opacity shadow-md shadow-zinc-950/10 dark:shadow-zinc-950/30"
+      >
+        <FileText class="w-4 h-4 text-[var(--color-accent-contrast)]" />
+        <span>Ver CV (PDF A4)</span>
+      </a>
+
+      <!-- Copy Email Button -->
+      {personal.email && (
+        <button
+          type="button"
+          id="hero-copy-email-btn"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all cursor-pointer"
+          data-email={personal.email}
+        >
+          <span id="hero-copy-icon">
+            <Copy class="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
+          </span>
+          <span id="hero-copy-text">Copiar email</span>
+        </button>
+      )}
+
+      <!-- GitHub Link -->
+      {personal.github && (
+        <a
+          href={personal.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900 transition-all"
+          aria-label="Perfil de GitHub"
+        >
+          <Github class="w-4 h-4" />
+          <span>GitHub</span>
+          <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
+        </a>
+      )}
+
+      <!-- LinkedIn Link -->
+      {personal.linkedin && (
+        <a
+          href={personal.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900 transition-all"
+          aria-label="Perfil de LinkedIn"
+        >
+          <Linkedin class="w-4 h-4" />
+          <span>LinkedIn</span>
+          <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
+        </a>
+      )}
+    </div>
   </div>
 
-  <!-- Bio Narrative -->
-  <p class="text-zinc-600 dark:text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl">
-    {about.fullBio}
-  </p>
-
-  <!-- Actions & Triggers -->
-  <div class="flex flex-wrap items-center gap-3 pt-2">
-    <!-- Printable CV link -->
-    <a
-      href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
-      class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] hover:opacity-90 transition-opacity shadow-md"
-    >
-      <FileText class="w-4 h-4 text-[var(--color-accent-contrast)]" />
-      <span>Ver CV (PDF A4)</span>
-    </a>
-
-    <!-- Copy Email Button -->
-    {personal.email && (
-      <button
-        type="button"
-        id="hero-copy-email-btn"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all cursor-pointer"
-        data-email={personal.email}
-      >
-        <span id="hero-copy-icon">
-          <Copy class="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
-        </span>
-        <span id="hero-copy-text">Copiar email</span>
-      </button>
-    )}
-
-    <!-- GitHub Link -->
-    {personal.github && (
-      <a
-        href={personal.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900 transition-all"
-        aria-label="Perfil de GitHub"
-      >
-        <Github class="w-4 h-4" />
-        <span>GitHub</span>
-        <ArrowUpRight class="w-3.5 h-3.5 text-zinc-500" />
-      </a>
-    )}
-
-    <!-- LinkedIn Link -->
-    {personal.linkedin && (
-      <a
-        href={personal.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900 transition-all"
-        aria-label="Perfil de LinkedIn"
-      >
-        <Linkedin class="w-4 h-4" />
-        <span>LinkedIn</span>
-        <ArrowUpRight class="w-3.5 h-3.5 text-zinc-500" />
-      </a>
-    )}
+  <!-- Right column: Interactive Profile Portrait -->
+  <div class="shrink-0 w-full md:w-auto flex justify-center">
+    <ProfilePortrait
+      name={personal.name}
+      avatarUrl={personal.avatarUrl}
+      title={personal.title}
+      birthDate={personal.birthDate}
+    />
   </div>
 </section>
 

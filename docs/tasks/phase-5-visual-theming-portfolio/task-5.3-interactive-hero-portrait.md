@@ -17,6 +17,6 @@ Design and implement a high-end interactive profile portrait card inside `Hero.a
    - Pulsing emerald/accent dot indicating availability for technical roles or internships.
 
 ## Acceptance Criteria
-- [ ] Portrait renders cleanly on both mobile and desktop with zero overflow.
-- [ ] Micro-interaction runs at 60 FPS and disables gracefully on reduced-motion devices.
-- [ ] Fallback placeholder renders if user image is not yet provided.
+- [x] Portrait renders cleanly on both mobile and desktop with zero overflow.
+- [x] Micro-interaction runs at 60 FPS and disables gracefully on reduced-motion devices.
+- [x] Fallback placeholder renders if user image is not yet provided.
