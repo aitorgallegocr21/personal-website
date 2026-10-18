@@ -8,7 +8,7 @@ const { personal } = cvData;
 <header class="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-zinc-950/75 backdrop-blur-md">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
     <a
-      href="/"
+      href={import.meta.env.BASE_URL}
       class="group flex items-center gap-2.5 font-semibold text-zinc-100 hover:text-white transition-colors"
       aria-label={`Inicio - ${personal.name}`}
     >
@@ -42,7 +42,7 @@ const { personal } = cvData;
         Contacto
       </a>
       <a
-        href="/cv"
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
         class="inline-flex items-center gap-1.5 ml-1 sm:ml-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-200 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 hover:text-white transition-all shadow-xs"
       >
         <FileDown class="w-3.5 h-3.5 text-emerald-400" />
