@@ -25,8 +25,8 @@ const ogImageURL = new URL(image, canonicalURL);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.ico`} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#09090b" />
     <meta name="color-scheme" content="dark" />

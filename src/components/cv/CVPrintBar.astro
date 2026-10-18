@@ -7,7 +7,7 @@ import { Printer, ArrowLeft } from 'lucide-astro';
   aria-label="Acciones del CV"
 >
   <a
-    href="/"
+    href={import.meta.env.BASE_URL}
     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/80 transition-colors"
   >
     <ArrowLeft class="w-3.5 h-3.5" />

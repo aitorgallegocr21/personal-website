@@ -57,7 +57,7 @@ const currentYear = new Date().getFullYear();
       )}
       <li>
         <a
-          href="/cv"
+          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
           class="p-2 rounded-lg hover:text-zinc-100 hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
           aria-label="Curriculum Vitae"
         >

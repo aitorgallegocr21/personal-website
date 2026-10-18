@@ -7,7 +7,7 @@ export const cvData: ResumeData = {
     email: "aitorgallegocr21@gmail.com",
     phone: import.meta.env.PUBLIC_PHONE || undefined,
     location: "Herencia, Ciudad Real, España",
-    website: "https://tuportfolio.dev",
+    website: "https://aitorgallegocr21.github.io/personal-website",
     github: "https://github.com/aitorgcr",
     linkedin: "https://linkedin.com/in/aitor-gallego-casilda",
   },
