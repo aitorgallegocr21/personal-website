@@ -19,6 +19,6 @@ Implement a dedicated `#contacto` section in `index.astro` featuring a prominent
    - Direct cards/buttons for LinkedIn and GitHub profiles.
 
 ## Acceptance Criteria
-- [ ] Clicking "Contacto" in Navbar scrolls smoothly to the dedicated contact section.
-- [ ] Both email triggers (direct mailto and clipboard copy) work seamlessly.
-- [ ] Fully responsive on mobile, tablet, and desktop viewports.
+- [x] Clicking "Contacto" in Navbar scrolls smoothly to the dedicated contact section.
+- [x] Both email triggers (direct mailto and clipboard copy) work seamlessly.
+- [x] Fully responsive on mobile, tablet, and desktop viewports.

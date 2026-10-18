@@ -1,0 +1,121 @@
+---
+import { cvData } from '@/data/cv-data';
+import { Mail, Copy, MapPin, Github, Linkedin, ArrowUpRight } from 'lucide-astro';
+
+const { personal } = cvData;
+---
+
+<section id="contacto" class="py-12 sm:py-16 scroll-mt-20">
+  <div class="mb-8">
+    <div class="inline-flex items-center gap-2 font-mono text-xs text-[var(--color-accent)] font-semibold tracking-wider uppercase mb-1">
+      <span>// Contacto</span>
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+      ¿Hablamos sobre un proyecto o vacante?
+    </h2>
+    <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-1 max-w-xl">
+      Siempre abierto a nuevas oportunidades, colaboraciones y retos técnicos.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+
+    <!-- Email Card -->
+    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/40 p-6 backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20">
+          <Mail class="w-5 h-5 text-[var(--color-accent)]" />
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Email directo</h3>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">{personal.email}</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <a
+          href={`mailto:${personal.email}`}
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity shadow-sm"
+        >
+          <Mail class="w-4 h-4" />
+          Enviar email
+        </a>
+        <button
+          id="copy-email-btn"
+          type="button"
+          data-email={personal.email}
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+        >
+          <Copy class="w-4 h-4" />
+          <span id="copy-email-label">Copiar email</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Location & Availability -->
+    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/40 p-6 backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+          <MapPin class="w-5 h-5 text-emerald-500" />
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Ubicación</h3>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400">{personal.location}</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 mb-5">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">Disponible presencial / remoto</span>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <a
+          href={personal.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group/link inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+        >
+          <Linkedin class="w-4 h-4 text-[#0A66C2]" />
+          LinkedIn
+          <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+        </a>
+        <a
+          href={personal.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group/link inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+        >
+          <Github class="w-4 h-4" />
+          GitHub
+          <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById('copy-email-btn');
+  const label = document.getElementById('copy-email-label');
+  if (btn && label) {
+    btn.addEventListener('click', async () => {
+      const email = btn.getAttribute('data-email') || '';
+      try {
+        await navigator.clipboard.writeText(email);
+        label.textContent = '¡Email copiado!';
+        btn.classList.add('border-emerald-400', 'dark:border-emerald-600', 'text-emerald-600', 'dark:text-emerald-400');
+        setTimeout(() => {
+          label.textContent = 'Copiar email';
+          btn.classList.remove('border-emerald-400', 'dark:border-emerald-600', 'text-emerald-600', 'dark:text-emerald-400');
+        }, 2000);
+      } catch {
+        label.textContent = 'Error al copiar';
+        setTimeout(() => { label.textContent = 'Copiar email'; }, 2000);
+      }
+    });
+  }
+</script>
