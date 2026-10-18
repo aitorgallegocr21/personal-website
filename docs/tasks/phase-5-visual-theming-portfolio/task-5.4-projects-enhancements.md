@@ -18,6 +18,6 @@ Upgrade the Bento project grid cards in `ProjectsGrid.astro` to showcase preview
    - Direct button to Live Demo / Web page (when available).
 
 ## Acceptance Criteria
-- [ ] Portfolio project card visually highlighted with "Proyecto actual" badge.
-- [ ] Cards handle projects with or without images gracefully.
-- [ ] All external links open with `target="_blank"` and `rel="noopener noreferrer"`.
+- [x] Portfolio project card visually highlighted with "Proyecto actual" badge.
+- [x] Cards handle projects with or without images gracefully (image + gradient placeholder).
+- [x] All external links open with `target="_blank"` and `rel="noopener noreferrer"`.
