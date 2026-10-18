@@ -21,7 +21,7 @@ Extend the Single Source of Truth (SSOT) architecture in `src/types/resume.ts` a
    - Add metadata placeholders for projects, hospitality company name in Arenas de San Juan, and certificate documents.
 
 ## Acceptance Criteria
-- [ ] TypeScript schemas compiled strictly with 0 `any`.
-- [ ] Age calculates dynamically to 19 years old (and updates automatically every Feb 21).
-- [ ] Asset directories prepared with `.gitkeep` files.
-- [ ] `npm run check` and `npm run build` exit with code 0.
+- [x] TypeScript schemas compiled strictly with 0 `any`.
+- [x] Age calculates dynamically to 19 years old (and updates automatically every Feb 21).
+- [x] Asset directories prepared with `.gitkeep` files.
+- [x] `npm run check` and `npm run build` exit with code 0.
