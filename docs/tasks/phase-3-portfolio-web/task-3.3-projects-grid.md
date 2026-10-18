@@ -20,5 +20,5 @@ Build `src/components/portfolio/ProjectsGrid.astro` displaying project showcase 
    - `hover:border-zinc-700 hover:bg-zinc-900/70 hover:shadow-2xl`.
 
 ## Acceptance Criteria
-- [ ] Renders all projects from `cvData.projects`.
-- [ ] Links open in new tabs with `rel="noopener noreferrer"`.
+- [x] Renders all projects from `cvData.projects`.
+- [x] Links open in new tabs with `rel="noopener noreferrer"`.
