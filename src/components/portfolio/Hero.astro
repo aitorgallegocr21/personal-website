@@ -1,0 +1,126 @@
+---
+import { cvData } from '@/data/cv-data';
+import { FileText, Github, Linkedin, Copy, MapPin, ArrowUpRight } from 'lucide-astro';
+
+const { personal, about } = cvData;
+---
+
+<section class="py-12 sm:py-20 flex flex-col items-start gap-6">
+  <!-- Status Badge -->
+  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+    <span class="relative flex h-2 w-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+    </span>
+    <span>Disponible para proyectos &amp; prácticas</span>
+  </div>
+
+  <!-- Main Info -->
+  <div class="space-y-3">
+    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+      {personal.name}
+    </h1>
+    <p class="text-xl font-medium text-zinc-300">
+      {personal.title}
+    </p>
+    {personal.location && (
+      <div class="flex items-center gap-1.5 text-xs text-zinc-400 font-mono">
+        <MapPin class="w-3.5 h-3.5 text-emerald-400/80" />
+        <span>{personal.location}</span>
+      </div>
+    )}
+  </div>
+
+  <!-- Bio Narrative -->
+  <p class="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+    {about.fullBio}
+  </p>
+
+  <!-- Actions & Triggers -->
+  <div class="flex flex-wrap items-center gap-3 pt-2">
+    <!-- Printable CV link -->
+    <a
+      href="/cv"
+      class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-emerald-500 text-zinc-950 hover:bg-emerald-400 transition-colors shadow-md shadow-emerald-950/30"
+    >
+      <FileText class="w-4 h-4 text-zinc-950" />
+      <span>Ver CV (PDF A4)</span>
+    </a>
+
+    <!-- Copy Email Button -->
+    {personal.email && (
+      <button
+        type="button"
+        id="hero-copy-email-btn"
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-zinc-300 bg-zinc-900/80 border border-zinc-800 hover:border-zinc-700 hover:text-white transition-all cursor-pointer"
+        data-email={personal.email}
+      >
+        <span id="hero-copy-icon">
+          <Copy class="w-4 h-4 text-zinc-400" />
+        </span>
+        <span id="hero-copy-text">Copiar email</span>
+      </button>
+    )}
+
+    <!-- GitHub Link -->
+    {personal.github && (
+      <a
+        href={personal.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-400 bg-zinc-900/50 border border-zinc-800/80 hover:border-zinc-700 hover:text-zinc-100 hover:bg-zinc-900 transition-all"
+        aria-label="Perfil de GitHub"
+      >
+        <Github class="w-4 h-4" />
+        <span>GitHub</span>
+        <ArrowUpRight class="w-3.5 h-3.5 text-zinc-500" />
+      </a>
+    )}
+
+    <!-- LinkedIn Link -->
+    {personal.linkedin && (
+      <a
+        href={personal.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-400 bg-zinc-900/50 border border-zinc-800/80 hover:border-zinc-700 hover:text-zinc-100 hover:bg-zinc-900 transition-all"
+        aria-label="Perfil de LinkedIn"
+      >
+        <Linkedin class="w-4 h-4" />
+        <span>LinkedIn</span>
+        <ArrowUpRight class="w-3.5 h-3.5 text-zinc-500" />
+      </a>
+    )}
+  </div>
+</section>
+
+<script>
+  const copyBtn = document.getElementById('hero-copy-email-btn');
+  const copyText = document.getElementById('hero-copy-text');
+  const copyIcon = document.getElementById('hero-copy-icon');
+
+  if (copyBtn && copyText && copyIcon) {
+    const originalText = copyText.textContent || 'Copiar email';
+    const originalIcon = copyIcon.innerHTML;
+
+    copyBtn.addEventListener('click', async () => {
+      const email = copyBtn.getAttribute('data-email');
+      if (!email) return;
+
+      try {
+        await navigator.clipboard.writeText(email);
+        copyText.textContent = '¡Copiado!';
+        copyBtn.classList.add('border-emerald-500/50', 'text-emerald-400', 'bg-emerald-500/10');
+        copyIcon.innerHTML = `<svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+
+        setTimeout(() => {
+          copyText.textContent = originalText;
+          copyBtn.classList.remove('border-emerald-500/50', 'text-emerald-400', 'bg-emerald-500/10');
+          copyIcon.innerHTML = originalIcon;
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy email:', err);
+      }
+    });
+  }
+</script>
