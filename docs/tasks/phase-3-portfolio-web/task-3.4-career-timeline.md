@@ -21,5 +21,5 @@ Build `src/components/portfolio/Timeline.astro` to present the complete chronolo
    - Organization and role clearly distinguished.
 
 ## Acceptance Criteria
-- [ ] Complete chronological items rendered cleanly.
-- [ ] Fully responsive on mobile and desktop viewports.
+- [x] Complete chronological items rendered cleanly.
+- [x] Fully responsive on mobile and desktop viewports.
