@@ -12,6 +12,7 @@ export const cvData: ResumeData = {
     linkedin: "https://linkedin.com/in/aitor-gallego-casilda",
     birthDate: "2007-02-21",
     avatarUrl: "/images/avatar.webp",
+    status: "Disponible",
   },
 
   about: {

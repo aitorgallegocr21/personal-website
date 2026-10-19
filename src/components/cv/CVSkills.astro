@@ -12,14 +12,15 @@ const { skills } = cvData;
 {
   skills && skills.length > 0 && (
     <section class="mb-3 break-inside-avoid">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5">
-        {title}
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5 flex items-center gap-1.5">
+        <span class="w-1 h-3 rounded-xs bg-[var(--color-accent)] shrink-0" />
+        <span>{title}</span>
       </h2>
 
       <div class="space-y-1">
         {skills.map((group) => (
-          <div class="flex items-baseline gap-2 text-[11px] leading-relaxed">
-            <span class="font-semibold text-zinc-900 shrink-0 w-40">
+          <div class="flex items-baseline gap-2 text-[10.5px] leading-relaxed">
+            <span class="font-semibold text-zinc-900 shrink-0 w-38">
               {group.category}:
             </span>
             <span class="text-zinc-700">

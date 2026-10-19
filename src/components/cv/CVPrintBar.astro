@@ -1,30 +1,132 @@
 ---
-import { Printer, ArrowLeft } from 'lucide-astro';
+import { Printer, ArrowLeft, Palette } from 'lucide-astro';
+
+const palettes = [
+  { id: 'emerald', label: 'Tech Emerald (Por defecto)', color: '#059669', bgClass: 'bg-[#059669]' },
+  { id: 'slate', label: 'Navy Blue (Corporativo / Ejecutivo)', color: '#1e3a8a', bgClass: 'bg-[#1e3a8a]' },
+  { id: 'sky', label: 'Sky Blue (Modern Tech)', color: '#0284c7', bgClass: 'bg-[#0284c7]' },
+  { id: 'violet', label: 'Violet (Creativo)', color: '#7c3aed', bgClass: 'bg-[#7c3aed]' },
+  { id: 'rose', label: 'Rose (Alto Contraste)', color: '#e11d48', bgClass: 'bg-[#e11d48]' },
+  { id: 'monochrome', label: 'Monocromo (Blanco y Negro Clásico)', color: '#18181b', bgClass: 'bg-[#18181b] border border-zinc-600' },
+];
 ---
 
 <aside
-  class="fixed bottom-6 right-6 z-50 flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/90 text-white shadow-xl border border-zinc-800 print:hidden backdrop-blur-sm"
-  aria-label="Acciones del CV"
+  class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-50 flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/95 text-white shadow-2xl border border-zinc-800 print:hidden backdrop-blur-md"
+  aria-label="Acciones y personalización del CV"
 >
+  <!-- Return to Portfolio -->
   <a
     href={import.meta.env.BASE_URL}
     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/80 transition-colors"
+    title="Volver al Portfolio interactivo"
   >
     <ArrowLeft class="w-3.5 h-3.5" />
-    <span>Portfolio</span>
+    <span class="hidden sm:inline">Portfolio</span>
   </a>
 
+  <span class="h-4 w-px bg-zinc-800" aria-hidden="true"></span>
+
+  <!-- Dynamic Palette Selector Swatches -->
+  <div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-zinc-950/70 border border-zinc-800/80" role="group" aria-label="Selector de paleta para imprimir o descargar PDF">
+    <div class="flex items-center gap-1 text-[11px] font-mono text-zinc-400 mr-1 hidden md:flex">
+      <Palette class="w-3.5 h-3.5 text-zinc-400" />
+      <span>Color PDF:</span>
+    </div>
+
+    <div class="flex items-center gap-1.5" role="radiogroup" aria-label="Color de acento del CV">
+      {
+        palettes.map((p) => (
+          <button
+            type="button"
+            role="radio"
+            data-palette-target={p.id}
+            aria-label={p.label}
+            title={p.label}
+            class:list={[
+              'palette-swatch-btn relative w-4.5 h-4.5 rounded-full transition-transform hover:scale-115 focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer',
+              p.bgClass,
+            ]}
+            aria-checked={p.id === 'emerald' ? 'true' : 'false'}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <span class="h-4 w-px bg-zinc-800" aria-hidden="true"></span>
+
+  <!-- PDF Print / Download Trigger -->
   <button
     id="print-cv-btn"
     type="button"
-    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-900 hover:bg-white transition-colors cursor-pointer shadow-sm"
+    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-900 hover:bg-white transition-colors cursor-pointer shadow-sm active:scale-95"
+    title="Descargar o imprimir el CV en formato A4"
   >
     <Printer class="w-3.5 h-3.5" />
-    <span>Descargar / Imprimir PDF</span>
+    <span>Imprimir / PDF</span>
   </button>
 </aside>
 
 <script>
+  const STORAGE_KEY = 'portfolio_palette';
+  const defaultPalette = 'emerald';
+
+  function applyPalette(paletteId: string) {
+    // Apply to html root and cv container
+    document.documentElement.dataset.palette = paletteId;
+    const cvContainer = document.getElementById('cv-container');
+    if (cvContainer) {
+      cvContainer.dataset.palette = paletteId;
+    }
+
+    // Persist choice
+    try {
+      localStorage.setItem(STORAGE_KEY, paletteId);
+    } catch {
+      // Ignore if localStorage unavailable
+    }
+
+    // Update active ring on buttons
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-palette-target]');
+    buttons.forEach((btn) => {
+      const target = btn.dataset.paletteTarget;
+      const isActive = target === paletteId;
+      btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+      if (isActive) {
+        btn.classList.add('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-900', 'scale-115');
+      } else {
+        btn.classList.remove('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-900', 'scale-115');
+      }
+    });
+  }
+
+  // Initialize palette from localStorage or document default
+  let initialPalette = defaultPalette;
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      initialPalette = saved;
+    } else if (document.documentElement.dataset.palette) {
+      initialPalette = document.documentElement.dataset.palette;
+    }
+  } catch {
+    // fallback
+  }
+
+  applyPalette(initialPalette);
+
+  // Bind swatch clicks
+  document.querySelectorAll<HTMLButtonElement>('[data-palette-target]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const paletteId = btn.dataset.paletteTarget;
+      if (paletteId) {
+        applyPalette(paletteId);
+      }
+    });
+  });
+
+  // Bind print button
   const printBtn = document.getElementById('print-cv-btn');
   printBtn?.addEventListener('click', () => {
     window.print();

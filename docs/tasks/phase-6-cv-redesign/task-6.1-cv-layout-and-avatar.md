@@ -16,5 +16,5 @@ Redesign the core A4 CV architecture in `src/pages/cv.astro` and `src/components
    - Preserved `@page` margin `10mm 12mm`.
 
 ## Acceptance Criteria
-- [ ] Avatar container renders crisply on both screen and physical print/PDF.
-- [ ] Header height remains compact (under 38mm total).
+- [x] Avatar container renders crisply on both screen and physical print/PDF.
+- [x] Header height remains compact (under 38mm total).

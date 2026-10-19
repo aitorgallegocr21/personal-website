@@ -16,5 +16,5 @@ Perform strict mathematical layout verification to ensure the redesigned CV fits
    - Confirm `npm run build` succeeds with zero errors.
 
 ## Acceptance Criteria
-- [ ] Physical print preview (`Cmd+P` / `Ctrl+P`) renders on exactly 1 page.
-- [ ] No overflow into a second blank or truncated page.
+- [x] Physical print preview (`Cmd+P` / `Ctrl+P`) renders on exactly 1 page.
+- [x] No overflow into a second blank or truncated page.

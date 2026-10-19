@@ -14,5 +14,5 @@ Refactor contact links and section headers across all CV components to show huma
    - Tight, elegant font scale (`text-[10px]` to `text-sm`) with high contrast in monochrome and color modes.
 
 ## Acceptance Criteria
-- [ ] No raw, sprawling URLs visible on the printable CV.
-- [ ] Links remain fully clickable in exported PDFs.
+- [x] No raw, sprawling URLs visible on the printable CV.
+- [x] Links remain fully clickable in exported PDFs.

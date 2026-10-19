@@ -9,6 +9,7 @@ export interface PersonalInfo {
   linkedin: string;
   birthDate: string;
   avatarUrl?: string;
+  status?: string;
 }
 
 export type ContactInfo = PersonalInfo;
