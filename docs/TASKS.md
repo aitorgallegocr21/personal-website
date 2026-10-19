@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-*None active (All planned phases up to Phase 6 are completed).*
+- [ ] **[Phase 7: Interactive Modal Fixes & Navigation Polish](tasks/phase-7-modal-and-navigation-fixes/index.md)** (Fix persistent dialog overlay, restore close/escape controls, prevent broken fallback downloads, and verify CV navigation links).
 
 ---
 

@@ -27,7 +27,9 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 1. **Step 1 (Spec/Plan):** Define technical intent in 1-2 lines.
 2. **Step 2 (Code):** Implement modular changes following Tailwind CSS and Astro best practices.
 3. **Step 3 (Validation):** Run `npm run build` to confirm zero type or syntax errors.
-4. **Step 4 (Docs & Backlog):** If changes introduce scripts, routes, variables, or structure, update `docs/TASKS.md` and `README.md`.
+4. **Step 4 (Docs & Backlog Synchronization):**
+   - **Post-Task Audit:** Evaluate if the task modified architecture, components, props, routes, styles, data schema, or operational commands. If so, update the relevant docs (`README.md`, `README.es.md`, `DESIGN_SYSTEM.md`, or task spec file). Only update when there is an actual delta or outdated info; do not generate noise.
+   - **Post-Phase Audit:** When concluding a phase or major milestone, update the high-level roadmap in `docs/TASKS.md`, the phase summary in `docs/tasks/`, and both `README.md` and `README.es.md` (features and progress) to keep project status 100% synchronized for users and incoming agents.
 5. **Step 5 (Git Commit):** Propose or run semantic commit adhering to **Conventional Commits**:
    - `feat(...)`: New feature or component.
    - `fix(...)`: Bug fix or layout/print adjustment.
@@ -92,14 +94,18 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 
 ---
 
-## 7. Autonomous Execution Protocol
+## 7. Autonomous Execution Protocol & Zero-Ambiguity Standard
 
-When requested to progress on the project (e.g., *"next task"* or *"do task X"*):
-1. **Strict Scope:** Select the next unchecked task `[ ]` in `docs/TASKS.md` (or the one indicated). Do not edit unrelated files.
-2. **JIT Context:** Refer to `docs/DESIGN_SYSTEM.md` for visual tokens and `src/types/resume.ts` for schemas. Never hardcode static copy (SSOT).
-3. **Build Check:** Always verify with `npm run build`.
-4. **Close Iteration:** Check off task in `docs/TASKS.md` `[x]`, update docs if required.
-5. **Ultra-Concise Output:** Provide only modified/created files and the commit command:
+When requested to progress on the project (e.g., *"next task"* or *"do task X"*), or when an agent joins the project without direct instructions:
+1. **Zero-Ambiguity Principle:** Project state and active direction must always be decipherable from `docs/TASKS.md` and the active phase in `docs/tasks/`. No agent should need to guess or ask obvious context questions if the documentation is properly maintained.
+2. **Strict Scope:** Select the next unchecked task `[ ]` in `docs/TASKS.md` (or the specific task indicated). Do not edit unrelated files.
+3. **JIT Context:** Refer to `docs/DESIGN_SYSTEM.md` for visual tokens and `src/types/resume.ts` for schemas. Never hardcode static copy (SSOT).
+4. **Build Check:** Always verify with `npm run build` (`astro check && astro build`).
+5. **Documentation & Backlog Sync:**
+   - Mark task completed `[x]` in its dedicated file in `docs/tasks/<phase>/` and reflect completion status.
+   - If the task completes an entire phase, update `docs/TASKS.md` to move the phase into `Completed Phases` and register the next active phase.
+   - If user-facing features or system commands were added/altered, reflect changes in both `README.md` and `README.es.md`.
+6. **Ultra-Concise Output:** Provide only modified/created files and the commit command:
    ```bash
    git add . && git commit -m "type(scope): descriptive message"
    ```

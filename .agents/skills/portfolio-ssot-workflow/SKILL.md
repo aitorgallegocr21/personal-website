@@ -61,3 +61,6 @@ Before concluding any iteration or proposing a commit:
 1. Run `npm run check` (`astro check && tsc --noEmit`).
 2. Run `npm run build` (`astro check && astro build`).
 3. Confirm zero TypeScript errors, zero warnings, and zero broken assets in `dist/`.
+4. **Documentation Audit:**
+   - **Task-level:** If interfaces, props, styling tokens, or commands were added or changed, check whether `README.md`, `README.es.md`, `DESIGN_SYSTEM.md`, or task files need updating. Update only if there is an actual delta.
+   - **Phase-level:** On completing a phase, synchronize `docs/TASKS.md`, the corresponding `docs/tasks/` folder, and project summaries in both README files.
