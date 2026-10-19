@@ -4,7 +4,7 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
 
 <dialog
   id="certificate-modal"
-  class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none bg-transparent p-4 sm:p-6 md:p-10 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md z-50 flex items-center justify-center border-0 open:flex"
+  class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none bg-transparent p-4 sm:p-6 md:p-10 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md z-50 items-center justify-center border-0"
   aria-labelledby="cert-modal-title"
   aria-modal="true"
 >
@@ -69,7 +69,7 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
       </div>
       <iframe
         id="cert-modal-iframe"
-        src=""
+        src="about:blank"
         class="w-full h-full border-0 relative z-10"
         title="Vista previa del documento"
       ></iframe>
@@ -77,13 +77,24 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
   </div>
 </dialog>
 
+<style>
+  dialog:not([open]) {
+    display: none !important;
+  }
+  dialog[open] {
+    display: flex !important;
+  }
+</style>
+
 <script>
   const modal = document.getElementById('certificate-modal') as HTMLDialogElement | null;
+  const modalContainer = document.getElementById('cert-modal-container');
   const modalTitle = document.getElementById('cert-modal-title');
   const modalSubtitle = document.getElementById('cert-modal-subtitle');
   const modalDownload = document.getElementById('cert-modal-download') as HTMLAnchorElement | null;
   const modalExternal = document.getElementById('cert-modal-external') as HTMLAnchorElement | null;
   const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement | null;
+  const modalLoading = document.getElementById('cert-modal-loading');
   const modalClose = document.getElementById('cert-modal-close');
 
   function openCertificateModal(url: string, title: string, subtitle?: string) {
@@ -91,10 +102,11 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
 
     if (modalTitle) modalTitle.textContent = title;
     if (modalSubtitle) modalSubtitle.textContent = subtitle || 'Acreditación oficial';
+    if (modalLoading) modalLoading.classList.remove('hidden');
 
     modalIframe.src = url;
     modalDownload.href = url;
-    modalDownload.download = url.split('/').pop() || 'certificado.pdf';
+    modalDownload.download = url.split('/').pop() || 'documento.pdf';
 
     if (modalExternal) {
       modalExternal.href = url;
@@ -106,24 +118,65 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
 
   function closeCertificateModal() {
     if (!modal) return;
-    modal.close();
-    if (modalIframe) modalIframe.src = '';
+    if (modal.open) {
+      modal.close();
+    }
+    if (modalIframe) modalIframe.src = 'about:blank';
+    if (modalDownload) {
+      modalDownload.href = '#';
+      modalDownload.removeAttribute('download');
+    }
+    if (modalExternal) {
+      modalExternal.href = '#';
+    }
+    if (modalLoading) modalLoading.classList.remove('hidden');
     document.body.classList.remove('overflow-hidden');
   }
 
-  modalClose?.addEventListener('click', closeCertificateModal);
+  modalClose?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeCertificateModal();
+  });
 
-  // Close when clicking dialog backdrop
+  // Close when clicking dialog backdrop outside modalContainer
   modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    if (!modalContainer) return;
+    const rect = modalContainer.getBoundingClientRect();
+    const isInDialog = (
+      rect.top <= e.clientY &&
+      e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX &&
+      e.clientX <= rect.left + rect.width
+    );
+    if (!isInDialog) {
       closeCertificateModal();
     }
   });
 
-  // Handle escape key closing
+  // Handle escape key closing (cancel event triggered natively on dialog)
   modal?.addEventListener('cancel', () => {
-    document.body.classList.remove('overflow-hidden');
-    if (modalIframe) modalIframe.src = '';
+    closeCertificateModal();
+  });
+
+  modalIframe?.addEventListener('load', () => {
+    if (modalLoading && modalIframe.src && !modalIframe.src.endsWith('about:blank')) {
+      modalLoading.classList.add('hidden');
+    }
+  });
+
+  // Prevent invalid navigation if links clicked when not configured
+  modalDownload?.addEventListener('click', (e) => {
+    const href = modalDownload.getAttribute('href');
+    if (!href || href === '#' || href === 'about:blank') {
+      e.preventDefault();
+    }
+  });
+
+  modalExternal?.addEventListener('click', (e) => {
+    const href = modalExternal.getAttribute('href');
+    if (!href || href === '#' || href === 'about:blank') {
+      e.preventDefault();
+    }
   });
 
   // Attach event delegation for any document trigger button across the page

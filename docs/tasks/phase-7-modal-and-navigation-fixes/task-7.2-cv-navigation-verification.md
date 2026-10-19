@@ -14,6 +14,6 @@ Users attempting to access the Curriculum Vitae must have a seamless, uninterrup
 ---
 
 ## 3. Acceptance Criteria
-- [ ] Clicking "Ver CV (PDF A4)" in Hero immediately takes the user to `/cv` (or `/personal-website/cv`).
-- [ ] Clicking "CV PDF" in Navbar immediately navigates to `/cv`.
-- [ ] No modal is opened when clicking general links or navigation anchors.
+- [x] Clicking "Ver CV (PDF A4)" in Hero immediately takes the user to `/cv` (or `/personal-website/cv`).
+- [x] Clicking "CV PDF" in Navbar immediately navigates to `/cv`.
+- [x] No modal is opened when clicking general links or navigation anchors.

@@ -86,10 +86,10 @@ When a user navigates to the root web portfolio (`/` or `/personal-website/`), t
 
 ## 4. Acceptance Criteria
 
-- [ ] On initial page load (`/` and `/personal-website/`), no modal is visible.
-- [ ] Clicking on any credential or certificate card opens the modal with the matching PDF.
-- [ ] Clicking the `X` button closes the modal immediately.
-- [ ] Clicking outside the modal container (the dark backdrop) closes the modal.
-- [ ] Pressing the `Escape` key closes the modal and restores scrolling.
-- [ ] "Descargar PDF" downloads the legitimate `.pdf` file with correct filename.
-- [ ] `npm run build` passes with 0 errors.
+- [x] On initial page load (`/` and `/personal-website/`), no modal is visible.
+- [x] Clicking on any credential or certificate card opens the modal with the matching PDF.
+- [x] Clicking the `X` button closes the modal immediately.
+- [x] Clicking outside the modal container (the dark backdrop) closes the modal.
+- [x] Pressing the `Escape` key closes the modal and restores scrolling.
+- [x] "Descargar PDF" downloads the legitimate `.pdf` file with correct filename.
+- [x] `npm run build` passes with 0 errors.
