@@ -7,11 +7,12 @@
 ---
 
 ## Active Phase
-- [ ] **[Phase 6: Printable CV Redesign & PDF Engine V2](tasks/phase-6-cv-redesign/index.md)** — Editorial A4 redesign, avatar container, clean handles, and interactive print palette switcher.
+*None active (All planned phases up to Phase 6 are completed).*
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+- [x] **[Phase 6: Printable CV Redesign & PDF Engine V2](tasks/phase-6-cv-redesign/index.md)** — *Completed 2026-10-19* (Editorial A4 redesign, avatar container, clean semantic handles, and interactive print palette switcher).
 - [x] **[Phase 5: Visual Identity, Theming & Interactive Portfolio](tasks/phase-5-visual-theming-portfolio/index.md)** — *Completed 2026-10-19* (Dynamic color palettes with daily rotation, dark/light mode, interactive 3D portrait, project previews, contact section, and in-page certificate viewer).
 - [x] **[Phase 4: Automation & Deployment](tasks/phase-4-ci-deployment/index.md)** — *Completed 2026-10-18* (Strict type checking, CI verification, and GitHub Pages automated deployment pipeline).
 - [x] **[Phase 3: Interactive Web Portfolio (/)](tasks/phase-3-portfolio-web/index.md)** — *Completed 2026-10-18* (BaseLayout, Hero, ProjectsGrid Bento, Timeline, Certifications viewer, 0 KB client JS overhead).
