@@ -1,0 +1,143 @@
+---
+import { X, Download, FileText, ExternalLink } from 'lucide-astro';
+---
+
+<dialog
+  id="certificate-modal"
+  class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none bg-transparent p-4 sm:p-6 md:p-10 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md z-50 flex items-center justify-center border-0 open:flex"
+  aria-labelledby="cert-modal-title"
+  aria-modal="true"
+>
+  <div
+    class="relative w-full max-w-4xl h-[85vh] max-h-[900px] flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all"
+    id="cert-modal-container"
+  >
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/80 backdrop-blur-sm shrink-0">
+      <div class="flex items-center gap-2.5 min-w-0 pr-3">
+        <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] shrink-0">
+          <FileText class="w-4 h-4" />
+        </div>
+        <div class="min-w-0">
+          <h2 id="cert-modal-title" class="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-100 truncate">
+            Visor de Documento
+          </h2>
+          <p id="cert-modal-subtitle" class="text-xs text-zinc-500 dark:text-zinc-400 font-mono truncate">
+            Acreditación oficial
+          </p>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex items-center gap-2 shrink-0">
+        <a
+          id="cert-modal-download"
+          href="#"
+          download
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity shadow-xs"
+          title="Descargar documento PDF"
+        >
+          <Download class="w-3.5 h-3.5" />
+          <span class="hidden sm:inline">Descargar PDF</span>
+        </a>
+        <a
+          id="cert-modal-external"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center p-1.5 sm:px-3 sm:py-1.5 rounded-lg text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 transition-colors"
+          title="Abrir en pestaña nueva"
+        >
+          <ExternalLink class="w-4 h-4" />
+          <span class="hidden sm:inline ml-1.5">Abrir</span>
+        </a>
+        <button
+          id="cert-modal-close"
+          type="button"
+          class="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+          aria-label="Cerrar visor"
+        >
+          <X class="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Viewer Body -->
+    <div class="relative flex-1 bg-zinc-100 dark:bg-zinc-950 overflow-hidden flex items-center justify-center">
+      <div id="cert-modal-loading" class="absolute inset-0 flex items-center justify-center text-xs font-mono text-zinc-500">
+        Cargando documento...
+      </div>
+      <iframe
+        id="cert-modal-iframe"
+        src=""
+        class="w-full h-full border-0 relative z-10"
+        title="Vista previa del documento"
+      ></iframe>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.getElementById('certificate-modal') as HTMLDialogElement | null;
+  const modalTitle = document.getElementById('cert-modal-title');
+  const modalSubtitle = document.getElementById('cert-modal-subtitle');
+  const modalDownload = document.getElementById('cert-modal-download') as HTMLAnchorElement | null;
+  const modalExternal = document.getElementById('cert-modal-external') as HTMLAnchorElement | null;
+  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement | null;
+  const modalClose = document.getElementById('cert-modal-close');
+
+  function openCertificateModal(url: string, title: string, subtitle?: string) {
+    if (!modal || !modalIframe || !modalDownload) return;
+
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalSubtitle) modalSubtitle.textContent = subtitle || 'Acreditación oficial';
+
+    modalIframe.src = url;
+    modalDownload.href = url;
+    modalDownload.download = url.split('/').pop() || 'certificado.pdf';
+
+    if (modalExternal) {
+      modalExternal.href = url;
+    }
+
+    modal.showModal();
+    document.body.classList.add('overflow-hidden');
+  }
+
+  function closeCertificateModal() {
+    if (!modal) return;
+    modal.close();
+    if (modalIframe) modalIframe.src = '';
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  modalClose?.addEventListener('click', closeCertificateModal);
+
+  // Close when clicking dialog backdrop
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeCertificateModal();
+    }
+  });
+
+  // Handle escape key closing
+  modal?.addEventListener('cancel', () => {
+    document.body.classList.remove('overflow-hidden');
+    if (modalIframe) modalIframe.src = '';
+  });
+
+  // Attach event delegation for any document trigger button across the page
+  document.addEventListener('click', (e) => {
+    const target = (e.target as HTMLElement).closest('[data-doc-url]') as HTMLElement | null;
+    if (!target) return;
+
+    e.preventDefault();
+    const url = target.getAttribute('data-doc-url');
+    const title = target.getAttribute('data-doc-title') || 'Documento';
+    const subtitle = target.getAttribute('data-doc-subtitle') || '';
+
+    if (url) {
+      openCertificateModal(url, title, subtitle);
+    }
+  });
+</script>

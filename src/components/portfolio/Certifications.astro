@@ -1,8 +1,9 @@
 ---
 import { cvData } from '@/data/cv-data';
-import { Award, CheckCircle2 } from 'lucide-astro';
+import { Award, CheckCircle2, FileText } from 'lucide-astro';
 
 const { certificates } = cvData;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const categories = [
   'Todas',
@@ -99,17 +100,33 @@ const categories = [
             )}
           </div>
 
-          <!-- Skills tags -->
-          {cert.skills && cert.skills.length > 0 && (
-            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-200 dark:border-zinc-800/60">
-              {cert.skills.map((skill) => (
-                <span class="inline-flex items-center gap-1 font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100/70 dark:bg-zinc-800/40 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 group-hover:border-zinc-300 dark:group-hover:border-zinc-700/60 transition-colors">
-                  <CheckCircle2 class="w-2.5 h-2.5 text-[var(--color-accent)]" />
-                  <span>{skill}</span>
-                </span>
-              ))}
-            </div>
-          )}
+          <!-- Bottom Row: Skills tags & Document preview button -->
+          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            {cert.skills && cert.skills.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 flex-1">
+                {cert.skills.map((skill) => (
+                  <span class="inline-flex items-center gap-1 font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100/70 dark:bg-zinc-800/40 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 group-hover:border-zinc-300 dark:group-hover:border-zinc-700/60 transition-colors">
+                    <CheckCircle2 class="w-2.5 h-2.5 text-[var(--color-accent)]" />
+                    <span>{skill}</span>
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {cert.documentUrl && (
+              <button
+                type="button"
+                data-doc-url={`${baseUrl}${cert.documentUrl}`}
+                data-doc-title={cert.title}
+                data-doc-subtitle={`${cert.issuer} · ${cert.category}`}
+                class="inline-flex items-center justify-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-[var(--color-accent)] bg-[var(--color-accent-subtle)] hover:bg-[var(--color-accent)] hover:text-white border border-[var(--color-accent-border)] transition-all cursor-pointer shrink-0 self-start sm:self-auto"
+                aria-label={`Ver credencial de ${cert.title}`}
+              >
+                <FileText class="w-3.5 h-3.5" />
+                <span>Ver credencial</span>
+              </button>
+            )}
+          </div>
         </article>
       ))
     }

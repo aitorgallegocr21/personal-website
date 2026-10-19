@@ -1,8 +1,9 @@
 ---
 import { cvData } from '@/data/cv-data';
-import { MapPin } from 'lucide-astro';
+import { MapPin, FileText } from 'lucide-astro';
 
 const { experience, education } = cvData;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 interface TimelineEntry {
   id: string;
@@ -15,6 +16,7 @@ interface TimelineEntry {
   description?: string;
   bullets?: string[];
   technologies?: string[];
+  documentUrl?: string;
 }
 
 const ntt = experience.find((e) => e.id === 'ntt-data');
@@ -35,6 +37,7 @@ const timelineItems: TimelineEntry[] = [
           category: 'education' as const,
           badge: 'Formación Superior',
           bullets: dam.details,
+          documentUrl: dam.documentUrl,
         },
       ]
     : []),
@@ -112,6 +115,7 @@ const timelineItems: TimelineEntry[] = [
           category: 'education' as const,
           badge: 'Formación Técnica',
           bullets: smr.details,
+          documentUrl: smr.documentUrl,
         },
       ]
     : []),
@@ -202,14 +206,20 @@ const timelineItems: TimelineEntry[] = [
             </ul>
           )}
 
-          <!-- Technologies / Tags -->
-          {item.technologies && item.technologies.length > 0 && (
-            <div class="flex flex-wrap gap-1.5 mt-3.5 pt-2">
-              {item.technologies.map((tech) => (
-                <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100/70 dark:bg-zinc-800/40 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800">
-                  {tech}
-                </span>
-              ))}
+          <!-- Document Credential Trigger -->
+          {item.documentUrl && (
+            <div class="mt-3.5">
+              <button
+                type="button"
+                data-doc-url={`${baseUrl}${item.documentUrl}`}
+                data-doc-title={item.role}
+                data-doc-subtitle={`${item.organization} · ${item.period}`}
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-[var(--color-accent)] bg-[var(--color-accent-subtle)] hover:bg-[var(--color-accent)] hover:text-white border border-[var(--color-accent-border)] transition-all cursor-pointer"
+                aria-label={`Ver documento oficial de ${item.role}`}
+              >
+                <FileText class="w-3.5 h-3.5" />
+                <span>Ver documento oficial</span>
+              </button>
             </div>
           )}
         </article>

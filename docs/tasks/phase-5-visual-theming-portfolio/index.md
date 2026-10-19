@@ -1,6 +1,6 @@
 # Phase 5: Visual Identity, Theming & Interactive Portfolio
 
-**Status:** In Progress (Active)
+**Status:** Completed (2026-10-19)
 
 ## Objective
 Elevate the interactive portfolio to a high-end, responsive product with a dynamic multi-palette color engine (with daily rotation), dark/light mode toggle, interactive personal portrait with micro-interactions, project preview cards with "Current Project" status, dedicated contact section, and an in-page certificate preview modal.
@@ -11,4 +11,4 @@ Elevate the interactive portfolio to a high-end, responsive product with a dynam
 - [x] [5.3 Interactive Profile Portrait (Hero)](task-5.3-interactive-hero-portrait.md) — Subtle 3D tilt portrait card with status indicator badge and crisp imagery.
 - [x] [5.4 Projects Bento Enhancements](task-5.4-projects-enhancements.md) — Project image previews, "Proyecto Actual" animated badge, and verified demo/repository links.
 - [x] [5.5 Dedicated Contact Section](task-5.5-dedicated-contact-section.md) — Standalone `#contacto` section with dual-action email button (send/copy) and geographic badges.
-- [ ] [5.6 In-Page Certificate Viewer Modal](task-5.6-certificates-modal-viewer.md) — Accessible modal component to preview and download certificates and degrees without leaving the page.
+- [x] [5.6 In-Page Certificate Viewer Modal](task-5.6-certificates-modal-viewer.md) — Accessible modal component to preview and download certificates and degrees without leaving the page.
