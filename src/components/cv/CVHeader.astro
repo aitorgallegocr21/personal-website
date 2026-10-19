@@ -6,102 +6,139 @@ import { MapPin, Mail, Github, Linkedin, Phone, Globe } from 'lucide-astro';
 const { personal, about } = cvData;
 
 const formatUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
+const avatarSrc = personal.avatarUrl
+  ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${personal.avatarUrl}`
+  : undefined;
 ---
 
-<header class="mb-4 pb-3 border-b border-zinc-200">
-  <div class="flex flex-col gap-0.5">
-    <h1 class="text-2xl font-bold tracking-tight text-zinc-900 leading-none">
-      {personal.name}
-    </h1>
-    <p class="text-sm font-medium text-zinc-600">
-      {personal.title}
-    </p>
+<header class="mb-3.5 pb-2.5 border-b border-zinc-200 break-inside-avoid">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 print:flex-row print:items-center print:justify-between">
+    <!-- Left Column: Avatar Frame + Candidate Identity -->
+    <div class="flex items-center gap-3.5 min-w-0 flex-1">
+      {
+        avatarSrc && (
+          <div class="relative w-[26mm] h-[26mm] shrink-0 rounded-full overflow-hidden border border-zinc-200/90 ring-1 ring-zinc-950/5 shadow-2xs bg-zinc-100 print:border-zinc-300 print:ring-0">
+            <img
+              src={avatarSrc}
+              alt={personal.name}
+              class="w-full h-full object-cover object-top print:contrast-[1.05]"
+              loading="eager"
+              decoding="sync"
+            />
+          </div>
+        )
+      }
+
+      <div class="min-w-0 flex flex-col justify-center gap-0.5">
+        <div class="flex flex-wrap items-center gap-2">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 leading-none">
+            {personal.name}
+          </h1>
+          {
+            personal.status && (
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9.5px] font-medium bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] leading-none shrink-0 print:border-zinc-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
+                <span>{personal.status}</span>
+              </span>
+            )
+          }
+        </div>
+
+        <p class="text-xs font-semibold text-zinc-700 tracking-wide mt-0.5">
+          {personal.title}
+        </p>
+
+        {
+          about.shortSummary && (
+            <p class="text-[10.5px] text-zinc-600 leading-snug line-clamp-3 text-pretty mt-1 max-w-[110mm]">
+              {about.shortSummary}
+            </p>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Right Column: Contact Metadata -->
+    <div class="shrink-0 w-full sm:w-auto print:w-auto">
+      <ul class="flex flex-col gap-1 text-[10px] sm:text-[10.5px] text-zinc-600 font-mono">
+        {
+          personal.location && (
+            <li class="inline-flex items-center gap-1.5">
+              <MapPin class="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <span>{personal.location}</span>
+            </li>
+          )
+        }
+
+        {
+          personal.email && (
+            <li class="inline-flex items-center gap-1.5">
+              <Mail class="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <a href={`mailto:${personal.email}`} class="hover:text-zinc-900 hover:underline">
+                {personal.email}
+              </a>
+            </li>
+          )
+        }
+
+        {
+          personal.phone && (
+            <li class="inline-flex items-center gap-1.5">
+              <Phone class="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <PhoneContact phone={personal.phone} mode="auto" />
+            </li>
+          )
+        }
+
+        {
+          personal.github && (
+            <li class="inline-flex items-center gap-1.5">
+              <Github class="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <a
+                href={personal.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-zinc-900 hover:underline"
+              >
+                {formatUrl(personal.github)}
+              </a>
+            </li>
+          )
+        }
+
+        {
+          personal.linkedin && (
+            <li class="inline-flex items-center gap-1.5">
+              <Linkedin class="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <a
+                href={personal.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-zinc-900 hover:underline"
+              >
+                {formatUrl(personal.linkedin)}
+              </a>
+            </li>
+          )
+        }
+
+        {
+          personal.website && (
+            <li class="inline-flex items-center gap-1.5">
+              <Globe class="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <a
+                href={personal.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-zinc-900 hover:underline"
+              >
+                {formatUrl(personal.website)}
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </div>
   </div>
-
-  <ul class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs text-zinc-600 font-mono">
-    {
-      personal.location && (
-        <li class="inline-flex items-center gap-1">
-          <MapPin class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-          <span>{personal.location}</span>
-        </li>
-      )
-    }
-
-    {
-      personal.email && (
-        <li class="inline-flex items-center gap-1">
-          <Mail class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-          <a href={`mailto:${personal.email}`} class="hover:text-zinc-900 hover:underline">
-            {personal.email}
-          </a>
-        </li>
-      )
-    }
-
-    {
-      personal.phone && (
-        <li class="inline-flex items-center gap-1">
-          <Phone class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-          <PhoneContact phone={personal.phone} mode="auto" />
-        </li>
-      )
-    }
-
-    {
-      personal.github && (
-        <li class="inline-flex items-center gap-1">
-          <Github class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-          <a
-            href={personal.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-zinc-900 hover:underline"
-          >
-            {formatUrl(personal.github)}
-          </a>
-        </li>
-      )
-    }
-
-    {
-      personal.linkedin && (
-        <li class="inline-flex items-center gap-1">
-          <Linkedin class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-          <a
-            href={personal.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-zinc-900 hover:underline"
-          >
-            {formatUrl(personal.linkedin)}
-          </a>
-        </li>
-      )
-    }
-
-    {
-      personal.website && (
-        <li class="inline-flex items-center gap-1">
-          <Globe class="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-          <a
-            href={personal.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-zinc-900 hover:underline"
-          >
-            {formatUrl(personal.website)}
-          </a>
-        </li>
-      )
-    }
-  </ul>
-
-  {
-    about.shortSummary && (
-      <p class="text-[11.5px] text-zinc-700 leading-snug mt-2 max-w-prose text-pretty">
-        {about.shortSummary}
-      </p>
-    )
-  }
 </header>
