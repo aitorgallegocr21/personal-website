@@ -214,22 +214,33 @@ The system supports real-time accent shifting across both Dark and Light modes u
 ---
 
 ### F. In-Page Certificate Viewer Modal
+The modal utilizes the native HTML5 `<dialog>` element. To prevent user-agent CSS clashes with utility frameworks like Tailwind CSS, the modal MUST enforce `display: none` when closed and `display: flex` when open:
+
 ```html
-<dialog id="cert-modal" class="backdrop:backdrop-blur-md backdrop:bg-zinc-950/70 p-0 rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl max-w-3xl w-[92vw] overflow-hidden">
-  <!-- Header bar with title and actions -->
-  <div class="flex items-center justify-between px-5 py-3.5 border-b border-zinc-800 bg-zinc-950/50">
-    <h4 id="cert-modal-title" class="text-sm font-semibold text-zinc-100">Document Title</h4>
-    <div class="flex items-center gap-2">
-      <a id="cert-modal-download" href="#" download class="px-2.5 py-1 text-xs font-medium rounded-md bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors">Descargar</a>
-      <button id="cert-modal-close" class="p-1 rounded-md text-zinc-400 hover:text-white transition-colors" aria-label="Cerrar">✕</button>
+<dialog 
+  id="certificate-modal" 
+  class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none bg-transparent p-4 sm:p-6 md:p-10 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md z-50 items-center justify-center border-0 open:flex hidden"
+>
+  <!-- Modal Container -->
+  <div class="relative w-full max-w-4xl h-[85vh] max-h-[900px] flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden">
+    <!-- Header bar with title and actions -->
+    <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/80 backdrop-blur-sm">
+      <h2 id="cert-modal-title" class="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-100">Visor de Documento</h2>
+      <div class="flex items-center gap-2">
+        <a id="cert-modal-download" href="#" download class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--color-accent)] text-white">Descargar PDF</a>
+        <button id="cert-modal-close" class="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white" aria-label="Cerrar visor">✕</button>
+      </div>
     </div>
-  </div>
-  <!-- Embedded document preview container -->
-  <div class="p-4 bg-zinc-950/80 min-h-[350px] flex items-center justify-center">
-    <iframe id="cert-modal-frame" src="" class="w-full h-[60vh] rounded-lg border border-zinc-800" title="Vista previa"></iframe>
+    <!-- Embedded document preview container -->
+    <div class="relative flex-1 bg-zinc-100 dark:bg-zinc-950 overflow-hidden flex items-center justify-center">
+      <iframe id="cert-modal-iframe" src="" class="w-full h-full border-0 relative z-10" title="Vista previa del documento"></iframe>
+    </div>
   </div>
 </dialog>
 ```
+
+> [!IMPORTANT]
+> **Native `<dialog>` Rule:** Never add an unconditional `flex` class to a `<dialog>` element without `hidden` or `open:flex`. Otherwise, modern browsers will display the dialog permanently even when `dialog.close()` is called or the `open` attribute is removed.
 
 ---
 

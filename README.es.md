@@ -1,124 +1,204 @@
-# Portfolio & Generador Automatizado de CV (SSOT)
+# ⚡ Portfolio & Generador Automatizado de CV (SSOT)
 
-> 🌐 **Idioma:** [Read in English](README.md) | Español
+<div align="center">
 
-Sitio web personal y generador automatizado de currículum vitae en formato PDF de una sola página, construido con **Astro**, **TypeScript** y **Tailwind CSS**, diseñado bajo una arquitectura estricta de **Fuente Única de Verdad (Single Source of Truth - SSOT)**.
+[![Astro](https://img.shields.io/badge/Astro-5.x-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x_Strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Licencia: MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg?style=flat-square)](LICENSE)
+[![CI/CD](https://img.shields.io/badge/GitHub_Actions-Despliegue_Automático-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/aitorgallegocr21/personal-website/actions)
 
----
+<p align="center">
+  <strong>Portfolio web de alto rendimiento y generador milimétrico de currículum vitae en PDF A4.</strong><br>
+  Construido con Astro, TypeScript en modo estricto y Tailwind CSS bajo una arquitectura de Fuente Única de Verdad (SSOT) sin concesiones.
+</p>
 
-## Características Principales
+<p align="center">
+  🇪🇸 <strong>Español</strong> • 🇬🇧 <a href="README.md">Read in English</a>
+</p>
 
-- **Fuente Única de Verdad (SSOT):** Todos los datos biográficos, experiencia, proyectos, habilidades técnicas y formación académica residen en `src/data/cv-data.ts`. Tanto la web interactiva como el CV descargable leen el mismo conjunto de datos tipado.
-- **Motor de Theming Dinámico & Rotación Diaria:** Selector de paleta cromática multi-acento (Esmeralda, Sky, Violeta, Rosa, Ámbar) con rotación automática por día de la semana, alternador de modo claro/oscuro y transiciones CSS fluidas a 60 FPS.
-- **Retrato Interactivo & Bento Moderno:** Tarjeta de perfil con micro-interacción 3D tilt, indicador de disponibilidad pulsante, capturas de proyectos e insignia de "Proyecto Actual".
-- **Visor Modal de Certificados:** Componente accesible para previsualizar y descargar credenciales oficiales y títulos académicos sin abandonar la página.
-- **Exportación A4 Perfecta a PDF:** Ruta de impresión dedicada (`/cv`) con selector dinámico de color en la barra de acciones, maquetación matemática a 1 página y protección ante saltos huérfanos (`break-inside-avoid`).
-- **Arquitectura Tipada Estricta:** Comprobación estática integral mediante interfaces de TypeScript, sin uso de tipos laxos como `any`.
-- **Desarrollo Guiado por Especificaciones para Agentes:** Normas arquitectónicas, de ahorro de contexto y de commits semánticos consolidadas en `AGENTS.md` y skills especializadas de Antigravity.
-
----
-
-## Stack Tecnológico
-
-- **Framework:** [Astro](https://astro.build/) (Generación de Sitios Estáticos)
-- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/) (Modo Estricto)
-- **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
-- **Herramientas de Calidad:** Prettier con plugin oficial de Tailwind, `@astrojs/check`
-- **Despliegue:** GitHub Pages (Automatizado mediante GitHub Actions)
+</div>
 
 ---
 
-## Estructura del Proyecto
+## 📑 Tabla de Contenidos
+
+- [Visión General & Arquitectura](#-visión-general--arquitectura)
+- [Características Principales](#-características-principales)
+- [Vistas del Proyecto & Rutas](#-vistas-del-proyecto--rutas)
+- [Stack Tecnológico](#-stack-tecnológico)
+- [Estructura del Repositorio](#-estructura-del-repositorio)
+- [Puesta en Marcha Rápida](#-puesta-en-marcha-rápida)
+- [Flujo de Desarrollo & Scripts](#-flujo-de-desarrollo--scripts)
+- [Guía de Exportación a PDF / Impresión](#-guía-de-exportación-a-pdf--impresión)
+- [Estándares para Agentes de IA & Desarrolladores](#-estándares-para-agentes-de-ia--desarrolladores)
+- [Licencia](#-licencia)
+
+---
+
+## 🏛 Visión General & Arquitectura
+
+Este proyecto da vida de forma simultánea a un portfolio web moderno y a un currículum vitae descargable en PDF maquetado a 1 sola página A4, ambos consumiendo exactamente el mismo conjunto de datos centralizado.
+
+```
+                      ┌────────────────────────────────┐
+                      │   src/data/cv-data.ts (SSOT)   │
+                      │ Tipado estricto con resume.ts  │
+                      └──────────────┬─────────────────┘
+                                     │
+                 ┌───────────────────┴───────────────────┐
+                 ▼                                       ▼
+    ┌────────────────────────┐              ┌────────────────────────┐
+    │     Portfolio Web      │              │    CV Imprimible       │
+    │        (/)             │              │        (/cv)           │
+    │  - Grid Bento dinámico │              │  - Ajuste exacto a 1 A4│
+    │  - Modo Claro/Oscuro   │              │  - Cero desbordamiento │
+    │  - Tarjeta 3D Tilt     │              │  - Selector de acento  │
+    │  - 0 KB JS innecesario │              │  - PDF nítido y ATS    │
+    └────────────────────────┘              └────────────────────────┘
+```
+
+### Principios Fundamentales de Diseño
+
+1. **Fuente Única de Verdad (SSOT):** Queda estrictamente prohibido incluir texto biográfico, nombres de empresas, métricas o proyectos hardcodeados en componentes `.astro`. Todo se centraliza en [`src/data/cv-data.ts`](src/data/cv-data.ts).
+2. **Tipado Estricto:** Cualquier nueva entidad o campo debe modelarse primero en [`src/types/resume.ts`](src/types/resume.ts) sin admitir `any`.
+3. **Rendimiento Web Máximo:** Cero JavaScript innecesario enviado al cliente. La interactividad es puntual y aislada (cambio de tema, visor modal de certificados).
+4. **Maquetación Matemática de Impresión:** La ruta `/cv` aprovecha reglas CSS `@page` y contenedores calibrados al milímetro para garantizar 1 hoja A4 física sin elementos huérfanos.
+
+---
+
+## ✨ Características Principales
+
+- **🎯 Datos SSOT Centralizados:** Biografía, catálogo de proyectos, stack tecnológico, experiencia y formación gestionados en un solo lugar.
+- **🎨 Theming Dinámico & Rotación Diaria:** 5 paletas de acento (Esmeralda, Sky, Violeta, Rosa, Ámbar) con rotación automática según el día de la semana, selector manual y modo oscuro/claro.
+- **🎴 Bento Grid Moderno & Retrato Interactivo:** Tarjeta de perfil con micro-interacción 3D tilt, indicador de disponibilidad en tiempo real y enlaces directos a código/demos.
+- **📜 Visor Modal de Certificados:** Inspecciona y descarga credenciales oficiales y títulos sin abandonar la experiencia de navegación.
+- **🖨️ Barra de Impresión A4 Interactiva:** Permite cambiar la paleta cromática en vivo en `/cv` antes de disparar la exportación nativa a PDF.
+- **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
+
+---
+
+## 🌐 Vistas del Proyecto & Rutas
+
+| Ruta | Propósito | Características Clave |
+|---|---|---|
+| **`/`** | Portfolio Web Interactivo | Bento showcase, enlaces a demos/código, timeline profesional, visor de títulos y diseño totalmente responsivo. |
+| **`/cv`** | CV Imprimible / Exportable a PDF | Diseño editorial suizo, ajuste estricto a 1 página A4, selector de color para impresión y estructura semántica legible para ATS. |
+
+---
+
+## 🛠 Stack Tecnológico
+
+- **Framework:** [Astro 5.x](https://astro.build/) (Static Site Generation / SSG)
+- **Lenguaje:** [TypeScript 5.x](https://www.typescriptlang.org/) (Modo estricto habilitado)
+- **Estilos:** [Tailwind CSS 4.x](https://tailwindcss.com/) con variables nativas CSS
+- **Calidad de Código:** [Prettier](https://prettier.io/) con plugin de Tailwind y `@astrojs/check`
+- **Despliegue Continuo:** GitHub Pages automatizado vía GitHub Actions (`.github/workflows/deploy.yml`)
+
+---
+
+## 📂 Estructura del Repositorio
 
 ```text
 .
-├── .agents/skills/         # Skills de workspace para pair programming con Antigravity
-├── docs/                   # Dossier profesional, sistema de diseño y backlog
-│   ├── DESIGN_SYSTEM.md
-│   ├── DOSSIER_PROFESIONAL.md
-│   ├── tasks/              # Especificaciones detalladas de cada tarea
-│   └── TASKS.md            # Índice de sprints y fases del roadmap
+├── .agents/skills/              # Skills especializadas para trabajo con agentes IA (Antigravity)
+├── docs/                        # Documentación técnica completa y especificaciones
+│   ├── DESIGN_SYSTEM.md         # Tokens de diseño, paletas y especificaciones de impresión
+│   ├── DOSSIER_PROFESIONAL.md   # Historial completo, trayectoria y datos de referencia
+│   ├── tasks/                   # Desglose exhaustivo de fases y tareas técnicas
+│   └── TASKS.md                 # Índice del backlog activo y roadmap
 ├── src/
-│   ├── components/         # Componentes modulares Astro
-│   │   ├── cv/             # Componentes compactos optimizados para impresión A4
-│   │   └── portfolio/      # Componentes interactivos para la web
+│   ├── components/              # Componentes Astro organizados por dominio
+│   │   ├── cv/                  # Componentes compactos optimizados para hoja A4
+│   │   └── portfolio/           # Componentes interactivos del portfolio (Hero, Bento, Modal)
 │   ├── data/
-│   │   └── cv-data.ts      # SSOT: Datos profesionales centralizados
+│   │   └── cv-data.ts           # 🌟 SSOT: Datos profesionales centralizados
 │   ├── layouts/
-│   │   ├── BaseLayout.astro
-│   │   └── PrintLayout.astro
+│   │   ├── BaseLayout.astro     # Estructura HTML global, scripts de tema y metadatos
+│   │   └── PrintLayout.astro    # Maquetación específica con reglas @page para A4
 │   ├── pages/
-│   │   ├── index.astro     # Portfolio interactivo (/)
-│   │   └── cv.astro        # Vista imprimible A4 (/cv)
-│   ├── styles/             # Estilos globales y reglas de impresión
-│   └── types/
-│       └── resume.ts       # Esquema TypeScript y contratos de datos
-├── public/                 # Documentos de usuario y assets estáticos
-│   ├── docs/certificates/  # Diplomas y certificados oficiales en PDF
-│   ├── images/             # Avatares y fotos de perfil
-│   │   └── projects/       # Capturas y vistas previas de proyectos
-│   └── _headers            # Reglas de caché inmutable
-├── AGENTS.md               # Protocolo y directrices para agentes de IA
-├── README.md               # Documentación principal en inglés
-└── README.es.md            # Documentación en español
+│   │   ├── index.astro          # Vista del portfolio web (/)
+│   │   └── cv.astro             # Vista del CV imprimible (/cv)
+│   ├── styles/                  # CSS global, Tailwind y variables de paletas dinámicas
+│   ├── types/
+│   │   └── resume.ts            # Contratos de datos e interfaces TypeScript
+│   └── utils/                   # Utilidades para cálculo dinámico de edad y formato de fechas
+├── public/                      # Archivos estáticos servidos en la raíz
+│   ├── docs/certificates/       # Certificados en PDF y credenciales académicas
+│   ├── images/                  # Fotos de perfil, capturas de proyectos e iconos
+│   └── _headers                 # Políticas de caché para producción
+├── AGENTS.md                    # Protocolo inviolable para agentes IA, flujo y commits
+├── README.md                    # Documentación en inglés
+└── README.es.md                 # Documentación en español (este archivo)
 ```
 
 ---
 
-## Instalación y Uso
+## 🚀 Puesta en Marcha Rápida
 
 ### Requisitos Previos
 
-- **Node.js:** Versión 20.x o superior (LTS recomendada)
-- **Gestor de paquetes:** `npm`
+- **Node.js:** `v20.x` o superior (versión LTS recomendada)
+- **Gestor de paquetes:** `npm` (v10+ recomendado)
 
-### Puesta en Marcha
+### Instalación
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/portfolio-cv.git
-cd portfolio-cv
+# 1. Clonar el repositorio
+git clone https://github.com/aitorgallegocr21/personal-website.git
+cd personal-website
 
-# Instalar dependencias exactas
+# 2. Instalar dependencias exactas
 npm clean-install
+
+# 3. Configurar variables de entorno opcionales
+cp .env.example .env
 ```
 
-### Scripts Disponibles
-
-```bash
-# Servidor local de desarrollo (http://localhost:4321)
-npm run dev
-
-# Iniciar servidor de desarrollo en segundo plano
-astro dev --background
-
-# Validación estricta de tipos en archivos .astro y .ts
-npm run check
-
-# Compilar proyecto estático para producción en /dist
-npm run build
-
-# Previsualizar localmente la build de producción
-npm run preview
-```
+> **Nota:** En `.env` puedes definir `PUBLIC_PHONE="+34 600 00 00 00"`. Si no se define, el campo de teléfono se omitirá limpiamente sin generar fallos en la compilación.
 
 ---
 
-## Rutas y Exportación de Documentos
+## 💻 Flujo de Desarrollo & Scripts
 
-- **`/`**: Portfolio interactivo con catálogo completo de proyectos, detalles de arquitectura técnica, enlaces a repositorios y trayectoria íntegra.
-- **`/cv`**: Vista minimalista maquetada milimétricamente para caber en una hoja A4. Usa el diálogo de impresión del navegador (`Ctrl + P` o `Cmd + P`) y selecciona **"Guardar como PDF"** con gráficos de fondo activados y márgenes predeterminados.
-
----
-
-## Protocolos de Desarrollo para Agentes
-
-Antes de realizar modificaciones o delegar tareas a agentes de programación, consulta:
-- [`AGENTS.md`](AGENTS.md) para conocer las restricciones de diseño, convención de commits y reglas SSOT.
-- [`docs/TASKS.md`](docs/TASKS.md) para revisar el backlog activo de trabajo.
+| Comando | Acción |
+|---|---|
+| `npm run dev` | Inicia el servidor de desarrollo local en `http://localhost:4321`. |
+| `astro dev --background` | Arranca el servidor de desarrollo en segundo plano. |
+| `npm run check` | Valida tipos TypeScript y diagnóstico en archivos `.astro` sin compilar. |
+| `npm run build` | Compila el bundle de producción estático en `/dist` tras verificar tipos. |
+| `npm run preview` | Levanta un servidor local para previsualizar el contenido generado en `/dist`. |
 
 ---
 
-## Licencia
+## 🖨️ Guía de Exportación a PDF / Impresión
 
-Este proyecto está bajo la [Licencia MIT](LICENSE).
+Para generar un CV en PDF nítido y optimizado desde la ruta `/cv`:
+
+1. Inicia el servidor (`npm run dev`) o entra a la página desplegada en `/cv`.
+2. En la barra superior flotante, elige el acento cromático deseado (*Esmeralda*, *Sky*, *Pizarra*, etc.).
+3. Abre el cuadro de diálogo de impresión del navegador:
+   - **Atajo:** `Ctrl + P` (Windows/Linux) o `Cmd + P` (macOS).
+4. Configura los siguientes parámetros en la ventana de impresión:
+   - **Destino:** Guardar como PDF
+   - **Tamaño de papel:** A4
+   - **Márgenes:** Predeterminados (el diseño define internamente `@page { margin: 10mm 12mm }`)
+   - **Opciones:** Marcar **"Gráficos de fondo"** (necesario para insignias y detalles de color)
+   - **Escala:** 100% (Predeterminada)
+
+---
+
+## 🤖 Estándares para Agentes de IA & Desarrolladores
+
+Cualquier agente de programación o colaborador debe respetar las directrices del proyecto:
+
+- **Seguir [AGENTS.md](AGENTS.md):** Cumplir estrictamente el ciclo de 5 pasos (`Spec` ➔ `Code` ➔ `npm run build` ➔ `Sincronización de Docs` ➔ `Commit Semántico`).
+- **Nunca hardcodear datos estáticos:** Cualquier dato debe agregarse a `src/data/cv-data.ts` y estar respaldado por tipos en `src/types/resume.ts`.
+- **Cero Ambigüedad:** El estado del proyecto y el backlog activo se consultan y mantienen siempre en [`docs/TASKS.md`](docs/TASKS.md).
+- **Auditoría de Documentación:** Tras cualquier tarea que altere arquitectura, props o configuración, evaluar y actualizar la documentación afectada.
+
+---
+
+## 📄 Licencia
+
+Este proyecto es de código abierto y cuenta con la [Licencia MIT](LICENSE).
