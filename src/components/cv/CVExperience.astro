@@ -12,9 +12,10 @@ const featuredExperience = cvData.experience.filter((exp) => exp.featuredInCV);
 
 {
   featuredExperience.length > 0 && (
-    <section class="mb-3">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5">
-        {title}
+    <section class="mb-3 break-inside-avoid">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5 flex items-center gap-1.5">
+        <span class="w-1 h-3 rounded-xs bg-[var(--color-accent)] shrink-0" />
+        <span>{title}</span>
       </h2>
 
       <div class="space-y-2.5">
@@ -27,16 +28,28 @@ const featuredExperience = cvData.experience.filter((exp) => exp.featuredInCV);
                 </h3>
                 <span class="text-xs font-medium text-zinc-700"> · {exp.company}</span>
                 {exp.location && (
-                  <span class="text-[11px] text-zinc-500 font-normal"> ({exp.location})</span>
+                  exp.locationUrl ? (
+                    <a
+                      href={exp.locationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-[11px] text-zinc-500 font-normal hover:text-zinc-900 hover:underline"
+                      title={`Ver ubicación de ${exp.company}`}
+                    >
+                      ({exp.location})
+                    </a>
+                  ) : (
+                    <span class="text-[11px] text-zinc-500 font-normal"> ({exp.location})</span>
+                  )
                 )}
               </div>
-              <span class="text-[11px] font-mono text-zinc-500 shrink-0">
+              <span class="text-[10.5px] font-mono text-zinc-500 shrink-0">
                 {exp.startDate} — {exp.endDate || 'Actualidad'}
               </span>
             </div>
 
             {exp.bullets && exp.bullets.length > 0 && (
-              <ul class="mt-1 space-y-0.5 text-[11px] leading-relaxed text-zinc-700 list-disc list-outside ml-3.5">
+              <ul class="mt-1 space-y-0.5 text-[10.5px] leading-relaxed text-zinc-700 list-disc list-outside ml-3.5">
                 {exp.bullets.map((bullet) => (
                   <li>{bullet}</li>
                 ))}
@@ -46,7 +59,7 @@ const featuredExperience = cvData.experience.filter((exp) => exp.featuredInCV);
             {exp.technologies && exp.technologies.length > 0 && (
               <div class="mt-1 flex flex-wrap gap-1">
                 {exp.technologies.map((tech) => (
-                  <span class="text-[10px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded border border-zinc-200/60">
+                  <span class="text-[9.5px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.2 rounded border border-zinc-200/60">
                     {tech}
                   </span>
                 ))}
