@@ -18,6 +18,6 @@ Enhance the floating action toolbar `CVPrintBar.astro` to include an interactive
    - Pure Monochrome (Standard black & white)
 
 ## Acceptance Criteria
-- [ ] Changing swatch updates CV accent highlights in real time.
-- [ ] Exporting to PDF via browser print preserves the currently selected color theme.
-- [ ] Toolbar hides completely during print.
+- [x] Changing swatch updates CV accent highlights in real time.
+- [x] Exporting to PDF via browser print preserves the currently selected color theme.
+- [x] Toolbar hides completely during print.
