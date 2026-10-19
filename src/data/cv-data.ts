@@ -10,6 +10,8 @@ export const cvData: ResumeData = {
     website: "https://aitorgallegocr21.github.io/personal-website",
     github: "https://github.com/aitorgcr",
     linkedin: "https://linkedin.com/in/aitor-gallego-casilda",
+    birthDate: "2007-02-21",
+    avatarUrl: "/images/avatar.webp",
   },
 
   about: {
@@ -44,6 +46,7 @@ export const cvData: ResumeData = {
       role: "Desarrollador Software en Prácticas",
       company: "NTT DATA",
       location: "Remoto / España",
+      locationUrl: "https://www.google.com/maps/search/NTT+DATA+Spain",
       startDate: "2026-03", // Ajustar fechas exactas si difieren
       endDate: "2026-04",
       description:
@@ -61,6 +64,7 @@ export const cvData: ResumeData = {
       role: "Técnico de Sistemas en Prácticas (FCT)",
       company: "IES Hermógenes Rodríguez",
       location: "Herencia, Ciudad Real",
+      locationUrl: "https://maps.google.com/?q=IES+Hermogenes+Rodriguez+Herencia",
       startDate: "2025-03",
       endDate: "2025-06",
       description: "Administración, despliegue y mantenimiento de infraestructura informática educativa.",
@@ -77,6 +81,7 @@ export const cvData: ResumeData = {
       role: "Profesor Particular de Tenis",
       company: "Cuenta propia",
       location: "Herencia, Ciudad Real",
+      locationUrl: "https://maps.google.com/?q=Herencia,+Ciudad+Real",
       startDate: "2025-09",
       description: "Enseñanza técnica personalizada y planificación deportiva.",
       bullets: [
@@ -90,7 +95,8 @@ export const cvData: ResumeData = {
       id: "hosteleria",
       role: "Camarero y Servicio de Barra",
       company: "Hostelería Local",
-      location: "Herencia, Ciudad Real",
+      location: "Arenas de San Juan, Ciudad Real",
+      locationUrl: "https://maps.google.com/?q=Arenas+de+San+Juan,+Ciudad+Real",
       startDate: "2026-05", // Ajustar rango de meses
       endDate: "2026-08",
       description: "Servicio al cliente y soporte operativo a jornada parcial (40%).",
@@ -117,6 +123,7 @@ export const cvData: ResumeData = {
       ],
       technologies: ["Python", "yt-dlp", "ListenBrainz API", "Algoritmia", "Metadatos ID3"],
       repoUrl: "https://github.com/aitorgcr/music-manager",
+      isCurrentProject: false,
       featuredInCV: true,
     },
     {
@@ -132,6 +139,8 @@ export const cvData: ResumeData = {
       ],
       technologies: ["Angular", "TypeScript", "Tailwind CSS", "HTML5"],
       repoUrl: "https://github.com/aitorgcr/bookstack",
+      image: "/images/projects/bookstack.png",
+      isCurrentProject: false,
       featuredInCV: true,
     },
     {
@@ -147,6 +156,8 @@ export const cvData: ResumeData = {
       ],
       technologies: ["JavaScript (ES6+)", "HTML5", "CSS3", "Git"],
       repoUrl: "https://github.com/aitorgcr/portal-reservas-argamasilla",
+      image: "/images/projects/reservas_instalaciones.png",
+      isCurrentProject: false,
       featuredInCV: false, // Detallado en web
     },
     {
@@ -161,6 +172,8 @@ export const cvData: ResumeData = {
       ],
       technologies: ["Astro", "TypeScript", "Tailwind CSS", "SSOT"],
       repoUrl: "https://github.com/aitorgcr/portfolio-cv",
+      liveUrl: "https://aitorgallegocr21.github.io/personal-website",
+      isCurrentProject: true,
       featuredInCV: false,
     },
   ],
@@ -183,6 +196,7 @@ export const cvData: ResumeData = {
         "Nota media final: 8,7.",
         "Gestión de servidores, cableado estructurado, redes y seguridad perimetral.",
       ],
+      documentUrl: "/docs/certificates/gm-smr/CertificadoSupletorioProvisional_L.O.E._Titulo_Sistemas_Microinformaticos_y_Redes.pdf",
     },
   ],
 
@@ -197,6 +211,7 @@ export const cvData: ResumeData = {
       hours: "Especialización avanzada",
       summary: "Profundización en Programación Orientada a Objetos, API de colecciones de Java, gestión avanzada de excepciones, hilos y concurrencia básica.",
       skills: ["Java SE 8", "POO", "Colecciones", "Manejo de Excepciones", "Concurrencia"],
+      documentUrl: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/1Z0-808_ Java SE 8 Programmer I.pdf",
       featuredInCV: true,
     },
     {
@@ -208,6 +223,7 @@ export const cvData: ResumeData = {
       hours: "Especialización funcional",
       summary: "Programación declarativa y funcional en Java moderno mediante Functional Interfaces, expresiones Lambda y operaciones intermedias/terminales con Stream API.",
       skills: ["Java 11", "Streams API", "Lambdas", "Programación Funcional"],
+      documentUrl: "/docs/certificates/nttdata/Java/Java SE 11 Programmer II - Lambda Operations & Streams/Java SE 11 Programmer II_ Lambda Operations & Streams.pdf",
       featuredInCV: true,
     },
     {
@@ -219,6 +235,7 @@ export const cvData: ResumeData = {
       hours: "Especialización backend",
       summary: "Diseño y construcción de servicios web RESTful, inyección de dependencias, mapeo de endpoints con controladores Spring MVC y serialización JSON.",
       skills: ["Spring Boot", "REST APIs", "Spring MVC", "Inyección de Dependencias"],
+      documentUrl: "/docs/certificates/nttdata/Java/Create REST APIs with Spring and Java/Create REST APIs with Spring and Java.pdf",
       featuredInCV: true,
     },
     {
@@ -230,6 +247,7 @@ export const cvData: ResumeData = {
       hours: "Calidad de software",
       summary: "Metodologías de testing automatizado, aislamiento de capas con mocks/stubs mediante Mockito y aseguramiento de suites de pruebas con JUnit 5.",
       skills: ["JUnit 5", "Mockito", "Test Unitarios", "Mocks & Stubs"],
+      documentUrl: "/docs/certificates/nttdata/Java/Unit Testing/Final Exam_ Unit Testing.pdf",
       featuredInCV: true,
     },
 
@@ -243,6 +261,7 @@ export const cvData: ResumeData = {
       hours: "~6 horas lectivas",
       summary: "Formación completa de 9 módulos formativos: fundamentos y arquitectura en Angular 16, transición y nuevas características reactivas en Angular 17 y 18 (Signals, nuevo control flow syntax y componentes Standalone).",
       skills: ["Angular 16-18", "Signals", "Standalone Components", "Control Flow", "TypeScript"],
+      documentUrl: "/docs/certificates/nttdata/Angular/Angular 17 and 18 New Features.pdf",
       featuredInCV: true,
     },
 
@@ -256,6 +275,7 @@ export const cvData: ResumeData = {
       hours: "~4.5 horas lectivas",
       summary: "Ciclo intensivo de gestión y diseño de persistencia: modelado de esquemas, sentencias DDL y DML complejas, definición de constraints de integridad referencial y nociones de bases de datos NoSQL.",
       skills: ["SQL", "DDL / DML", "Constraints", "Modelado de Datos", "NoSQL"],
+      documentUrl: "/docs/certificates/nttdata/BBDD/DDL, DML, & Constraints.pdf",
       featuredInCV: true,
     },
 
@@ -268,6 +288,7 @@ export const cvData: ResumeData = {
       category: "Inteligencia Artificial",
       summary: "Técnicas avanzadas de prompting, diseño de directrices para modelos de lenguaje y aplicación práctica de herramientas de IA Generativa al flujo de desarrollo.",
       skills: ["Prompt Engineering", "GenAI", "LLMs", "Context Optimization"],
+      documentUrl: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Prompt Engineering with Generative AI Tools.pdf",
       featuredInCV: false, // Visible en web y dossier
     },
     {
@@ -277,6 +298,7 @@ export const cvData: ResumeData = {
       category: "Inteligencia Artificial",
       summary: "Fundamentos de modelos de inteligencia artificial aplicados al desarrollo de software y automatización.",
       skills: ["Inteligencia Artificial", "Automatización"],
+      documentUrl: "/docs/certificates/big-school/Certificado-Aitor-Gallego-Casilda-Romero-abnvieoi.pdf",
       featuredInCV: false,
     },
   ],

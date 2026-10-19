@@ -1,0 +1,157 @@
+---
+import { calculateAge } from '@/utils/date';
+import { User } from 'lucide-astro';
+
+interface Props {
+  name: string;
+  avatarUrl?: string;
+  title: string;
+  birthDate?: string;
+}
+
+const { name, avatarUrl, title, birthDate } = Astro.props;
+const age = birthDate ? calculateAge(birthDate) : 19;
+const imageSrc = avatarUrl
+  ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${avatarUrl}`
+  : undefined;
+---
+
+<div class="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[280px] mx-auto md:mx-0 select-none">
+  <!-- Interactive Tilt Card Container -->
+  <div
+    id="profile-portrait-card"
+    class="relative rounded-2xl p-1 bg-gradient-to-b from-zinc-200 to-zinc-300 dark:from-zinc-800 dark:to-zinc-900/60 shadow-xl transition-transform duration-100 ease-out will-change-transform group cursor-pointer"
+    style="transform-style: preserve-3d;"
+  >
+    <!-- Dynamic Ambient Accent Glow behind card -->
+    <div
+      class="absolute -inset-1.5 rounded-2xl bg-[var(--color-accent)] opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500 -z-10"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Inner Card Surface -->
+    <div class="relative rounded-[14px] overflow-hidden bg-zinc-100 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 aspect-[3/4] flex items-center justify-center">
+      {imageSrc ? (
+        <img
+          src={imageSrc}
+          alt={`Retrato profesional de ${name}`}
+          class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          loading="eager"
+          decoding="async"
+          width="400"
+          height="533"
+        />
+      ) : null}
+
+      <!-- Fallback Placeholder when image is unavailable -->
+      <div
+        id="portrait-avatar-fallback"
+        class:list={[
+          'w-full h-full flex flex-col items-center justify-center bg-zinc-200/80 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 p-6 text-center',
+          imageSrc ? 'hidden' : 'flex',
+        ]}
+      >
+        <div class="w-16 h-16 rounded-full bg-zinc-300/80 dark:bg-zinc-800 flex items-center justify-center mb-3 text-[var(--color-accent)] shadow-inner">
+          <User class="w-8 h-8" />
+        </div>
+        <span class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{name}</span>
+        <span class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">{title}</span>
+      </div>
+
+      <!-- Glossy Sheen Overlay (Interactive Glare) -->
+      <div
+        class="portrait-card-glare absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 rounded-[14px]"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Subtle Bottom Gradient for Contrast -->
+      <div
+        class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Floating Mini Badge Inside Photo (Age & Availability) -->
+      <div
+        class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between px-2.5 py-1 rounded-lg bg-zinc-950/80 backdrop-blur-md border border-white/10 text-white text-[11px] font-mono shadow-lg pointer-events-none"
+        style="transform: translateZ(25px);"
+      >
+        <span class="flex items-center gap-1.5">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
+          </span>
+          <span class="text-zinc-200 font-semibold">{age} años</span>
+        </span>
+        <span class="text-[10px] text-[var(--color-accent)] font-medium">DAM · Jr Dev</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initPortrait3D() {
+    const card = document.getElementById('profile-portrait-card');
+    if (!card) return;
+
+    const glare = card.querySelector<HTMLElement>('.portrait-card-glare');
+    const img = card.querySelector<HTMLImageElement>('img');
+    const fallback = document.getElementById('portrait-avatar-fallback');
+    img?.addEventListener('error', () => {
+      img.style.display = 'none';
+      fallback?.classList.remove('hidden');
+    });
+
+    // Respect user's motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    let rafId: number | null = null;
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (rafId) cancelAnimationFrame(rafId);
+
+      rafId = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const cardX = e.clientX - rect.left;
+        const cardY = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // Max tilt of 9 degrees for smooth, elegant micro-interaction
+        const rotateX = ((cardY - centerY) / centerY) * -9;
+        const rotateY = ((cardX - centerX) / centerX) * 9;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        if (glare) {
+          const glareX = (cardX / rect.width) * 100;
+          const glareY = (cardY / rect.height) * 100;
+          glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 65%)`;
+          glare.style.opacity = '1';
+        }
+      });
+    };
+
+    const onMouseLeave = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      card.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      if (glare) {
+        glare.style.opacity = '0';
+      }
+    };
+
+    const onMouseEnter = () => {
+      card.style.transition = 'transform 0.1s ease-out';
+    };
+
+    card.addEventListener('mousemove', onMouseMove);
+    card.addEventListener('mouseleave', onMouseLeave);
+    card.addEventListener('mouseenter', onMouseEnter);
+  }
+
+  initPortrait3D();
+  document.addEventListener('astro:after-swap', initPortrait3D);
+</script>

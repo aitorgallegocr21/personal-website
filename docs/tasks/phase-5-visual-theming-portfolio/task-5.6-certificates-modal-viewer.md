@@ -19,6 +19,6 @@ Implement an accessible in-page preview modal/drawer to inspect and download off
    - Zero heavyweight external PDF libraries (uses native browser rendering).
 
 ## Acceptance Criteria
-- [ ] Modal opens smoothly on clicking a certificate document trigger.
-- [ ] Clicking backdrop or pressing `Escape` closes the modal immediately.
-- [ ] Download button provides the exact file with proper filename.
+- [x] Modal opens smoothly on clicking a certificate document trigger.
+- [x] Clicking backdrop or pressing `Escape` closes the modal immediately.
+- [x] Download button provides the exact file with proper filename.

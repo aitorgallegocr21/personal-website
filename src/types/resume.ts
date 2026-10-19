@@ -1,4 +1,4 @@
-export interface ContactInfo {
+export interface PersonalInfo {
   name: string;
   title: string;
   email: string;
@@ -7,7 +7,11 @@ export interface ContactInfo {
   website: string;
   github: string;
   linkedin: string;
+  birthDate: string;
+  avatarUrl?: string;
 }
+
+export type ContactInfo = PersonalInfo;
 
 export interface SkillGroup {
   category: string;
@@ -19,6 +23,7 @@ export interface Experience {
   role: string;
   company: string;
   location: string;
+  locationUrl?: string;
   startDate: string;
   endDate?: string;
   description: string;
@@ -36,6 +41,8 @@ export interface Project {
   technologies: string[];
   repoUrl?: string;
   liveUrl?: string;
+  image?: string;
+  isCurrentProject?: boolean;
   featuredInCV: boolean;
 }
 
@@ -44,6 +51,7 @@ export interface Education {
   degree: string;
   period: string;
   details?: string[];
+  documentUrl?: string;
 }
 
 export type CertificateCategory =
@@ -63,6 +71,7 @@ export interface Certificate {
   category: CertificateCategory;
   summary: string;
   skills: string[];
+  documentUrl?: string;
   featuredInCV: boolean;
 }
 
@@ -72,7 +81,7 @@ export interface Language {
 }
 
 export interface ResumeData {
-  personal: ContactInfo;
+  personal: PersonalInfo;
   about: {
     shortSummary: string;
     fullBio: string;

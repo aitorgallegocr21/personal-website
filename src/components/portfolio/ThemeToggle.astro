@@ -1,0 +1,204 @@
+---
+import { Sun, Moon, Palette, Sparkles, Check } from 'lucide-astro';
+
+const palettes = [
+  { id: 'emerald', name: 'Emerald', color: '#10b981', label: 'Verde Tech' },
+  { id: 'sky', name: 'Sky', color: '#0284c7', label: 'Azul Cielo' },
+  { id: 'violet', name: 'Violet', color: '#8b5cf6', label: 'Violeta' },
+  { id: 'rose', name: 'Rose', color: '#f43f5e', label: 'Rosa Coral' },
+  { id: 'amber', name: 'Amber', color: '#f59e0b', label: 'Ámbar' },
+];
+---
+
+<div class="relative flex items-center gap-1.5" id="theme-controls-container">
+  <!-- Palette Picker Button -->
+  <div class="relative">
+    <button
+      type="button"
+      id="palette-menu-btn"
+      class="p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900/60 transition-colors inline-flex items-center justify-center cursor-pointer"
+      aria-label="Seleccionar paleta de acento"
+      aria-haspopup="true"
+      aria-expanded="false"
+      title="Cambiar color de acento"
+    >
+      <Palette class="w-4 h-4" />
+      <span
+        id="palette-indicator-dot"
+        class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full border border-white dark:border-zinc-950 bg-[var(--color-accent)]"
+      ></span>
+    </button>
+
+    <!-- Palette Dropdown Popover -->
+    <div
+      id="palette-dropdown"
+      class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-950/10 dark:shadow-zinc-950/50 p-2 z-50 text-xs font-medium"
+      role="menu"
+    >
+      <div class="px-2 py-1 text-[11px] font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+        Color de acento
+      </div>
+
+      <div class="space-y-1 py-1">
+        {palettes.map((p) => (
+          <button
+            type="button"
+            class="palette-select-option w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
+            data-palette-id={p.id}
+            role="menuitem"
+          >
+            <span class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full" style={`background-color: ${p.color}`}></span>
+              <span>{p.name}</span>
+            </span>
+            <Check class="palette-check-icon w-3.5 h-3.5 hidden text-[var(--color-accent)]" data-check-id={p.id} />
+          </button>
+        ))}
+      </div>
+
+      <div class="border-t border-zinc-200 dark:border-zinc-800/80 mt-1 pt-1">
+        <button
+          type="button"
+          id="palette-auto-rotate-btn"
+          class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
+          role="menuitem"
+        >
+          <span class="flex items-center gap-2">
+            <Sparkles class="w-3.5 h-3.5 text-zinc-600 dark:text-zinc-400" />
+            <span>Rotación diaria</span>
+          </span>
+          <span id="auto-badge" class="hidden text-[10px] font-mono px-1.5 py-0.2 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Auto</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Light / Dark Mode Toggle Button -->
+  <button
+    type="button"
+    id="theme-toggle-btn"
+    class="p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900/60 transition-colors inline-flex items-center justify-center cursor-pointer"
+    aria-label="Cambiar entre modo claro y oscuro"
+    title="Alternar tema claro/oscuro"
+  >
+    <Sun class="theme-icon-sun w-4 h-4 hidden dark:block" />
+    <Moon class="theme-icon-moon w-4 h-4 block dark:hidden" />
+  </button>
+</div>
+
+<script>
+  const PALETTES = ['emerald', 'sky', 'violet', 'rose', 'amber'];
+
+  function initThemeEngine() {
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    const paletteBtn = document.getElementById('palette-menu-btn');
+    const paletteDropdown = document.getElementById('palette-dropdown');
+    const autoRotateBtn = document.getElementById('palette-auto-rotate-btn');
+    const autoBadge = document.getElementById('auto-badge');
+    const paletteOptions = document.querySelectorAll('.palette-select-option');
+    const checkIcons = document.querySelectorAll('.palette-check-icon');
+
+    function getTodayPalette() {
+      const todayIndex = new Date().getDay() % PALETTES.length;
+      return PALETTES[todayIndex];
+    }
+
+    function syncPaletteUI(currentPalette: string | null, isAuto: boolean) {
+      checkIcons.forEach((icon) => {
+        const id = icon.getAttribute('data-check-id');
+        if (id === currentPalette) {
+          icon.classList.remove('hidden');
+        } else {
+          icon.classList.add('hidden');
+        }
+      });
+
+      if (autoBadge) {
+        if (isAuto) {
+          autoBadge.classList.remove('hidden');
+        } else {
+          autoBadge.classList.add('hidden');
+        }
+      }
+    }
+
+    // Toggle Dark / Light Theme
+    themeBtn?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('portfolio-theme', newTheme);
+    });
+
+    // Toggle Palette Dropdown
+    paletteBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = paletteDropdown?.classList.contains('hidden');
+      if (isHidden) {
+        paletteDropdown?.classList.remove('hidden');
+        paletteBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        paletteDropdown?.classList.add('hidden');
+        paletteBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close Dropdown on outside click or Esc
+    document.addEventListener('click', (e) => {
+      if (!paletteDropdown?.contains(e.target as Node) && e.target !== paletteBtn) {
+        paletteDropdown?.classList.add('hidden');
+        paletteBtn?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !paletteDropdown?.classList.contains('hidden')) {
+        paletteDropdown?.classList.add('hidden');
+        paletteBtn?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Handle Palette Selection
+    paletteOptions.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-palette-id');
+        if (selected && PALETTES.includes(selected)) {
+          document.documentElement.setAttribute('data-palette', selected);
+          localStorage.setItem('portfolio-palette', selected);
+          syncPaletteUI(selected, false);
+          paletteDropdown?.classList.add('hidden');
+          paletteBtn?.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Handle Auto / Daily Rotation
+    autoRotateBtn?.addEventListener('click', () => {
+      localStorage.removeItem('portfolio-palette');
+      const daily = getTodayPalette();
+      document.documentElement.setAttribute('data-palette', daily);
+      syncPaletteUI(daily, true);
+      paletteDropdown?.classList.add('hidden');
+      paletteBtn?.setAttribute('aria-expanded', 'false');
+    });
+
+    // Initial state sync
+    const currentStored = localStorage.getItem('portfolio-palette');
+    const isAuto = !currentStored;
+    const activePalette = document.documentElement.getAttribute('data-palette') || (isAuto ? getTodayPalette() : currentStored);
+    syncPaletteUI(activePalette, isAuto);
+  }
+
+  // Setup on page load and view transitions
+  initThemeEngine();
+  document.addEventListener('astro:after-swap', initThemeEngine);
+</script>

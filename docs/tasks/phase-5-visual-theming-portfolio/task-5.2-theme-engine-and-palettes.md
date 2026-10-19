@@ -22,7 +22,7 @@ Implement a high-performance theme engine supporting dark/light mode toggle and 
    - Persisted across navigation with inline head script preventing flash of unstyled content (FOUC).
 
 ## Acceptance Criteria
-- [ ] Theme switches instantly between Dark and Light mode.
-- [ ] Accent color palette updates all buttons, badges, and glows dynamically.
-- [ ] Daily rotation algorithm selects a fresh color automatically when no preference is saved.
-- [ ] Zero layout shift or flash on page reload.
+- [x] Theme switches instantly between Dark and Light mode.
+- [x] Accent color palette updates all buttons, badges, and glows dynamically.
+- [x] Daily rotation algorithm selects a fresh color automatically when no preference is saved.
+- [x] Zero layout shift or flash on page reload.
