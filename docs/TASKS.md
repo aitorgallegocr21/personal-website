@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-- *No active phase pending. System is in continuous maintenance and enhancement mode.*
+- [ ] **[Phase 9: Portfolio Visual Creativity, Modal Document Engine & UI Polish](tasks/phase-9-portfolio-visual-creativity-and-modals/index.md)** — *Planned* (Accent glow micro-interactions, badge collision fix, multi-document credential viewer engine, and structured footer redesign).
 
 ---
 
