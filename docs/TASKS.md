@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-- *No active phase currently in progress. All roadmap phases 0 through 11 are fully completed.*
+- [ ] **[Phase 12: CV Visual Symmetry, 2-Column Balance & Strict A4 WYSIWYG Print Engine](tasks/phase-12-cv-visual-symmetry-and-print-wysiwyg/index.md)** — *In Progress* (Equilibrio visual de doble columna en pantalla eliminando el espacio vacío inferior izquierdo, habilitación de retícula de dos columnas en `@media print` para evitar el colapso a 1 sola columna, contención estricta de altura A4 para prevenir la 2ª página desbordada y paridad 100% WYSIWYG entre web e impresión).
 
 ---
 
