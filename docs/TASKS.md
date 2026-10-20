@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-- *No active phase pending. System is in continuous maintenance and enhancement mode.*
+- [ ] **[Phase 8: Project Links, Assets & External Identity Audit](tasks/phase-8-links-assets-audit/index.md)** — *In progress* (Audit and correct personal profile handles, GitHub repos, live demos, and project preview media).
 
 ---
 
