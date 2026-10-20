@@ -74,6 +74,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **🎴 Bento Grid Moderno & Retrato Interactivo:** Tarjeta de perfil con micro-interacción 3D tilt, indicador de disponibilidad en tiempo real y enlaces directos a código/demos.
 - **📜 Motor Modal Multi-Documental de Credenciales:** Visor interactivo capaz de navegar entre múltiples PDFs de módulos formativos, descarga individual y descarga en lote secuencial (`Descargar todos`).
 - **✨ Micro-interacciones con Acento & Footer Estructurado:** Pie de página responsivo en 3 columnas con indicador dinámico de disponibilidad, bordes con brillo ambiental reactivo a la paleta activa y badges de proyecto sin colisiones.
+- **📰 Maquetación Editorial del CV a 2 Columnas:** Diseño editorial para impresión A4 en 2 columnas con insignia destacada hacia el portfolio interactivo, proyectos de software con enlaces a repositorios GitHub, chips compactos de certificación, experiencia complementaria y permiso B/inglés técnico.
 - **🖨️ Barra de Impresión A4 Interactiva:** Permite cambiar la paleta cromática en vivo en `/cv` antes de disparar la exportación nativa a PDF.
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 
@@ -84,7 +85,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 | Ruta | Propósito | Características Clave |
 |---|---|---|
 | **`/`** | Portfolio Web Interactivo | Bento showcase, enlaces a demos/código, timeline profesional, visor de títulos y diseño totalmente responsivo. |
-| **`/cv`** | CV Imprimible / Exportable a PDF | Diseño editorial suizo, ajuste estricto a 1 página A4, selector de color para impresión y estructura semántica legible para ATS. |
+| **`/cv`** | CV Imprimible / Exportable a PDF | Diseño editorial a 2 columnas, ajuste estricto a 1 página A4, CTA destacado a portfolio web, enlaces a repositorios, selector de color para impresión y estructura semántica legible para ATS. |
 
 ---
 

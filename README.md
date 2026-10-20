@@ -74,6 +74,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **🎴 Modern Bento Grid & Interactive Portrait:** 3D perspective tilt avatar card, real-time availability indicator, and GitHub/project direct links.
 - **📜 Multi-Document Credential Engine:** Integrated modal viewer capable of navigating between multiple modular course syllabus PDFs, single downloads, and sequential batch download (`Descargar todos`).
 - **✨ Accent Polish & Structured Footer:** Responsive 3-column footer with dynamic availability indicator, project card glow micro-interactions, illuminated tech chips, and non-overlapping status badges.
+- **📰 Editorial 2-Column CV Layout:** Modern magazine-inspired 2-column printable A4 layout with prominent interactive portfolio badge, prioritized software project cards with direct GitHub repository links, compact certification chips, complementary non-tech experience, and driver's license/technical English competencies.
 - **🖨️ Precision A4 Print Bar:** Live accent palette selection directly on the `/cv` view that dynamically applies to print styles before exporting to PDF.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
@@ -84,7 +85,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 | Route | Purpose | Key Capabilities |
 |---|---|---|
 | **`/`** | Interactive Web Portfolio | Bento showcase, project live/code links, tech timeline, credential viewer, responsive layout. |
-| **`/cv`** | Printable / PDF CV | Minimalist Swiss-inspired layout, strict single A4 page fit, interactive color bar, ATS-friendly semantic markup. |
+| **`/cv`** | Printable / PDF CV | Bold editorial 2-column layout, strict single A4 page fit, prominent web portfolio CTA, repository links, interactive color bar, ATS-friendly semantic markup. |
 
 ---
 

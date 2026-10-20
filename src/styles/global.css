@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant print (@media print);
 
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -207,5 +208,17 @@ footer {
   body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    background: transparent !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .cv-editorial-grid {
+    display: grid !important;
+    grid-template-columns: 58% 39% !important;
+    gap: 3% !important;
+    align-items: start !important;
   }
 }
