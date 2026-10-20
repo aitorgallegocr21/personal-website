@@ -1,24 +1,25 @@
 # Task 9.3: Footer Redesign & Visual Hierarchy Enhancement
 
-**Status:** Planned
-**Branch:** `docs/phase-9-portfolio-visual-creativity-and-modals`
+**Status:** Completed (2026-10-20)
+**Branch:** `feat/phase-9-portfolio-creativity-and-modals`
 
 ## Context & Problem
-The current footer (`src/components/portfolio/Footer.astro`) is minimalistic but lacks structural hierarchy. It stacks copyright and social icons with modest spacing and without taking advantage of the site's accent tokens, status indicators, or modern multi-column layout.
+The previous footer (`src/components/portfolio/Footer.astro`) was minimalistic but lacked structural hierarchy. It stacked copyright and social icons with modest spacing and without taking advantage of the site's accent tokens, status indicators, or modern multi-column layout.
 
 ## Requirements
 1. **Restructure Layout:**
-   - Organize into a balanced 2-column or 3-column layout on medium/large screens:
-     - **Left Column:** Identity brand, brief purpose statement, and dynamic availability indicator (e.g. green pulse dot "Disponible para retos de desarrollo").
-     - **Center/Right Column:** Quick navigation links (Proyectos, Trayectoria, Certificaciones, CV A4).
-     - **Social Column:** Reimagined social pill cards with subtle accent hover effects (GitHub, LinkedIn, Email).
+   - Organized into a balanced 3-column layout on medium/large screens (12-column grid):
+     - **Left Column (5 cols):** Identity brand, purpose narrative, and dynamic availability indicator with pulsing dot (`Disponible para nuevos retos`).
+     - **Center Column (3 cols):** Structured navigation links (Proyectos, Trayectoria, Certificaciones, Contacto, CV A4).
+     - **Social Column (4 cols):** Reimagined social pill cards with subtle accent hover effects (GitHub, LinkedIn, Email directo).
 2. **Dynamic Tokens & Polish:**
-   - Incorporate subtle top border gradient using `--color-accent-border` or ambient glow.
+   - Incorporated subtle top border gradient using `--color-accent` rule.
    - Dynamic year and copyright statement.
 3. **Responsive Balance:**
-   - Stack gracefully on mobile screens with centered or cleanly aligned items and comfortable tap targets.
+   - Stacks gracefully on mobile screens with comfortable tap targets and clean typography.
 
 ## Acceptance Criteria
-- [ ] Visual hierarchy clearly distinguishes brand, navigation, and social contact.
-- [ ] Mobile responsive without cramped elements.
-- [ ] Consistent use of semantic tokens and dark/light mode balance.
+- [x] Visual hierarchy clearly distinguishes brand, navigation, and social contact.
+- [x] Mobile responsive without cramped elements.
+- [x] Consistent use of semantic tokens and dark/light mode balance.
+- [x] Verified build with `astro check && astro build` (0 errors, 0 warnings, 0 hints).

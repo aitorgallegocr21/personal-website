@@ -72,7 +72,8 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **🎯 Centralized SSOT Data:** Biography, project catalog, tech skills, work experience, and educational credentials configured in one place.
 - **🎨 Dynamic Theming & Daily Rotation:** Multi-accent palette system (Emerald, Sky, Violet, Rose, Amber) with automatic weekday rotation, manual switching, and dark/light mode.
 - **🎴 Modern Bento Grid & Interactive Portrait:** 3D perspective tilt avatar card, real-time availability indicator, and GitHub/project direct links.
-- **📜 Accessible Certificate Modal:** Integrated modal to inspect, review, and download official credentials and course certificates without navigating away.
+- **📜 Multi-Document Credential Engine:** Integrated modal viewer capable of navigating between multiple modular course syllabus PDFs, single downloads, and sequential batch download (`Descargar todos`).
+- **✨ Accent Polish & Structured Footer:** Responsive 3-column footer with dynamic availability indicator, project card glow micro-interactions, illuminated tech chips, and non-overlapping status badges.
 - **🖨️ Precision A4 Print Bar:** Live accent palette selection directly on the `/cv` view that dynamically applies to print styles before exporting to PDF.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 

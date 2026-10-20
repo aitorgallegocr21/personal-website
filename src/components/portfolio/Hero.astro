@@ -50,7 +50,7 @@ const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
       <!-- Printable CV link -->
       <a
         href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] hover:opacity-90 transition-opacity shadow-md shadow-zinc-950/10 dark:shadow-zinc-950/30"
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] hover:opacity-95 hover:shadow-lg hover:shadow-[var(--color-accent-glow)]/40 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md shadow-zinc-950/10 dark:shadow-zinc-950/30"
       >
         <FileText class="w-4 h-4 text-[var(--color-accent-contrast)]" />
         <span>Ver CV (PDF A4)</span>
@@ -61,7 +61,7 @@ const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
         <button
           type="button"
           id="hero-copy-email-btn"
-          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all cursor-pointer"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-800 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           data-email={personal.email}
         >
           <span id="hero-copy-icon">
@@ -77,7 +77,7 @@ const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
           href={personal.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900 transition-all"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] hover:scale-[1.02] active:scale-[0.98] transition-all"
           aria-label="Perfil de GitHub"
         >
           <Github class="w-4 h-4" />
@@ -92,7 +92,7 @@ const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
           href={personal.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900 transition-all"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100/70 dark:bg-zinc-900/50 border border-zinc-300/80 dark:border-zinc-800/80 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] hover:scale-[1.02] active:scale-[0.98] transition-all"
           aria-label="Perfil de LinkedIn"
         >
           <Linkedin class="w-4 h-4" />

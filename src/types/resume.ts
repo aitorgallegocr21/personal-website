@@ -62,6 +62,12 @@ export type CertificateCategory =
   | 'Inteligencia Artificial'
   | 'Metodologías & Otros';
 
+export interface CertificateDocument {
+  title: string;
+  url: string;
+  type?: 'main' | 'module' | 'syllabus';
+}
+
 export interface Certificate {
   id: string;
   title: string;
@@ -73,6 +79,7 @@ export interface Certificate {
   summary: string;
   skills: string[];
   documentUrl?: string;
+  documents?: CertificateDocument[];
   featuredInCV: boolean;
 }
 

@@ -1,27 +1,35 @@
 ---
-import { X, Download, FileText, ExternalLink } from 'lucide-astro';
+import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
 ---
 
 <dialog
   id="certificate-modal"
-  class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none bg-transparent p-4 sm:p-6 md:p-10 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md z-50 items-center justify-center border-0"
+  class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none bg-transparent p-3 sm:p-6 md:p-10 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md z-50 items-center justify-center border-0"
   aria-labelledby="cert-modal-title"
   aria-modal="true"
 >
   <div
-    class="relative w-full max-w-4xl h-[85vh] max-h-[900px] flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all"
+    class="relative w-full max-w-5xl h-[90vh] max-h-[920px] flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all"
     id="cert-modal-container"
   >
     <!-- Modal Header -->
-    <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/80 backdrop-blur-sm shrink-0">
-      <div class="flex items-center gap-2.5 min-w-0 pr-3">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/90 backdrop-blur-sm shrink-0 gap-3">
+      <div class="flex items-center gap-3 min-w-0">
         <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] shrink-0">
           <FileText class="w-4 h-4" />
         </div>
         <div class="min-w-0">
-          <h2 id="cert-modal-title" class="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-100 truncate">
-            Visor de Documento
-          </h2>
+          <div class="flex items-center gap-2">
+            <h2 id="cert-modal-title" class="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-100 truncate">
+              Visor de Documento
+            </h2>
+            <span
+              id="cert-modal-counter-badge"
+              class="hidden font-mono text-[11px] px-2 py-0.5 rounded-md bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] font-semibold shrink-0"
+            >
+              1 de 1
+            </span>
+          </div>
           <p id="cert-modal-subtitle" class="text-xs text-zinc-500 dark:text-zinc-400 font-mono truncate">
             Acreditación oficial
           </p>
@@ -29,17 +37,31 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
       </div>
 
       <!-- Action buttons -->
-      <div class="flex items-center gap-2 shrink-0">
+      <div class="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+        <!-- Batch download all documents (visible when multiple docs exist) -->
+        <button
+          id="cert-modal-download-all"
+          type="button"
+          class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 hover:border-[var(--color-accent-border)] transition-all cursor-pointer"
+          title="Descargar todos los documentos en serie"
+        >
+          <Files class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+          <span id="cert-modal-download-all-text">Descargar todos</span>
+        </button>
+
+        <!-- Current Document Download -->
         <a
           id="cert-modal-download"
           href="#"
           download
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity shadow-xs"
-          title="Descargar documento PDF"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xs"
+          title="Descargar documento PDF actual"
         >
           <Download class="w-3.5 h-3.5" />
           <span class="hidden sm:inline">Descargar PDF</span>
         </a>
+
+        <!-- Open External Tab -->
         <a
           id="cert-modal-external"
           href="#"
@@ -51,6 +73,8 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
           <ExternalLink class="w-4 h-4" />
           <span class="hidden sm:inline ml-1.5">Abrir</span>
         </a>
+
+        <!-- Close Button -->
         <button
           id="cert-modal-close"
           type="button"
@@ -59,6 +83,19 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
         >
           <X class="w-5 h-5" />
         </button>
+      </div>
+    </div>
+
+    <!-- Multi-document Switcher Bar (visible when multiple docs exist) -->
+    <div
+      id="cert-modal-nav-container"
+      class="hidden px-5 py-2 bg-zinc-100/90 dark:bg-zinc-800/70 border-b border-zinc-200 dark:border-zinc-800/80 overflow-x-auto flex items-center gap-2 shrink-0 scrollbar-none"
+    >
+      <span class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 font-semibold uppercase tracking-wider shrink-0">
+        Módulos:
+      </span>
+      <div id="cert-modal-nav-tabs" class="flex items-center gap-1.5 flex-nowrap">
+        <!-- Injected dynamically -->
       </div>
     </div>
 
@@ -87,29 +124,119 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
 </style>
 
 <script>
+  interface DocItem {
+    title: string;
+    url: string;
+    type?: string;
+  }
+
   const modal = document.getElementById('certificate-modal') as HTMLDialogElement | null;
   const modalContainer = document.getElementById('cert-modal-container');
   const modalTitle = document.getElementById('cert-modal-title');
   const modalSubtitle = document.getElementById('cert-modal-subtitle');
+  const modalCounterBadge = document.getElementById('cert-modal-counter-badge');
   const modalDownload = document.getElementById('cert-modal-download') as HTMLAnchorElement | null;
+  const modalDownloadAll = document.getElementById('cert-modal-download-all') as HTMLButtonElement | null;
+  const modalDownloadAllText = document.getElementById('cert-modal-download-all-text');
   const modalExternal = document.getElementById('cert-modal-external') as HTMLAnchorElement | null;
   const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement | null;
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalClose = document.getElementById('cert-modal-close');
+  const modalNavContainer = document.getElementById('cert-modal-nav-container');
+  const modalNavTabs = document.getElementById('cert-modal-nav-tabs');
 
-  function openCertificateModal(url: string, title: string, subtitle?: string) {
+  let currentDocsList: DocItem[] = [];
+
+  function selectDoc(index: number) {
+    if (!currentDocsList[index] || !modalIframe || !modalDownload) return;
+    const doc = currentDocsList[index];
+
+    if (modalLoading) modalLoading.classList.remove('hidden');
+    modalIframe.src = doc.url;
+    modalDownload.href = doc.url;
+    modalDownload.download = doc.url.split('/').pop() || `${doc.title}.pdf`;
+
+    if (modalExternal) {
+      modalExternal.href = doc.url;
+    }
+
+    if (modalCounterBadge) {
+      modalCounterBadge.textContent = `${index + 1} de ${currentDocsList.length}`;
+    }
+
+    // Update active tab styles
+    if (modalNavTabs) {
+      const tabButtons = modalNavTabs.querySelectorAll<HTMLButtonElement>('.doc-tab-btn');
+      tabButtons.forEach((btn, i) => {
+        if (i === index) {
+          btn.className = 'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] border border-[var(--color-accent)] shadow-xs transition-all cursor-default';
+        } else {
+          btn.className = 'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700/60 hover:border-[var(--color-accent-border)] transition-all cursor-pointer';
+        }
+      });
+    }
+  }
+
+  function openCertificateModal(url: string, title: string, subtitle?: string, docsJson?: string) {
     if (!modal || !modalIframe || !modalDownload) return;
 
     if (modalTitle) modalTitle.textContent = title;
     if (modalSubtitle) modalSubtitle.textContent = subtitle || 'Acreditación oficial';
-    if (modalLoading) modalLoading.classList.remove('hidden');
 
-    modalIframe.src = url;
-    modalDownload.href = url;
-    modalDownload.download = url.split('/').pop() || 'documento.pdf';
+    // Parse docs array if provided
+    let parsedDocs: DocItem[] = [];
+    if (docsJson) {
+      try {
+        parsedDocs = JSON.parse(docsJson);
+      } catch (e) {
+        console.error('Failed to parse data-docs JSON:', e);
+      }
+    }
 
-    if (modalExternal) {
-      modalExternal.href = url;
+    if (parsedDocs.length > 0) {
+      currentDocsList = parsedDocs;
+    } else if (url) {
+      currentDocsList = [{ title, url, type: 'main' }];
+    } else {
+      currentDocsList = [];
+    }
+
+    // Configure multi-document vs single-document view
+    if (currentDocsList.length > 1) {
+      if (modalNavContainer) modalNavContainer.classList.remove('hidden');
+      if (modalDownloadAll) modalDownloadAll.classList.remove('hidden');
+      if (modalDownloadAllText) modalDownloadAllText.textContent = `Descargar todos (${currentDocsList.length})`;
+      if (modalCounterBadge) modalCounterBadge.classList.remove('hidden');
+
+      // Populate tabs
+      if (modalNavTabs) {
+        modalNavTabs.innerHTML = '';
+        currentDocsList.forEach((doc, i) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = doc.title;
+          btn.className = 'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs transition-all';
+          btn.addEventListener('click', () => selectDoc(i));
+          modalNavTabs.appendChild(btn);
+        });
+      }
+
+      // Check if requested url matches any specific document
+      const targetIndex = Math.max(0, currentDocsList.findIndex((d) => d.url === url));
+      selectDoc(targetIndex);
+    } else {
+      if (modalNavContainer) modalNavContainer.classList.add('hidden');
+      if (modalDownloadAll) modalDownloadAll.classList.add('hidden');
+      if (modalCounterBadge) modalCounterBadge.classList.add('hidden');
+
+      const singleUrl = currentDocsList[0]?.url || url;
+      if (modalLoading) modalLoading.classList.remove('hidden');
+      modalIframe.src = singleUrl;
+      modalDownload.href = singleUrl;
+      modalDownload.download = singleUrl.split('/').pop() || 'documento.pdf';
+      if (modalExternal) {
+        modalExternal.href = singleUrl;
+      }
     }
 
     modal.showModal();
@@ -130,12 +257,42 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
       modalExternal.href = '#';
     }
     if (modalLoading) modalLoading.classList.remove('hidden');
+    if (modalNavContainer) modalNavContainer.classList.add('hidden');
+    if (modalDownloadAll) modalDownloadAll.classList.add('hidden');
+    currentDocsList = [];
     document.body.classList.remove('overflow-hidden');
   }
 
   modalClose?.addEventListener('click', (e) => {
     e.stopPropagation();
     closeCertificateModal();
+  });
+
+  // Batch download all documents sequentially
+  modalDownloadAll?.addEventListener('click', async () => {
+    if (currentDocsList.length === 0) return;
+    const originalText = modalDownloadAllText?.textContent || 'Descargar todos';
+    if (modalDownloadAllText) modalDownloadAllText.textContent = 'Descargando...';
+
+    for (let i = 0; i < currentDocsList.length; i++) {
+      const doc = currentDocsList[i];
+      const a = document.createElement('a');
+      a.href = doc.url;
+      a.download = doc.url.split('/').pop() || `${doc.title}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      if (i < currentDocsList.length - 1) {
+        await new Promise((r) => setTimeout(r, 400));
+      }
+    }
+
+    if (modalDownloadAllText) {
+      modalDownloadAllText.textContent = '¡Descargados!';
+      setTimeout(() => {
+        if (modalDownloadAllText) modalDownloadAllText.textContent = originalText;
+      }, 2000);
+    }
   });
 
   // Close when clicking dialog backdrop outside modalContainer
@@ -181,16 +338,17 @@ import { X, Download, FileText, ExternalLink } from 'lucide-astro';
 
   // Attach event delegation for any document trigger button across the page
   document.addEventListener('click', (e) => {
-    const target = (e.target as HTMLElement).closest('[data-doc-url]') as HTMLElement | null;
+    const target = (e.target as HTMLElement).closest('[data-doc-url], [data-docs]') as HTMLElement | null;
     if (!target) return;
 
     e.preventDefault();
-    const url = target.getAttribute('data-doc-url');
+    const url = target.getAttribute('data-doc-url') || '';
     const title = target.getAttribute('data-doc-title') || 'Documento';
     const subtitle = target.getAttribute('data-doc-subtitle') || '';
+    const docs = target.getAttribute('data-docs') || undefined;
 
-    if (url) {
-      openCertificateModal(url, title, subtitle);
+    if (url || docs) {
+      openCertificateModal(url, title, subtitle, docs);
     }
   });
 </script>
