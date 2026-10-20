@@ -1,6 +1,6 @@
 # Phase 12: CV Visual Symmetry, 2-Column Balance & Strict A4 WYSIWYG Print Engine
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Branch:** `feat/phase-12-cv-visual-symmetry-and-print-wysiwyg`  
 **Reference Images / Issues:**
 - Screen view visual void: Left column ends prematurely (~50% height) with huge empty space beneath projects.
@@ -35,4 +35,4 @@
 - [x] **[12.2 Dual-Mode Multi-Column Grid Architecture (Web & Print Parity)](task-12.2-print-grid-architecture-wysiwyg.md)** — Añadir clases `print:grid-cols-12`, `print:col-span-7`, `print:col-span-5` y `print:gap-4` para evitar el colapso a 1 sola columna en el motor de impresión.
 - [x] **[12.3 Print Engine Page Sizing & Anti-Overflow Constraint Fix](task-12.3-print-engine-overflow-and-page-bounds.md)** — Corregir `PrintLayout.astro` eliminando `height: 297mm` en body de impresión y aplicando contenciones estrictas para asegurar 1 página A4 exacta.
 - [x] **[12.4 Typography & Spacing Fine-Tuning for A4 Harmony](task-12.4-typography-spacing-and-a4-harmony.md)** — Calibrar espaciados internos, tags y márgenes de sección para que el diseño ocupe armónicamente el espacio A4 sin vacíos ni compresiones.
-- [ ] **[12.5 Build & Verification](task-12.5-verification-and-acceptance.md)** — Verificar build limpio con TypeScript y validar exportación de 1 página exacta en Chromium/Firefox.
+- [x] **[12.5 Build & Verification](task-12.5-verification-and-acceptance.md)** — Verificar build limpio con TypeScript y validar exportación de 1 página exacta en Chromium/Firefox.
