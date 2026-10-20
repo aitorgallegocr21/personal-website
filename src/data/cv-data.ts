@@ -8,8 +8,8 @@ export const cvData: ResumeData = {
     phone: import.meta.env.PUBLIC_PHONE || undefined,
     location: "Herencia, Ciudad Real, España",
     website: "https://aitorgallegocr21.github.io/personal-website",
-    github: "https://github.com/aitorgcr",
-    linkedin: "https://linkedin.com/in/aitor-gallego-casilda",
+    github: "https://github.com/aitorgallegocr21",
+    linkedin: "https://www.linkedin.com/in/aitor-gallego-casilda-romero-7260ba3a1",
     birthDate: "2007-02-21",
     avatarUrl: "/images/avatar.webp",
     status: "Disponible",
@@ -113,7 +113,7 @@ export const cvData: ResumeData = {
   projects: [
     {
       id: "music-engine",
-      title: "Local Music Management Engine",
+      title: "Music Engine — The Autonomous Musical Conveyor Belt",
       summary: "Motor local de descarga y gestión de música en Python con inferencia de preferencias y metadatos ID3.",
       description:
         "Desarrollo open-source de un motor local enfocado en privacidad para catalogación y descarga musical. Autor del ~90% de la lógica de procesamiento del repositorio.",
@@ -123,13 +123,13 @@ export const cvData: ResumeData = {
         "Integración con la API de ListenBrainz para registro analítico de métricas y hábitos de escucha.",
       ],
       technologies: ["Python", "yt-dlp", "ListenBrainz API", "Algoritmia", "Metadatos ID3"],
-      repoUrl: "https://github.com/aitorgcr/music-manager",
+      repoUrl: "https://github.com/jorgefernandezmc-cpu/Music_Engine",
       isCurrentProject: false,
       featuredInCV: true,
     },
     {
       id: "bookstack",
-      title: "Bookstack - Registro de Lecturas",
+      title: "Bookstack",
       summary: "Aplicación web moderna en Angular y Tailwind CSS para organización de bibliotecas y seguimiento de libros.",
       description:
         "Plataforma web enfocada en experiencia de usuario y diseño limpio para registrar y puntuar lecturas en almacenamiento local.",
@@ -139,14 +139,15 @@ export const cvData: ResumeData = {
         "Gestión de estado y persistencia local sin fricción de registros externos.",
       ],
       technologies: ["Angular", "TypeScript", "Tailwind CSS", "HTML5"],
-      repoUrl: "https://github.com/aitorgcr/bookstack",
+      repoUrl: "https://github.com/aitorgallegocr21/bookstack",
+      liveUrl: "https://aitorgallegocr21.github.io/bookstack/",
       image: "/images/projects/bookstack.png",
       isCurrentProject: false,
       featuredInCV: true,
     },
     {
       id: "portal-reservas",
-      title: "Portal de Reservas Deportivas",
+      title: "Sistema de Gestión y Reservas - Argamasilla de Alba",
       summary: "Aplicación web interactiva desarrollada en Vanilla JavaScript para reserva de instalaciones municipales.",
       description:
         "Proyecto Intermodular de 1º DAM desarrollado en equipo de 3 personas para informatizar la reserva de instalaciones en Argamasilla de Alba.",
@@ -156,14 +157,15 @@ export const cvData: ResumeData = {
         "Coordinación y control de versiones con Git en equipo multidisciplinar.",
       ],
       technologies: ["JavaScript (ES6+)", "HTML5", "CSS3", "Git"],
-      repoUrl: "https://github.com/aitorgcr/portal-reservas-argamasilla",
+      repoUrl: "https://github.com/aitorgallegocr21/reservas_instalaciones",
+      liveUrl: "https://aitorgallegocr21.github.io/reservas_instalaciones/",
       image: "/images/projects/reservas_instalaciones.png",
       isCurrentProject: false,
       featuredInCV: false, // Detallado en web
     },
     {
       id: "portfolio-cv-ssot",
-      title: "Portfolio Web & Automated CV SSOT",
+      title: "Portfolio & Automated Resume (SSOT)",
       summary: "Sitio web de alto rendimiento y generador de CV A4 con Astro, TypeScript y Tailwind CSS.",
       description:
         "Plataforma personal con arquitectura Single Source of Truth para unificar la web y el PDF descargable.",
@@ -172,7 +174,7 @@ export const cvData: ResumeData = {
         "Estilos de impresión CSS `@media print` para exportar un PDF A4 perfecto sin desbordamientos.",
       ],
       technologies: ["Astro", "TypeScript", "Tailwind CSS", "SSOT"],
-      repoUrl: "https://github.com/aitorgcr/portfolio-cv",
+      repoUrl: "https://github.com/aitorgallegocr21/personal-website",
       liveUrl: "https://aitorgallegocr21.github.io/personal-website",
       isCurrentProject: true,
       featuredInCV: false,
