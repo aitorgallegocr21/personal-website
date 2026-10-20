@@ -1,6 +1,6 @@
 # Task 12.3: Print Engine Page Sizing & Anti-Overflow Constraint Fix
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Phase:** 12  
 **Components:** `src/layouts/PrintLayout.astro`, `src/styles/global.css`
 
@@ -55,6 +55,6 @@ In `src/layouts/PrintLayout.astro`:
    - Set `main` to `print:p-0 print:m-0 print:shadow-none print:w-full print:max-w-none`.
 
 3. **Checklist:**
-   - [ ] Replace `height: 297mm` with `height: auto` and `overflow: hidden` in `@media print`.
-   - [ ] Apply `page-break-inside: avoid` / `break-inside: avoid` to the root CV container.
-   - [ ] Verify zero extraneous page generation.
+   - [x] Replace `height: 297mm` with `height: auto` and `overflow: hidden` in `@media print`.
+   - [x] Apply `page-break-inside: avoid` / `break-inside: avoid` to the root CV container.
+   - [x] Verify zero extraneous page generation.

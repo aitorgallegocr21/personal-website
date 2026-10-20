@@ -31,13 +31,20 @@ const {
 
       @media print {
         html, body {
-          width: 210mm !important;
-          height: 297mm !important;
+          width: 100% !important;
+          height: auto !important;
+          max-height: 100% !important;
           margin: 0 !important;
           padding: 0 !important;
           background: #ffffff !important;
+          overflow: hidden !important;
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
+        }
+
+        #cv-container {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
         }
 
         /* Prevent link URLs from being printed next to anchors */
@@ -47,9 +54,9 @@ const {
       }
     </style>
   </head>
-  <body class="bg-zinc-100 print:bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-200 overflow-x-auto print:overflow-visible">
+  <body class="bg-zinc-100 print:bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-200 overflow-x-auto print:overflow-hidden">
     <div class="min-w-fit md:min-w-0 flex justify-center p-2 sm:p-6 md:p-8 print:p-0 print:m-0">
-      <main class="w-[210mm] max-w-[210mm] min-h-[297mm] p-[10mm_12mm] print:p-0 print:m-0 bg-white print:bg-transparent shadow-xl print:shadow-none print:min-h-0 print:h-auto shrink-0 transition-shadow">
+      <main class="w-[210mm] max-w-[210mm] min-h-[297mm] p-[10mm_12mm] print:p-0 print:m-0 print:w-full print:max-w-none bg-white print:bg-transparent shadow-xl print:shadow-none print:min-h-0 print:h-auto shrink-0 transition-shadow">
         <slot />
       </main>
     </div>
