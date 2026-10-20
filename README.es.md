@@ -72,7 +72,8 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **🎯 Datos SSOT Centralizados:** Biografía, catálogo de proyectos, stack tecnológico, experiencia y formación gestionados en un solo lugar.
 - **🎨 Theming Dinámico & Rotación Diaria:** 5 paletas de acento (Esmeralda, Sky, Violeta, Rosa, Ámbar) con rotación automática según el día de la semana, selector manual y modo oscuro/claro.
 - **🎴 Bento Grid Moderno & Retrato Interactivo:** Tarjeta de perfil con micro-interacción 3D tilt, indicador de disponibilidad en tiempo real y enlaces directos a código/demos.
-- **📜 Visor Modal de Certificados:** Inspecciona y descarga credenciales oficiales y títulos sin abandonar la experiencia de navegación.
+- **📜 Motor Modal Multi-Documental de Credenciales:** Visor interactivo capaz de navegar entre múltiples PDFs de módulos formativos, descarga individual y descarga en lote secuencial (`Descargar todos`).
+- **✨ Micro-interacciones con Acento & Footer Estructurado:** Pie de página responsivo en 3 columnas con indicador dinámico de disponibilidad, bordes con brillo ambiental reactivo a la paleta activa y badges de proyecto sin colisiones.
 - **🖨️ Barra de Impresión A4 Interactiva:** Permite cambiar la paleta cromática en vivo en `/cv` antes de disparar la exportación nativa a PDF.
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 

@@ -1,69 +1,157 @@
 ---
 import { cvData } from '@/data/cv-data';
-import { Github, Linkedin, Mail, FileText } from 'lucide-astro';
+import { Github, Linkedin, Mail, FileDown, ArrowUpRight } from 'lucide-astro';
 
 const { personal } = cvData;
 const currentYear = new Date().getFullYear();
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<footer id="contacto" class="mt-20 border-t border-zinc-200 dark:border-zinc-800/80 bg-zinc-100/60 dark:bg-zinc-950/40 scroll-mt-20">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs sm:text-sm text-zinc-500">
-    <div class="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
+<footer class="mt-20 border-t border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-950/70 backdrop-blur-md relative overflow-hidden">
+  <!-- Subtle top accent gradient rule -->
+  <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)]/30 to-transparent"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-12 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 pb-10">
+      <!-- Left Column: Identity & Availability (5 cols) -->
+      <div class="md:col-span-5 flex flex-col items-start">
+        <a
+          href={import.meta.env.BASE_URL}
+          class="group inline-flex items-center gap-2.5 font-bold text-base text-zinc-900 dark:text-zinc-100 hover:text-[var(--color-accent)] transition-colors"
+          aria-label={`Inicio - ${personal.name}`}
+        >
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]"></span>
+          <span class="tracking-tight">{personal.name}</span>
+        </a>
+
+        <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-2 max-w-sm leading-relaxed">
+          {personal.title}. Enfoque en código estructurado, rendimiento web con arquitectura SSOT y desarrollo de soluciones backend fiables.
+        </p>
+
+        <!-- Dynamic Availability Indicator -->
+        <div class="inline-flex items-center gap-2 mt-4 px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)]">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
+          </span>
+          <span class="text-zinc-800 dark:text-zinc-200 font-medium">Disponible para nuevos retos</span>
+        </div>
+      </div>
+
+      <!-- Center Column: Quick Navigation (3 cols) -->
+      <div class="md:col-span-3 flex flex-col">
+        <h3 class="font-mono text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-3">
+          // Navegación
+        </h3>
+        <ul class="space-y-2 text-xs sm:text-sm">
+          <li>
+            <a
+              href="#proyectos"
+              class="text-zinc-600 dark:text-zinc-400 hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5 py-0.5"
+            >
+              <span>›</span>
+              <span>Proyectos</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#trayectoria"
+              class="text-zinc-600 dark:text-zinc-400 hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5 py-0.5"
+            >
+              <span>›</span>
+              <span>Trayectoria</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#certificaciones"
+              class="text-zinc-600 dark:text-zinc-400 hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5 py-0.5"
+            >
+              <span>›</span>
+              <span>Certificaciones</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#contacto"
+              class="text-zinc-600 dark:text-zinc-400 hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5 py-0.5"
+            >
+              <span>›</span>
+              <span>Contacto</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href={`${baseUrl}/cv`}
+              class="text-zinc-700 dark:text-zinc-300 font-medium hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5 py-0.5"
+            >
+              <FileDown class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+              <span>Currículum (PDF A4)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right Column: Social Pills (4 cols) -->
+      <div class="md:col-span-4 flex flex-col">
+        <h3 class="font-mono text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-3">
+          // Conectar
+        </h3>
+        <div class="flex flex-col gap-2">
+          {personal.github && (
+            <a
+              href={personal.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group/link flex items-center justify-between px-3.5 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/40 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] hover:scale-[1.01] active:scale-[0.99] transition-all"
+            >
+              <div class="flex items-center gap-2.5">
+                <Github class="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover/link:text-[var(--color-accent)] transition-colors" />
+                <span>GitHub</span>
+              </div>
+              <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 group-hover/link:text-[var(--color-accent)] transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+            </a>
+          )}
+
+          {personal.linkedin && (
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group/link flex items-center justify-between px-3.5 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/40 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] hover:scale-[1.01] active:scale-[0.99] transition-all"
+            >
+              <div class="flex items-center gap-2.5">
+                <Linkedin class="w-4 h-4 text-[#0A66C2]" />
+                <span>LinkedIn</span>
+              </div>
+              <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 group-hover/link:text-[var(--color-accent)] transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+            </a>
+          )}
+
+          {personal.email && (
+            <a
+              href={`mailto:${personal.email}`}
+              class="group/link flex items-center justify-between px-3.5 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/40 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] hover:scale-[1.01] active:scale-[0.99] transition-all"
+            >
+              <div class="flex items-center gap-2.5">
+                <Mail class="w-4 h-4 text-[var(--color-accent)]" />
+                <span>Email directo</span>
+              </div>
+              <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 group-hover/link:text-[var(--color-accent)] transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="pt-6 border-t border-zinc-200/80 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400 text-center sm:text-left">
       <p>
         &copy; {currentYear} <span class="text-zinc-700 dark:text-zinc-300 font-medium">{personal.name}</span>. Todos los derechos reservados.
       </p>
-      <p class="text-xs text-zinc-500 dark:text-zinc-600">
-        Construido con <span class="text-zinc-700 dark:text-zinc-400">Astro</span> &amp; <span class="text-zinc-700 dark:text-zinc-400">Tailwind CSS</span>.
+      <p class="font-mono text-[11px] text-zinc-500 dark:text-zinc-500">
+        Construido con <span class="text-zinc-700 dark:text-zinc-400">Astro</span> &amp; <span class="text-zinc-700 dark:text-zinc-400">Tailwind CSS</span> (SSOT).
       </p>
     </div>
-
-    <ul class="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
-      {personal.github && (
-        <li>
-          <a
-            href={personal.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-2 rounded-lg hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
-            aria-label="GitHub"
-          >
-            <Github class="w-4 h-4" />
-          </a>
-        </li>
-      )}
-      {personal.linkedin && (
-        <li>
-          <a
-            href={personal.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-2 rounded-lg hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
-            aria-label="LinkedIn"
-          >
-            <Linkedin class="w-4 h-4" />
-          </a>
-        </li>
-      )}
-      {personal.email && (
-        <li>
-          <a
-            href={`mailto:${personal.email}`}
-            class="p-2 rounded-lg hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
-            aria-label="Email"
-          >
-            <Mail class="w-4 h-4" />
-          </a>
-        </li>
-      )}
-      <li>
-        <a
-          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
-          class="p-2 rounded-lg hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900 transition-colors inline-flex items-center justify-center"
-          aria-label="Curriculum Vitae"
-        >
-          <FileText class="w-4 h-4" />
-        </a>
-      </li>
-    </ul>
   </div>
 </footer>
