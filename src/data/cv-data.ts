@@ -13,11 +13,12 @@ export const cvData: ResumeData = {
     birthDate: "2007-02-21",
     avatarUrl: "/images/avatar.webp",
     status: "Disponible",
+    driverLicense: "Permiso B y vehículo propio",
   },
 
   about: {
     shortSummary:
-      "Desarrollador de software con base sólida en administración de sistemas (SMR) y especialización en desarrollo multiplataforma (DAM, media 9,2). Enfoque en código limpio, arquitectura estructurada y desarrollo backend con Java. Experiencia en formación técnica en NTT Data y proyectos colaborativos en Python y Angular.",
+      "Desarrollador de software con base sólida en administración de sistemas (SMR) y especialización en desarrollo multiplataforma (DAM) con rendimiento académico destacado. Enfoque en código limpio, arquitectura estructurada y desarrollo backend con Java. Experiencia en formación técnica en NTT Data y proyectos colaborativos en Python y Angular.",
     fullBio:
       "Estudiante de 2º curso de Desarrollo de Aplicaciones Multiplataforma con formación previa en Sistemas Microinformáticos y Redes. Me apasiona la optimización de código, el diseño de arquitecturas eficientes y la resolución de problemas lógicos. Combino una metodología de trabajo meticulosa y estructurada con capacidad demostrada para aprender y entregar software bajo presión.",
   },
@@ -48,17 +49,18 @@ export const cvData: ResumeData = {
       company: "NTT DATA",
       location: "Remoto / España",
       locationUrl: "https://www.google.com/maps/search/NTT+DATA+Spain",
-      startDate: "2026-03", // Ajustar fechas exactas si difieren
+      startDate: "2026-03",
       endDate: "2026-04",
       description:
         "Programa intensivo de formación técnica avanzada en inglés y desarrollo de software fullstack en equipo.",
       bullets: [
-        "Completé más de 120 horas de especialización técnica en inglés (Java avanzado, JUnit/Mockito, Spring Boot, Angular y BBDD).",
-        "Diseñé e implementé en equipo un prototipo fullstack con Angular y Spring Boot bajo plazos ajustados, superando los objetivos de entrega.",
-        "Fortalecí competencias de comunicación ágil, gestión de emociones y resolución colaborativa de incidencias técnicas.",
+        "Especialización técnica intensiva de +120h en inglés: Java avanzado, JUnit/Mockito, Spring Boot, Angular y SQL.",
+        "Desarrollo colaborativo de prototipo fullstack (Angular + Spring Boot) cumpliendo exigentes hitos de entrega.",
+        "Resolución proactiva de incidencias técnicas y coordinación diaria bajo metodología ágil.",
       ],
       technologies: ["Java", "Spring Boot", "Angular", "JUnit", "Mockito", "SQL"],
       featuredInCV: true,
+      category: "tech",
     },
     {
       id: "ies-hermogenes",
@@ -70,12 +72,12 @@ export const cvData: ResumeData = {
       endDate: "2025-06",
       description: "Administración, despliegue y mantenimiento de infraestructura informática educativa.",
       bullets: [
-        "Mantuve y optimicé el parque informático y la infraestructura de red local del centro educativo.",
-        "Proporcioné soporte técnico crítico de alta disponibilidad durante las Pruebas de Evaluación de Castilla-La Mancha.",
-        "Automaticé y ejecuté el despliegue de imágenes de software en aulas y puestos administrativos.",
+        "Mantenimiento preventivo del parque informático, infraestructura de red local y despliegue automatizado de software.",
+        "Soporte técnico crítico de alta disponibilidad durante las Pruebas de Evaluación oficiales de Castilla-La Mancha.",
       ],
       technologies: ["Linux", "Windows Server", "Redes Locales", "Hardware", "Mantenimiento"],
       featuredInCV: true,
+      category: "tech",
     },
     {
       id: "clases-tenis",
@@ -90,7 +92,8 @@ export const cvData: ResumeData = {
         "Desarrollo de habilidades de pedagogía, comunicación asertiva y adaptación a distintos ritmos de aprendizaje.",
       ],
       technologies: ["Planificación", "Pedagogía", "Comunicación"],
-      featuredInCV: false, // Se muestra en la web, se oculta en el CV para dar prioridad técnica
+      featuredInCV: false,
+      category: "complementary",
     },
     {
       id: "hosteleria",
@@ -98,15 +101,16 @@ export const cvData: ResumeData = {
       company: "Hostelería Local",
       location: "Arenas de San Juan, Ciudad Real",
       locationUrl: "https://maps.google.com/?q=Arenas+de+San+Juan,+Ciudad+Real",
-      startDate: "2026-05", // Ajustar rango de meses
+      startDate: "2026-05",
       endDate: "2026-08",
       description: "Servicio al cliente y soporte operativo a jornada parcial (40%).",
       bullets: [
-        "Gestión ágil de pedidos y resolución de incidencias en picos de alta demanda.",
-        "Refuerzo de capacidad de trabajo bajo presión, priorización y coordinación de tareas.",
+        "Gestión ágil de comandas y resolución de incidencias operativas en picos de alta demanda.",
+        "Fortalecimiento de la capacidad de trabajo bajo presión, priorización y servicio al cliente.",
       ],
       technologies: ["Trabajo bajo presión", "Atención al cliente", "Multitasking"],
-      featuredInCV: false, // Visible en web o cartas, omitido en CV técnico A4
+      featuredInCV: true,
+      category: "complementary",
     },
   ],
 
@@ -161,7 +165,7 @@ export const cvData: ResumeData = {
       liveUrl: "https://aitorgallegocr21.github.io/reservas_instalaciones/",
       image: "/images/projects/reservas_instalaciones.png",
       isCurrentProject: false,
-      featuredInCV: false, // Detallado en web
+      featuredInCV: true,
     },
     {
       id: "portfolio-cv-ssot",
@@ -187,8 +191,8 @@ export const cvData: ResumeData = {
       degree: "CFGS Desarrollo de Aplicaciones Multiplataforma (DAM)",
       period: "2025 - 2027 (En curso)",
       details: [
-        "Nota media de 1º curso: 9,2.",
-        "Especialización en desarrollo backend con Java, patrones DAO/MVC y bases de datos relacionales.",
+        "Rendimiento académico destacado con enfoque en desarrollo backend y persistencia relacional.",
+        "Especialización en arquitectura Java, patrones de diseño (DAO/MVC) y construcción de APIs REST.",
       ],
     },
     {
@@ -196,8 +200,8 @@ export const cvData: ResumeData = {
       degree: "CFGM Sistemas Microinformáticos y Redes (SMR)",
       period: "2023 - 2025",
       details: [
-        "Nota media final: 8,7.",
-        "Gestión de servidores, cableado estructurado, redes y seguridad perimetral.",
+        "Rendimiento académico sobresaliente con sólida base práctica en infraestructura y despliegue.",
+        "Administración de servidores Linux/Windows Server, cableado estructurado y seguridad perimetral.",
       ],
       documentUrl: "/docs/certificates/gm-smr/CertificadoSupletorioProvisional_L.O.E._Titulo_Sistemas_Microinformaticos_y_Redes.pdf",
     },
@@ -554,6 +558,10 @@ export const cvData: ResumeData = {
 
   languages: [
     { language: "Español", level: "Nativo" },
-    { language: "Inglés", level: "Técnico (B1/B2 - Formación y documentación técnica en inglés)" },
+    {
+      language: "Inglés",
+      level: "Técnico (B1/B2)",
+      detail: "Formación técnica y documentación en inglés (+120h intensivas)",
+    },
   ],
 };
