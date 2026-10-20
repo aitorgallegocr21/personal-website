@@ -1,6 +1,6 @@
 # Task 12.1: Column Structural Redistribution & Visual Symmetry
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Phase:** 12  
 **Components:** `src/pages/cv.astro`, `src/components/cv/CVExperience.astro`
 
@@ -36,5 +36,5 @@ In the current layout of `src/pages/cv.astro`, the 2-column layout has an acute 
    - Both columns terminate at the exact same visual horizontal plane, eliminating the blank void on the left.
 
 3. **Checklist:**
-   - [ ] Relocate `<CVExperience category="complementary" />` from right column to bottom of left column in `src/pages/cv.astro`.
-   - [ ] Verify semantic titles and responsive flow.
+   - [x] Relocate `<CVExperience category="complementary" />` from right column to bottom of left column in `src/pages/cv.astro`.
+   - [x] Verify semantic titles and responsive flow.
