@@ -10,6 +10,7 @@ export interface PersonalInfo {
   birthDate: string;
   avatarUrl?: string;
   status?: string;
+  driverLicense?: string;
 }
 
 export type ContactInfo = PersonalInfo;
@@ -31,6 +32,7 @@ export interface Experience {
   bullets: string[];
   technologies: string[];
   featuredInCV: boolean;
+  category?: 'tech' | 'complementary';
 }
 
 export interface Project {
@@ -86,6 +88,7 @@ export interface Certificate {
 export interface Language {
   language: string;
   level: string;
+  detail?: string;
 }
 
 export interface ResumeData {

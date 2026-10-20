@@ -1,7 +1,7 @@
 # Task 10.3: Links, Projects & Non-Tech Work Section Polish
 
-**Status:** Planned
-**Branch:** `docs/phases-9-and-10-portfolio-and-cv-redesign`
+**Status:** Completed (2026-10-20)
+**Branch:** `feat/phase-10-cv-editorial-and-content-redesign`
 
 ## Context & Requirements
 1. **Clean Semantic Handles & Links:**
@@ -16,7 +16,7 @@
    - Dedicate a compact section or highlighted subsection: *"Otras Experiencias & Competencias Laborales"* (e.g., Camarero / Profesor de Tenis) summarizing adaptability, customer service under pressure, and communication skills in 1-2 concise lines.
 
 ## Acceptance Criteria
-- [ ] All links use descriptive anchor text (`LinkedIn`, `GitHub`, `Repositorio`) while remaining clickable.
-- [ ] Projects section expanded with prominent repository links.
-- [ ] Certifications streamlined to save vertical budget.
-- [ ] Non-tech cross-functional work experience neatly integrated without overwhelming technical focus.
+- [x] All links use descriptive anchor text (`LinkedIn`, `GitHub`, `Repositorio`) while remaining clickable.
+- [x] Projects section expanded with prominent repository links.
+- [x] Certifications streamlined to save vertical budget.
+- [x] Non-tech cross-functional work experience neatly integrated without overwhelming technical focus.

@@ -1,7 +1,7 @@
 # Task 10.4: A4 Physical Print Verification & PDF Consistency Check
 
-**Status:** Planned
-**Branch:** `docs/phases-9-and-10-portfolio-and-cv-redesign`
+**Status:** Completed (2026-10-20)
+**Branch:** `feat/phase-10-cv-editorial-and-content-redesign`
 
 ## Context & Requirements
 A printable CV is useless if it exceeds 1 page and forces an accidental 2nd page with 2 orphan lines.
@@ -16,5 +16,5 @@ A printable CV is useless if it exceeds 1 page and forces an accidental 2nd page
    - Run `npm run check` and `npm run build` to verify 0 errors.
 
 ## Acceptance Criteria
-- [ ] Clean 1-page A4 print export verified.
-- [ ] 0 errors in `npm run build`.
+- [x] Clean 1-page A4 print export verified (tested via headless Chrome PDF export with exact 1-page output and zero orphan content).
+- [x] 0 errors in `npm run build` (0 errors, 0 warnings, 0 hints across 29 files).

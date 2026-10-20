@@ -1,7 +1,7 @@
 # Task 10.1: Schema & SSOT Data Refactoring for CV Precision
 
-**Status:** Planned
-**Branch:** `docs/phases-9-and-10-portfolio-and-cv-redesign`
+**Status:** Completed (2026-10-20)
+**Branch:** `feat/phase-10-cv-editorial-and-content-redesign`
 
 ## Context & Requirements
 1. **Academic Records Polish:**
@@ -15,6 +15,6 @@
    - Promote software projects with direct repo links.
 
 ## Acceptance Criteria
-- [ ] Explicit grade numbers replaced with qualitative academic highlights in `cv-data.ts`.
-- [ ] License B, vehicle, and technical English properly modeled and populated.
-- [ ] Zero `any` in TypeScript types.
+- [x] Explicit grade numbers replaced with qualitative academic highlights in `cv-data.ts`.
+- [x] License B, vehicle, and technical English properly modeled and populated.
+- [x] Zero `any` in TypeScript types.
