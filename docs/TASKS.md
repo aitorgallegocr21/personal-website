@@ -7,11 +7,12 @@
 ---
 
 ## Active Phase
-- [ ] **[Phase 8: Project Links, Assets & External Identity Audit](tasks/phase-8-links-assets-audit/index.md)** — *In progress* (Audit and correct personal profile handles, GitHub repos, live demos, and project preview media).
+- *No active phase pending. System is in continuous maintenance and enhancement mode.*
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+- [x] **[Phase 8: Project Links, Assets & External Identity Audit](tasks/phase-8-links-assets-audit/index.md)** — *Completed 2026-10-20* (Audit and correct personal profile handles, GitHub repos, live demos, and project preview media).
 - [x] **[Phase 7: Interactive Modal Fixes & Navigation Polish](tasks/phase-7-modal-and-navigation-fixes/index.md)** — *Completed 2026-10-19* (Fix persistent dialog overlay, restore close/escape controls, prevent broken fallback downloads, and verify CV navigation links).
 - [x] **[Phase 6: Printable CV Redesign & PDF Engine V2](tasks/phase-6-cv-redesign/index.md)** — *Completed 2026-10-19* (Editorial A4 redesign, avatar container, clean semantic handles, and interactive print palette switcher).
 - [x] **[Phase 5: Visual Identity, Theming & Interactive Portfolio](tasks/phase-5-visual-theming-portfolio/index.md)** — *Completed 2026-10-19* (Dynamic color palettes with daily rotation, dark/light mode, interactive 3D portrait, project previews, contact section, and in-page certificate viewer).
