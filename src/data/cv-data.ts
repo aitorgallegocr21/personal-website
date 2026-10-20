@@ -215,6 +215,68 @@ export const cvData: ResumeData = {
       summary: "Profundización en Programación Orientada a Objetos, API de colecciones de Java, gestión avanzada de excepciones, hilos y concurrencia básica.",
       skills: ["Java SE 8", "POO", "Colecciones", "Manejo de Excepciones", "Concurrencia"],
       documentUrl: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/1Z0-808_ Java SE 8 Programmer I.pdf",
+      documents: [
+        {
+          title: "1Z0-808: Java SE 8 Programmer I (Diploma)",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/1Z0-808_ Java SE 8 Programmer I.pdf",
+          type: "main",
+        },
+        {
+          title: "Fundamentos: Introduction to Java",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Fundamentos de Java y Tipos de Datos/Introduction to Java.pdf",
+          type: "module",
+        },
+        {
+          title: "Fundamentos: Classes, Data Types & RegEx",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Fundamentos de Java y Tipos de Datos/Classes, Data Types & Regular Expressions.pdf",
+          type: "module",
+        },
+        {
+          title: "Fundamentos: Conditions & Arrays",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Fundamentos de Java y Tipos de Datos/Conditions & Arrays.pdf",
+          type: "module",
+        },
+        {
+          title: "Fundamentos: Working with Variables",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Fundamentos de Java y Tipos de Datos/Working with Variables.pdf",
+          type: "module",
+        },
+        {
+          title: "Fundamentos: Classes & Objects",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Fundamentos de Java y Tipos de Datos/Classes & Objects.pdf",
+          type: "module",
+        },
+        {
+          title: "Métodos: Encapsulation & Constructors",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Métodos, Operadores y Constructores/Encapsulation & Overloaded Constructors.pdf",
+          type: "module",
+        },
+        {
+          title: "Métodos: Operators & Conditionals",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Métodos, Operadores y Constructores/Operators & Conditionals.pdf",
+          type: "module",
+        },
+        {
+          title: "Métodos: Data Manipulation",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Métodos, Operadores y Constructores/Data Manipulation.pdf",
+          type: "module",
+        },
+        {
+          title: "Herencia: Working with Exceptions",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Herencia, Excepciones y Mejoras/Working with Exceptions.pdf",
+          type: "module",
+        },
+        {
+          title: "Herencia: Working with Interfaces",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Herencia, Excepciones y Mejoras/Working with Interfaces.pdf",
+          type: "module",
+        },
+        {
+          title: "Herencia: Working with Inheritance",
+          url: "/docs/certificates/nttdata/Java/1Z0-808 - Java SE 8 Programmer I/Certificados de Contenidos/Herencia, Excepciones y Mejoras/Working with Inheritance.pdf",
+          type: "module",
+        },
+      ],
       featuredInCV: true,
     },
     {
@@ -227,6 +289,13 @@ export const cvData: ResumeData = {
       summary: "Programación declarativa y funcional en Java moderno mediante Functional Interfaces, expresiones Lambda y operaciones intermedias/terminales con Stream API.",
       skills: ["Java 11", "Streams API", "Lambdas", "Programación Funcional"],
       documentUrl: "/docs/certificates/nttdata/Java/Java SE 11 Programmer II - Lambda Operations & Streams/Java SE 11 Programmer II_ Lambda Operations & Streams.pdf",
+      documents: [
+        {
+          title: "Java SE 11: Lambda Operations & Streams",
+          url: "/docs/certificates/nttdata/Java/Java SE 11 Programmer II - Lambda Operations & Streams/Java SE 11 Programmer II_ Lambda Operations & Streams.pdf",
+          type: "main",
+        },
+      ],
       featuredInCV: true,
     },
     {
@@ -239,6 +308,28 @@ export const cvData: ResumeData = {
       summary: "Diseño y construcción de servicios web RESTful, inyección de dependencias, mapeo de endpoints con controladores Spring MVC y serialización JSON.",
       skills: ["Spring Boot", "REST APIs", "Spring MVC", "Inyección de Dependencias"],
       documentUrl: "/docs/certificates/nttdata/Java/Create REST APIs with Spring and Java/Create REST APIs with Spring and Java.pdf",
+      documents: [
+        {
+          title: "Create REST APIs with Spring & Java (Acreditación)",
+          url: "/docs/certificates/nttdata/Java/Create REST APIs with Spring and Java/Create REST APIs with Spring and Java.pdf",
+          type: "main",
+        },
+        {
+          title: "Fundamentos: Introduction to CRUD",
+          url: "/docs/certificates/nttdata/Java/Create REST APIs with Spring and Java/Fundamentos de Spring/Introduction to CRUD.pdf",
+          type: "module",
+        },
+        {
+          title: "Fundamentos: Back-End Architecture",
+          url: "/docs/certificates/nttdata/Java/Create REST APIs with Spring and Java/Fundamentos de Spring/Back-End Architecture.pdf",
+          type: "module",
+        },
+        {
+          title: "Fundamentos: Spring Bean & Spring Boot",
+          url: "/docs/certificates/nttdata/Java/Create REST APIs with Spring and Java/Fundamentos de Spring/Spring Bean and Spring Boot.pdf",
+          type: "module",
+        },
+      ],
       featuredInCV: true,
     },
     {
@@ -251,6 +342,53 @@ export const cvData: ResumeData = {
       summary: "Metodologías de testing automatizado, aislamiento de capas con mocks/stubs mediante Mockito y aseguramiento de suites de pruebas con JUnit 5.",
       skills: ["JUnit 5", "Mockito", "Test Unitarios", "Mocks & Stubs"],
       documentUrl: "/docs/certificates/nttdata/Java/Unit Testing/Final Exam_ Unit Testing.pdf",
+      documents: [
+        {
+          title: "Final Exam: Unit Testing (Acreditación)",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Final Exam_ Unit Testing.pdf",
+          type: "main",
+        },
+        {
+          title: "JUnit: Introduction to Framework",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing/Unit Testing_ An Introduction to the JUnit Framework.pdf",
+          type: "module",
+        },
+        {
+          title: "JUnit: Executing JUnit Tests",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing/Unit Testing_ Executing JUnit Tests.pdf",
+          type: "module",
+        },
+        {
+          title: "JUnit: Assertions & Assumptions",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing/Unit Testing_ Assertions & Assumptions in JUnit.pdf",
+          type: "module",
+        },
+        {
+          title: "JUnit: Parameterized Tests",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing/Unit Testing_ Parameterized JUnit Tests.pdf",
+          type: "module",
+        },
+        {
+          title: "JUnit: Advanced Annotations",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing/Unit Testing_ Advanced Annotations in JUnit.pdf",
+          type: "module",
+        },
+        {
+          title: "Mockito: Getting Started with Mockito",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing with Mocks/Unit Testing with Mocks_ Getting Started with Mockito.pdf",
+          type: "module",
+        },
+        {
+          title: "Mockito: Creating Mocks & Verifying Behavior",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing with Mocks/Unit Testing with Mocks_ Creating Mocks & Verifying Behavior.pdf",
+          type: "module",
+        },
+        {
+          title: "Mockito: Mocking Exceptions & Spies",
+          url: "/docs/certificates/nttdata/Java/Unit Testing/Unit Testing with Mocks/Unit Testing with Mocks_ Mocking Exceptions & Using Spies.pdf",
+          type: "module",
+        },
+      ],
       featuredInCV: true,
     },
 
@@ -265,6 +403,53 @@ export const cvData: ResumeData = {
       summary: "Formación completa de 9 módulos formativos: fundamentos y arquitectura en Angular 16, transición y nuevas características reactivas en Angular 17 y 18 (Signals, nuevo control flow syntax y componentes Standalone).",
       skills: ["Angular 16-18", "Signals", "Standalone Components", "Control Flow", "TypeScript"],
       documentUrl: "/docs/certificates/nttdata/Angular/Angular 17 and 18 New Features.pdf",
+      documents: [
+        {
+          title: "Angular 17 & 18: New Features & Signals",
+          url: "/docs/certificates/nttdata/Angular/Angular 17 and 18 New Features.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Getting Started with Angular",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Getting Started with Angular.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Introduction to Components",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Introduction to Components.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Working with Components",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Working with Components.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Working with Angular Modules",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Working with Angular Modules.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Services and Dependency Injection",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Services and Dependency Injection.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Navigation and Routing",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Navigation and Routing in Angular.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Working With Forms",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Working With Forms.pdf",
+          type: "module",
+        },
+        {
+          title: "Angular 16: Security and Deployment",
+          url: "/docs/certificates/nttdata/Angular/Angular 16_ Security and Deployment in Angular.pdf",
+          type: "module",
+        },
+      ],
       featuredInCV: true,
     },
 
@@ -273,12 +458,34 @@ export const cvData: ResumeData = {
       id: "bbdd-advanced-track",
       title: "Bases de Datos Relacionales y NoSQL",
       issuer: "NTT DATA",
-      platform: "Percipio (3 certificaciones avanzadas)",
+      platform: "Percipio (4 certificaciones modulares)",
       category: "Bases de Datos",
       hours: "~4.5 horas lectivas",
       summary: "Ciclo intensivo de gestión y diseño de persistencia: modelado de esquemas, sentencias DDL y DML complejas, definición de constraints de integridad referencial y nociones de bases de datos NoSQL.",
       skills: ["SQL", "DDL / DML", "Constraints", "Modelado de Datos", "NoSQL"],
       documentUrl: "/docs/certificates/nttdata/BBDD/DDL, DML, & Constraints.pdf",
+      documents: [
+        {
+          title: "BBDD: DDL, DML & Constraints",
+          url: "/docs/certificates/nttdata/BBDD/DDL, DML, & Constraints.pdf",
+          type: "module",
+        },
+        {
+          title: "BBDD: Creating an Organized Database",
+          url: "/docs/certificates/nttdata/BBDD/Creating an Organized Database.pdf",
+          type: "module",
+        },
+        {
+          title: "BBDD: Data Retrieval",
+          url: "/docs/certificates/nttdata/BBDD/Data Retrieval.pdf",
+          type: "module",
+        },
+        {
+          title: "NoSQL: Introduction to MongoDB Atlas",
+          url: "/docs/certificates/nttdata/BBDD/Working with MongoDB Atlas_ An Introduction to MongoDB Atlas.pdf",
+          type: "module",
+        },
+      ],
       featuredInCV: true,
     },
 
@@ -292,6 +499,38 @@ export const cvData: ResumeData = {
       summary: "Técnicas avanzadas de prompting, diseño de directrices para modelos de lenguaje y aplicación práctica de herramientas de IA Generativa al flujo de desarrollo.",
       skills: ["Prompt Engineering", "GenAI", "LLMs", "Context Optimization"],
       documentUrl: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Prompt Engineering with Generative AI Tools.pdf",
+      documents: [
+        {
+          title: "Prompt Engineering with Gen AI Tools (Diploma)",
+          url: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Prompt Engineering with Generative AI Tools.pdf",
+          type: "main",
+        },
+        {
+          title: "Módulo: Getting Started with Prompt Engineering",
+          url: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Certificados de contenidos/Getting Started with Prompt Engineering.pdf",
+          type: "module",
+        },
+        {
+          title: "Módulo: Exploring Prompt Engineering Techniques",
+          url: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Certificados de contenidos/Exploring Prompt Engineering Techniques.pdf",
+          type: "module",
+        },
+        {
+          title: "Módulo: Exploring the OpenAI Playground",
+          url: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Certificados de contenidos/Exploring the OpenAI Playground.pdf",
+          type: "module",
+        },
+        {
+          title: "Módulo: Case Studies in Prompt Engineering",
+          url: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Certificados de contenidos/Case Studies in Prompt Engineering.pdf",
+          type: "module",
+        },
+        {
+          title: "Módulo: Final Exam Prompt Engineering",
+          url: "/docs/certificates/nttdata/Prompt_Engineering_With_Gen_AI_Tools/Certificados de contenidos/Final Exam_ Prompt Engineering with Generative AI Tools.pdf",
+          type: "module",
+        },
+      ],
       featuredInCV: false, // Visible en web y dossier
     },
     {
@@ -302,6 +541,13 @@ export const cvData: ResumeData = {
       summary: "Fundamentos de modelos de inteligencia artificial aplicados al desarrollo de software y automatización.",
       skills: ["Inteligencia Artificial", "Automatización"],
       documentUrl: "/docs/certificates/big-school/Certificado-Aitor-Gallego-Casilda-Romero-abnvieoi.pdf",
+      documents: [
+        {
+          title: "Certificado Oficial: Iniciación al Desarrollo con IA",
+          url: "/docs/certificates/big-school/Certificado-Aitor-Gallego-Casilda-Romero-abnvieoi.pdf",
+          type: "main",
+        },
+      ],
       featuredInCV: false,
     },
   ],

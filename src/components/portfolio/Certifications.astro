@@ -75,10 +75,17 @@ const categories = [
           <div>
             <!-- Top badges row: Issuer & Category/Hours -->
             <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)]">
-                <Award class="w-3.5 h-3.5" />
-                <span>{cert.issuer}</span>
-              </span>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)]">
+                  <Award class="w-3.5 h-3.5" />
+                  <span>{cert.issuer}</span>
+                </span>
+                {cert.documents && cert.documents.length > 1 && (
+                  <span class="inline-flex items-center gap-1 font-mono text-[10px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/60 font-medium">
+                    <span>{cert.documents.length} PDFs</span>
+                  </span>
+                )}
+              </div>
 
               <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
                 {cert.hours && <span>{cert.hours}</span>}
@@ -113,17 +120,22 @@ const categories = [
               </div>
             )}
 
-            {cert.documentUrl && (
+            {(cert.documentUrl || (cert.documents && cert.documents.length > 0)) && (
               <button
                 type="button"
-                data-doc-url={`${baseUrl}${cert.documentUrl}`}
+                data-doc-url={cert.documentUrl ? `${baseUrl}${cert.documentUrl}` : `${baseUrl}${cert.documents![0].url}`}
                 data-doc-title={cert.title}
                 data-doc-subtitle={`${cert.issuer} · ${cert.category}`}
+                data-docs={cert.documents ? JSON.stringify(cert.documents.map((d) => ({ title: d.title, url: `${baseUrl}${d.url}`, type: d.type }))) : ''}
                 class="inline-flex items-center justify-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-[var(--color-accent)] bg-[var(--color-accent-subtle)] hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-contrast)] border border-[var(--color-accent-border)] hover:scale-[1.02] active:scale-[0.98] hover:shadow-xs transition-all cursor-pointer shrink-0 self-start sm:self-auto font-medium"
                 aria-label={`Ver credencial de ${cert.title}`}
               >
                 <FileText class="w-3.5 h-3.5" />
-                <span>Ver credencial</span>
+                <span>
+                  {cert.documents && cert.documents.length > 1
+                    ? `Ver documentos (${cert.documents.length})`
+                    : 'Ver credencial'}
+                </span>
               </button>
             )}
           </div>

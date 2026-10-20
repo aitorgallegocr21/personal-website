@@ -10,5 +10,5 @@ Elevate the web portfolio's visual and interactive experience by leveraging dyna
 
 ## Tasks Breakdown
 - [x] [9.1 Interactive Accent Polish & Project Badges Restructure](task-9.1-accent-polish-and-project-badges.md) — Enhance hover states, subtle gradient borders and interactive micro-interactions across project cards, buttons and sections. Redesign the overlapping "⚡ Proyecto actual" badge with clean pill placement or banner integration.
-- [ ] [9.2 Multi-Document & Credential Engine V2](task-9.2-multi-document-credential-engine.md) — Extend certificate data schema (`documentUrls` / syllabus files), build a smart modal viewer capable of navigating between multiple PDFs or batch downloading them, and present single vs multiple document actions seamlessly.
+- [x] [9.2 Multi-Document & Credential Engine V2](task-9.2-multi-document-credential-engine.md) — Extend certificate data schema (`documentUrls` / syllabus files), build a smart modal viewer capable of navigating between multiple PDFs or batch downloading them, and present single vs multiple document actions seamlessly.
 - [ ] [9.3 Footer Redesign & Visual Hierarchy Enhancement](task-9.3-footer-redesign-and-hierarchy.md) — Reorganize the footer layout into structured columns/cards with quick links, status indicators, and refined social interaction buttons.
