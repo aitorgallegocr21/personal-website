@@ -1,7 +1,7 @@
 # Task 10.2: Editorial Layout & Creative Print Typography
 
-**Status:** Planned
-**Branch:** `docs/phases-9-and-10-portfolio-and-cv-redesign`
+**Status:** Completed (2026-10-20)
+**Branch:** `feat/phase-10-cv-editorial-and-content-redesign`
 
 ## Context & Requirements
 1. **Diverge from Generic Corporate Templates:**
@@ -15,6 +15,6 @@
    - Compact margins ensuring zero wasted whitespace while preserving breathability.
 
 ## Acceptance Criteria
-- [ ] Creative, non-conventional visual structure that elevates the candidate's personal brand.
-- [ ] Prominent interactive call-to-action for the web portfolio.
-- [ ] Dynamic color palette switcher (`CVPrintBar.astro`) continues to instantly update print themes.
+- [x] Creative, non-conventional visual structure that elevates the candidate's personal brand.
+- [x] Prominent interactive call-to-action for the web portfolio.
+- [x] Dynamic color palette switcher (`CVPrintBar.astro`) continues to instantly update print themes.

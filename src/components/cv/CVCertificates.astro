@@ -5,23 +5,23 @@ interface Props {
   title?: string;
 }
 
-const { title = 'Certificaciones & Especialización' } = Astro.props;
+const { title = 'Certificaciones Clave' } = Astro.props;
 
 const featuredCertificates = cvData.certificates.filter((cert) => cert.featuredInCV);
 ---
 
 {
   featuredCertificates.length > 0 && (
-    <section class="mb-3 break-inside-avoid">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200 pb-0.5 mb-1.5 flex items-center gap-1.5">
+    <section class="break-inside-avoid">
+      <h2 class="text-[11px] font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2 flex items-center gap-1.5">
         <span class="w-1 h-3 rounded-xs bg-[var(--color-accent)] shrink-0" />
         <span>{title}</span>
       </h2>
 
       <div class="space-y-1.5">
         {featuredCertificates.map((cert) => (
-          <article class="break-inside-avoid text-[10.5px]">
-            <div class="flex items-baseline justify-between gap-2">
+          <article class="break-inside-avoid text-[10px] border-l-2 border-zinc-200 hover:border-[var(--color-accent)] pl-2 transition-colors print:border-zinc-300">
+            <div class="flex items-baseline justify-between gap-1">
               <div class="min-w-0">
                 {cert.documentUrl ? (
                   <a
@@ -38,23 +38,16 @@ const featuredCertificates = cvData.certificates.filter((cert) => cert.featuredI
                     {cert.title}
                   </h3>
                 )}
-                <span class="text-zinc-700 font-medium"> · {cert.issuer}</span>
-                {cert.platform && (
-                  <span class="text-zinc-500 font-normal"> ({cert.platform})</span>
-                )}
               </div>
               {cert.hours && (
-                <span class="font-mono text-zinc-500 text-[10px] shrink-0">
+                <span class="font-mono text-zinc-500 text-[9px] shrink-0">
                   {cert.hours}
                 </span>
               )}
             </div>
-
-            {cert.summary && (
-              <p class="text-zinc-600 leading-snug mt-0.5 text-pretty">
-                {cert.summary}
-              </p>
-            )}
+            <div class="text-[9px] text-zinc-500 font-mono">
+              {cert.issuer} {cert.platform ? `· ${cert.platform}` : ''}
+            </div>
           </article>
         ))}
       </div>
