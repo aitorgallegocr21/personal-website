@@ -1,5 +1,6 @@
 ---
 import { cvData } from '@/data/cv-data';
+import { Award } from 'lucide-astro';
 
 interface Props {
   title?: string;
@@ -18,38 +19,30 @@ const featuredCertificates = cvData.certificates.filter((cert) => cert.featuredI
         <span>{title}</span>
       </h2>
 
-      <div class="space-y-1.5">
-        {featuredCertificates.map((cert) => (
-          <article class="break-inside-avoid text-[10px] border-l-2 border-zinc-200 hover:border-[var(--color-accent)] pl-2 transition-colors print:border-zinc-300">
-            <div class="flex items-baseline justify-between gap-1">
-              <div class="min-w-0">
-                {cert.documentUrl ? (
-                  <a
-                    href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}${cert.documentUrl}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="font-semibold text-zinc-900 inline hover:text-[var(--color-accent)] hover:underline"
-                    title="Ver credencial oficial (PDF)"
-                  >
-                    {cert.title}
-                  </a>
-                ) : (
-                  <h3 class="font-semibold text-zinc-900 inline">
-                    {cert.title}
-                  </h3>
-                )}
-              </div>
-              {cert.hours && (
-                <span class="font-mono text-zinc-500 text-[9px] shrink-0">
-                  {cert.hours}
-                </span>
-              )}
-            </div>
-            <div class="text-[9px] text-zinc-500 font-mono">
-              {cert.issuer} {cert.platform ? `· ${cert.platform}` : ''}
-            </div>
-          </article>
-        ))}
+      <div class="flex flex-wrap gap-1.5">
+        {featuredCertificates.map((cert) => {
+          const docUrl = cert.documentUrl
+            ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${cert.documentUrl}`
+            : undefined;
+
+          return docUrl ? (
+            <a
+              href={docUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-1 px-2 py-1 rounded text-[9px] font-medium bg-zinc-50 text-zinc-800 border border-zinc-200/90 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-subtle)] transition-colors print:bg-zinc-50 print:text-zinc-800 print:border-zinc-300"
+              title={`Ver credencial oficial: ${cert.title}`}
+            >
+              <Award class="w-2.5 h-2.5 text-[var(--color-accent)] shrink-0" />
+              <span>{cert.title}</span>
+            </a>
+          ) : (
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded text-[9px] font-medium bg-zinc-50 text-zinc-800 border border-zinc-200/90">
+              <Award class="w-2.5 h-2.5 text-zinc-400 shrink-0" />
+              <span>{cert.title}</span>
+            </span>
+          );
+        })}
       </div>
     </section>
   )

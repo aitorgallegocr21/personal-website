@@ -32,11 +32,11 @@ const featuredProjects = cvData.projects.filter((proj) => proj.featuredInCV);
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1 text-[9.5px] font-mono text-[var(--color-accent)] hover:underline"
-                    title={`Ver repositorio de ${project.title}`}
+                    class="inline-flex items-center gap-1 text-[9.5px] font-mono font-medium text-[var(--color-accent)] hover:underline"
+                    title={`Ver repositorio en GitHub de ${project.title}`}
                   >
                     <Github class="w-3 h-3 shrink-0" />
-                    <span>Repo ↗</span>
+                    <span>Repositorio ↗</span>
                   </a>
                 )}
                 {project.liveUrl && (
@@ -48,7 +48,7 @@ const featuredProjects = cvData.projects.filter((proj) => proj.featuredInCV);
                     title={`Visitar demo de ${project.title}`}
                   >
                     <ExternalLink class="w-2.5 h-2.5 shrink-0" />
-                    <span>Demo</span>
+                    <span>Demo ↗</span>
                   </a>
                 )}
               </div>
