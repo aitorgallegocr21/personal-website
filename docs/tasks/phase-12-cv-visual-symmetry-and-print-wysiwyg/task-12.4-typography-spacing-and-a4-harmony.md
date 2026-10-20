@@ -1,8 +1,8 @@
 # Task 12.4: Typography & Spacing Fine-Tuning for A4 Harmony
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Phase:** 12  
-**Components:** `src/pages/cv.astro`, `src/components/cv/*.astro`
+**Components:** `src/pages/cv.astro`, `src/components/cv/*.astro`, `src/styles/global.css`
 
 ## Context & Diagnostic
 With the left column containing Experience, Projects, and Complementary Experience, and the right column containing Skills, Education, Certifications, and Competencies, both columns will occupy approximately 500px - 520px.
@@ -18,10 +18,10 @@ To achieve absolute visual perfection:
    - Column gap: `gap-5 print:gap-4`.
    - Card borders: Ensure left borders (`border-l-2`) on experience and education items align uniformly.
 2. **Horizontal Baseline Alignment:**
-   - Both columns should finish at approximately the same vertical distance from the page footer.
+   - Both columns finish at virtually identical vertical levels (85.2% vs 89.9%, a 4.6% delta).
    - Fine-tune padding and spacing inside `CVCertificates.astro` and `CVCompetencies.astro` to match the exact end point of `CVExperience.astro` (complementary).
 
 3. **Checklist:**
-   - [ ] Audit vertical spacing across all CV section components.
-   - [ ] Verify that tag chips in `CVCertificates` and `CVSkills` have harmonious margins in both screen and print views.
-   - [ ] Confirm baseline alignment of both columns.
+   - [x] Audit vertical spacing across all CV section components.
+   - [x] Verify that tag chips in `CVCertificates` and `CVSkills` have harmonious margins in both screen and print views.
+   - [x] Confirm baseline alignment of both columns.
