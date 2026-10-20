@@ -1,6 +1,6 @@
 # Task 12.2: Dual-Mode Multi-Column Grid Architecture (Web & Print Parity)
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Phase:** 12  
 **Components:** `src/pages/cv.astro`, `src/styles/global.css`
 
@@ -38,7 +38,7 @@ In `src/pages/cv.astro`, the grid was declared as:
    Ensure on screen (inside the fixed `w-[210mm]` container) the grid always maintains its 2-column structure even if container queries or browser zoom changes.
 
 3. **Checklist:**
-   - [ ] Add `print:grid-cols-12` and `print:gap-4` to `.cv-editorial-grid`.
-   - [ ] Add `print:col-span-7` to the left column.
-   - [ ] Add `print:col-span-5` to the right column.
-   - [ ] Ensure `print:space-y-2.5` or `print:space-y-2` gives adequate vertical rhythm.
+   - [x] Add `print:grid-cols-12` and `print:gap-4` to `.cv-editorial-grid`.
+   - [x] Add `print:col-span-7` to the left column.
+   - [x] Add `print:col-span-5` to the right column.
+   - [x] Ensure `print:space-y-2.5` or `print:space-y-2` gives adequate vertical rhythm.
