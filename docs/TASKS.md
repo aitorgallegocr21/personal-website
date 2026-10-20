@@ -8,6 +8,7 @@
 
 ## Active Phase
 - [ ] **[Phase 9: Portfolio Visual Creativity, Modal Document Engine & UI Polish](tasks/phase-9-portfolio-visual-creativity-and-modals/index.md)** — *Planned* (Accent glow micro-interactions, badge collision fix, multi-document credential viewer engine, and structured footer redesign).
+- [ ] **[Phase 10: Printable CV Creative Editorial Redesign & Content Refactoring](tasks/phase-10-cv-editorial-and-content-redesign/index.md)** — *Planned* (Creative non-conventional A4 layout, prominent web portfolio badge, projects promotion with clickable repos, non-tech experience line, and driver's license/English technical competencies).
 
 ---
 
