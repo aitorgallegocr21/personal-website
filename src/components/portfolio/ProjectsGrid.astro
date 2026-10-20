@@ -21,40 +21,45 @@ const { projects } = cvData;
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
     {
       projects.map((project) => (
-        <article class="group relative flex flex-col justify-between rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/40 p-6 backdrop-blur-sm transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-white dark:hover:bg-zinc-900/70 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-zinc-950/50">
+        <article class="group relative flex flex-col justify-between rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/40 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[var(--color-accent)]/50 hover:bg-white dark:hover:bg-zinc-900/70 hover:shadow-xl hover:shadow-[var(--color-accent-glow)]/10 hover:-translate-y-0.5">
           <div>
-            <div class="flex items-start justify-between gap-4 mb-3">
-              <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
-                {project.title}
-              </h3>
-              {project.isCurrentProject && (
-                <span class="absolute top-2 right-2 bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 px-2 py-0.5 rounded text-xs font-bold shadow-md">
-                  ⚡ Proyecto actual
-                </span>
-              )}
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div class="space-y-1.5 min-w-0">
+                {project.isCurrentProject && (
+                  <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-mono text-[11px] font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)]">
+                    <span class="relative flex h-1.5 w-1.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--color-accent)]"></span>
+                    </span>
+                    <span>⚡ Proyecto actual</span>
+                  </div>
+                )}
+                <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-[var(--color-accent)] transition-colors">
+                  {project.title}
+                </h3>
+              </div>
               {project.technologies[0] && (
-                <span class="shrink-0 font-mono text-xs px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/50">
+                <span class="shrink-0 font-mono text-xs px-2.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/50 group-hover:border-[var(--color-accent-border)] group-hover:text-[var(--color-accent)] transition-colors">
                   {project.technologies[0]}
                 </span>
               )}
             </div>
-
 
             <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
               {project.summary}
             </p>
 
             {project.image ? (
-              <div class="overflow-hidden rounded-lg mb-4 border border-zinc-200 dark:border-zinc-800/60">
+              <div class="overflow-hidden rounded-lg mb-4 border border-zinc-200 dark:border-zinc-800/60 group-hover:border-[var(--color-accent-border)] transition-colors duration-300">
                 <img
                   src={project.image}
                   alt={`Preview de ${project.title}`}
-                  class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105"
+                  class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
             ) : (
-              <div class="w-full h-40 rounded-lg mb-4 bg-gradient-to-br from-zinc-100 via-zinc-200 to-zinc-300 dark:from-zinc-800 dark:via-zinc-800/70 dark:to-zinc-900 border border-zinc-200 dark:border-zinc-800/60 flex items-center justify-center">
+              <div class="w-full h-40 rounded-lg mb-4 bg-gradient-to-br from-zinc-100 via-zinc-200 to-zinc-300 dark:from-zinc-800 dark:via-zinc-800/70 dark:to-zinc-900 border border-zinc-200 dark:border-zinc-800/60 group-hover:border-[var(--color-accent-border)] transition-colors duration-300 flex items-center justify-center">
                 <span class="font-mono text-xs text-zinc-400 dark:text-zinc-600 select-none">{project.id}</span>
               </div>
             )}
@@ -72,26 +77,26 @@ const { projects } = cvData;
           </div>
 
           <div>
-            <div class="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-zinc-200 dark:border-zinc-800/60">
+            <div class="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-zinc-200/80 dark:border-zinc-800/60">
               {project.technologies.map((tech) => (
-                <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100/70 dark:bg-zinc-800/40 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800">
+                <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100/70 dark:bg-zinc-800/40 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 transition-all duration-200 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] select-none">
                   {tech}
                 </span>
               ))}
             </div>
 
-            <div class="flex items-center gap-4 text-xs font-medium">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs font-medium">
               {project.repoUrl && (
                 <a
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group/link inline-flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors"
+                  class="group/link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-800/40 text-zinc-700 dark:text-zinc-300 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                   aria-label={`Ver código de ${project.title}`}
                 >
-                  <Github class="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400 group-hover/link:text-zinc-950 dark:group-hover/link:text-white transition-colors" />
+                  <Github class="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400 group-hover/link:text-[var(--color-accent)] transition-colors" />
                   <span>Repositorio</span>
-                  <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-zinc-700 dark:group-hover/link:text-zinc-300" />
+                  <ArrowUpRight class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-[var(--color-accent)]" />
                 </a>
               )}
 
@@ -100,12 +105,12 @@ const { projects } = cvData;
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group/link inline-flex items-center gap-1.5 text-[var(--color-accent)] hover:opacity-85 transition-opacity"
+                  class="group/link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-contrast)] hover:scale-[1.02] active:scale-[0.98] hover:shadow-sm hover:shadow-[var(--color-accent-glow)] transition-all duration-200 font-semibold"
                   aria-label={`Ver demo en vivo de ${project.title}`}
                 >
-                  <ExternalLink class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+                  <ExternalLink class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover/link:text-[var(--color-accent-contrast)] transition-colors" />
                   <span>Demo en vivo</span>
-                  <ArrowUpRight class="w-3.5 h-3.5 text-[var(--color-accent)] transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                  <ArrowUpRight class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover/link:text-[var(--color-accent-contrast)] transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                 </a>
               )}
             </div>
