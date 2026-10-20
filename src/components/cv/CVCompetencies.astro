@@ -13,12 +13,12 @@ const { languages, personal } = cvData;
 {
   languages && languages.length > 0 && (
     <section class="break-inside-avoid">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 flex items-center gap-1.5">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 print:mb-1.5 flex items-center gap-1.5">
         <span class="w-1.5 h-3.5 rounded-xs bg-[var(--color-accent)] shrink-0" />
         <span>{title}</span>
       </h2>
 
-      <div class="space-y-2 text-[10.5px]">
+      <div class="space-y-2 print:space-y-1 text-[10.5px]">
         <div class="space-y-1">
           {languages.map((lang) => (
             <div class="flex items-baseline justify-between gap-1">
@@ -30,7 +30,7 @@ const { languages, personal } = cvData;
 
         {
           personal.driverLicense && (
-            <div class="pt-2 border-t border-zinc-100 print:border-zinc-200 flex items-center gap-1.5 text-zinc-700">
+            <div class="pt-2 print:pt-1 border-t border-zinc-100 print:border-zinc-200 flex items-center gap-1.5 text-zinc-700">
               <Car class="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0" />
               <span class="font-medium text-[10px]">{personal.driverLicense}</span>
             </div>

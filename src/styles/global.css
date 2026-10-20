@@ -206,11 +206,13 @@ footer {
 
 @media print {
   html, body {
-    width: 210mm !important;
-    height: 297mm !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: transparent !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -219,15 +221,13 @@ footer {
     display: none !important;
   }
 
+  #cv-container {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
   /* Prevent any browser auto appended url text */
   a[href]:after {
     content: "" !important;
-  }
-
-  .cv-editorial-grid {
-    display: grid !important;
-    grid-template-columns: 58% 39% !important;
-    gap: 3% !important;
-    align-items: start !important;
   }
 }
