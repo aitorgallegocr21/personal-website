@@ -1,7 +1,7 @@
 ---
 import { cvData } from '@/data/cv-data';
 import PhoneContact from '@/components/ui/PhoneContact.astro';
-import { MapPin, Mail, Github, Linkedin, ExternalLink, Sparkles } from 'lucide-astro';
+import { MapPin, Mail, Github, Linkedin, Globe, ArrowUpRight } from 'lucide-astro';
 
 const { personal, about } = cvData;
 
@@ -10,7 +10,7 @@ const avatarSrc = personal.avatarUrl
   : undefined;
 ---
 
-<header class="mb-3 pb-3 border-b border-zinc-200/90 break-inside-avoid">
+<header class="mb-3.5 pb-3 border-b border-zinc-200/90 break-inside-avoid">
   <!-- Dynamic Accent Stripe -->
   <div class="h-1 w-full bg-[var(--color-accent)] rounded-full mb-3 print:h-1"></div>
 
@@ -19,7 +19,7 @@ const avatarSrc = personal.avatarUrl
     <div class="flex items-start gap-3.5 min-w-0 flex-1">
       {
         avatarSrc && (
-          <div class="relative w-[24mm] h-[24mm] shrink-0 rounded-full overflow-hidden border border-zinc-200/90 ring-2 ring-[var(--color-accent-border)] shadow-xs bg-zinc-100 print:border-zinc-300 print:ring-1">
+          <div class="relative w-[23mm] h-[23mm] shrink-0 rounded-full overflow-hidden border border-zinc-200/90 ring-2 ring-[var(--color-accent-border)] shadow-xs bg-zinc-100 print:border-zinc-300 print:ring-1">
             <img
               src={avatarSrc}
               alt={personal.name}
@@ -51,40 +51,35 @@ const avatarSrc = personal.avatarUrl
         </p>
 
         {
-          about.shortSummary && (
-            <p class="text-[10px] text-zinc-600 leading-snug line-clamp-3 text-pretty mt-1 max-w-[115mm]">
-              {about.shortSummary}
+          (about.cvSummary || about.shortSummary) && (
+            <p class="text-[11px] text-zinc-600 leading-normal text-pretty mt-1.5 max-w-[118mm]">
+              {about.cvSummary || about.shortSummary}
             </p>
           )
         }
       </div>
     </div>
 
-    <!-- Right Column: Prominent Web Portfolio Anchor & Semantic Contact Details -->
+    <!-- Right Column: Minimalist Web Anchor & Semantic Contact Details -->
     <div class="shrink-0 w-full sm:w-auto print:w-auto flex flex-col items-start sm:items-end print:items-end">
-      <!-- Prominent Web Portfolio Interactive Anchor -->
+      <!-- Minimalist & Modern Web Anchor -->
       {
         personal.website && (
           <a
             href={personal.website}
             target="_blank"
             rel="noopener noreferrer"
-            class="group inline-flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-lg bg-[var(--color-accent-subtle)] hover:bg-[var(--color-accent)] text-[var(--color-accent)] hover:text-white border border-[var(--color-accent-border)] transition-all shadow-2xs print:bg-zinc-100 print:text-zinc-900 print:border-zinc-300 mb-2"
+            class="group inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-accent-subtle)] hover:bg-[var(--color-accent)] text-[var(--color-accent)] hover:text-white border border-[var(--color-accent-border)] transition-all duration-200 shadow-2xs font-medium text-[11px] mb-2.5 print:bg-zinc-50 print:text-zinc-900 print:border-zinc-300"
             title="Abrir portafolio interactivo en línea"
           >
-            <div class="flex items-center gap-1.5">
-              <Sparkles class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover:text-white print:text-zinc-700 shrink-0" />
-              <div class="flex flex-col text-left">
-                <span class="text-[8px] uppercase tracking-wider font-mono opacity-80 leading-none">Ver en vivo</span>
-                <span class="text-[10px] font-bold leading-tight">✦ Portfolio Web Interactivo</span>
-              </div>
-            </div>
-            <ExternalLink class="w-3 h-3 shrink-0 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
+            <Globe class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover:text-white print:text-zinc-700 shrink-0" />
+            <span class="tracking-tight">Web Personal</span>
+            <ArrowUpRight class="w-3.5 h-3.5 shrink-0 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
         )
       }
 
-      <ul class="flex flex-col gap-1 text-[10px] text-zinc-600 font-mono sm:items-end print:items-end">
+      <ul class="flex flex-col gap-1 text-[10.5px] text-zinc-600 font-mono sm:items-end print:items-end">
         {
           personal.location && (
             <li class="inline-flex items-center gap-1.5">

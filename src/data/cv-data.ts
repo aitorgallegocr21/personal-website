@@ -19,6 +19,8 @@ export const cvData: ResumeData = {
   about: {
     shortSummary:
       "Desarrollador de software con base sólida en administración de sistemas (SMR) y especialización en desarrollo multiplataforma (DAM) con rendimiento académico destacado. Enfoque en código limpio, arquitectura estructurada y desarrollo backend con Java. Experiencia en formación técnica en NTT Data y proyectos colaborativos en Python y Angular.",
+    cvSummary:
+      "Desarrollador de software con sólida base en sistemas (SMR) y especialización en backend con Java y DAM. Experiencia en formación técnica intensiva en NTT DATA y desarrollo de proyectos en Python y Angular. Enfoque riguroso en código limpio, resolución de problemas y arquitecturas modulares.",
     fullBio:
       "Estudiante de 2º curso de Desarrollo de Aplicaciones Multiplataforma con formación previa en Sistemas Microinformáticos y Redes. Me apasiona la optimización de código, el diseño de arquitecturas eficientes y la resolución de problemas lógicos. Combino una metodología de trabajo meticulosa y estructurada con capacidad demostrada para aprender y entregar software bajo presión.",
   },
@@ -54,11 +56,10 @@ export const cvData: ResumeData = {
       description:
         "Programa intensivo de formación técnica avanzada en inglés y desarrollo de software fullstack en equipo.",
       bullets: [
-        "Especialización técnica intensiva de +120h en inglés: Java avanzado, JUnit/Mockito, Spring Boot, Angular y SQL.",
-        "Desarrollo colaborativo de prototipo fullstack (Angular + Spring Boot) cumpliendo exigentes hitos de entrega.",
-        "Resolución proactiva de incidencias técnicas y coordinación diaria bajo metodología ágil.",
+        "Especialización técnica de +120h en inglés: Java avanzado, JUnit/Mockito, Spring Boot y SQL.",
+        "Desarrollo colaborativo de prototipo fullstack (Angular + Spring Boot) cumpliendo hitos ágiles.",
       ],
-      technologies: ["Java", "Spring Boot", "Angular", "JUnit", "Mockito", "SQL"],
+      technologies: ["Java", "Spring Boot", "Angular", "JUnit", "SQL"],
       featuredInCV: true,
       category: "tech",
     },
@@ -72,10 +73,10 @@ export const cvData: ResumeData = {
       endDate: "2025-06",
       description: "Administración, despliegue y mantenimiento de infraestructura informática educativa.",
       bullets: [
-        "Mantenimiento preventivo del parque informático, infraestructura de red local y despliegue automatizado de software.",
-        "Soporte técnico crítico de alta disponibilidad durante las Pruebas de Evaluación oficiales de Castilla-La Mancha.",
+        "Mantenimiento preventivo del parque informático, redes locales y despliegue de software.",
+        "Soporte técnico de alta disponibilidad en pruebas de evaluación oficiales.",
       ],
-      technologies: ["Linux", "Windows Server", "Redes Locales", "Hardware", "Mantenimiento"],
+      technologies: ["Linux", "Windows Server", "Redes Locales", "Hardware"],
       featuredInCV: true,
       category: "tech",
     },
@@ -105,8 +106,8 @@ export const cvData: ResumeData = {
       endDate: "2026-08",
       description: "Servicio al cliente y soporte operativo a jornada parcial (40%).",
       bullets: [
-        "Gestión ágil de comandas y resolución de incidencias operativas en picos de alta demanda.",
-        "Fortalecimiento de la capacidad de trabajo bajo presión, priorización y servicio al cliente.",
+        "Gestión ágil de pedidos y resolución de incidencias en picos de alta demanda.",
+        "Desarrollo de resiliencia, trabajo en equipo bajo presión y orientación al servicio.",
       ],
       technologies: ["Trabajo bajo presión", "Atención al cliente", "Multitasking"],
       featuredInCV: true,
@@ -122,11 +123,10 @@ export const cvData: ResumeData = {
       description:
         "Desarrollo open-source de un motor local enfocado en privacidad para catalogación y descarga musical. Autor del ~90% de la lógica de procesamiento del repositorio.",
       bullets: [
-        "Desarrollo del 90% de la lógica central en Python: algoritmos de gustos, extracción de letras sincronizadas y tagging ID3.",
-        "Implementación de cola dinámica de descargas y streaming desde YouTube Music API con gestión de fallos.",
-        "Integración con la API de ListenBrainz para registro analítico de métricas y hábitos de escucha.",
+        "Desarrollo del 90% de la lógica central en Python: metadatos ID3, letras y preferencias.",
+        "Cola dinámica de descargas y streaming vía YouTube Music API con gestión de excepciones.",
       ],
-      technologies: ["Python", "yt-dlp", "ListenBrainz API", "Algoritmia", "Metadatos ID3"],
+      technologies: ["Python", "yt-dlp", "ListenBrainz API", "Metadatos ID3"],
       repoUrl: "https://github.com/jorgefernandezmc-cpu/Music_Engine",
       isCurrentProject: false,
       featuredInCV: true,
@@ -134,15 +134,14 @@ export const cvData: ResumeData = {
     {
       id: "bookstack",
       title: "Bookstack",
-      summary: "Aplicación web moderna en Angular y Tailwind CSS para organización de bibliotecas y seguimiento de libros.",
+      summary: "Aplicación web moderna en Angular y Tailwind CSS para organización de bibliotecas y seguimiento de lecturas.",
       description:
         "Plataforma web enfocada en experiencia de usuario y diseño limpio para registrar y puntuar lecturas en almacenamiento local.",
       bullets: [
-        "Diseño modular de componentes desacoplados en Angular con tipado estricto en TypeScript.",
-        "Interfaz visual moderna y responsive construida con utilidades avanzadas de Tailwind CSS.",
-        "Gestión de estado y persistencia local sin fricción de registros externos.",
+        "Arquitectura modular desacoplada en Angular con tipado estricto en TypeScript.",
+        "Interfaz interactiva y responsive con utilidades modernas de Tailwind CSS.",
       ],
-      technologies: ["Angular", "TypeScript", "Tailwind CSS", "HTML5"],
+      technologies: ["Angular", "TypeScript", "Tailwind CSS"],
       repoUrl: "https://github.com/aitorgallegocr21/bookstack",
       liveUrl: "https://aitorgallegocr21.github.io/bookstack/",
       image: "/images/projects/bookstack.png",
@@ -156,9 +155,8 @@ export const cvData: ResumeData = {
       description:
         "Proyecto Intermodular de 1º DAM desarrollado en equipo de 3 personas para informatizar la reserva de instalaciones en Argamasilla de Alba.",
       bullets: [
-        "Desarrollo de la lógica interactiva completa con JavaScript moderno (ES6+) sin frameworks externos.",
-        "Validación dinámica de disponibilidad y gestión de horarios en frontend.",
-        "Coordinación y control de versiones con Git en equipo multidisciplinar.",
+        "Lógica interactiva integral con JavaScript ES6+ y manipulación eficiente del DOM.",
+        "Validación de disponibilidad y control de versiones con Git en equipo.",
       ],
       technologies: ["JavaScript (ES6+)", "HTML5", "CSS3", "Git"],
       repoUrl: "https://github.com/aitorgallegocr21/reservas_instalaciones",
@@ -191,8 +189,7 @@ export const cvData: ResumeData = {
       degree: "CFGS Desarrollo de Aplicaciones Multiplataforma (DAM)",
       period: "2025 - 2027 (En curso)",
       details: [
-        "Rendimiento académico destacado con enfoque en desarrollo backend y persistencia relacional.",
-        "Especialización en arquitectura Java, patrones de diseño (DAO/MVC) y construcción de APIs REST.",
+        "Especialización en desarrollo backend Java, arquitectura modular y persistencia SQL.",
       ],
     },
     {
@@ -200,8 +197,7 @@ export const cvData: ResumeData = {
       degree: "CFGM Sistemas Microinformáticos y Redes (SMR)",
       period: "2023 - 2025",
       details: [
-        "Rendimiento académico sobresaliente con sólida base práctica en infraestructura y despliegue.",
-        "Administración de servidores Linux/Windows Server, cableado estructurado y seguridad perimetral.",
+        "Sólida base práctica en servidores Linux/Windows Server, redes y seguridad de sistemas.",
       ],
       documentUrl: "/docs/certificates/gm-smr/CertificadoSupletorioProvisional_L.O.E._Titulo_Sistemas_Microinformaticos_y_Redes.pdf",
     },
@@ -560,8 +556,8 @@ export const cvData: ResumeData = {
     { language: "Español", level: "Nativo" },
     {
       language: "Inglés",
-      level: "Técnico (B1/B2)",
-      detail: "Formación técnica y documentación en inglés (+120h intensivas)",
+      level: "Nivel Técnico",
+      detail: "Lectura, redacción de documentación técnica y comunicación en ingeniería",
     },
   ],
 };

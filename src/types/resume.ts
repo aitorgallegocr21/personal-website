@@ -95,6 +95,7 @@ export interface ResumeData {
   personal: PersonalInfo;
   about: {
     shortSummary: string;
+    cvSummary?: string;
     fullBio: string;
   };
   skills: SkillGroup[];

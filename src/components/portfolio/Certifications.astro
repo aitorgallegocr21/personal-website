@@ -40,20 +40,20 @@ const categories = [
           <button
             type="button"
             class:list={[
-              'cert-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer border',
+              'cert-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer border',
               index === 0
-                ? 'active bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 font-semibold shadow-xs'
-                : 'bg-zinc-100 dark:bg-zinc-900/60 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-200 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-800/80',
+                ? 'active bg-[var(--color-accent)] text-[var(--color-accent-contrast)] border-[var(--color-accent)] font-semibold shadow-xs ring-1 ring-[var(--color-accent-border)]'
+                : 'bg-zinc-100 dark:bg-zinc-900/60 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent)] hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)]',
             ]}
             data-filter={cat}
           >
             <span>{cat}</span>
             <span
               class:list={[
-                'cert-filter-count text-[10px] px-1.5 py-0.2 rounded-full font-mono',
+                'cert-filter-count text-[10px] px-1.5 py-0.2 rounded-full font-mono transition-colors',
                 index === 0
-                  ? 'bg-zinc-700 text-zinc-100 dark:bg-zinc-300 dark:text-zinc-900'
-                  : 'bg-zinc-200 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400',
+                  ? 'bg-black/20 text-[var(--color-accent-contrast)]'
+                  : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400',
               ]}
             >
               {count}
@@ -149,32 +149,51 @@ const categories = [
   const buttons = document.querySelectorAll<HTMLButtonElement>('.cert-filter-btn');
   const cards = document.querySelectorAll<HTMLElement>('.cert-card');
 
+  const activeClasses = [
+    'active',
+    'bg-[var(--color-accent)]',
+    'text-[var(--color-accent-contrast)]',
+    'border-[var(--color-accent)]',
+    'font-semibold',
+    'shadow-xs',
+    'ring-1',
+    'ring-[var(--color-accent-border)]',
+  ];
+
+  const inactiveClasses = [
+    'bg-zinc-100',
+    'dark:bg-zinc-900/60',
+    'text-zinc-600',
+    'dark:text-zinc-400',
+    'border-zinc-200',
+    'dark:border-zinc-800',
+    'font-medium',
+  ];
+
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-filter');
       if (!filter) return;
 
-      // Update active button classes
+      // Update active button state
       buttons.forEach((b) => {
         const isCurrent = b === btn;
-        b.classList.toggle('active', isCurrent);
-        b.classList.toggle('bg-zinc-100', isCurrent);
-        b.classList.toggle('text-zinc-900', isCurrent);
-        b.classList.toggle('border-zinc-100', isCurrent);
-        b.classList.toggle('shadow-xs', isCurrent);
-        b.classList.toggle('font-semibold', isCurrent);
-
-        b.classList.toggle('bg-zinc-900/60', !isCurrent);
-        b.classList.toggle('text-zinc-400', !isCurrent);
-        b.classList.toggle('border-zinc-800', !isCurrent);
-        b.classList.toggle('font-medium', !isCurrent);
-
         const countSpan = b.querySelector('.cert-filter-count');
-        if (countSpan) {
-          countSpan.classList.toggle('bg-zinc-300', isCurrent);
-          countSpan.classList.toggle('text-zinc-900', isCurrent);
-          countSpan.classList.toggle('bg-zinc-800', !isCurrent);
-          countSpan.classList.toggle('text-zinc-400', !isCurrent);
+
+        if (isCurrent) {
+          b.classList.remove(...inactiveClasses);
+          b.classList.add(...activeClasses);
+          if (countSpan) {
+            countSpan.classList.remove('bg-zinc-200', 'dark:bg-zinc-800', 'text-zinc-600', 'dark:text-zinc-400');
+            countSpan.classList.add('bg-black/20', 'text-[var(--color-accent-contrast)]');
+          }
+        } else {
+          b.classList.remove(...activeClasses);
+          b.classList.add(...inactiveClasses);
+          if (countSpan) {
+            countSpan.classList.remove('bg-black/20', 'text-[var(--color-accent-contrast)]');
+            countSpan.classList.add('bg-zinc-200', 'dark:bg-zinc-800', 'text-zinc-600', 'dark:text-zinc-400');
+          }
         }
       });
 

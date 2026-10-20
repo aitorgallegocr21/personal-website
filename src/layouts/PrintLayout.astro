@@ -26,20 +26,32 @@ const {
     <style is:global>
       @page {
         size: A4 portrait;
-        margin: 10mm 12mm;
+        margin: 8mm 10mm;
       }
 
       @media print {
-        body {
+        html, body {
+          width: 210mm !important;
+          height: 297mm !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          background: #ffffff !important;
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
+        }
+
+        /* Prevent link URLs from being printed next to anchors */
+        a[href]:after {
+          content: "" !important;
         }
       }
     </style>
   </head>
-  <body class="bg-zinc-100 print:bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-200">
-    <main class="max-w-[210mm] mx-auto p-4 sm:p-8 md:p-[10mm_12mm] print:p-0 print:m-0 bg-white print:bg-transparent sm:shadow-md print:shadow-none min-h-screen print:min-h-0">
-      <slot />
-    </main>
+  <body class="bg-zinc-100 print:bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-200 overflow-x-auto print:overflow-visible">
+    <div class="min-w-fit md:min-w-0 flex justify-center p-2 sm:p-6 md:p-8 print:p-0 print:m-0">
+      <main class="w-[210mm] max-w-[210mm] min-h-[297mm] p-[10mm_12mm] print:p-0 print:m-0 bg-white print:bg-transparent shadow-xl print:shadow-none print:min-h-0 print:h-auto shrink-0 transition-shadow">
+        <slot />
+      </main>
+    </div>
   </body>
 </html>

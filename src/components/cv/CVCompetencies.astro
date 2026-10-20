@@ -10,33 +10,33 @@ const { title = 'Idiomas & Movilidad' } = Astro.props;
 const { languages, personal } = cvData;
 ---
 
-<section class="break-inside-avoid">
-  <h2 class="text-[11px] font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2 flex items-center gap-1.5">
-    <span class="w-1 h-3 rounded-xs bg-[var(--color-accent)] shrink-0" />
-    <span>{title}</span>
-  </h2>
+{
+  languages && languages.length > 0 && (
+    <section class="break-inside-avoid">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 flex items-center gap-1.5">
+        <span class="w-1.5 h-3.5 rounded-xs bg-[var(--color-accent)] shrink-0" />
+        <span>{title}</span>
+      </h2>
 
-  <div class="space-y-1.5 text-[10px]">
-    {
-      languages && languages.length > 0 && (
+      <div class="space-y-2 text-[10.5px]">
         <div class="space-y-1">
           {languages.map((lang) => (
             <div class="flex items-baseline justify-between gap-1">
               <span class="font-semibold text-zinc-800">{lang.language}:</span>
-              <span class="text-zinc-600 font-mono text-[9px]">{lang.level}</span>
+              <span class="text-zinc-600 font-mono text-[10px]">{lang.level}</span>
             </div>
           ))}
         </div>
-      )
-    }
 
-    {
-      personal.driverLicense && (
-        <div class="pt-1.5 border-t border-zinc-100 print:border-zinc-200 flex items-center gap-1.5 text-zinc-700">
-          <Car class="w-3 h-3 text-[var(--color-accent)] shrink-0" />
-          <span class="font-medium text-[9px]">{personal.driverLicense}</span>
-        </div>
-      )
-    }
-  </div>
-</section>
+        {
+          personal.driverLicense && (
+            <div class="pt-2 border-t border-zinc-100 print:border-zinc-200 flex items-center gap-1.5 text-zinc-700">
+              <Car class="w-3.5 h-3.5 text-[var(--color-accent)] shrink-0" />
+              <span class="font-medium text-[10px]">{personal.driverLicense}</span>
+            </div>
+          )
+        }
+      </div>
+    </section>
+  )
+}

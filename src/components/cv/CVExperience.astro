@@ -20,43 +20,43 @@ const featuredExperience = cvData.experience.filter((exp) => {
 {
   featuredExperience.length > 0 && (
     <section class="break-inside-avoid">
-      <h2 class="text-[11px] font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2 flex items-center gap-1.5">
-        <span class="w-1.5 h-3 rounded-xs bg-[var(--color-accent)] shrink-0" />
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 flex items-center gap-1.5">
+        <span class="w-1.5 h-3.5 rounded-xs bg-[var(--color-accent)] shrink-0" />
         <span>{title}</span>
       </h2>
 
-      <div class="space-y-2.5">
+      <div class="space-y-3">
         {featuredExperience.map((exp) => (
-          <article class="break-inside-avoid border-l-2 border-zinc-200 hover:border-[var(--color-accent)] pl-2.5 transition-colors print:border-zinc-300">
+          <article class="break-inside-avoid border-l-2 border-[var(--color-accent-border)] hover:border-[var(--color-accent)] pl-2.5 transition-colors print:border-[var(--color-accent-border)]">
             <div class="flex items-baseline justify-between gap-1.5">
               <div class="min-w-0">
-                <h3 class="text-[11px] font-bold text-zinc-900 inline">
+                <h3 class="text-xs font-bold text-zinc-900 inline">
                   {exp.role}
                 </h3>
-                <span class="text-[10.5px] font-medium text-zinc-700"> · {exp.company}</span>
+                <span class="text-[11px] font-semibold text-zinc-700"> · {exp.company}</span>
                 {exp.location && (
                   exp.locationUrl ? (
                     <a
                       href={exp.locationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-[10px] text-zinc-500 font-normal hover:text-zinc-900 hover:underline"
+                      class="text-[10.5px] text-zinc-500 font-normal hover:text-zinc-900 hover:underline"
                       title={`Ver ubicación de ${exp.company}`}
                     >
                       ({exp.location})
                     </a>
                   ) : (
-                    <span class="text-[10px] text-zinc-500 font-normal"> ({exp.location})</span>
+                    <span class="text-[10.5px] text-zinc-500 font-normal"> ({exp.location})</span>
                   )
                 )}
               </div>
-              <span class="text-[9.5px] font-mono text-zinc-500 shrink-0">
+              <span class="text-[10px] font-mono text-zinc-500 shrink-0">
                 {exp.startDate} — {exp.endDate || 'Actualidad'}
               </span>
             </div>
 
             {exp.bullets && exp.bullets.length > 0 && (
-              <ul class="mt-1 space-y-0.5 text-[10px] leading-snug text-zinc-600 list-disc list-outside ml-3">
+              <ul class="mt-1 space-y-0.5 text-[10.5px] leading-snug text-zinc-600 list-disc list-outside ml-3">
                 {exp.bullets.map((bullet) => (
                   <li>{bullet}</li>
                 ))}
@@ -64,9 +64,9 @@ const featuredExperience = cvData.experience.filter((exp) => {
             )}
 
             {exp.technologies && exp.technologies.length > 0 && (
-              <div class="mt-1 flex flex-wrap gap-1">
+              <div class="mt-1.5 flex flex-wrap gap-1">
                 {exp.technologies.map((tech) => (
-                  <span class="text-[9px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.2 rounded border border-zinc-200/60 print:border-zinc-300">
+                  <span class="text-[9.5px] font-mono bg-[var(--color-accent-subtle)] text-zinc-800 px-1.5 py-0.2 rounded border border-[var(--color-accent-border)] print:border-zinc-300">
                     {tech}
                   </span>
                 ))}
