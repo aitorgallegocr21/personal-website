@@ -3,6 +3,7 @@ import { cvData } from '@/data/cv-data';
 import { Github, ExternalLink, ArrowUpRight } from 'lucide-astro';
 
 const { projects } = cvData;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <section id="proyectos" class="py-12 sm:py-16 scroll-mt-20">
@@ -52,7 +53,7 @@ const { projects } = cvData;
             {project.image ? (
               <div class="overflow-hidden rounded-lg mb-4 border border-zinc-200 dark:border-zinc-800/60 group-hover:border-[var(--color-accent-border)] transition-colors duration-300">
                 <img
-                  src={project.image}
+                  src={project.image.startsWith('http') ? project.image : `${baseUrl}${project.image}`}
                   alt={`Preview de ${project.title}`}
                   class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"

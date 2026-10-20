@@ -11,23 +11,23 @@ import CVPrintBar from '@/components/cv/CVPrintBar.astro';
 ---
 
 <PrintLayout>
-  <div id="cv-container" class="space-y-3 print:space-y-2.5 max-w-[210mm] mx-auto">
+  <div id="cv-container" class="space-y-3.5 print:space-y-2.5 max-w-[210mm] mx-auto">
     <CVHeader />
 
     <!-- Editorial 2-Column Grid -->
     <div class="cv-editorial-grid grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
-      <!-- Main Column (7 cols): Tech Experience, Projects & Complementary Experience -->
-      <div class="md:col-span-7 space-y-3 print:space-y-2">
+      <!-- Main Column (7 cols): Tech Experience & Projects -->
+      <div class="md:col-span-7 space-y-3.5 print:space-y-2.5">
         <CVExperience category="tech" title="Experiencia Técnica" />
         <CVProjects title="Proyectos Software Destacados" />
-        <CVExperience category="complementary" title="Otras Experiencias & Competencias" />
       </div>
 
-      <!-- Side Column (5 cols): Skills, Education, Certifications & Competencies -->
-      <div class="md:col-span-5 space-y-3 print:space-y-2">
+      <!-- Side Column (5 cols): Skills, Education, Other Experience & Competencies -->
+      <div class="md:col-span-5 space-y-3.5 print:space-y-2.5">
         <CVSkills />
         <CVEducation />
         <CVCertificates />
+        <CVExperience category="complementary" title="Otras Experiencias & Competencias" />
         <CVCompetencies />
       </div>
     </div>
