@@ -53,6 +53,7 @@ export interface Education {
   institution: string;
   degree: string;
   period: string;
+  grade?: string;
   details?: string[];
   documentUrl?: string;
 }

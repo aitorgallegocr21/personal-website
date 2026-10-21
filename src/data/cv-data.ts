@@ -186,16 +186,18 @@ export const cvData: ResumeData = {
       institution: "IES Juan Bosco (Alcázar de San Juan)",
       degree: "CFGS Desarrollo de Aplicaciones Multiplataforma (DAM)",
       period: "2025 - 2027 (En curso)",
+      grade: "Media 1º curso: 9,2",
       details: [
-        "Especialización en desarrollo backend Java, arquitectura modular y persistencia SQL.",
+        "Nota media (1º curso): 9,2 · Backend Java, modularidad y SQL.",
       ],
     },
     {
       institution: "IES Juan Bosco (Alcázar de San Juan)",
       degree: "CFGM Sistemas Microinformáticos y Redes (SMR)",
       period: "2023 - 2025",
+      grade: "Media final: 8,7",
       details: [
-        "Sólida base práctica en servidores Linux/Windows Server, redes y seguridad de sistemas.",
+        "Nota media final: 8,7 · Servidores Linux/Windows Server y redes.",
       ],
       documentUrl: "/docs/certificates/gm-smr/CertificadoSupletorioProvisional_L.O.E._Titulo_Sistemas_Microinformaticos_y_Redes.pdf",
     },
