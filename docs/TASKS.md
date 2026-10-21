@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-- *No active phase currently in progress. All roadmap phases up to Phase 13 are complete.*
+- [ ] **[Phase 14: Editorial Balance, Contact Architecture & Symmetrical Bottom Rhythm](tasks/phase-14-editorial-balance-and-contact-polish/index.md)** — *Active Sprint* (Color-accented CONTACTO label, restored phone number rendering via local .env, vertically stacked GitHub and LinkedIn items, justified candidate bio summary, and condensed complementary experience with symmetrical column baselines on 1-page A4).
 
 ---
 
