@@ -1,7 +1,7 @@
 ---
 import { cvData } from '@/data/cv-data';
 import PhoneContact from '@/components/ui/PhoneContact.astro';
-import { MapPin, Mail, Github, Linkedin, Globe, ArrowUpRight } from 'lucide-astro';
+import { MapPin, Mail, Phone, Github, Linkedin, Globe, ArrowUpRight } from 'lucide-astro';
 
 const { personal, about } = cvData;
 
@@ -15,11 +15,11 @@ const avatarSrc = personal.avatarUrl
   <div class="h-1 w-full bg-[var(--color-accent)] rounded-full mb-3 print:mb-2 print:h-1"></div>
 
   <div class="flex flex-col sm:flex-row items-start justify-between gap-3 sm:gap-4 print:flex-row print:items-start print:justify-between">
-    <!-- Left Column: Avatar + Candidate Identity -->
+    <!-- Left Column: Rectangular Avatar Badge + Candidate Identity -->
     <div class="flex items-start gap-3.5 min-w-0 flex-1">
       {
         avatarSrc && (
-          <div class="relative w-[23mm] h-[23mm] shrink-0 rounded-full overflow-hidden border border-zinc-200/90 ring-2 ring-[var(--color-accent-border)] shadow-xs bg-zinc-100 print:border-zinc-300 print:ring-1">
+          <div class="relative w-[26mm] sm:w-[28mm] h-[33mm] sm:h-[35mm] shrink-0 rounded-xl overflow-hidden border border-zinc-200/90 ring-2 ring-[var(--color-accent-border)] shadow-xs bg-zinc-100 print:border-zinc-300 print:ring-1">
             <img
               src={avatarSrc}
               alt={personal.name}
@@ -52,7 +52,7 @@ const avatarSrc = personal.avatarUrl
 
         {
           (about.cvSummary || about.shortSummary) && (
-            <p class="text-[11px] text-zinc-600 leading-normal text-pretty mt-1.5 print:mt-1 max-w-[118mm]">
+            <p class="text-[11px] text-zinc-600 leading-normal text-pretty mt-1.5 print:mt-1 max-w-[110mm]">
               {about.cvSummary || about.shortSummary}
             </p>
           )
@@ -69,7 +69,7 @@ const avatarSrc = personal.avatarUrl
             href={personal.website}
             target="_blank"
             rel="noopener noreferrer"
-            class="group inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-accent-subtle)] hover:bg-[var(--color-accent)] text-[var(--color-accent)] hover:text-white border border-[var(--color-accent-border)] transition-all duration-200 shadow-2xs font-medium text-[11px] mb-2.5 print:mb-1.5 print:bg-zinc-50 print:text-zinc-900 print:border-zinc-300"
+            class="group inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[var(--color-accent-subtle)] hover:bg-[var(--color-accent)] text-[var(--color-accent)] hover:text-white border border-[var(--color-accent-border)] transition-all duration-200 shadow-2xs font-medium text-[11px] mb-2 print:mb-1.5 print:bg-zinc-50 print:text-zinc-900 print:border-zinc-300"
             title="Abrir portafolio interactivo en línea"
           >
             <Globe class="w-3.5 h-3.5 text-[var(--color-accent)] group-hover:text-white print:text-zinc-700 shrink-0" />
@@ -78,6 +78,11 @@ const avatarSrc = personal.avatarUrl
           </a>
         )
       }
+
+      <div class="flex items-center gap-1 text-[9.5px] font-mono tracking-widest uppercase font-bold text-zinc-400 mb-1">
+        <span class="text-[var(--color-accent)]">//</span>
+        <span>Contacto</span>
+      </div>
 
       <ul class="flex flex-col gap-1 print:gap-0.5 text-[10.5px] text-zinc-600 font-mono sm:items-end print:items-end">
         {
@@ -107,6 +112,7 @@ const avatarSrc = personal.avatarUrl
         {
           personal.phone && (
             <li class="inline-flex items-center gap-1.5">
+              <Phone class="w-3 h-3 text-zinc-400 shrink-0" />
               <PhoneContact phone={personal.phone} mode="auto" />
             </li>
           )

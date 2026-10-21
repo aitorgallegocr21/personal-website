@@ -20,7 +20,7 @@ export const cvData: ResumeData = {
     shortSummary:
       "Desarrollador de software con base sólida en administración de sistemas (SMR) y especialización en desarrollo multiplataforma (DAM) con rendimiento académico destacado. Enfoque en código limpio, arquitectura estructurada y desarrollo backend con Java. Experiencia en formación técnica en NTT Data y proyectos colaborativos en Python y Angular.",
     cvSummary:
-      "Desarrollador de software con sólida base en sistemas (SMR) y especialización en backend con Java y DAM. Experiencia en formación técnica intensiva en NTT DATA y desarrollo de proyectos en Python y Angular. Enfoque riguroso en código limpio, resolución de problemas y arquitecturas modulares.",
+      "Desarrollador de software con base en sistemas (SMR) y especialización en backend con Java y DAM. Formación técnica en NTT DATA y proyectos en Python y Angular. Enfoque riguroso en código limpio, arquitecturas modulares y resolución analítica.",
     fullBio:
       "Estudiante de 2º curso de Desarrollo de Aplicaciones Multiplataforma con formación previa en Sistemas Microinformáticos y Redes. Me apasiona la optimización de código, el diseño de arquitecturas eficientes y la resolución de problemas lógicos. Combino una metodología de trabajo meticulosa y estructurada con capacidad demostrada para aprender y entregar software bajo presión.",
   },
