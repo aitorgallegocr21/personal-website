@@ -35,19 +35,22 @@ const featuredExperience = cvData.experience.filter((exp) => {
                 </h3>
                 <span class="text-[11px] font-semibold text-zinc-700"> · {exp.company}</span>
                 {exp.location && (
-                  exp.locationUrl ? (
-                    <a
-                      href={exp.locationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-[10.5px] text-zinc-500 font-normal hover:text-zinc-900 hover:underline"
-                      title={`Ver ubicación de ${exp.company}`}
-                    >
-                      ({exp.location})
-                    </a>
-                  ) : (
-                    <span class="text-[10.5px] text-zinc-500 font-normal"> ({exp.location})</span>
-                  )
+                  <>
+                    {' '}
+                    {exp.locationUrl ? (
+                      <a
+                        href={exp.locationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[10.5px] text-zinc-500 font-normal hover:text-zinc-900 hover:underline"
+                        title={`Ver ubicación de ${exp.company}`}
+                      >
+                        ({exp.location})
+                      </a>
+                    ) : (
+                      <span class="text-[10.5px] text-zinc-500 font-normal">({exp.location})</span>
+                    )}
+                  </>
                 )}
               </div>
               <span class="text-[10px] font-mono text-zinc-500 shrink-0">

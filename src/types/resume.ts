@@ -53,6 +53,7 @@ export interface Education {
   institution: string;
   degree: string;
   period: string;
+  grade?: string;
   details?: string[];
   documentUrl?: string;
 }
@@ -91,6 +92,12 @@ export interface Language {
   detail?: string;
 }
 
+export interface InterestItem {
+  name: string;
+  category?: string;
+  description: string;
+}
+
 export interface ResumeData {
   personal: PersonalInfo;
   about: {
@@ -104,4 +111,5 @@ export interface ResumeData {
   certificates: Certificate[];
   education: Education[];
   languages?: Language[];
+  interests?: InterestItem[];
 }

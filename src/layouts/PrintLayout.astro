@@ -23,6 +23,40 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+
+    <!-- Typography (Synchronized Inter & JetBrains Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Palette Initialization (Zero-FOUC & URL Param Support) -->
+    <script is:inline>
+      (function () {
+        try {
+          const VALID_PALETTES = ['emerald', 'slate', 'sky', 'violet', 'rose', 'monochrome'];
+          const params = new URLSearchParams(window.location.search);
+          const urlPalette = params.get('palette');
+          const storedPalette = localStorage.getItem('portfolio-palette');
+
+          let activePalette = 'emerald';
+          if (urlPalette && VALID_PALETTES.includes(urlPalette)) {
+            activePalette = urlPalette;
+          } else if (storedPalette && VALID_PALETTES.includes(storedPalette)) {
+            activePalette = storedPalette;
+          }
+
+          document.documentElement.setAttribute('data-palette', activePalette);
+          document.documentElement.dataset.palette = activePalette;
+        } catch (e) {
+          document.documentElement.setAttribute('data-palette', 'emerald');
+          document.documentElement.dataset.palette = 'emerald';
+        }
+      })();
+    </script>
+
     <style is:global>
       @page {
         size: A4 portrait;

@@ -7,11 +7,13 @@
 ---
 
 ## Active Phase
-- [ ] *None currently active* (All scheduled phases completed).
+- *No active phase currently — Phase 14 completed. Ready for next instructions or branch merge.*
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+- [x] **[Phase 14: Editorial Balance, Contact Architecture & Symmetrical Bottom Rhythm](tasks/phase-14-editorial-balance-and-contact-polish/index.md)** — *Completed 2026-10-21* (Color-accented CONTACTO label, restored phone number rendering via local .env, vertically stacked GitHub and LinkedIn items, justified candidate bio summary, condensed complementary experience bullets, added Prompt Engineering certification for millimeter baseline parity with Languages & Mobility, and strict 1-page A4 PDF verification across all 6 palettes).
+- [x] **[Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](tasks/phase-13-multi-palette-pdf-build-and-editorial-cv/index.md)** — *Completed 2026-10-21* (Precompilación determinista de PDFs A4 en 6 paletas de color con alias canónico mediante Chromium headless en build, barra dual de descarga directa en 1 clic y botón de impresión con modal de aviso, retrato rectangular con bordes redondeados, encabezado CONTACTO alineado con icono Phone, activación de clases particulares de tenis en experiencia complementaria, sincronización de Google Fonts y verificación estricta de 1 página A4).
 - [x] **[Phase 12: CV Visual Symmetry, 2-Column Balance & Strict A4 WYSIWYG Print Engine](tasks/phase-12-cv-visual-symmetry-and-print-wysiwyg/index.md)** — *Completed 2026-10-20* (Equilibrio visual de doble columna en pantalla eliminando el espacio vacío inferior izquierdo, habilitación de retícula de dos columnas en `@media print` para evitar el colapso a 1 sola columna, contención estricta de altura A4 para prevenir la 2ª página desbordada y paridad 100% WYSIWYG entre web e impresión).
 - [x] **[Phase 11: Portfolio Filter Fixes, CV Editorial Density & A4 Print Engine Calibration](tasks/phase-11-filters-and-cv-a4-calibration/index.md)** — *Completed 2026-10-20* (Filtros interactivos de certificaciones con color de acento, rediseño minimalista del botón web en CV, bio y descripciones adaptadas para máxima legibilidad, semántica de proyectos `Web ↗`, calibración de impresión A4 limpia en 1 sola página y preservación de aspect ratio A4 en móvil).
 - [x] **[Phase 10: Printable CV Creative Editorial Redesign & Content Refactoring](tasks/phase-10-cv-editorial-and-content-redesign/index.md)** — *Completed 2026-10-20* (Creative non-conventional A4 layout, 2-column editorial grid, prominent web portfolio badge, projects promotion with clickable repos, non-tech experience line, driver's license/English technical competencies, and strict 1-page A4 print verification).

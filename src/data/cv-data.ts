@@ -20,7 +20,7 @@ export const cvData: ResumeData = {
     shortSummary:
       "Desarrollador de software con base sólida en administración de sistemas (SMR) y especialización en desarrollo multiplataforma (DAM) con rendimiento académico destacado. Enfoque en código limpio, arquitectura estructurada y desarrollo backend con Java. Experiencia en formación técnica en NTT Data y proyectos colaborativos en Python y Angular.",
     cvSummary:
-      "Desarrollador de software con sólida base en sistemas (SMR) y especialización en backend con Java y DAM. Experiencia en formación técnica intensiva en NTT DATA y desarrollo de proyectos en Python y Angular. Enfoque riguroso en código limpio, resolución de problemas y arquitecturas modulares.",
+      "Desarrollador de software con base en sistemas (SMR) y especialización en backend con Java y DAM. Formación técnica en NTT DATA y proyectos en Python y Angular. Enfoque riguroso en código limpio, arquitecturas modulares y resolución analítica.",
     fullBio:
       "Estudiante de 2º curso de Desarrollo de Aplicaciones Multiplataforma con formación previa en Sistemas Microinformáticos y Redes. Me apasiona la optimización de código, el diseño de arquitecturas eficientes y la resolución de problemas lógicos. Combino una metodología de trabajo meticulosa y estructurada con capacidad demostrada para aprender y entregar software bajo presión.",
   },
@@ -89,11 +89,10 @@ export const cvData: ResumeData = {
       startDate: "2025-09",
       description: "Enseñanza técnica personalizada y planificación deportiva.",
       bullets: [
-        "Planificación individualizada de sesiones técnicas y seguimiento de objetivos para alumnos particulares.",
-        "Desarrollo de habilidades de pedagogía, comunicación asertiva y adaptación a distintos ritmos de aprendizaje.",
+        "Planificación técnica individualizada, comunicación asertiva y pedagogía adaptada a diferentes perfiles.",
       ],
       technologies: ["Planificación", "Pedagogía", "Comunicación"],
-      featuredInCV: false,
+      featuredInCV: true,
       category: "complementary",
     },
     {
@@ -106,8 +105,7 @@ export const cvData: ResumeData = {
       endDate: "2026-08",
       description: "Servicio al cliente y soporte operativo a jornada parcial (40%).",
       bullets: [
-        "Gestión ágil de pedidos y resolución de incidencias en picos de alta demanda.",
-        "Desarrollo de resiliencia, trabajo en equipo bajo presión y orientación al servicio.",
+        "Atención ágil en picos de alta demanda, trabajo en equipo bajo presión y resolución de incidencias.",
       ],
       technologies: ["Trabajo bajo presión", "Atención al cliente", "Multitasking"],
       featuredInCV: true,
@@ -188,16 +186,18 @@ export const cvData: ResumeData = {
       institution: "IES Juan Bosco (Alcázar de San Juan)",
       degree: "CFGS Desarrollo de Aplicaciones Multiplataforma (DAM)",
       period: "2025 - 2027 (En curso)",
+      grade: "Media 1º curso: 9,2",
       details: [
-        "Especialización en desarrollo backend Java, arquitectura modular y persistencia SQL.",
+        "Nota media (1º curso): 9,2 · Backend Java, modularidad y SQL.",
       ],
     },
     {
       institution: "IES Juan Bosco (Alcázar de San Juan)",
       degree: "CFGM Sistemas Microinformáticos y Redes (SMR)",
       period: "2023 - 2025",
+      grade: "Media final: 8,7",
       details: [
-        "Sólida base práctica en servidores Linux/Windows Server, redes y seguridad de sistemas.",
+        "Nota media final: 8,7 · Servidores Linux/Windows Server y redes.",
       ],
       documentUrl: "/docs/certificates/gm-smr/CertificadoSupletorioProvisional_L.O.E._Titulo_Sistemas_Microinformaticos_y_Redes.pdf",
     },
@@ -558,6 +558,17 @@ export const cvData: ResumeData = {
       language: "Inglés",
       level: "Nivel Técnico",
       detail: "Lectura, redacción de documentación técnica y comunicación en ingeniería",
+    },
+  ],
+
+  interests: [
+    {
+      name: "Tenis de Competición",
+      description: "Práctica activa y competición en torneos amateur; enfoque mental, constancia y superación.",
+    },
+    {
+      name: "Lectura & Ficción",
+      description: "Lectura asidua de narrativa, novela negra y policiaca como fuente de concentración y desconexión.",
     },
   ],
 };

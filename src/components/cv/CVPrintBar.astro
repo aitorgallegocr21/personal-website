@@ -1,5 +1,5 @@
 ---
-import { Printer, ArrowLeft, Palette } from 'lucide-astro';
+import { Printer, ArrowLeft, Palette, Download, AlertTriangle, X } from 'lucide-astro';
 
 const palettes = [
   { id: 'emerald', label: 'Tech Emerald (Por defecto)', color: '#059669', bgClass: 'bg-[#059669]' },
@@ -9,16 +9,20 @@ const palettes = [
   { id: 'rose', label: 'Rose (Alto Contraste)', color: '#e11d48', bgClass: 'bg-[#e11d48]' },
   { id: 'monochrome', label: 'Monocromo (Blanco y Negro Clásico)', color: '#18181b', bgClass: 'bg-[#18181b] border border-zinc-600' },
 ];
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <aside
-  class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-50 flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/95 text-white shadow-2xl border border-zinc-800 print:hidden backdrop-blur-md"
+  id="cv-print-bar"
+  data-base-url={baseUrl}
+  class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-40 flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/95 text-white shadow-2xl border border-zinc-800 print:hidden backdrop-blur-md"
   aria-label="Acciones y personalización del CV"
 >
   <!-- Return to Portfolio -->
   <a
     href={import.meta.env.BASE_URL}
-    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/80 transition-colors"
+    class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/80 transition-colors"
     title="Volver al Portfolio interactivo"
   >
     <ArrowLeft class="w-3.5 h-3.5" />
@@ -56,21 +60,105 @@ const palettes = [
 
   <span class="h-4 w-px bg-zinc-800" aria-hidden="true"></span>
 
-  <!-- PDF Print / Download Trigger -->
-  <button
-    id="print-cv-btn"
-    type="button"
-    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-900 hover:bg-white transition-colors cursor-pointer shadow-sm active:scale-95"
-    title="Descargar o imprimir el CV en formato A4"
-  >
-    <Printer class="w-3.5 h-3.5" />
-    <span>Imprimir / PDF</span>
-  </button>
+  <!-- Dual Action Triggers: 1-Click Download & Print Warning Modal -->
+  <div class="flex items-center gap-1.5">
+    <a
+      id="download-pdf-btn"
+      href={`${baseUrl}/cv/cv-aitor-gallego-emerald.pdf`}
+      download="cv-aitor-gallego.pdf"
+      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-900 hover:bg-white transition-colors cursor-pointer shadow-sm active:scale-95"
+      title="Descargar directamente el PDF oficial calibrado en A4"
+    >
+      <Download class="w-3.5 h-3.5 text-zinc-900" />
+      <span class="hidden sm:inline">Descargar PDF</span>
+      <span class="sm:hidden">PDF</span>
+    </a>
+
+    <button
+      id="open-print-modal-btn"
+      type="button"
+      class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+      title="Opciones de impresión física o exportación del navegador"
+    >
+      <Printer class="w-3.5 h-3.5" />
+      <span class="hidden sm:inline">Imprimir</span>
+    </button>
+  </div>
 </aside>
 
+<!-- Layout Warning Modal -->
+<div
+  id="print-warning-modal"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs transition-opacity duration-200 hidden print:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="print-modal-title"
+>
+  <div class="relative w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl text-zinc-100 space-y-4">
+    <!-- Header -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+          <AlertTriangle class="w-5 h-5" />
+        </div>
+        <div>
+          <h3 id="print-modal-title" class="text-sm font-bold text-white">
+            Recomendación de Impresión
+          </h3>
+          <p class="text-xs text-zinc-400">Calibración A4 y fidelidad de formato</p>
+        </div>
+      </div>
+      <button
+        id="close-print-modal-btn"
+        type="button"
+        class="text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+        aria-label="Cerrar modal"
+      >
+        <X class="w-4 h-4" />
+      </button>
+    </div>
+
+    <!-- Body text -->
+    <div class="text-xs text-zinc-300 leading-relaxed space-y-2 border-y border-zinc-800/80 py-3">
+      <p>
+        El cuadro de diálogo de impresión de tu navegador puede alterar márgenes, fuentes o colores según el sistema operativo, navegador (Chrome, Brave, etc.) o la escala de pantalla (DPI).
+      </p>
+      <p class="text-zinc-400">
+        Para garantizar un documento <strong>100% exacto en 1 sola página A4</strong> con la paleta de color seleccionada, te recomendamos descargar el PDF oficial precompilado.
+      </p>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row-reverse items-center justify-between gap-2.5 pt-1">
+      <button
+        id="modal-download-btn"
+        type="button"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-white text-zinc-950 hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm active:scale-95"
+      >
+        <Download class="w-3.5 h-3.5" />
+        <span>Descargar PDF Oficial</span>
+      </button>
+
+      <button
+        id="modal-proceed-print-btn"
+        type="button"
+        class="w-full sm:w-auto text-xs text-zinc-400 hover:text-white underline underline-offset-4 py-1.5 px-2 transition-colors cursor-pointer text-center"
+      >
+        Imprimir de todos modos
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
-  const STORAGE_KEY = 'portfolio_palette';
+  const STORAGE_KEY = 'portfolio-palette';
   const defaultPalette = 'emerald';
+  const printBar = document.getElementById('cv-print-bar');
+  const baseUrl = (printBar?.dataset.baseUrl || '').replace(/\/$/, '');
+
+  function getPdfPath(paletteId: string): string {
+    return `${baseUrl}/cv/cv-aitor-gallego-${paletteId}.pdf`;
+  }
 
   function applyPalette(paletteId: string) {
     // Apply to html root and cv container
@@ -87,6 +175,13 @@ const palettes = [
       // Ignore if localStorage unavailable
     }
 
+    // Update download buttons href
+    const downloadBtn = document.getElementById('download-pdf-btn') as HTMLAnchorElement | null;
+    if (downloadBtn) {
+      downloadBtn.href = getPdfPath(paletteId);
+      downloadBtn.download = `cv-aitor-gallego-${paletteId}.pdf`;
+    }
+
     // Update active ring on buttons
     const buttons = document.querySelectorAll<HTMLButtonElement>('[data-palette-target]');
     buttons.forEach((btn) => {
@@ -101,11 +196,15 @@ const palettes = [
     });
   }
 
-  // Initialize palette from localStorage or document default
+  // Initialize palette from URL, localStorage or document default
   let initialPalette = defaultPalette;
   try {
+    const params = new URLSearchParams(window.location.search);
+    const urlPalette = params.get('palette');
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
+    if (urlPalette) {
+      initialPalette = urlPalette;
+    } else if (saved) {
       initialPalette = saved;
     } else if (document.documentElement.dataset.palette) {
       initialPalette = document.documentElement.dataset.palette;
@@ -126,9 +225,55 @@ const palettes = [
     });
   });
 
-  // Bind print button
-  const printBtn = document.getElementById('print-cv-btn');
-  printBtn?.addEventListener('click', () => {
+  // Modal logic
+  const modal = document.getElementById('print-warning-modal');
+  const openModalBtn = document.getElementById('open-print-modal-btn');
+  const closeModalBtn = document.getElementById('close-print-modal-btn');
+  const modalProceedPrintBtn = document.getElementById('modal-proceed-print-btn');
+  const modalDownloadBtn = document.getElementById('modal-download-btn');
+
+  function openModal() {
+    if (modal) {
+      modal.classList.remove('hidden');
+    }
+  }
+
+  function closeModal() {
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+  }
+
+  openModalBtn?.addEventListener('click', openModal);
+  closeModalBtn?.addEventListener('click', closeModal);
+
+  modalProceedPrintBtn?.addEventListener('click', () => {
+    closeModal();
     window.print();
+  });
+
+  modalDownloadBtn?.addEventListener('click', () => {
+    const currentPalette = document.documentElement.dataset.palette || defaultPalette;
+    const downloadBtn = document.getElementById('download-pdf-btn') as HTMLAnchorElement | null;
+    closeModal();
+    if (downloadBtn) {
+      downloadBtn.click();
+    } else {
+      window.location.href = getPdfPath(currentPalette);
+    }
+  });
+
+  // Dismiss on background click
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Dismiss on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
   });
 </script>
