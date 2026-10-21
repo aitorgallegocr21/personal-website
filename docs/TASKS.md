@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-- [ ] *None currently active* (All scheduled phases completed).
+- [ ] **[Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](tasks/phase-13-multi-palette-pdf-build-and-editorial-cv/index.md)** — *Active Sprint* (Deterministic headless A4 PDF precompilation across all 6 palettes, dual-action print bar with layout warning modal, rectangular portrait badge, CONTACTO section header, tennis coaching experience activation, font synchronization and strict 1-page A4 verification).
 
 ---
 
