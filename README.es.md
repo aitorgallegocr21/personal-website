@@ -75,7 +75,8 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **📜 Motor Modal Multi-Documental de Credenciales:** Visor interactivo capaz de navegar entre múltiples PDFs de módulos formativos, descarga individual y descarga en lote secuencial (`Descargar todos`).
 - **✨ Micro-interacciones con Acento & Footer Estructurado:** Pie de página responsivo en 3 columnas con indicador dinámico de disponibilidad, bordes con brillo ambiental reactivo a la paleta activa y badges de proyecto sin colisiones.
 - **📰 Maquetación Editorial del CV a 2 Columnas:** Diseño editorial para impresión A4 en 2 columnas con insignia destacada hacia el portfolio interactivo, proyectos de software con enlaces a repositorios GitHub, chips compactos de certificación, experiencia complementaria y permiso B/inglés técnico.
-- **🖨️ Barra de Impresión A4 Interactiva:** Permite cambiar la paleta cromática en vivo en `/cv` antes de disparar la exportación nativa a PDF.
+- **🖨️ Motor Headless de PDFs Multi-Paleta & Barra Dual de Impresión:** Compilación automatizada en build de PDFs A4 deterministas para las 6 paletas de color con Chromium headless, descarga directa en 1 clic y modal accesible de recomendación de formato para impresión.
+- **📐 Retrato Editorial & Columna de Contacto:** Insignia de retrato rectangular en proporción nativa, encabezado estructurado `// CONTACTO` con icono telefónico alineado y activación de clases particulares de tenis en experiencia complementaria.
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 
 ---

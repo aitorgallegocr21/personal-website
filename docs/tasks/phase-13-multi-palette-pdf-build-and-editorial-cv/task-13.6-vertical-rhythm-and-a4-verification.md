@@ -1,7 +1,8 @@
 # Task 13.6: Vertical Rhythm Calibration & Strict A4 Verification
 
 **Parent Phase:** [Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](index.md)  
-**Status:** In Progress  
+**Status:** Completed  
+**Completed At:** 2026-10-21  
 
 ---
 

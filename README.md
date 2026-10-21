@@ -75,7 +75,8 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **📜 Multi-Document Credential Engine:** Integrated modal viewer capable of navigating between multiple modular course syllabus PDFs, single downloads, and sequential batch download (`Descargar todos`).
 - **✨ Accent Polish & Structured Footer:** Responsive 3-column footer with dynamic availability indicator, project card glow micro-interactions, illuminated tech chips, and non-overlapping status badges.
 - **📰 Editorial 2-Column CV Layout:** Modern magazine-inspired 2-column printable A4 layout with prominent interactive portfolio badge, prioritized software project cards with direct GitHub repository links, compact certification chips, complementary non-tech experience, and driver's license/technical English competencies.
-- **🖨️ Precision A4 Print Bar:** Live accent palette selection directly on the `/cv` view that dynamically applies to print styles before exporting to PDF.
+- **🖨️ Multi-Palette Headless PDF Build Engine & Dual-Action Print Bar:** Automated build-time generation of 100% deterministic A4 PDFs across all 6 color palettes via headless Chromium, paired with an interactive 1-click download button and an accessible print layout warning modal.
+- **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and authentic tennis coaching complementary experience.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
 ---

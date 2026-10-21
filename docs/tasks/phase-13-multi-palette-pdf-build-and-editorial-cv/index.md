@@ -1,6 +1,7 @@
 # Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening
 
-**Status:** In Progress  
+**Status:** Completed  
+**Completed At:** 2026-10-21  
 **Branch:** `feat/phase-13-multi-palette-pdf-build-and-editorial-cv`  
 **Core Mission:** Transition from browser-dependent print dialogs to a deterministic, 1-click multi-palette precompiled PDF download engine, while modernizing the CV layout (rectangular portrait badge, CONTACTO section header, tennis coaching experience, balanced vertical rhythm, and print modal warnings).
 
@@ -37,4 +38,4 @@ The web UI then provides:
 - [x] **[13.3 Print Engine Hardening & Font Synchronization](task-13.3-print-engine-hardening-and-fonts.md)** — Import Google Fonts in `PrintLayout.astro`, lock `@page { margin: 0; }` with explicit mm containment, fix `localStorage` key to `portfolio-palette`, and eliminate FOUC.
 - [x] **[13.4 Dual-Action CV Print Bar & Layout Warning Modal](task-13.4-dual-action-bar-and-print-modal.md)** — Implement primary 1-click Download button tied to active palette, add secondary Print button, and create an accessible warning modal advising precompiled download.
 - [x] **[13.5 Multi-Palette Headless PDF Build Engine](task-13.5-multi-palette-pdf-build-engine.md)** — Create an automated build script (`scripts/generate-pdf.mjs`) to render and save deterministic A4 PDFs for all 6 palettes into `public/cv/` and `dist/cv/`, with CI integration.
-- [ ] **[13.6 Vertical Rhythm Calibration & Strict A4 Verification](task-13.6-vertical-rhythm-and-a4-verification.md)** — Calibrate grid gap and vertical margins, verify 1-page A4 compliance across screen and print, test optional interests fit, and run full test suite (`npm run check && npm run build`).
+- [x] **[13.6 Vertical Rhythm Calibration & Strict A4 Verification](task-13.6-vertical-rhythm-and-a4-verification.md)** — Calibrate grid gap and vertical margins, verify 1-page A4 compliance across screen and print, test optional interests fit, and run full test suite (`npm run check && npm run build`).
