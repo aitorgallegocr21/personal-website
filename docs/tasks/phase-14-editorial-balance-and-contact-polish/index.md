@@ -24,5 +24,5 @@
 ## 2. Tasks Breakdown
 
 - [x] **[14.1 Contact Section Architecture & Visual Accent](task-14.1-contact-architecture-and-accent.md)** — Style `// CONTACTO` with the active accent color, stack GitHub and LinkedIn vertically, and restore phone number rendering via local `.env`.
-- [ ] **[14.2 Editorial Bio Text Justification](task-14.2-editorial-bio-justification.md)** — Apply `text-justify` to candidate bio summary in `CVHeader.astro` for symmetrical margin alignment.
+- [x] **[14.2 Editorial Bio Text Justification](task-14.2-editorial-bio-justification.md)** — Apply `text-justify` to candidate bio summary in `CVHeader.astro` for symmetrical margin alignment.
 - [ ] **[14.3 Column Baseline Symmetry & Complementary Experience Condensation](task-14.3-column-baseline-symmetry.md)** — Condense complementary experience bullets, align both columns to the exact same baseline, and verify strict 1-page A4 PDF compilation across all palettes.
