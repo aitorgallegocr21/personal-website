@@ -1,6 +1,6 @@
 # Phase 14: Editorial Balance, Contact Architecture & Symmetrical Bottom Rhythm
 
-**Status:** Planned / Ready to Execute  
+**Status:** Completed  
 **Branch:** `feat/phase-13-multi-palette-pdf-build-and-editorial-cv`  
 **Core Mission:** Polish the CV layout with millimeter precision: make the `// CONTACTO` header visually prominent with the active color palette, restore the phone number via `.env` configuration, stack GitHub and LinkedIn vertically in clean single lines, justify the bio summary text, and balance the bottom of both columns so they terminate at the exact same horizontal line leaving an elegant, balanced bottom margin on 1 strict A4 page.
 
@@ -25,4 +25,4 @@
 
 - [x] **[14.1 Contact Section Architecture & Visual Accent](task-14.1-contact-architecture-and-accent.md)** — Style `// CONTACTO` with the active accent color, stack GitHub and LinkedIn vertically, and restore phone number rendering via local `.env`.
 - [x] **[14.2 Editorial Bio Text Justification](task-14.2-editorial-bio-justification.md)** — Apply `text-justify` to candidate bio summary in `CVHeader.astro` for symmetrical margin alignment.
-- [ ] **[14.3 Column Baseline Symmetry & Complementary Experience Condensation](task-14.3-column-baseline-symmetry.md)** — Condense complementary experience bullets, align both columns to the exact same baseline, and verify strict 1-page A4 PDF compilation across all palettes.
+- [x] **[14.3 Column Baseline Symmetry & Complementary Experience Condensation](task-14.3-column-baseline-symmetry.md)** — Condense complementary experience bullets, align both columns to the exact same baseline, and verify strict 1-page A4 PDF compilation across all palettes.

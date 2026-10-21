@@ -89,8 +89,7 @@ export const cvData: ResumeData = {
       startDate: "2025-09",
       description: "Enseñanza técnica personalizada y planificación deportiva.",
       bullets: [
-        "Planificación técnica y seguimiento individualizado de objetivos para alumnos particulares.",
-        "Desarrollo de pedagogía, comunicación asertiva, empatía y adaptabilidad a distintos perfiles.",
+        "Planificación técnica individualizada, comunicación asertiva y pedagogía adaptada a diferentes perfiles.",
       ],
       technologies: ["Planificación", "Pedagogía", "Comunicación"],
       featuredInCV: true,
@@ -106,8 +105,7 @@ export const cvData: ResumeData = {
       endDate: "2026-08",
       description: "Servicio al cliente y soporte operativo a jornada parcial (40%).",
       bullets: [
-        "Gestión ágil de pedidos y resolución de incidencias en picos de alta demanda.",
-        "Desarrollo de resiliencia, trabajo en equipo bajo presión y orientación al servicio.",
+        "Atención ágil en picos de alta demanda, trabajo en equipo bajo presión y resolución de incidencias.",
       ],
       technologies: ["Trabajo bajo presión", "Atención al cliente", "Multitasking"],
       featuredInCV: true,
@@ -531,7 +529,7 @@ export const cvData: ResumeData = {
           type: "module",
         },
       ],
-      featuredInCV: false, // Visible en web y dossier
+      featuredInCV: true,
     },
     {
       id: "ia-big-school",
