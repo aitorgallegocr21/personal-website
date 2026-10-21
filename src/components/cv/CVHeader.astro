@@ -79,8 +79,8 @@ const avatarSrc = personal.avatarUrl
         )
       }
 
-      <div class="flex items-center gap-1 text-[9.5px] font-mono tracking-widest uppercase font-bold text-zinc-400 mb-1">
-        <span class="text-[var(--color-accent)]">//</span>
+      <div class="flex items-center gap-1 text-[10px] font-mono tracking-widest uppercase font-bold text-[var(--color-accent)] mb-1">
+        <span class="opacity-70">//</span>
         <span>Contacto</span>
       </div>
 
@@ -118,37 +118,39 @@ const avatarSrc = personal.avatarUrl
           )
         }
 
-        <li class="inline-flex items-center gap-3 pt-0.5">
-          {
-            personal.github && (
+        {
+          personal.github && (
+            <li class="inline-flex items-center gap-1.5">
+              <Github class="w-3 h-3 text-zinc-400 shrink-0" />
               <a
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 hover:text-zinc-900 hover:underline"
+                class="hover:text-zinc-900 hover:underline"
                 title="Perfil de GitHub"
               >
-                <Github class="w-3 h-3 text-zinc-400 shrink-0" />
                 <span>GitHub ↗</span>
               </a>
-            )
-          }
+            </li>
+          )
+        }
 
-          {
-            personal.linkedin && (
+        {
+          personal.linkedin && (
+            <li class="inline-flex items-center gap-1.5">
+              <Linkedin class="w-3 h-3 text-zinc-400 shrink-0" />
               <a
                 href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 hover:text-zinc-900 hover:underline"
+                class="hover:text-zinc-900 hover:underline"
                 title="Perfil de LinkedIn"
               >
-                <Linkedin class="w-3 h-3 text-zinc-400 shrink-0" />
                 <span>LinkedIn ↗</span>
               </a>
-            )
-          }
-        </li>
+            </li>
+          )
+        }
       </ul>
     </div>
   </div>
