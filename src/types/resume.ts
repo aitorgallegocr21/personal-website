@@ -91,6 +91,12 @@ export interface Language {
   detail?: string;
 }
 
+export interface InterestItem {
+  name: string;
+  category?: string;
+  description: string;
+}
+
 export interface ResumeData {
   personal: PersonalInfo;
   about: {
@@ -104,4 +110,5 @@ export interface ResumeData {
   certificates: Certificate[];
   education: Education[];
   languages?: Language[];
+  interests?: InterestItem[];
 }

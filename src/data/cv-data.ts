@@ -89,11 +89,11 @@ export const cvData: ResumeData = {
       startDate: "2025-09",
       description: "Enseñanza técnica personalizada y planificación deportiva.",
       bullets: [
-        "Planificación individualizada de sesiones técnicas y seguimiento de objetivos para alumnos particulares.",
-        "Desarrollo de habilidades de pedagogía, comunicación asertiva y adaptación a distintos ritmos de aprendizaje.",
+        "Planificación técnica y seguimiento individualizado de objetivos para alumnos particulares.",
+        "Desarrollo de pedagogía, comunicación asertiva, empatía y adaptabilidad a distintos perfiles.",
       ],
       technologies: ["Planificación", "Pedagogía", "Comunicación"],
-      featuredInCV: false,
+      featuredInCV: true,
       category: "complementary",
     },
     {
@@ -558,6 +558,17 @@ export const cvData: ResumeData = {
       language: "Inglés",
       level: "Nivel Técnico",
       detail: "Lectura, redacción de documentación técnica y comunicación en ingeniería",
+    },
+  ],
+
+  interests: [
+    {
+      name: "Tenis de Competición",
+      description: "Práctica activa y competición en torneos amateur; enfoque mental, constancia y superación.",
+    },
+    {
+      name: "Lectura & Ficción",
+      description: "Lectura asidua de narrativa, novela negra y policiaca como fuente de concentración y desconexión.",
     },
   ],
 };

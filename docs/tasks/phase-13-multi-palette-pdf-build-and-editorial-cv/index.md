@@ -32,7 +32,7 @@ The web UI then provides:
 
 ## 2. Tasks Breakdown
 
-- [ ] **[13.1 Data Schema SSOT & Experience Refactoring](task-13.1-ssot-experience-and-interests.md)** — Activate `clases-tenis` (`featuredInCV: true`) with refined bullets, fix company/location whitespace concatenations, and model optional `interests` schema in `resume.ts`.
+- [x] **[13.1 Data Schema SSOT & Experience Refactoring](task-13.1-ssot-experience-and-interests.md)** — Activate `clases-tenis` (`featuredInCV: true`) with refined bullets, fix company/location whitespace concatenations, and model optional `interests` schema in `resume.ts`.
 - [ ] **[13.2 Editorial Header & Contact Column Modernization](task-13.2-editorial-header-and-contact.md)** — Transform avatar into a rectangular portrait badge, integrate `// CONTACTO` uppercase header, add Phone icon to contact list, and tune `about.cvSummary`.
 - [ ] **[13.3 Print Engine Hardening & Font Synchronization](task-13.3-print-engine-hardening-and-fonts.md)** — Import Google Fonts in `PrintLayout.astro`, lock `@page { margin: 0; }` with explicit mm containment, fix `localStorage` key to `portfolio-palette`, and eliminate FOUC.
 - [ ] **[13.4 Dual-Action CV Print Bar & Layout Warning Modal](task-13.4-dual-action-bar-and-print-modal.md)** — Implement primary 1-click Download button tied to active palette, add secondary Print button, and create an accessible warning modal advising precompiled download.
