@@ -69,7 +69,7 @@ const palettes = [
 </aside>
 
 <script>
-  const STORAGE_KEY = 'portfolio_palette';
+  const STORAGE_KEY = 'portfolio-palette';
   const defaultPalette = 'emerald';
 
   function applyPalette(paletteId: string) {
@@ -101,11 +101,15 @@ const palettes = [
     });
   }
 
-  // Initialize palette from localStorage or document default
+  // Initialize palette from URL, localStorage or document default
   let initialPalette = defaultPalette;
   try {
+    const params = new URLSearchParams(window.location.search);
+    const urlPalette = params.get('palette');
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
+    if (urlPalette) {
+      initialPalette = urlPalette;
+    } else if (saved) {
       initialPalette = saved;
     } else if (document.documentElement.dataset.palette) {
       initialPalette = document.documentElement.dataset.palette;
