@@ -531,7 +531,7 @@ export const cvData: ResumeData = {
           type: "module",
         },
       ],
-      featuredInCV: true,
+      featuredInCV: false, // Visible en web y dossier
     },
     {
       id: "ia-big-school",
