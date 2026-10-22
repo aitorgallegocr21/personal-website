@@ -7,11 +7,12 @@
 ---
 
 ## Active Phase
-- *No active phase currently — Phase 14 completed. Ready for next instructions or branch merge.*
+- *No active phase currently — Phase 15 completed. Ready for next instructions or branch merge.*
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+- [x] **[Phase 15: External Links Polish, Interactive Modal Deep-Linking & Zip Download Engine](tasks/phase-15-cv-polish-deep-linking-and-zip-downloads/index.md)** — *Completed 2026-10-22* (CV Web button margin inset preventing PDF print clipping, bottom bar palette swatch spacing, credential & SMR degree URL deep-linking from CV to interactive modal viewer, and JSZip single-archive batch download).
 - [x] **[Phase 14: Editorial Balance, Contact Architecture & Symmetrical Bottom Rhythm](tasks/phase-14-editorial-balance-and-contact-polish/index.md)** — *Completed 2026-10-21* (Color-accented CONTACTO label, restored phone number rendering via local .env, vertically stacked GitHub and LinkedIn items, justified candidate bio summary, condensed complementary experience bullets, added Prompt Engineering certification for millimeter baseline parity with Languages & Mobility, and strict 1-page A4 PDF verification across all 6 palettes).
 - [x] **[Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](tasks/phase-13-multi-palette-pdf-build-and-editorial-cv/index.md)** — *Completed 2026-10-21* (Precompilación determinista de PDFs A4 en 6 paletas de color con alias canónico mediante Chromium headless en build, barra dual de descarga directa en 1 clic y botón de impresión con modal de aviso, retrato rectangular con bordes redondeados, encabezado CONTACTO alineado con icono Phone, activación de clases particulares de tenis en experiencia complementaria, sincronización de Google Fonts y verificación estricta de 1 página A4).
 - [x] **[Phase 12: CV Visual Symmetry, 2-Column Balance & Strict A4 WYSIWYG Print Engine](tasks/phase-12-cv-visual-symmetry-and-print-wysiwyg/index.md)** — *Completed 2026-10-20* (Equilibrio visual de doble columna en pantalla eliminando el espacio vacío inferior izquierdo, habilitación de retícula de dos columnas en `@media print` para evitar el colapso a 1 sola columna, contención estricta de altura A4 para prevenir la 2ª página desbordada y paridad 100% WYSIWYG entre web e impresión).

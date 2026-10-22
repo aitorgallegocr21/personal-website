@@ -38,7 +38,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
       <span>Color PDF:</span>
     </div>
 
-    <div class="flex items-center gap-1.5" role="radiogroup" aria-label="Color de acento del CV">
+    <div class="flex items-center gap-2.5 sm:gap-3" role="radiogroup" aria-label="Color de acento del CV">
       {
         palettes.map((p) => (
           <button
@@ -189,9 +189,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
       const isActive = target === paletteId;
       btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
       if (isActive) {
-        btn.classList.add('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-900', 'scale-115');
+        btn.classList.add('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-950', 'scale-110');
       } else {
-        btn.classList.remove('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-900', 'scale-115');
+        btn.classList.remove('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-950', 'scale-110');
       }
     });
   }
