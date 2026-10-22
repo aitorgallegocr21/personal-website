@@ -1,5 +1,50 @@
 ---
+import { cvData } from '@/data/cv-data';
 import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Prepare deep-link registry for all certificates & degrees
+const docRegistry: Record<
+  string,
+  {
+    title: string;
+    subtitle: string;
+    url: string;
+    docs?: Array<{ title: string; url: string; type?: string }>;
+  }
+> = {};
+
+// 1. Technical Certificates
+cvData.certificates.forEach((cert) => {
+  const mainUrl = cert.documentUrl
+    ? `${baseUrl}${cert.documentUrl}`
+    : cert.documents?.[0]
+      ? `${baseUrl}${cert.documents[0].url}`
+      : '';
+  const docs = cert.documents?.map((d) => ({
+    title: d.title,
+    url: `${baseUrl}${d.url}`,
+    type: d.type,
+  }));
+
+  docRegistry[cert.id] = {
+    title: cert.title,
+    subtitle: `${cert.issuer} · ${cert.category}`,
+    url: mainUrl,
+    docs,
+  };
+});
+
+// 2. Education (CFGM SMR Degree)
+const smrEdu = cvData.education.find((e) => e.degree.includes('SMR') || e.documentUrl);
+if (smrEdu && smrEdu.documentUrl) {
+  docRegistry['gm-smr'] = {
+    title: smrEdu.degree,
+    subtitle: `${smrEdu.institution} · ${smrEdu.period}`,
+    url: `${baseUrl}${smrEdu.documentUrl}`,
+  };
+}
 ---
 
 <dialog
@@ -38,15 +83,15 @@ import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
 
       <!-- Action buttons -->
       <div class="flex items-center gap-2 shrink-0 self-end sm:self-auto">
-        <!-- Batch download all documents (visible when multiple docs exist) -->
+        <!-- Batch download all documents into a single ZIP (visible when multiple docs exist) -->
         <button
           id="cert-modal-download-all"
           type="button"
-          class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 hover:border-[var(--color-accent-border)] transition-all cursor-pointer"
-          title="Descargar todos los documentos en serie"
+          class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 hover:border-[var(--color-accent-border)] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Descargar todos los documentos en un archivo ZIP"
         >
           <Files class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-          <span id="cert-modal-download-all-text">Descargar todos</span>
+          <span id="cert-modal-download-all-text">Descargar todos (ZIP)</span>
         </button>
 
         <!-- Current Document Download -->
@@ -114,6 +159,9 @@ import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
   </div>
 </dialog>
 
+<!-- Client Deep-Link Dictionary -->
+<script id="doc-registry-data" type="application/json" set:html={JSON.stringify(docRegistry)} />
+
 <style>
   dialog:not([open]) {
     display: none !important;
@@ -124,6 +172,8 @@ import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
 </style>
 
 <script>
+  import JSZip from 'jszip';
+
   interface DocItem {
     title: string;
     url: string;
@@ -204,8 +254,11 @@ import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
     // Configure multi-document vs single-document view
     if (currentDocsList.length > 1) {
       if (modalNavContainer) modalNavContainer.classList.remove('hidden');
-      if (modalDownloadAll) modalDownloadAll.classList.remove('hidden');
-      if (modalDownloadAllText) modalDownloadAllText.textContent = `Descargar todos (${currentDocsList.length})`;
+      if (modalDownloadAll) {
+        modalDownloadAll.classList.remove('hidden');
+        modalDownloadAll.title = 'Descargar todos los documentos en un archivo ZIP';
+      }
+      if (modalDownloadAllText) modalDownloadAllText.textContent = `Descargar ZIP (${currentDocsList.length})`;
       if (modalCounterBadge) modalCounterBadge.classList.remove('hidden');
 
       // Populate tabs
@@ -261,6 +314,18 @@ import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
     if (modalDownloadAll) modalDownloadAll.classList.add('hidden');
     currentDocsList = [];
     document.body.classList.remove('overflow-hidden');
+
+    // Clean up query parameters from URL if present
+    try {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('doc') || url.searchParams.has('cert')) {
+        url.searchParams.delete('doc');
+        url.searchParams.delete('cert');
+        window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+      }
+    } catch {
+      // ignore
+    }
   }
 
   modalClose?.addEventListener('click', (e) => {
@@ -268,30 +333,69 @@ import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
     closeCertificateModal();
   });
 
-  // Batch download all documents sequentially
+  // Batch download all documents compressed into a single ZIP archive
   modalDownloadAll?.addEventListener('click', async () => {
     if (currentDocsList.length === 0) return;
-    const originalText = modalDownloadAllText?.textContent || 'Descargar todos';
-    if (modalDownloadAllText) modalDownloadAllText.textContent = 'Descargando...';
+    const originalText = modalDownloadAllText?.textContent || 'Descargar ZIP';
+    if (modalDownloadAllText) modalDownloadAllText.textContent = 'Generando ZIP...';
+    modalDownloadAll.disabled = true;
 
-    for (let i = 0; i < currentDocsList.length; i++) {
-      const doc = currentDocsList[i];
+    try {
+      const zip = new JSZip();
+      const currentTitle = modalTitle?.textContent?.trim() || 'Certificados';
+      const cleanFileName = `Certificados_${currentTitle.replace(/[^a-zA-Z0-9_\u00C0-\u017F-]/g, '_')}.zip`;
+
+      // Fetch all PDFs asynchronously
+      const fetchPromises = currentDocsList.map(async (doc) => {
+        const response = await fetch(doc.url);
+        if (!response.ok) {
+          throw new Error(`Error descargando documento: ${doc.url} (${response.statusText})`);
+        }
+        const blob = await response.blob();
+        let fileName = doc.url.split('/').pop() || `${doc.title}.pdf`;
+        try {
+          fileName = decodeURIComponent(fileName);
+        } catch {
+          // ignore
+        }
+        if (!fileName.toLowerCase().endsWith('.pdf')) {
+          fileName += '.pdf';
+        }
+        zip.file(fileName, blob);
+      });
+
+      await Promise.all(fetchPromises);
+
+      // Generate compressed zip archive
+      const zipBlob = await zip.generateAsync({
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 6 },
+      });
+
+      // Trigger single download prompt
+      const downloadUrl = URL.createObjectURL(zipBlob);
       const a = document.createElement('a');
-      a.href = doc.url;
-      a.download = doc.url.split('/').pop() || `${doc.title}.pdf`;
+      a.href = downloadUrl;
+      a.download = cleanFileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      if (i < currentDocsList.length - 1) {
-        await new Promise((r) => setTimeout(r, 400));
-      }
-    }
+      URL.revokeObjectURL(downloadUrl);
 
-    if (modalDownloadAllText) {
-      modalDownloadAllText.textContent = '¡Descargados!';
+      if (modalDownloadAllText) {
+        modalDownloadAllText.textContent = '¡ZIP Descargado!';
+      }
+    } catch (err) {
+      console.error('Error al empaquetar archivo ZIP:', err);
+      if (modalDownloadAllText) {
+        modalDownloadAllText.textContent = 'Error al generar';
+      }
+    } finally {
       setTimeout(() => {
         if (modalDownloadAllText) modalDownloadAllText.textContent = originalText;
-      }, 2000);
+        if (modalDownloadAll) modalDownloadAll.disabled = false;
+      }, 2500);
     }
   });
 
@@ -351,4 +455,33 @@ import { X, Download, FileText, ExternalLink, Files } from 'lucide-astro';
       openCertificateModal(url, title, subtitle, docs);
     }
   });
+
+  // Deep-link auto opener from URL params (?doc=<id> or ?cert=<id>)
+  function checkUrlDeepLink() {
+    try {
+      const docRegistryEl = document.getElementById('doc-registry-data');
+      if (!docRegistryEl || !docRegistryEl.textContent) return;
+      const registry = JSON.parse(docRegistryEl.textContent);
+
+      const params = new URLSearchParams(window.location.search);
+      const targetId = params.get('doc') || params.get('cert');
+      if (targetId && registry[targetId]) {
+        const item = registry[targetId];
+        openCertificateModal(
+          item.url,
+          item.title,
+          item.subtitle,
+          item.docs ? JSON.stringify(item.docs) : undefined
+        );
+      }
+    } catch (e) {
+      console.error('Error processing modal deep link:', e);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkUrlDeepLink);
+  } else {
+    checkUrlDeepLink();
+  }
 </script>
