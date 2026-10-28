@@ -577,26 +577,20 @@ export const cvData: ResumeData = {
   personalTraits: [
     {
       id: "organizacion-rigor",
-      title: "Organización y Rigor Metodológico",
-      description: "Estructuración metódica de flujos de trabajo, documentación precisa y entornos limpios y reproducibles.",
-      category: "virtud",
-    },
-    {
-      id: "disciplina-constancia",
-      title: "Disciplina y Constancia",
-      description: "Hábitos firmes de constancia y planificación trasladados a cada entrega técnica y reto profesional.",
+      title: "Organización y Orden Metódico",
+      description: "Priorizo el orden, la pulcritud y la organización sistemática en mi día a día, trasladándolo a flujos limpios y código predecible.",
       category: "virtud",
     },
     {
       id: "deporte-competicion",
       title: "Deporte y Resistencia Mental",
-      description: "Práctica activa de tenis (recreativo y competición amateur), entrenamiento de fuerza y running como base de foco y energía.",
+      description: "Practico tenis habitualmente (aficionado y competición), entreno fuerza y salgo a correr; una disciplina que me aporta foco y constancia.",
       category: "habito",
     },
     {
       id: "lectura-analitica",
-      title: "Lectura y Razonamiento Deductivo",
-      description: "Lector habitual de novela policíaca, misterio y ensayo; estímulo continuo de la atención al detalle y el análisis crítico.",
+      title: "Lectura y Razonamiento Analítico",
+      description: "Me apasiona la lectura, en especial la novela de misterio y policíaca, como estímulo continuo de la deducción lógica y el detalle.",
       category: "habito",
     },
   ],
