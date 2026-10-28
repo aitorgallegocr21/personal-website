@@ -1,6 +1,6 @@
 # Task 16.4: A4 Print Calibration, Multi-Palette Build & Verification
 
-**Status:** Pending  
+**Status:** Completed  
 **Objective:** Calibrate the final CV layout for exact 1-page A4 print compliance across all 6 color palettes, recompile static PDFs via headless Chromium, and verify zero regressions.
 
 ---
@@ -26,7 +26,7 @@
 ---
 
 ## 2. Documentation & Git Commit
-- [ ] Mark tasks completed in `docs/tasks/phase-16-cv-personal-profile-and-structure/`.
-- [ ] Update `docs/TASKS.md`.
-- [ ] Synchronize `README.md` and `README.es.md`.
-- [ ] Propose conventional git commit.
+- [x] Mark tasks completed in `docs/tasks/phase-16-cv-personal-profile-and-structure/`.
+- [x] Update `docs/TASKS.md`.
+- [x] Synchronize `README.md` and `README.es.md`.
+- [x] Propose conventional git commit.

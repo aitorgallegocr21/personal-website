@@ -1,6 +1,6 @@
 # Phase 16: CV Editorial Restructure, Personal Profile & Engineering Philosophy
 
-**Status:** In Progress  
+**Status:** Completed  
 **Branch:** `feat/phase-16-cv-personal-profile-and-structure`  
 **Core Mission:** Restructure the printable CV layout by promoting "Educación & Formación Reglada" to the top position of the main column (col 1, row 1) with expanded real academic modules, cascading Technical Experience and Featured Projects downward. Move the new human-centered "Aspectos Personales & Aptitudes" section to the right column under key certifications. Additionally, enrich the web portfolio with an "Engineering Philosophy & Work Approach" section. Ensure Single Source of Truth (SSOT) data architecture in `src/data/cv-data.ts`, strict typing in `src/types/resume.ts`, and millimeter-calibrated 1-page A4 print balance across all 6 color palettes.
 
@@ -54,4 +54,4 @@ COLUMNA PRINCIPAL (7 cols)          COLUMNA LATERAL (5 cols)
 - [x] **[16.1 SSOT Data Architecture: Enriched Education, Personal Traits & Engineering Philosophy](task-16.1-ssot-profile-and-philosophy.md)** — Model schemas in `src/types/resume.ts` and expand `cv-data.ts` with real academic curriculum details (DAM/SMR), personal traits, and philosophy.
 - [x] **[16.2 CV Layout Restructure: Education Promotion & Personal Profile Integration](task-16.2-cv-personal-profile-and-a4-restructure.md)** — Reorder `cv.astro` grid: move `CVEducation` to col 1 row 1, cascade tech experience and projects, integrate `CVPersonalProfile.astro` in col 2, and tune typography.
 - [x] **[16.3 Web Portfolio: Engineering Philosophy Component](task-16.3-web-engineering-philosophy-component.md)** — Implement `EngineeringPhilosophy.astro` in `src/components/portfolio/` and embed into `src/pages/index.astro`.
-- [ ] **[16.4 A4 Print Calibration, Multi-Palette Build & Verification](task-16.4-a4-calibration-and-multi-palette-build.md)** — Verify 1-page A4 print calibration across all 6 palettes, validate 0 TypeScript/Astro errors, and recompile static PDFs.
+- [x] **[16.4 A4 Print Calibration, Multi-Palette Build & Verification](task-16.4-a4-calibration-and-multi-palette-build.md)** — Verify 1-page A4 print calibration across all 6 palettes, validate 0 TypeScript/Astro errors, and recompile static PDFs.
