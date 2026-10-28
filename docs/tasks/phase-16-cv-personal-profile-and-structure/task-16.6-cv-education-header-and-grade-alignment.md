@@ -1,6 +1,6 @@
 # Task 16.6: CV Education Header Polish, Grade Placement & Tight Leading
 
-**Status:** Pending  
+**Status:** Completed  
 **Objective:** Refine the education card headers in `CVEducation.astro` to place average grades on the second line beside the institution, tighten line spacing, and maximize vertical room for technical syllabus bullets.
 
 ---
@@ -14,7 +14,7 @@
 ---
 
 ## 2. Verification Criteria
-- [ ] Average grades render cleanly on the second line right without line wraps.
-- [ ] Line-height between line 1 and line 2 is noticeably tight and compact.
-- [ ] Explanation bullets dedicate all space to technical skills without repetitive grade text.
-- [ ] `break-inside-avoid` preserved.
+- [x] Average grades render cleanly on the second line right without line wraps.
+- [x] Line-height between line 1 and line 2 is noticeably tight and compact.
+- [x] Explanation bullets dedicate all space to technical skills without repetitive grade text.
+- [x] `break-inside-avoid` preserved.
