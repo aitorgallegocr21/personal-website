@@ -98,6 +98,28 @@ export interface InterestItem {
   description: string;
 }
 
+export interface PersonalTrait {
+  id: string;
+  title: string;
+  description: string;
+  category?: 'virtud' | 'habito' | 'interes';
+  icon?: string;
+}
+
+export interface PhilosophyPrinciple {
+  id: string;
+  title: string;
+  description: string;
+  type: 'principle' | 'balance';
+  icon?: string;
+}
+
+export interface EngineeringPhilosophy {
+  title: string;
+  subtitle: string;
+  principles: PhilosophyPrinciple[];
+}
+
 export interface ResumeData {
   personal: PersonalInfo;
   about: {
@@ -112,4 +134,6 @@ export interface ResumeData {
   education: Education[];
   languages?: Language[];
   interests?: InterestItem[];
+  personalTraits?: PersonalTrait[];
+  engineeringPhilosophy?: EngineeringPhilosophy;
 }

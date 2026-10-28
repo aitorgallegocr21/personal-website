@@ -74,9 +74,10 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **🎴 Modern Bento Grid & Interactive Portrait:** 3D perspective tilt avatar card, real-time availability indicator, and GitHub/project direct links.
 - **📜 Multi-Document Credential & Deep-Linking Engine:** Integrated modal viewer supporting direct URL query deep-linking (`?doc=<id>`), module switcher, single PDF download, and single-click `.zip` batch archive generation via JSZip.
 - **✨ Accent Polish & Structured Footer:** Responsive 3-column footer with dynamic availability indicator, project card glow micro-interactions, illuminated tech chips, and non-overlapping status badges.
-- **📰 Editorial 2-Column CV Layout:** Modern magazine-inspired 2-column printable A4 layout with prominent interactive portfolio badge, prioritized software project cards with direct GitHub repository links, compact certification chips, complementary non-tech experience, and driver's license/technical English competencies.
+- **📰 Editorial 2-Column CV Layout:** Modern magazine-inspired 2-column printable A4 layout with prominent interactive portfolio badge, prioritized formal education (DAM with 9.2 average grade & SMR with 8.7) on the main column, technical experience, software projects with repository links, personal profile & virtues (organization, competitive tennis, reading), and driver's license/technical English competencies.
+- **🧠 Engineering Philosophy & Work Approach:** Dedicated portfolio section reflecting foundational systems mastery, deep curiosity over black-box abstractions, and a pragmatic balance preventing over-engineering while delivering real value.
 - **🖨️ Multi-Palette Headless PDF Build Engine & Dual-Action Print Bar:** Automated build-time generation of 100% deterministic A4 PDFs across all 6 color palettes via headless Chromium, paired with an interactive 1-click download button and an accessible print layout warning modal.
-- **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and authentic tennis coaching complementary experience.
+- **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and streamlined contact badges with anti-scraping defense.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
 ---

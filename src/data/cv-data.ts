@@ -28,7 +28,7 @@ export const cvData: ResumeData = {
   skills: [
     {
       category: "Lenguajes & Backend",
-      skills: ["Java (POO, Streams)", "Python", "SQL", "Spring Boot (Fundamentos)", "REST APIs"],
+      skills: ["Java (POO, Streams)", "Python", "SQL", "Spring Boot", "REST APIs"],
     },
     {
       category: "Frontend & Web",
@@ -40,7 +40,7 @@ export const cvData: ResumeData = {
     },
     {
       category: "Sistemas & Herramientas",
-      skills: ["Linux / Bash", "Git & GitHub", "Redes & SMR", "VS Code", "Obsidian"],
+      skills: ["Linux / Bash", "Git & GitHub", "Docker", "IntelliJ IDEA", "VS Code", "Postman"],
     },
   ],
 
@@ -186,18 +186,20 @@ export const cvData: ResumeData = {
       institution: "IES Juan Bosco (Alcázar de San Juan)",
       degree: "CFGS Desarrollo de Aplicaciones Multiplataforma (DAM)",
       period: "2025 - 2027 (En curso)",
-      grade: "Media 1º curso: 9,2",
+      grade: "Media: 9,2",
       details: [
-        "Nota media (1º curso): 9,2 · Backend Java, modularidad y SQL.",
+        "Especialización en desarrollo backend con Java: POO avanzada, colecciones, streams y persistencia relacional SQL.",
+        "Desarrollo de interfaces multiplataforma, arquitectura limpia, modularidad y control de versiones profesional con Git.",
       ],
     },
     {
       institution: "IES Juan Bosco (Alcázar de San Juan)",
       degree: "CFGM Sistemas Microinformáticos y Redes (SMR)",
       period: "2023 - 2025",
-      grade: "Media final: 8,7",
+      grade: "Media: 8,7",
       details: [
-        "Nota media final: 8,7 · Servidores Linux/Windows Server y redes.",
+        "Administración de servidores Linux y Windows Server, configuración de servicios de red (DNS, DHCP, SSH, VPN) y seguridad perimetral.",
+        "Mantenimiento y diagnóstico de infraestructura hardware, cableado estructurado y despliegue automatizado de sistemas.",
       ],
       documentUrl: "/docs/certificates/gm-smr/CertificadoSupletorioProvisional_L.O.E._Titulo_Sistemas_Microinformaticos_y_Redes.pdf",
     },
@@ -571,4 +573,80 @@ export const cvData: ResumeData = {
       description: "Lectura asidua de narrativa, novela negra y policiaca como fuente de concentración y desconexión.",
     },
   ],
+
+  personalTraits: [
+    {
+      id: "organizacion-rigor",
+      title: "Organización y Orden Metódico",
+      description: "Priorizo el orden, la pulcritud y la organización sistemática en mi día a día, trasladándolo a flujos limpios y código predecible.",
+      category: "virtud",
+    },
+    {
+      id: "deporte-competicion",
+      title: "Deporte y Resistencia Mental",
+      description: "Practico tenis habitualmente (aficionado y competición), entreno fuerza y salgo a correr; una disciplina que me aporta foco y constancia.",
+      category: "habito",
+    },
+    {
+      id: "lectura-analitica",
+      title: "Lectura y Razonamiento Analítico",
+      description: "Me apasiona la lectura, en especial la novela de misterio y policíaca, como estímulo continuo de la deducción lógica y el detalle.",
+      category: "habito",
+    },
+  ],
+
+  engineeringPhilosophy: {
+    title: "Filosofía de Ingeniería & Enfoque de Trabajo",
+    subtitle: "Criterio técnico, dominio de fundamentos y búsqueda continua de equilibrio pragmático.",
+    principles: [
+      {
+        id: "fundamentos-cajas-negras",
+        title: "Comprensión profunda sin cajas negras",
+        description: "Priorizo dominar la arquitectura interna, el ciclo de vida de procesos y la gestión de recursos a bajo nivel antes que confiar a ciegas en abstracciones prefabricadas.",
+        type: "principle",
+      },
+      {
+        id: "organizacion-orden-extremo",
+        title: "Organización rigurosa y orden sistemático",
+        description: "Foco absoluto en la pulcritud y el orden metódico. Estructuro el código, las dependencias y los flujos operativos con máxima precisión para eliminar el caos técnico y hacer el software predecible.",
+        type: "principle",
+      },
+      {
+        id: "rigor-optimizacion",
+        title: "Rigor metodológico y optimización",
+        description: "Mentalidad de ingeniería aplicada a especificaciones claras, tipado estricto y eliminación sistemática de desperdicio técnico.",
+        type: "principle",
+      },
+      {
+        id: "soberania-seguridad",
+        title: "Soberanía digital y seguridad por diseño",
+        description: "Postura activa en protección de datos, principio de menor privilegio y preferencia por soluciones auditables y de código abierto.",
+        type: "principle",
+      },
+      {
+        id: "aprendizaje-disciplinado",
+        title: "Aprendizaje continuo y estructurado",
+        description: "Asimilación rápida y sólida de nuevos paradigmas y estándares de arquitectura a partir de sus especificaciones formales.",
+        type: "principle",
+      },
+      {
+        id: "liderazgo-coordinacion-equipos",
+        title: "Liderazgo y organización de proyectos en equipo",
+        description: "Habilidad contrastada para estructurar grupos de trabajo, dinamizar la comunicación y organizar el avance de proyectos colectivos, validada en entregas del Grado Superior y en NTT DATA.",
+        type: "balance",
+      },
+      {
+        id: "equilibrio-pragmatico",
+        title: "Equilibrio pragmático y prevención de sobreingeniería",
+        description: "Vigilo activamente el coste de mantenimiento técnico para evitar el over-engineering, priorizando la entrega ágil de valor real en equipo.",
+        type: "balance",
+      },
+      {
+        id: "adaptabilidad-equipo",
+        title: "Adaptabilidad táctica en ecosistemas reales",
+        description: "Tolerancia constructiva ante sistemas heredados y plazos de negocio, combinando la excelencia técnica con la agilidad operativa.",
+        type: "balance",
+      },
+    ],
+  },
 };

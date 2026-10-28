@@ -21,29 +21,40 @@ const websiteUrl = cvData.personal.website;
       <div class="space-y-2.5 print:space-y-2">
         {education.map((edu) => (
           <article class="break-inside-avoid border-l-2 border-[var(--color-accent-border)] hover:border-[var(--color-accent)] pl-2.5 transition-colors print:border-[var(--color-accent-border)]">
-            <div class="flex items-baseline justify-between gap-1">
-              <div class="min-w-0">
-                {edu.documentUrl ? (
-                  <a
-                    href={`${websiteUrl}/?doc=gm-smr#trayectoria`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="font-bold text-[11px] text-zinc-900 inline hover:text-[var(--color-accent)] hover:underline"
-                    title="Ver titulación o certificado oficial de SMR en la web"
-                  >
-                    {edu.degree}
-                  </a>
-                ) : (
-                  <h3 class="font-bold text-[11px] text-zinc-900 inline">
-                    {edu.degree}
-                  </h3>
+            <div class="leading-snug">
+              <div class="flex items-baseline justify-between gap-1.5">
+                <div class="min-w-0">
+                  {edu.documentUrl ? (
+                    <a
+                      href={`${websiteUrl}/?doc=gm-smr#trayectoria`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-bold text-xs text-zinc-900 inline hover:text-[var(--color-accent)] hover:underline"
+                      title="Ver titulación o certificado oficial de SMR en la web"
+                    >
+                      {edu.degree}
+                    </a>
+                  ) : (
+                    <h3 class="font-bold text-xs text-zinc-900 inline">
+                      {edu.degree}
+                    </h3>
+                  )}
+                </div>
+                <span class="text-[10px] font-mono text-zinc-500 shrink-0">
+                  {edu.period}
+                </span>
+              </div>
+
+              <div class="flex items-baseline justify-between text-[10.5px] text-zinc-600 mt-0.5">
+                <span class="font-medium text-zinc-700">
+                  {edu.institution.replace(/\s*\(.*\)/, '')}
+                </span>
+                {edu.grade && (
+                  <span class="text-[10px] font-mono font-semibold text-[var(--color-accent-text)] bg-[var(--color-accent-subtle)] px-1.5 py-0.2 rounded border border-[var(--color-accent-border)] print:border-zinc-300 shrink-0">
+                    {edu.grade}
+                  </span>
                 )}
               </div>
-            </div>
-
-            <div class="flex items-center justify-between text-[10px] text-zinc-500 font-mono mt-0.5">
-              <span>{edu.institution.replace(/\s*\(.*\)/, '')}</span>
-              <span>{edu.period}</span>
             </div>
 
             {edu.details && edu.details.length > 0 && (
