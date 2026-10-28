@@ -12,18 +12,18 @@ const { personalTraits } = cvData;
 {
   personalTraits && personalTraits.length > 0 && (
     <section class="break-inside-avoid">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 print:mb-1.5 flex items-center gap-1.5">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 print:mb-2 flex items-center gap-1.5">
         <span class="w-1.5 h-3.5 rounded-xs bg-[var(--color-accent)] shrink-0" />
         <span>{title}</span>
       </h2>
 
-      <div class="space-y-2 print:space-y-1.5 text-[10.5px] leading-snug">
+      <div class="space-y-2.5 print:space-y-2 text-[10.5px]">
         {personalTraits.map((trait) => (
-          <div class="border-l-2 border-[var(--color-accent-border)] hover:border-[var(--color-accent)] pl-2 transition-colors print:border-[var(--color-accent-border)]">
-            <h3 class="font-bold text-zinc-900 text-[10.5px] leading-tight">
+          <div class="border-l-2 border-[var(--color-accent-border)] hover:border-[var(--color-accent)] pl-2.5 transition-colors print:border-[var(--color-accent-border)]">
+            <h3 class="font-bold text-zinc-900 text-[11px] print:text-[10.5px] leading-snug">
               {trait.title}
             </h3>
-            <p class="text-zinc-600 text-[10px] leading-tight mt-0.5">
+            <p class="text-zinc-600 text-[10.5px] print:text-[10px] leading-relaxed print:leading-snug mt-0.5">
               {trait.description}
             </p>
           </div>

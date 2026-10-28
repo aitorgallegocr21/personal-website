@@ -38,6 +38,7 @@ function findChromePath() {
     return process.env.PUPPETEER_EXECUTABLE_PATH;
   }
   const candidates = [
+    path.join(rootDir, 'chrome', 'linux-156.0.8078.73', 'chrome-linux64', 'chrome'),
     '/usr/bin/google-chrome',
     '/usr/bin/google-chrome-stable',
     '/usr/bin/chromium',
