@@ -1,28 +1,36 @@
-# Task 16.2: CV Layout Restructure: Personal Profile Component
+# Task 16.2: CV Layout Restructure: Education Promotion & Personal Profile Integration
 
 **Status:** Pending  
-**Objective:** Replace the non-tech complementary experience section in `/cv` with a dedicated, compact personal profile component (`CVPersonalProfile.astro`), respecting strict 1-page A4 vertical limits.
+**Objective:** Reconfigure the editorial grid in `/cv` by promoting `CVEducation` to column 1 row 1, cascading technical experience and projects, and embedding `CVPersonalProfile.astro` into column 2, maintaining strict 1-page A4 balance.
 
 ---
 
-## 1. Architectural Changes
+## 1. Grid Reordering in `src/pages/cv.astro`
 
-1. **Remove / Deactivate:**
-   - Retire `<CVExperience category="complementary" title="Otras Experiencias & Competencias" />` from `src/pages/cv.astro`.
-2. **Create `CVPersonalProfile.astro`:**
-   - Location: `src/components/cv/CVPersonalProfile.astro`
-   - Consumes `cvData.personalTraits` or `cvData.interests`.
-   - Title: *"Aspectos Personales & Aptitudes"* or *"Perfil Personal & Hábitos"*.
-   - Left accent pill bar (`bg-[var(--color-accent)]`).
-   - Clean, compact typography (`text-[10.5px]`, `leading-snug`, monospace tags if applicable).
-   - Display virtues (organización, constancia), habits (tenis competitivo, running, lectura analítica).
-3. **Column Balance & Symmetrical Layout:**
-   - Placed at the bottom of the left column (7 cols) in `src/pages/cv.astro`, directly under `CVProjects`.
-   - Must achieve baseline parity with the right column (`CVEducation` + `CVCertificates` + `CVCompetencies`).
+1. **Left Column (7 cols) — Technical & Academic Core:**
+   - **Row 1:** `<CVEducation />` *(Promoted to top position; displays DAM and SMR with enriched bullets and average grades)*.
+   - **Row 2:** `<CVExperience category="tech" title="Experiencia Técnica" />` *(Cascaded to second position)*.
+   - **Row 3:** `<CVProjects title="Proyectos Software Destacados" />` *(Cascaded to third position)*.
+2. **Right Column (5 cols) — Skills, Credentials & Personal Profile:**
+   - **Row 1:** `<CVSkills />` *(Tech stack & tools)*.
+   - **Row 2:** `<CVCertificates />` *(Key certifications & deep-linking)*.
+   - **Row 3:** `<CVPersonalProfile title="Aspectos Personales & Aptitudes" />` *(New component: organization, sports discipline, reading, attention to detail)*.
+   - **Row 4:** `<CVCompetencies title="Idiomas & Movilidad" />` *(Languages & driver's license)*.
 
 ---
 
-## 2. Verification Criteria
-- [ ] No hardcoded strings inside `CVPersonalProfile.astro`.
-- [ ] Visual preview matches the existing design system tokens (`--color-accent`, etc.).
-- [ ] Page break avoidance (`break-inside-avoid`) applied cleanly.
+## 2. Component Design (`CVPersonalProfile.astro`)
+
+- Location: `src/components/cv/CVPersonalProfile.astro`
+- Design language:
+  - Header with accent bar (`bg-[var(--color-accent)]`).
+  - Compact vertical footprint (`text-[10.5px]`, `leading-snug`, tight margins).
+  - Presentation of personal qualities (organización, constancia) alongside sporting discipline and reading habits.
+- Strict page-break avoidance (`break-inside-avoid`).
+
+---
+
+## 3. Verification Criteria
+- [ ] Visual harmony and baseline alignment between the 7-col and 5-col layouts.
+- [ ] Zero content loss in existing sections (experience and projects preserved intact).
+- [ ] Zero hardcoded data in components.
