@@ -64,7 +64,7 @@ const ogImageURL = new URL(image, canonicalURL);
     <script is:inline>
       (function () {
         try {
-          const PALETTES = ['emerald', 'sky', 'violet', 'rose', 'amber'];
+          const PALETTES = ['amber', 'emerald', 'teal', 'sky', 'slate', 'violet', 'rose'];
           const storedTheme = localStorage.getItem('portfolio-theme');
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           const theme = storedTheme === 'light' || storedTheme === 'dark'
@@ -72,7 +72,7 @@ const ogImageURL = new URL(image, canonicalURL);
             : (prefersDark ? 'dark' : 'light');
 
           const storedPalette = localStorage.getItem('portfolio-palette');
-          const todayIndex = new Date().getDay() % PALETTES.length;
+          const todayIndex = new Date().getDay(); // 0 (Domingo) - 6 (Sábado)
           const palette = storedPalette && PALETTES.includes(storedPalette)
             ? storedPalette
             : PALETTES[todayIndex];

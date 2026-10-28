@@ -12,7 +12,7 @@ const distDir = path.join(rootDir, 'dist');
 const publicCvDir = path.join(rootDir, 'public', 'cv');
 const distCvDir = path.join(distDir, 'cv');
 
-const PALETTES = ['emerald', 'slate', 'sky', 'violet', 'rose', 'monochrome'];
+const PALETTES = ['emerald', 'teal', 'sky', 'slate', 'violet', 'rose', 'amber', 'monochrome'];
 const DEFAULT_PALETTE = 'emerald';
 
 const MIME_TYPES = {

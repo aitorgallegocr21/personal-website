@@ -2,11 +2,13 @@
 import { Sun, Moon, Palette, Sparkles, Check } from 'lucide-astro';
 
 const palettes = [
-  { id: 'emerald', name: 'Emerald', color: '#10b981', label: 'Verde Tech' },
-  { id: 'sky', name: 'Sky', color: '#0284c7', label: 'Azul Cielo' },
-  { id: 'violet', name: 'Violet', color: '#8b5cf6', label: 'Violeta' },
-  { id: 'rose', name: 'Rose', color: '#f43f5e', label: 'Rosa Coral' },
-  { id: 'amber', name: 'Amber', color: '#f59e0b', label: 'Ámbar' },
+  { id: 'emerald', name: 'Emerald', color: '#10b981', label: 'Verde Tech', day: 'Lunes' },
+  { id: 'teal', name: 'Teal', color: '#14b8a6', label: 'Turquesa', day: 'Martes' },
+  { id: 'sky', name: 'Sky', color: '#0284c7', label: 'Azul Cielo', day: 'Miércoles' },
+  { id: 'slate', name: 'Slate', color: '#1e3a8a', label: 'Azul Marino', day: 'Jueves' },
+  { id: 'violet', name: 'Violet', color: '#8b5cf6', label: 'Violeta', day: 'Viernes' },
+  { id: 'rose', name: 'Rose', color: '#f43f5e', label: 'Rosa Coral', day: 'Sábado' },
+  { id: 'amber', name: 'Amber', color: '#f59e0b', label: 'Ámbar Cálido', day: 'Domingo' },
 ];
 ---
 
@@ -32,14 +34,14 @@ const palettes = [
     <!-- Palette Dropdown Popover -->
     <div
       id="palette-dropdown"
-      class="hidden absolute right-0 mt-2 w-60 rounded-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-2xl shadow-zinc-950/15 dark:shadow-zinc-950/60 p-2.5 z-50 text-xs font-medium"
+      class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-2xl shadow-zinc-950/15 dark:shadow-zinc-950/60 p-2.5 z-50 text-xs font-medium"
       role="menu"
     >
       <!-- Section: Modo dinámico -->
       <div class="px-2 py-1 flex items-center justify-between text-[10.5px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
         <span>Modo dinámico</span>
         <span class="text-[9.5px] px-1.5 py-0.2 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)] font-semibold border border-[var(--color-accent-border)]">
-          Recomendado
+          7 Días
         </span>
       </div>
 
@@ -78,27 +80,33 @@ const palettes = [
       <div class="my-2 border-t border-zinc-200/80 dark:border-zinc-800/80"></div>
 
       <!-- Section: Colores fijos -->
-      <div class="px-2 py-1 text-[10.5px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
-        Colores fijos
+      <div class="px-2 py-1 flex items-center justify-between text-[10.5px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+        <span>Colores fijos</span>
+        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 font-normal">7 paletas</span>
       </div>
 
-      <div class="space-y-1 mt-0.5">
+      <div class="space-y-1 mt-0.5 max-h-64 overflow-y-auto pr-0.5">
         {palettes.map((p) => (
           <button
             type="button"
-            class="palette-select-option w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white border border-transparent transition-all cursor-pointer"
+            class="palette-select-option group w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white border border-transparent transition-all cursor-pointer"
             data-palette-id={p.id}
             data-palette-label={p.label}
             role="menuitem"
           >
-            <span class="flex items-center gap-2.5">
+            <span class="flex items-center gap-2.5 min-w-0">
               <span
                 class="w-3.5 h-3.5 rounded-full shrink-0 shadow-xs ring-1 ring-black/10 dark:ring-white/10"
                 style={`background-color: ${p.color}`}
               ></span>
-              <span class="palette-option-label text-xs font-medium">{p.label}</span>
+              <span class="palette-option-label text-xs font-medium truncate">{p.label}</span>
             </span>
-            <Check class="palette-check-icon w-3.5 h-3.5 hidden text-[var(--color-accent)] stroke-[2.5]" data-check-id={p.id} />
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="text-[9.5px] font-mono text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+                {p.day}
+              </span>
+              <Check class="palette-check-icon w-3.5 h-3.5 hidden text-[var(--color-accent)] stroke-[2.5]" data-check-id={p.id} />
+            </div>
           </button>
         ))}
       </div>
@@ -119,12 +127,15 @@ const palettes = [
 </div>
 
 <script>
-  const PALETTES_DATA = [
-    { id: 'emerald', label: 'Verde Tech' },
-    { id: 'sky', label: 'Azul Cielo' },
-    { id: 'violet', label: 'Violeta' },
-    { id: 'rose', label: 'Rosa Coral' },
-    { id: 'amber', label: 'Ámbar' },
+  // Index 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+  const DAY_PALETTES = [
+    { id: 'amber', label: 'Ámbar Cálido', day: 'Domingo' },
+    { id: 'emerald', label: 'Verde Tech', day: 'Lunes' },
+    { id: 'teal', label: 'Turquesa', day: 'Martes' },
+    { id: 'sky', label: 'Azul Cielo', day: 'Miércoles' },
+    { id: 'slate', label: 'Azul Marino', day: 'Jueves' },
+    { id: 'violet', label: 'Violeta', day: 'Viernes' },
+    { id: 'rose', label: 'Rosa Coral', day: 'Sábado' },
   ];
 
   function initThemeEngine() {
@@ -140,8 +151,8 @@ const palettes = [
     const checkIcons = document.querySelectorAll('.palette-check-icon');
 
     function getTodayPalette() {
-      const todayIndex = new Date().getDay() % PALETTES_DATA.length;
-      return PALETTES_DATA[todayIndex];
+      const todayIndex = new Date().getDay(); // 0 (Domingo) - 6 (Sábado)
+      return DAY_PALETTES[todayIndex];
     }
 
     function syncPaletteUI(currentPalette: string | null, isAuto: boolean) {
@@ -170,7 +181,7 @@ const palettes = [
           autoCheckContainer.classList.remove('hidden');
         }
         if (autoStatusText) {
-          autoStatusText.textContent = `Activa · Hoy: ${today.label}`;
+          autoStatusText.textContent = `Activa · Hoy: ${today.label} (${today.day})`;
           autoStatusText.className = 'text-[10.5px] font-semibold text-[var(--color-accent)] truncate';
         }
 
@@ -293,7 +304,7 @@ const palettes = [
     paletteOptions.forEach((btn) => {
       btn.addEventListener('click', () => {
         const selected = btn.getAttribute('data-palette-id');
-        if (selected && PALETTES_DATA.some((p) => p.id === selected)) {
+        if (selected && DAY_PALETTES.some((p) => p.id === selected)) {
           document.documentElement.setAttribute('data-palette', selected);
           localStorage.setItem('portfolio-palette', selected);
           syncPaletteUI(selected, false);
@@ -315,7 +326,7 @@ const palettes = [
 
     // Initial state sync: default to live rotation if no valid stored preference
     const currentStored = localStorage.getItem('portfolio-palette');
-    const isAuto = !currentStored || currentStored === 'auto' || !PALETTES_DATA.some((p) => p.id === currentStored);
+    const isAuto = !currentStored || currentStored === 'auto' || !DAY_PALETTES.some((p) => p.id === currentStored);
     const activePalette = isAuto ? getTodayPalette().id : currentStored;
     document.documentElement.setAttribute('data-palette', activePalette);
     syncPaletteUI(activePalette, isAuto);
