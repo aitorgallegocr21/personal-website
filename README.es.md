@@ -77,7 +77,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **📰 Maquetación Editorial del CV a 2 Columnas:** Diseño editorial para impresión A4 en 2 columnas con insignia destacada hacia el portfolio interactivo, educación reglada (DAM con media 9,2 y SMR con 8,7) en cabecera principal, proyectos de software con enlaces a repositorios GitHub, certificaciones clave, bloque de aspectos personales & virtudes humanas (organización, tenis de competición, lectura), e idiomas/permiso B.
 - **🧠 Filosofía de Ingeniería & Enfoque de Trabajo:** Sección dedicada en el portfolio web que refleja el criterio técnico, el dominio de fundamentos sin cajas negras y el equilibrio pragmático orientado a evitar la sobreingeniería y maximizar la entrega de valor.
 - **🖨️ Motor Headless de PDFs Multi-Paleta & Barra Dual de Impresión:** Compilación automatizada en build de PDFs A4 deterministas para las 6 paletas de color con Chromium headless, descarga directa en 1 clic y modal accesible de recomendación de formato para impresión.
-- **📐 Retrato Editorial & Columna de Contacto:** Insignia de retrato rectangular en proporción nativa, encabezado estructurado `// CONTACTO` con icono telefónico alineado y activación de clases particulares de tenis en experiencia complementaria.
+- **📐 Retrato Editorial & Columna de Contacto:** Insignia de retrato rectangular en proporción nativa, encabezado estructurado `// CONTACTO` con icono telefónico alineado e insignias de contacto optimizadas con defensa anti-scraping.
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 
 ---

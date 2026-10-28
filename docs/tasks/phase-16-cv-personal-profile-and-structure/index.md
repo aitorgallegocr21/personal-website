@@ -1,6 +1,6 @@
 # Phase 16: CV Editorial Restructure, Personal Profile & Engineering Philosophy
 
-**Status:** In Progress  
+**Status:** Completed  
 **Branch:** `feat/phase-16-cv-personal-profile-and-structure`  
 **Core Mission:** Restructure the printable CV layout by promoting "Educación & Formación Reglada" to the top position of the main column (col 1, row 1) with expanded real academic modules, cascading Technical Experience and Featured Projects downward. Move the new human-centered "Aspectos Personales & Aptitudes" section to the right column with authentic personal tone and condensed density. Add an "Engineering Philosophy & Work Approach" section to the web portfolio with a direct navbar link, and reflect extreme organization and collaborative team leadership. Ensure Single Source of Truth (SSOT) data architecture in `src/data/cv-data.ts`, strict typing in `src/types/resume.ts`, and millimeter-calibrated 1-page A4 print balance across all 6 color palettes.
 
@@ -63,4 +63,4 @@ COLUMNA PRINCIPAL (7 cols)          COLUMNA LATERAL (5 cols)
 - [x] **[16.5 Web Navbar Link & Engineering Philosophy Content Expansion](task-16.5-web-navbar-and-philosophy-expansion.md)** — Add "Filosofía" to navbar header and enrich philosophy in SSOT with extreme organization and team project leadership.
 - [x] **[16.6 CV Education Header Polish, Grade Placement & Tight Leading](task-16.6-cv-education-header-and-grade-alignment.md)** — Place clean average grades on line 2 right beside institution, tighten interlineado, and maximize technical syllabus room.
 - [x] **[16.7 CV Personal Profile Condensation & Authentic Human Tone](task-16.7-cv-personal-profile-concise-and-authentic-tone.md)** — Condense traits text, reduce visual clutter, and adopt a personal, approachable voice for sports, reading, and methodical organization.
-- [ ] **[16.8 Final A4 Calibration, Multi-Palette Build & Phase 16 Verification](task-16.8-final-a4-calibration-and-multi-palette-verification.md)** — Recompile all 6 PDF palettes, verify strictly 1 page each, update documentation, and prepare for final push.
+- [x] **[16.8 Final A4 Calibration, Multi-Palette Build & Phase 16 Verification](task-16.8-final-a4-calibration-and-multi-palette-verification.md)** — Recompile all 6 PDF palettes, verify strictly 1 page each, update documentation, and prepare for final push.
