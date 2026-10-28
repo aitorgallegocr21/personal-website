@@ -1,15 +1,17 @@
 ---
 import { cvData } from '@/data/cv-data';
-import { Cpu, ShieldCheck, FileCode2, GraduationCap, Scale, Users2 } from 'lucide-astro';
+import { Cpu, ShieldCheck, FileCode2, GraduationCap, Scale, Users2, FolderTree, Users } from 'lucide-astro';
 
 const philosophy = cvData.engineeringPhilosophy;
 if (!philosophy) return null;
 
 const iconMap: Record<string, any> = {
   'fundamentos-cajas-negras': Cpu,
+  'organizacion-orden-extremo': FolderTree,
   'rigor-optimizacion': FileCode2,
   'soberania-seguridad': ShieldCheck,
   'aprendizaje-disciplinado': GraduationCap,
+  'liderazgo-coordinacion-equipos': Users,
   'equilibrio-pragmatico': Scale,
   'adaptabilidad-equipo': Users2,
 };

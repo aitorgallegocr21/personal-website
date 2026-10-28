@@ -612,6 +612,12 @@ export const cvData: ResumeData = {
         type: "principle",
       },
       {
+        id: "organizacion-orden-extremo",
+        title: "Organización rigurosa y orden sistemático",
+        description: "Foco absoluto en la pulcritud y el orden metódico. Estructuro el código, las dependencias y los flujos operativos con máxima precisión para eliminar el caos técnico y hacer el software predecible.",
+        type: "principle",
+      },
+      {
         id: "rigor-optimizacion",
         title: "Rigor metodológico y optimización",
         description: "Mentalidad de ingeniería aplicada a especificaciones claras, tipado estricto y eliminación sistemática de desperdicio técnico.",
@@ -628,6 +634,12 @@ export const cvData: ResumeData = {
         title: "Aprendizaje continuo y estructurado",
         description: "Asimilación rápida y sólida de nuevos paradigmas y estándares de arquitectura a partir de sus especificaciones formales.",
         type: "principle",
+      },
+      {
+        id: "liderazgo-coordinacion-equipos",
+        title: "Liderazgo y organización de proyectos en equipo",
+        description: "Habilidad contrastada para estructurar grupos de trabajo, dinamizar la comunicación y organizar el avance de proyectos colectivos, validada en entregas del Grado Superior y en NTT DATA.",
+        type: "balance",
       },
       {
         id: "equilibrio-pragmatico",
