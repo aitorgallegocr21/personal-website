@@ -28,7 +28,7 @@ export const cvData: ResumeData = {
   skills: [
     {
       category: "Lenguajes & Backend",
-      skills: ["Java (POO, Streams)", "Python", "SQL", "Spring Boot (Fundamentos)", "REST APIs"],
+      skills: ["Java (POO, Streams)", "Python", "SQL", "Spring Boot", "REST APIs"],
     },
     {
       category: "Frontend & Web",
@@ -40,7 +40,7 @@ export const cvData: ResumeData = {
     },
     {
       category: "Sistemas & Herramientas",
-      skills: ["Linux / Bash", "Git & GitHub", "Redes & SMR", "VS Code", "Obsidian"],
+      skills: ["Linux / Bash", "Git & GitHub", "Docker", "IntelliJ IDEA", "VS Code", "Postman"],
     },
   ],
 
