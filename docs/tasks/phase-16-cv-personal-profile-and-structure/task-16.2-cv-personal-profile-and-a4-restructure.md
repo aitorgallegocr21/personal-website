@@ -1,6 +1,6 @@
 # Task 16.2: CV Layout Restructure: Education Promotion & Personal Profile Integration
 
-**Status:** Pending  
+**Status:** Completed  
 **Objective:** Reconfigure the editorial grid in `/cv` by promoting `CVEducation` to column 1 row 1, cascading technical experience and projects, and embedding `CVPersonalProfile.astro` into column 2, maintaining strict 1-page A4 balance.
 
 ---
@@ -31,6 +31,6 @@
 ---
 
 ## 3. Verification Criteria
-- [ ] Visual harmony and baseline alignment between the 7-col and 5-col layouts.
-- [ ] Zero content loss in existing sections (experience and projects preserved intact).
-- [ ] Zero hardcoded data in components.
+- [x] Visual harmony and baseline alignment between the 7-col and 5-col layouts.
+- [x] Zero content loss in existing sections (experience and projects preserved intact).
+- [x] Zero hardcoded data in components.

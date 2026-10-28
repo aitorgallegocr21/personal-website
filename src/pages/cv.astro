@@ -1,11 +1,12 @@
 ---
 import PrintLayout from '@/layouts/PrintLayout.astro';
 import CVHeader from '@/components/cv/CVHeader.astro';
+import CVEducation from '@/components/cv/CVEducation.astro';
 import CVExperience from '@/components/cv/CVExperience.astro';
 import CVProjects from '@/components/cv/CVProjects.astro';
 import CVSkills from '@/components/cv/CVSkills.astro';
-import CVEducation from '@/components/cv/CVEducation.astro';
 import CVCertificates from '@/components/cv/CVCertificates.astro';
+import CVPersonalProfile from '@/components/cv/CVPersonalProfile.astro';
 import CVCompetencies from '@/components/cv/CVCompetencies.astro';
 import CVPrintBar from '@/components/cv/CVPrintBar.astro';
 ---
@@ -16,18 +17,18 @@ import CVPrintBar from '@/components/cv/CVPrintBar.astro';
 
     <!-- Editorial 2-Column Grid -->
     <div class="cv-editorial-grid grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-5 print:gap-4 items-start">
-      <!-- Main Column (7 cols): Tech Experience, Projects & Complementary Experience -->
+      <!-- Main Column (7 cols): Education, Tech Experience & Projects -->
       <div class="md:col-span-7 print:col-span-7 space-y-3.5 print:space-y-2">
+        <CVEducation />
         <CVExperience category="tech" title="Experiencia Técnica" />
         <CVProjects title="Proyectos Software Destacados" />
-        <CVExperience category="complementary" title="Otras Experiencias & Competencias" />
       </div>
 
-      <!-- Side Column (5 cols): Skills, Education, Certificates & Competencies -->
+      <!-- Side Column (5 cols): Skills, Certificates, Personal Profile & Competencies -->
       <div class="md:col-span-5 print:col-span-5 space-y-3.5 print:space-y-2">
         <CVSkills />
-        <CVEducation />
         <CVCertificates />
+        <CVPersonalProfile />
         <CVCompetencies />
       </div>
     </div>

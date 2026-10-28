@@ -52,6 +52,6 @@ COLUMNA PRINCIPAL (7 cols)          COLUMNA LATERAL (5 cols)
 ## 3. Tasks Breakdown
 
 - [x] **[16.1 SSOT Data Architecture: Enriched Education, Personal Traits & Engineering Philosophy](task-16.1-ssot-profile-and-philosophy.md)** — Model schemas in `src/types/resume.ts` and expand `cv-data.ts` with real academic curriculum details (DAM/SMR), personal traits, and philosophy.
-- [ ] **[16.2 CV Layout Restructure: Education Promotion & Personal Profile Integration](task-16.2-cv-personal-profile-and-a4-restructure.md)** — Reorder `cv.astro` grid: move `CVEducation` to col 1 row 1, cascade tech experience and projects, integrate `CVPersonalProfile.astro` in col 2, and tune typography.
+- [x] **[16.2 CV Layout Restructure: Education Promotion & Personal Profile Integration](task-16.2-cv-personal-profile-and-a4-restructure.md)** — Reorder `cv.astro` grid: move `CVEducation` to col 1 row 1, cascade tech experience and projects, integrate `CVPersonalProfile.astro` in col 2, and tune typography.
 - [ ] **[16.3 Web Portfolio: Engineering Philosophy Component](task-16.3-web-engineering-philosophy-component.md)** — Implement `EngineeringPhilosophy.astro` in `src/components/portfolio/` and embed into `src/pages/index.astro`.
 - [ ] **[16.4 A4 Print Calibration, Multi-Palette Build & Verification](task-16.4-a4-calibration-and-multi-palette-build.md)** — Verify 1-page A4 print calibration across all 6 palettes, validate 0 TypeScript/Astro errors, and recompile static PDFs.
