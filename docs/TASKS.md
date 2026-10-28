@@ -7,7 +7,7 @@
 ---
 
 ## Active Phase
-- *No active phase currently — Phase 15 completed. Ready for next instructions or branch merge.*
+- [ ] **[Phase 16: CV Personal Profile, Engineering Philosophy & Layout Restructure](tasks/phase-16-cv-personal-profile-and-structure/index.md)** — *Branch: `feat/phase-16-cv-personal-profile-and-structure`* (Replace complementary experience in CV with a personal virtues & habits profile, add an Engineering Philosophy & Work Approach section on the web portfolio, model SSOT schemas, and verify 1-page A4 print calibration across all 6 palettes).
 
 ---
 
