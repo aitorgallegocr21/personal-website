@@ -7,12 +7,11 @@
 ---
 
 ## Active Phase
-- *No active phase currently — Phase 16 completed. Ready for next instructions or branch merge.*
+- [ ] **[Phase 16: CV Editorial Restructure, Personal Profile & Engineering Philosophy](tasks/phase-16-cv-personal-profile-and-structure/index.md)** — *Branch: `feat/phase-16-cv-personal-profile-and-structure`* (Promote education to top of main column with tight grade alignment, condense personal traits with approachable human tone, add web navbar link to philosophy and expand with extreme organization & team leadership).
 
 ---
 
 ## Completed Phases (Archive & Changelog)
-- [x] **[Phase 16: CV Editorial Restructure, Personal Profile & Engineering Philosophy](tasks/phase-16-cv-personal-profile-and-structure/index.md)** — *Completed 2026-10-28* (Promoted education to top of main column with enriched DAM/SMR academic modules, replaced complementary experience with personal profile & habits component in right column, added web engineering philosophy section, extended SSOT schema, and confirmed strict 1-page A4 print calibration across all 6 palettes).
 - [x] **[Phase 15: External Links Polish, Interactive Modal Deep-Linking & Zip Download Engine](tasks/phase-15-cv-polish-deep-linking-and-zip-downloads/index.md)** — *Completed 2026-10-22* (CV Web button margin inset preventing PDF print clipping, bottom bar palette swatch spacing, credential & SMR degree URL deep-linking from CV to interactive modal viewer, and JSZip single-archive batch download).
 - [x] **[Phase 14: Editorial Balance, Contact Architecture & Symmetrical Bottom Rhythm](tasks/phase-14-editorial-balance-and-contact-polish/index.md)** — *Completed 2026-10-21* (Color-accented CONTACTO label, restored phone number rendering via local .env, vertically stacked GitHub and LinkedIn items, justified candidate bio summary, condensed complementary experience bullets, added Prompt Engineering certification for millimeter baseline parity with Languages & Mobility, and strict 1-page A4 PDF verification across all 6 palettes).
 - [x] **[Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](tasks/phase-13-multi-palette-pdf-build-and-editorial-cv/index.md)** — *Completed 2026-10-21* (Precompilación determinista de PDFs A4 en 6 paletas de color con alias canónico mediante Chromium headless en build, barra dual de descarga directa en 1 clic y botón de impresión con modal de aviso, retrato rectangular con bordes redondeados, encabezado CONTACTO alineado con icono Phone, activación de clases particulares de tenis en experiencia complementaria, sincronización de Google Fonts y verificación estricta de 1 página A4).
