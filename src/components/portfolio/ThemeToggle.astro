@@ -16,59 +16,91 @@ const palettes = [
     <button
       type="button"
       id="palette-menu-btn"
-      class="p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900/60 transition-colors inline-flex items-center justify-center cursor-pointer"
-      aria-label="Seleccionar paleta de acento"
+      class="group relative p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/60 dark:hover:bg-zinc-900/60 transition-colors inline-flex items-center justify-center cursor-pointer"
+      aria-label="Seleccionar estilo y paleta de acento"
       aria-haspopup="true"
       aria-expanded="false"
-      title="Cambiar color de acento"
+      title="Personalizar colores y estilo"
     >
-      <Palette class="w-4 h-4" />
+      <Palette class="w-4 h-4 transition-transform group-hover:scale-110" />
       <span
         id="palette-indicator-dot"
-        class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full border border-white dark:border-zinc-950 bg-[var(--color-accent)]"
+        class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full border border-white dark:border-zinc-950 bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent-glow)] transition-colors"
       ></span>
     </button>
 
     <!-- Palette Dropdown Popover -->
     <div
       id="palette-dropdown"
-      class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-950/10 dark:shadow-zinc-950/50 p-2 z-50 text-xs font-medium"
+      class="hidden absolute right-0 mt-2 w-60 rounded-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-2xl shadow-zinc-950/15 dark:shadow-zinc-950/60 p-2.5 z-50 text-xs font-medium"
       role="menu"
     >
-      <div class="px-2 py-1 text-[11px] font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-        Color de acento
+      <!-- Section: Modo dinámico -->
+      <div class="px-2 py-1 flex items-center justify-between text-[10.5px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+        <span>Modo dinámico</span>
+        <span class="text-[9.5px] px-1.5 py-0.2 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)] font-semibold border border-[var(--color-accent-border)]">
+          Recomendado
+        </span>
       </div>
 
-      <div class="space-y-1 py-1">
-        {palettes.map((p) => (
-          <button
-            type="button"
-            class="palette-select-option w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
-            data-palette-id={p.id}
-            role="menuitem"
-          >
-            <span class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full" style={`background-color: ${p.color}`}></span>
-              <span>{p.name}</span>
-            </span>
-            <Check class="palette-check-icon w-3.5 h-3.5 hidden text-[var(--color-accent)]" data-check-id={p.id} />
-          </button>
-        ))}
-      </div>
-
-      <div class="border-t border-zinc-200 dark:border-zinc-800/80 mt-1 pt-1">
+      <div class="mt-1">
         <button
           type="button"
           id="palette-auto-rotate-btn"
-          class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
+          class="w-full flex items-center justify-between p-2 rounded-xl border transition-all cursor-pointer group text-left"
           role="menuitem"
         >
-          <span class="flex items-center gap-2">
-            <Sparkles class="w-3.5 h-3.5 text-zinc-600 dark:text-zinc-400" />
-            <span>Rotación diaria</span>
-          </span>
-          <span id="auto-badge" class="hidden text-[10px] font-mono px-1.5 py-0.2 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Auto</span>
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div id="auto-icon-box" class="p-1.5 rounded-lg bg-[var(--color-accent-subtle)] text-[var(--color-accent)] shrink-0 transition-colors">
+              <Sparkles class="w-4 h-4" />
+            </div>
+            <div class="flex flex-col min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-xs text-zinc-900 dark:text-zinc-100">Rotación viva</span>
+                <span id="auto-live-indicator" class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
+                </span>
+              </div>
+              <span id="auto-status-text" class="text-[10.5px] text-zinc-500 dark:text-zinc-400 truncate">
+                Activa · Hoy: Verde Tech
+              </span>
+            </div>
+          </div>
+
+          <div id="auto-check-container" class="shrink-0 pl-1.5">
+            <Check class="w-4 h-4 text-[var(--color-accent)] stroke-[2.5]" />
+          </div>
         </button>
+      </div>
+
+      <!-- Divider -->
+      <div class="my-2 border-t border-zinc-200/80 dark:border-zinc-800/80"></div>
+
+      <!-- Section: Colores fijos -->
+      <div class="px-2 py-1 text-[10.5px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+        Colores fijos
+      </div>
+
+      <div class="space-y-1 mt-0.5">
+        {palettes.map((p) => (
+          <button
+            type="button"
+            class="palette-select-option w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white border border-transparent transition-all cursor-pointer"
+            data-palette-id={p.id}
+            data-palette-label={p.label}
+            role="menuitem"
+          >
+            <span class="flex items-center gap-2.5">
+              <span
+                class="w-3.5 h-3.5 rounded-full shrink-0 shadow-xs ring-1 ring-black/10 dark:ring-white/10"
+                style={`background-color: ${p.color}`}
+              ></span>
+              <span class="palette-option-label text-xs font-medium">{p.label}</span>
+            </span>
+            <Check class="palette-check-icon w-3.5 h-3.5 hidden text-[var(--color-accent)] stroke-[2.5]" data-check-id={p.id} />
+          </button>
+        ))}
       </div>
     </div>
   </div>
@@ -87,38 +119,128 @@ const palettes = [
 </div>
 
 <script>
-  const PALETTES = ['emerald', 'sky', 'violet', 'rose', 'amber'];
+  const PALETTES_DATA = [
+    { id: 'emerald', label: 'Verde Tech' },
+    { id: 'sky', label: 'Azul Cielo' },
+    { id: 'violet', label: 'Violeta' },
+    { id: 'rose', label: 'Rosa Coral' },
+    { id: 'amber', label: 'Ámbar' },
+  ];
 
   function initThemeEngine() {
     const themeBtn = document.getElementById('theme-toggle-btn');
     const paletteBtn = document.getElementById('palette-menu-btn');
     const paletteDropdown = document.getElementById('palette-dropdown');
     const autoRotateBtn = document.getElementById('palette-auto-rotate-btn');
-    const autoBadge = document.getElementById('auto-badge');
+    const autoStatusText = document.getElementById('auto-status-text');
+    const autoCheckContainer = document.getElementById('auto-check-container');
+    const autoLiveIndicator = document.getElementById('auto-live-indicator');
+    const autoIconBox = document.getElementById('auto-icon-box');
     const paletteOptions = document.querySelectorAll('.palette-select-option');
     const checkIcons = document.querySelectorAll('.palette-check-icon');
 
     function getTodayPalette() {
-      const todayIndex = new Date().getDay() % PALETTES.length;
-      return PALETTES[todayIndex];
+      const todayIndex = new Date().getDay() % PALETTES_DATA.length;
+      return PALETTES_DATA[todayIndex];
     }
 
     function syncPaletteUI(currentPalette: string | null, isAuto: boolean) {
-      checkIcons.forEach((icon) => {
-        const id = icon.getAttribute('data-check-id');
-        if (id === currentPalette) {
-          icon.classList.remove('hidden');
-        } else {
-          icon.classList.add('hidden');
-        }
-      });
+      const today = getTodayPalette();
 
-      if (autoBadge) {
-        if (isAuto) {
-          autoBadge.classList.remove('hidden');
-        } else {
-          autoBadge.classList.add('hidden');
+      if (isAuto) {
+        // --- LIVE ROTATION IS ACTIVE ---
+        autoRotateBtn?.classList.add(
+          'bg-[var(--color-accent-subtle)]',
+          'border-[var(--color-accent-border)]',
+          'shadow-xs'
+        );
+        autoRotateBtn?.classList.remove(
+          'hover:bg-zinc-100',
+          'dark:hover:bg-zinc-800',
+          'border-transparent'
+        );
+
+        if (autoIconBox) {
+          autoIconBox.className = 'p-1.5 rounded-lg bg-[var(--color-accent)] text-[var(--color-accent-contrast)] shrink-0 transition-colors shadow-xs';
         }
+        if (autoLiveIndicator) {
+          autoLiveIndicator.classList.remove('hidden');
+        }
+        if (autoCheckContainer) {
+          autoCheckContainer.classList.remove('hidden');
+        }
+        if (autoStatusText) {
+          autoStatusText.textContent = `Activa · Hoy: ${today.label}`;
+          autoStatusText.className = 'text-[10.5px] font-semibold text-[var(--color-accent)] truncate';
+        }
+
+        // Hide ALL checkmarks on individual static colors
+        checkIcons.forEach((icon) => icon.classList.add('hidden'));
+
+        // Clear active styles from static color buttons
+        paletteOptions.forEach((btn) => {
+          btn.classList.remove(
+            'bg-zinc-100',
+            'dark:bg-zinc-800/90',
+            'font-semibold',
+            'border-zinc-200',
+            'dark:border-zinc-700'
+          );
+          btn.classList.add('border-transparent');
+        });
+      } else {
+        // --- STATIC FIXED COLOR IS ACTIVE ---
+        autoRotateBtn?.classList.remove(
+          'bg-[var(--color-accent-subtle)]',
+          'border-[var(--color-accent-border)]',
+          'shadow-xs'
+        );
+        autoRotateBtn?.classList.add(
+          'hover:bg-zinc-100',
+          'dark:hover:bg-zinc-800',
+          'border-transparent'
+        );
+
+        if (autoIconBox) {
+          autoIconBox.className = 'p-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 shrink-0 transition-colors';
+        }
+        if (autoLiveIndicator) {
+          autoLiveIndicator.classList.add('hidden');
+        }
+        if (autoCheckContainer) {
+          autoCheckContainer.classList.add('hidden');
+        }
+        if (autoStatusText) {
+          autoStatusText.textContent = 'Pulsa para activar la rotación diaria';
+          autoStatusText.className = 'text-[10.5px] text-zinc-500 dark:text-zinc-400 truncate';
+        }
+
+        // Show checkmark ONLY on the selected static color
+        paletteOptions.forEach((btn) => {
+          const id = btn.getAttribute('data-palette-id');
+          const check = btn.querySelector('.palette-check-icon');
+          if (id === currentPalette) {
+            check?.classList.remove('hidden');
+            btn.classList.add(
+              'bg-zinc-100',
+              'dark:bg-zinc-800/90',
+              'font-semibold',
+              'border-zinc-200',
+              'dark:border-zinc-700'
+            );
+            btn.classList.remove('border-transparent');
+          } else {
+            check?.classList.add('hidden');
+            btn.classList.remove(
+              'bg-zinc-100',
+              'dark:bg-zinc-800/90',
+              'font-semibold',
+              'border-zinc-200',
+              'dark:border-zinc-700'
+            );
+            btn.classList.add('border-transparent');
+          }
+        });
       }
     }
 
@@ -167,11 +289,11 @@ const palettes = [
       }
     });
 
-    // Handle Palette Selection
+    // Handle Static Palette Selection
     paletteOptions.forEach((btn) => {
       btn.addEventListener('click', () => {
         const selected = btn.getAttribute('data-palette-id');
-        if (selected && PALETTES.includes(selected)) {
+        if (selected && PALETTES_DATA.some((p) => p.id === selected)) {
           document.documentElement.setAttribute('data-palette', selected);
           localStorage.setItem('portfolio-palette', selected);
           syncPaletteUI(selected, false);
@@ -181,20 +303,21 @@ const palettes = [
       });
     });
 
-    // Handle Auto / Daily Rotation
+    // Handle Live Rotation Activation
     autoRotateBtn?.addEventListener('click', () => {
       localStorage.removeItem('portfolio-palette');
       const daily = getTodayPalette();
-      document.documentElement.setAttribute('data-palette', daily);
-      syncPaletteUI(daily, true);
+      document.documentElement.setAttribute('data-palette', daily.id);
+      syncPaletteUI(daily.id, true);
       paletteDropdown?.classList.add('hidden');
       paletteBtn?.setAttribute('aria-expanded', 'false');
     });
 
-    // Initial state sync
+    // Initial state sync: default to live rotation if no valid stored preference
     const currentStored = localStorage.getItem('portfolio-palette');
-    const isAuto = !currentStored;
-    const activePalette = document.documentElement.getAttribute('data-palette') || (isAuto ? getTodayPalette() : currentStored);
+    const isAuto = !currentStored || currentStored === 'auto' || !PALETTES_DATA.some((p) => p.id === currentStored);
+    const activePalette = isAuto ? getTodayPalette().id : currentStored;
+    document.documentElement.setAttribute('data-palette', activePalette);
     syncPaletteUI(activePalette, isAuto);
   }
 
