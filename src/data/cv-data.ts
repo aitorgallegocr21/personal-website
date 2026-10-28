@@ -188,7 +188,8 @@ export const cvData: ResumeData = {
       period: "2025 - 2027 (En curso)",
       grade: "Media 1º curso: 9,2",
       details: [
-        "Nota media (1º curso): 9,2 · Backend Java, modularidad y SQL.",
+        "Nota media (1º curso): 9,2 / 10 · Especialización en backend Java, POO avanzada, colecciones y persistencia relacional SQL.",
+        "Desarrollo de interfaces de usuario multiplataforma, modularidad y control de versiones profesional con Git.",
       ],
     },
     {
@@ -197,7 +198,8 @@ export const cvData: ResumeData = {
       period: "2023 - 2025",
       grade: "Media final: 8,7",
       details: [
-        "Nota media final: 8,7 · Servidores Linux/Windows Server y redes.",
+        "Nota media final: 8,7 / 10 · Administración de servidores Linux y Windows Server, servicios de red (DNS, DHCP, SSH, VPN) y seguridad.",
+        "Diagnóstico y mantenimiento de infraestructura de hardware y despliegue automatizado de sistemas.",
       ],
       documentUrl: "/docs/certificates/gm-smr/CertificadoSupletorioProvisional_L.O.E._Titulo_Sistemas_Microinformaticos_y_Redes.pdf",
     },
@@ -571,4 +573,74 @@ export const cvData: ResumeData = {
       description: "Lectura asidua de narrativa, novela negra y policiaca como fuente de concentración y desconexión.",
     },
   ],
+
+  personalTraits: [
+    {
+      id: "organizacion-rigor",
+      title: "Organización y Rigor Metodológico",
+      description: "Estructuración metódica de flujos de trabajo, documentación precisa y entornos limpios y reproducibles.",
+      category: "virtud",
+    },
+    {
+      id: "disciplina-constancia",
+      title: "Disciplina y Constancia",
+      description: "Hábitos firmes de constancia y planificación trasladados a cada entrega técnica y reto profesional.",
+      category: "virtud",
+    },
+    {
+      id: "deporte-competicion",
+      title: "Deporte y Resistencia Mental",
+      description: "Práctica activa de tenis (recreativo y competición amateur), entrenamiento de fuerza y running como base de foco y energía.",
+      category: "habito",
+    },
+    {
+      id: "lectura-analitica",
+      title: "Lectura y Razonamiento Deductivo",
+      description: "Lector habitual de novela policíaca, misterio y ensayo; estímulo continuo de la atención al detalle y el análisis crítico.",
+      category: "habito",
+    },
+  ],
+
+  engineeringPhilosophy: {
+    title: "Filosofía de Ingeniería & Enfoque de Trabajo",
+    subtitle: "Criterio técnico, dominio de fundamentos y búsqueda continua de equilibrio pragmático.",
+    principles: [
+      {
+        id: "fundamentos-cajas-negras",
+        title: "Comprensión profunda sin cajas negras",
+        description: "Priorizo dominar la arquitectura interna, el ciclo de vida de procesos y la gestión de recursos a bajo nivel antes que confiar a ciegas en abstracciones prefabricadas.",
+        type: "principle",
+      },
+      {
+        id: "rigor-optimizacion",
+        title: "Rigor metodológico y optimización",
+        description: "Mentalidad de ingeniería aplicada a especificaciones claras, tipado estricto y eliminación sistemática de desperdicio técnico.",
+        type: "principle",
+      },
+      {
+        id: "soberania-seguridad",
+        title: "Soberanía digital y seguridad por diseño",
+        description: "Postura activa en protección de datos, principio de menor privilegio y preferencia por soluciones auditables y de código abierto.",
+        type: "principle",
+      },
+      {
+        id: "aprendizaje-disciplinado",
+        title: "Aprendizaje continuo y estructurado",
+        description: "Asimilación rápida y sólida de nuevos paradigmas y estándares de arquitectura a partir de sus especificaciones formales.",
+        type: "principle",
+      },
+      {
+        id: "equilibrio-pragmatico",
+        title: "Equilibrio pragmático y prevención de sobreingeniería",
+        description: "Vigilo activamente el coste de mantenimiento técnico para evitar el over-engineering, priorizando la entrega ágil de valor real en equipo.",
+        type: "balance",
+      },
+      {
+        id: "adaptabilidad-equipo",
+        title: "Adaptabilidad táctica en ecosistemas reales",
+        description: "Tolerancia constructiva ante sistemas heredados y plazos de negocio, combinando la excelencia técnica con la agilidad operativa.",
+        type: "balance",
+      },
+    ],
+  },
 };
