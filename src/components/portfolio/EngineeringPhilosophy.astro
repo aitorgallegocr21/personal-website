@@ -1,0 +1,101 @@
+---
+import { cvData } from '@/data/cv-data';
+import { Cpu, ShieldCheck, FileCode2, GraduationCap, Scale, Users2 } from 'lucide-astro';
+
+const philosophy = cvData.engineeringPhilosophy;
+if (!philosophy) return null;
+
+const iconMap: Record<string, any> = {
+  'fundamentos-cajas-negras': Cpu,
+  'rigor-optimizacion': FileCode2,
+  'soberania-seguridad': ShieldCheck,
+  'aprendizaje-disciplinado': GraduationCap,
+  'equilibrio-pragmatico': Scale,
+  'adaptabilidad-equipo': Users2,
+};
+
+const principles = philosophy.principles.filter((p) => p.type === 'principle');
+const balances = philosophy.principles.filter((p) => p.type === 'balance');
+---
+
+<section id="filosofia" class="py-12 sm:py-16 scroll-mt-20">
+  <div class="mb-8 sm:mb-10">
+    <div class="inline-flex items-center gap-2 font-mono text-xs text-[var(--color-accent)] font-semibold tracking-wider uppercase mb-1">
+      <span>// Filosofía &amp; Enfoque de Trabajo</span>
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+      {philosophy.title}
+    </h2>
+    <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-1 max-w-2xl">
+      {philosophy.subtitle}
+    </p>
+  </div>
+
+  <div class="space-y-8">
+    <!-- Bloque 1: Principios Técnicos Fundamentales -->
+    <div>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
+        <h3 class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+          Principios Técnicos Fundamentales
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {principles.map((p) => {
+          const Icon = iconMap[p.id] || Cpu;
+          return (
+            <article class="p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] transition-all duration-200 group">
+              <div class="flex items-start gap-3.5">
+                <div class="w-9 h-9 rounded-lg bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)] text-[var(--color-accent)] flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+                  <Icon class="w-4 h-4" />
+                </div>
+                <div class="min-w-0 flex-1">
+                  <h4 class="text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-[var(--color-accent)] transition-colors">
+                    {p.title}
+                  </h4>
+                  <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mt-1.5">
+                    {p.description}
+                  </p>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Bloque 2: Equilibrio Pragmático & Trabajo en Equipo -->
+    <div>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
+        <h3 class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+          Equilibrio Pragmático &amp; Entrega de Valor
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {balances.map((p) => {
+          const Icon = iconMap[p.id] || Scale;
+          return (
+            <article class="p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] transition-all duration-200 group">
+              <div class="flex items-start gap-3.5">
+                <div class="w-9 h-9 rounded-lg bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)] text-[var(--color-accent)] flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+                  <Icon class="w-4 h-4" />
+                </div>
+                <div class="min-w-0 flex-1">
+                  <h4 class="text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-[var(--color-accent)] transition-colors">
+                    {p.title}
+                  </h4>
+                  <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mt-1.5">
+                    {p.description}
+                  </p>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
