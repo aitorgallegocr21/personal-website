@@ -12,7 +12,7 @@ const distDir = path.join(rootDir, 'dist');
 const publicCvDir = path.join(rootDir, 'public', 'cv');
 const distCvDir = path.join(distDir, 'cv');
 
-const PALETTES = ['emerald', 'slate', 'sky', 'violet', 'rose', 'monochrome'];
+const PALETTES = ['emerald', 'teal', 'sky', 'slate', 'violet', 'rose', 'amber', 'monochrome'];
 const DEFAULT_PALETTE = 'emerald';
 
 const MIME_TYPES = {
@@ -38,6 +38,7 @@ function findChromePath() {
     return process.env.PUPPETEER_EXECUTABLE_PATH;
   }
   const candidates = [
+    path.join(rootDir, 'chrome', 'linux-156.0.8078.73', 'chrome-linux64', 'chrome'),
     '/usr/bin/google-chrome',
     '/usr/bin/google-chrome-stable',
     '/usr/bin/chromium',

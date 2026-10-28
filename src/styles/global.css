@@ -64,6 +64,27 @@
   --color-accent-contrast: #09090b;
 }
 
+/* --- Palette Overrides: Teal --- */
+:root[data-palette="teal"],
+[data-palette="teal"] {
+  --color-accent: #0d9488;
+  --color-accent-hover: #0f766e;
+  --color-accent-subtle: rgba(13, 148, 136, 0.12);
+  --color-accent-border: rgba(13, 148, 136, 0.25);
+  --color-accent-glow: rgba(13, 148, 136, 0.25);
+  --color-accent-contrast: #ffffff;
+}
+:root.dark[data-palette="teal"],
+:root[data-theme="dark"][data-palette="teal"],
+.dark [data-palette="teal"] {
+  --color-accent: #2dd4bf;
+  --color-accent-hover: #5eead4;
+  --color-accent-subtle: rgba(45, 212, 191, 0.15);
+  --color-accent-border: rgba(45, 212, 191, 0.25);
+  --color-accent-glow: rgba(45, 212, 191, 0.3);
+  --color-accent-contrast: #09090b;
+}
+
 /* --- Palette Overrides: Sky --- */
 :root[data-palette="sky"],
 [data-palette="sky"] {
