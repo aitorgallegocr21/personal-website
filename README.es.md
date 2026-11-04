@@ -79,6 +79,8 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **🧠 Filosofía de Ingeniería & Enfoque de Trabajo:** Sección dedicada en el portfolio web que refleja el criterio técnico, el dominio de fundamentos sin cajas negras y el equilibrio pragmático orientado a evitar la sobreingeniería y maximizar la entrega de valor.
 - **🖨️ Motor Headless de PDFs Multi-Paleta & Barra Dual de Impresión:** Compilación automatizada en build de PDFs A4 deterministas para las 6 paletas de color con Chromium headless, descarga directa en 1 clic y modal accesible de recomendación de formato para impresión.
 - **📐 Retrato Editorial & Columna de Contacto:** Insignia de retrato rectangular en proporción nativa, encabezado estructurado `// CONTACTO` con icono telefónico alineado e insignias de contacto optimizadas con defensa anti-scraping.
+- **🔍 Schema.org Enriquecido & SEO Automatizado:** Datos estructurados JSON-LD (`Person` y `ProfilePage`), `sitemap-index.xml` autogenerado con `@astrojs/sitemap` y directivas para motores de búsqueda en `robots.txt`.
+- **🧪 Suite Completa de Pruebas (Unitarias & E2E):** 59 tests unitarios con Vitest (integridad SSOT, cálculo de fechas, esquemas Zod, estado de skins) junto a 12 tests End-to-End en navegador real con Playwright (interacciones y contención de layout A4).
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 
 ---
@@ -98,6 +100,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **Lenguaje:** [TypeScript 5.x](https://www.typescriptlang.org/) (Modo estricto habilitado)
 - **Estilos:** [Tailwind CSS 4.x](https://tailwindcss.com/) con variables nativas CSS
 - **Calidad de Código & Validación:** ESLint (Flat Config), Prettier con plugin de Tailwind, esquemas runtime Zod y `@astrojs/check`
+- **Testing & SEO:** Vitest (Tests unitarios), Playwright (Tests E2E en navegador y calibración de impresión A4), `@astrojs/sitemap` (sitemap automatizado)
 - **Despliegue Continuo:** GitHub Pages automatizado vía GitHub Actions (`.github/workflows/deploy.yml`)
 
 ---
@@ -173,7 +176,8 @@ cp .env.example .env
 | `npm run check`          | Valida tipos TypeScript y diagnóstico en archivos `.astro` sin compilar.                                                     |
 | `npm run lint`           | Ejecuta ESLint (flat config) validando reglas TypeScript, Astro y accesibilidad JSX.                                         |
 | `npm run format`         | Verifica el formateo del código con Prettier y ordenamiento de clases Tailwind CSS.                                          |
-| `npm test`               | Ejecuta la suite de pruebas unitarias con Vitest (44 tests cubriendo SSOT, fechas, temas, fuentes locales y validación Zod). |
+| `npm test`               | Ejecuta la suite de pruebas unitarias con Vitest (59 tests cubriendo SSOT, fechas, temas, fuentes locales y validación Zod). |
+| `npm run test:e2e`       | Ejecuta la suite de pruebas End-to-End con Playwright (12 tests verificando interacciones y contención A4).                  |
 | `npm run build`          | Compila el bundle de producción estático en `/dist` tras verificar tipos y compilar PDFs headless.                           |
 | `npm run preview`        | Levanta un servidor local para previsualizar el contenido generado en `/dist`.                                               |
 

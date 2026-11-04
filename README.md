@@ -79,6 +79,8 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **🧠 Engineering Philosophy & Work Approach:** Dedicated portfolio section reflecting foundational systems mastery, deep curiosity over black-box abstractions, and a pragmatic balance preventing over-engineering while delivering real value.
 - **🖨️ Multi-Palette Headless PDF Build Engine & Dual-Action Print Bar:** Automated build-time generation of 100% deterministic A4 PDFs across all 6 color palettes via headless Chromium, paired with an interactive 1-click download button and an accessible print layout warning modal.
 - **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and streamlined contact badges with anti-scraping defense.
+- **🔍 Rich Schema.org & Automated SEO:** JSON-LD structured data (`Person` & `ProfilePage`), auto-generated `sitemap-index.xml` via `@astrojs/sitemap`, and search crawler directives in `robots.txt`.
+- **🧪 Comprehensive Test Suite (Unit & E2E):** 59 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state) paired with 12 End-to-End browser tests via Playwright (live interactions, A4 print layout containment).
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
 ---
@@ -98,6 +100,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **Language:** [TypeScript 5.x](https://www.typescriptlang.org/) (Strict Mode enabled)
 - **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) with CSS Custom Properties
 - **Code Quality & Validation:** ESLint (Flat Config), Prettier with `prettier-plugin-tailwindcss`, Zod runtime schemas & `@astrojs/check`
+- **Testing & SEO:** Vitest (Unit testing), Playwright (E2E browser tests & A4 print calibration), `@astrojs/sitemap` (automated sitemap)
 - **Deployment:** GitHub Pages automated via GitHub Actions workflow (`.github/workflows/deploy.yml`)
 
 ---
@@ -173,7 +176,8 @@ cp .env.example .env
 | `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                                            |
 | `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                                         |
 | `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter.                                         |
-| `npm test`               | Runs the Vitest unit test suite (44 tests covering SSOT, dates, themes, self-hosted fonts, and Zod schemas). |
+| `npm test`               | Runs the Vitest unit test suite (59 tests covering SSOT, dates, themes, self-hosted fonts, and Zod schemas). |
+| `npm run test:e2e`       | Runs Playwright End-to-End test suite (12 tests verifying live interactions and A4 print containment).       |
 | `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                                   |
 | `npm run preview`        | Spins up a local server to preview production output from `dist/`.                                           |
 

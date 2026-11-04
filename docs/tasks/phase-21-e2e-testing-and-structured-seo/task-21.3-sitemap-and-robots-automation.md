@@ -1,6 +1,6 @@
 # Task 21.3: Integración de Sitemap y Robots Automatizados
 
-**Status:** Planned  
+**Status:** Completed  
 **Scope:** `package.json`, `astro.config.mjs`, `public/robots.txt`
 
 ---

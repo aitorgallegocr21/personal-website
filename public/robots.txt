@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aitorgallegocr21.github.io/personal-website/sitemap-index.xml

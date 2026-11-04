@@ -1,6 +1,6 @@
 # Phase 21: Testing E2E & SEO Enriquecido
 
-**Status:** Planned  
+**Status:** Completed  
 **Branch:** `feat/phase-21-e2e-testing-and-structured-seo`  
 **Core Mission:** Culminar la modernización técnica del proyecto integrando una suite completa de pruebas End-to-End con Playwright para verificar de forma desatendida la experiencia de usuario y la contención estricta A4 de los PDFs, incorporando datos estructurados Schema.org en JSON-LD para SEO enriquecido en motores de búsqueda, y automatizando la generación de `sitemap-index.xml` y `robots.txt`.
 
@@ -25,7 +25,7 @@
 
 - [x] **[Task 21.1: Automatización de Pruebas E2E con Playwright](task-21.1-playwright-e2e-automation.md)** — Configuración de `playwright.config.ts` y tests para portfolio interactivo y calibración A4 de `/cv`.
 - [x] **[Task 21.2: Marcado Estructurado Schema.org en JSON-LD](task-21.2-schema-org-json-ld.md)** — Creación del componente `JsonLd.astro` y validación con la herramienta de resultados enriquecidos.
-- [ ] **[Task 21.3: Integración de Sitemap y Robots Automatizados](task-21.3-sitemap-and-robots-automation.md)** — Configuración de `@astrojs/sitemap` en `astro.config.mjs` y archivo `public/robots.txt`.
+- [x] **[Task 21.3: Integración de Sitemap y Robots Automatizados](task-21.3-sitemap-and-robots-automation.md)** — Configuración de `@astrojs/sitemap` en `astro.config.mjs` y archivo `public/robots.txt`.
 
 ---
 

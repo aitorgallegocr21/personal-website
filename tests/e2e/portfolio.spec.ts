@@ -150,4 +150,21 @@ test.describe('Web Portfolio Interactive E2E', () => {
     expect(person.knowsAbout.length).toBeGreaterThan(0);
     expect(Array.isArray(person.alumniOf)).toBe(true);
   });
+
+  test('serves robots.txt with sitemap directive', async ({ page }) => {
+    const response = await page.goto('./robots.txt');
+    expect(response?.status()).toBe(200);
+
+    const body = await response?.text();
+    expect(body).toContain('User-agent: *');
+    expect(body).toContain('sitemap-index.xml');
+  });
+
+  test('generates valid and accessible sitemap-index.xml', async ({ page }) => {
+    const response = await page.goto('./sitemap-index.xml');
+    expect(response?.status()).toBe(200);
+
+    const body = await response?.text();
+    expect(body).toContain('sitemap');
+  });
 });
