@@ -96,7 +96,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **Core Framework:** [Astro 5.x](https://astro.build/) (Static Site Generation / SSG)
 - **Language:** [TypeScript 5.x](https://www.typescriptlang.org/) (Strict Mode enabled)
 - **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) with CSS Custom Properties
-- **Code Quality:** [Prettier](https://prettier.io/) with `prettier-plugin-tailwindcss` & `@astrojs/check`
+- **Code Quality & Validation:** ESLint (Flat Config), Prettier with `prettier-plugin-tailwindcss`, Zod runtime schemas & `@astrojs/check`
 - **Deployment:** GitHub Pages automated via GitHub Actions workflow (`.github/workflows/deploy.yml`)
 
 ---
@@ -165,16 +165,16 @@ cp .env.example .env
 
 ## 💻 Development Workflow & Scripts
 
-| Command                  | Action                                                                                          |
-| ------------------------ | ----------------------------------------------------------------------------------------------- |
-| `npm run dev`            | Starts local development server at `http://localhost:4321`.                                     |
-| `astro dev --background` | Runs development server in background mode.                                                     |
-| `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                               |
-| `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                            |
-| `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter.                            |
-| `npm test`               | Runs the Vitest unit test suite (32 tests covering SSOT, dates, themes, and self-hosted fonts). |
-| `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                      |
-| `npm run preview`        | Spins up a local server to preview production output from `dist/`.                              |
+| Command                  | Action                                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `npm run dev`            | Starts local development server at `http://localhost:4321`.                                                  |
+| `astro dev --background` | Runs development server in background mode.                                                                  |
+| `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                                            |
+| `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                                         |
+| `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter.                                         |
+| `npm test`               | Runs the Vitest unit test suite (44 tests covering SSOT, dates, themes, self-hosted fonts, and Zod schemas). |
+| `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                                   |
+| `npm run preview`        | Spins up a local server to preview production output from `dist/`.                                           |
 
 ---
 
