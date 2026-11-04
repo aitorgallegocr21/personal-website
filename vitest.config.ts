@@ -13,6 +13,7 @@ export default defineConfig({
       '@components': resolve(import.meta.dirname, './src/components'),
       '@layouts': resolve(import.meta.dirname, './src/layouts'),
       '@data': resolve(import.meta.dirname, './src/data'),
+      '@lib': resolve(import.meta.dirname, './src/lib'),
       '@types': resolve(import.meta.dirname, './src/types'),
       '@styles': resolve(import.meta.dirname, './src/styles'),
       '@utils': resolve(import.meta.dirname, './src/utils'),

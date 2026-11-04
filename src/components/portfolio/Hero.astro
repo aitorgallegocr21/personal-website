@@ -115,36 +115,24 @@ const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
 </section>
 
 <script>
-  const copyBtn = document.getElementById('hero-copy-email-btn');
-  const copyText = document.getElementById('hero-copy-text');
-  const copyIcon = document.getElementById('hero-copy-icon');
+  import { bindCopyButton } from '@/lib/clipboard';
 
-  if (copyBtn && copyText && copyIcon) {
-    const originalText = copyText.textContent || 'Copiar email';
-    const originalIcon = copyIcon.innerHTML;
+  function setupHeroCopyButton() {
+    const copyBtn = document.getElementById('hero-copy-email-btn');
+    const copyText = document.getElementById('hero-copy-text');
+    const copyIcon = document.getElementById('hero-copy-icon');
 
-    copyBtn.addEventListener('click', async () => {
-      const email = copyBtn.getAttribute('data-email');
-      if (!email) return;
-
-      try {
-        await navigator.clipboard.writeText(email);
-        copyText.textContent = '¡Copiado!';
-        copyBtn.style.borderColor = 'var(--color-accent)';
-        copyBtn.style.color = 'var(--color-accent)';
-        copyBtn.style.backgroundColor = 'var(--color-accent-subtle)';
-        copyIcon.innerHTML = `<svg class="w-4 h-4 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
-
-        setTimeout(() => {
-          copyText.textContent = originalText;
-          copyBtn.style.borderColor = '';
-          copyBtn.style.color = '';
-          copyBtn.style.backgroundColor = '';
-          copyIcon.innerHTML = originalIcon;
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy email:', err);
-      }
-    });
+    if (copyBtn && copyText && copyIcon) {
+      bindCopyButton(copyBtn, {
+        getText: () => copyBtn.getAttribute('data-email'),
+        labelElement: copyText,
+        iconElement: copyIcon,
+        successText: '¡Copiado!',
+        successIconHtml: `<svg class="w-4 h-4 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`,
+      });
+    }
   }
+
+  setupHeroCopyButton();
+  document.addEventListener('astro:after-swap', setupHeroCopyButton);
 </script>

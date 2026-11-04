@@ -1,6 +1,6 @@
 # Task 18.2: Desacoplamiento de Scripts a Módulos TypeScript en src/lib/
 
-**Status:** Ready  
+**Status:** Completed  
 **Scope:** `src/lib/theme-manager.ts`, `src/lib/modal-manager.ts`, `src/lib/clipboard.ts`, `src/components/portfolio/ThemeToggle.astro`, `src/components/portfolio/CertificateModal.astro`, `src/components/portfolio/ContactSection.astro`, `src/components/portfolio/Hero.astro`
 
 ---

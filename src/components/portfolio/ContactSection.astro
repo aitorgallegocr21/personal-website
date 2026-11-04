@@ -99,27 +99,20 @@ const { personal } = cvData;
 </section>
 
 <script>
-  const btn = document.getElementById('copy-email-btn');
-  const label = document.getElementById('copy-email-label');
-  if (btn && label) {
-    btn.addEventListener('click', async () => {
-      const email = btn.getAttribute('data-email') || '';
-      try {
-        await navigator.clipboard.writeText(email);
-        label.textContent = '¡Email copiado!';
-        btn.style.borderColor = 'var(--color-accent)';
-        btn.style.color = 'var(--color-accent)';
-        btn.style.backgroundColor = 'var(--color-accent-subtle)';
-        setTimeout(() => {
-          label.textContent = 'Copiar email';
-          btn.style.borderColor = '';
-          btn.style.color = '';
-          btn.style.backgroundColor = '';
-        }, 2000);
-      } catch {
-        label.textContent = 'Error al copiar';
-        setTimeout(() => { label.textContent = 'Copiar email'; }, 2000);
-      }
-    });
+  import { bindCopyButton } from '@/lib/clipboard';
+
+  function setupCopyButton() {
+    const btn = document.getElementById('copy-email-btn');
+    const label = document.getElementById('copy-email-label');
+    if (btn && label) {
+      bindCopyButton(btn, {
+        getText: () => btn.getAttribute('data-email'),
+        labelElement: label,
+        successText: '¡Email copiado!',
+      });
+    }
   }
+
+  setupCopyButton();
+  document.addEventListener('astro:after-swap', setupCopyButton);
 </script>
