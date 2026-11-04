@@ -137,3 +137,16 @@ export interface ResumeData {
   personalTraits?: PersonalTrait[];
   engineeringPhilosophy?: EngineeringPhilosophy;
 }
+
+export const VALID_PALETTES = [
+  'emerald',
+  'teal',
+  'sky',
+  'slate',
+  'violet',
+  'rose',
+  'amber',
+  'monochrome',
+] as const;
+
+export type ThemePalette = (typeof VALID_PALETTES)[number];

@@ -5,7 +5,7 @@ export const cvData: ResumeData = {
     name: "Aitor Gallego-Casilda Romero",
     title: "Desarrollador de Software Junior | Backend & Sistemas",
     email: "aitorgallegocr21@gmail.com",
-    phone: import.meta.env.PUBLIC_PHONE || undefined,
+    phone: import.meta.env?.PUBLIC_PHONE || undefined,
     location: "Herencia, Ciudad Real, España",
     website: "https://aitorgallegocr21.github.io/personal-website",
     github: "https://github.com/aitorgallegocr21",
