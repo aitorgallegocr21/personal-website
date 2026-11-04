@@ -23,7 +23,7 @@
 ## 2. Índice de Tareas
 
 - [x] **[Task 20.1: Definición de Tipos, Contratos y Registro de Skins](task-20.1-skin-contracts-and-types.md)** — Creación de `src/types/skin.ts` y `src/components/skins/registry.ts`.
-- [ ] **[Task 20.2: Modularización del Skin Bento Moderno](task-20.2-bento-modern-skin-modularization.md)** — Organización de los componentes actuales en `src/components/skins/bento/` e integración en el orquestador principal.
+- [x] **[Task 20.2: Modularización del Skin Bento Moderno](task-20.2-bento-modern-skin-modularization.md)** — Organización de los componentes actuales en `src/components/skins/bento/` e integración en el orquestador principal.
 - [ ] **[Task 20.3: Motor de Estado de Skin y Selector UI](task-20.3-skin-manager-and-ui-selector.md)** — Implementación de `skin-manager.ts` con persistencia en `localStorage`, inicialización zero-FOUC y selector visual accesible.
 
 ---
