@@ -1,7 +1,7 @@
 # Task 21.2: Marcado Estructurado Schema.org en JSON-LD
 
-**Status:** Planned  
-**Scope:** `src/components/seo/JsonLd.astro`, `src/layouts/BaseLayout.astro`
+**Status:** Completed  
+**Scope:** `src/components/seo/JsonLd.astro`, `src/layouts/BaseLayout.astro`, `tests/unit/schema-org.test.ts`
 
 ---
 

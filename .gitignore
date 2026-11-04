@@ -28,3 +28,7 @@ pnpm-debug.log*
 
 # local puppeteer browser binaries
 chrome/
+
+# test outputs
+test-results/
+playwright-report/
