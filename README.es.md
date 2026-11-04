@@ -71,6 +71,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 
 - **🎯 Datos SSOT Centralizados:** Biografía, catálogo de proyectos, stack tecnológico, experiencia y formación gestionados en un solo lugar.
 - **🎨 Theming Dinámico & Rotación Diaria:** 5 paletas de acento (Esmeralda, Sky, Violeta, Rosa, Ámbar) con rotación automática según el día de la semana, selector manual y modo oscuro/claro.
+- **🎭 Motor Arquitectónico Multi-Skin & Selector Visual:** Sistema modular de skins visuales intercambiables (`bento-modern` predeterminado) sobre el mismo SSOT `cvData`, con persistencia en `localStorage`, inicialización zero-FOUC y menú selector interactivo.
 - **🎴 Bento Grid Moderno & Retrato Interactivo:** Tarjeta de perfil con micro-interacción 3D tilt, indicador de disponibilidad en tiempo real y enlaces directos a código/demos.
 - **📜 Motor Modal Multi-Documental & Enlaces Profundos:** Visor interactivo con soporte de enlaces URL directos (`?doc=<id>`), navegación entre módulos formativos, descarga individual y empaquetado en lote en archivo `.zip` mediante JSZip.
 - **✨ Micro-interacciones con Acento & Footer Estructurado:** Pie de página responsivo en 3 columnas con indicador dinámico de disponibilidad, bordes con brillo ambiental reactivo a la paleta activa y badges de proyecto sin colisiones.

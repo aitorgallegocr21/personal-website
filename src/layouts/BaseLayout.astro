@@ -105,6 +105,9 @@ const ogImageURL = new URL(image, canonicalURL);
               ? storedPalette
               : PALETTES[todayIndex];
 
+          const storedSkin = localStorage.getItem('portfolio-skin');
+          const skin = storedSkin || 'bento-modern';
+
           const root = document.documentElement;
           if (theme === 'dark') {
             root.classList.add('dark');
@@ -115,10 +118,12 @@ const ogImageURL = new URL(image, canonicalURL);
           }
           root.setAttribute('data-theme', theme);
           root.setAttribute('data-palette', palette);
+          root.setAttribute('data-skin', skin);
         } catch (_e) {
           document.documentElement.classList.add('dark');
           document.documentElement.setAttribute('data-theme', 'dark');
           document.documentElement.setAttribute('data-palette', 'emerald');
+          document.documentElement.setAttribute('data-skin', 'bento-modern');
         }
       })();
     </script>

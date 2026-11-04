@@ -1,7 +1,7 @@
 # Task 20.3: Motor de Estado de Skin y Selector UI
 
-**Status:** Planned  
-**Scope:** `src/lib/skin-manager.ts`, `src/components/portfolio/ThemeToggle.astro`, `src/layouts/BaseLayout.astro`
+**Status:** Completed  
+**Scope:** `src/lib/skin-manager.ts`, `src/components/portfolio/ThemeToggle.astro`, `src/layouts/BaseLayout.astro`, `tests/unit/skin-manager.test.ts`
 
 ---
 

@@ -8,18 +8,13 @@
 
 ## Active Phase
 
-- [ ] **[Phase 20: Arquitectura del Motor Multi-Skin](tasks/phase-20-multi-skin-engine-architecture/index.md)** — _In Progress / Ready to Start_ (Modularización de la vista Bento actual como skin por defecto `bento-modern`, contratos de interfaz para futuros estilos visuales completos intercambiables, y selector con persistencia local).
-
----
-
-## Upcoming Phases (Roadmap)
-
-- [ ] **[Phase 21: Testing E2E & SEO Enriquecido](tasks/phase-21-e2e-testing-and-structured-seo/index.md)** — _Planned_ (Automatización de pruebas de navegación e integración con Playwright, calibración A4 desatendida, marcado Schema.org JSON-LD para Google y generación de sitemap/robots).
+- [ ] **[Phase 21: Testing E2E & SEO Enriquecido](tasks/phase-21-e2e-testing-and-structured-seo/index.md)** — _In Progress / Ready to Start_ (Automatización de pruebas de navegación e integración con Playwright, calibración A4 desatendida, marcado Schema.org JSON-LD para Google y generación de sitemap/robots).
 
 ---
 
 ## Completed Phases (Archive & Changelog)
 
+- [x] **[Phase 20: Arquitectura del Motor Multi-Skin](tasks/phase-20-multi-skin-engine-architecture/index.md)** — _Completed 2026-11-04_ (Modularización de la vista Bento actual como skin por defecto `bento-modern`, contratos formales de tipos, catálogo centralizado y selector UI integrado con persistencia en `localStorage`).
 - [x] **[Phase 19: Calidad de Código, Seguridad HTTP & Validación Zod](tasks/phase-19-code-quality-security-and-zod/index.md)** — _Completed 2026-11-04_ (ESLint flat config, Prettier con ordenamiento de clases Tailwind, hardening de cabeceras de seguridad en `public/_headers` y validación runtime de `cvData` con 44 tests unitarios y esquemas Zod).
 - [x] **[Phase 18: Testing Core, Desacoplamiento & Fuentes Locales](tasks/phase-18-testing-core-and-refactor/index.md)** — _Completed 2026-11-04_ (Testing unitario con Vitest para cálculos dinámicos de edad y consistencia SSOT con 32 tests, desacoplamiento de scripts clientes a `src/lib/` y auto-alojamiento tipográfico local con `@fontsource`).
 - [x] **[Phase 17: CV Editorial Balance, Header Polish & 7-Day Palette Synchronization](tasks/phase-17-cv-editorial-balance-and-right-column-polish/index.md)** — _Completed 2026-10-28_ (Descompresión de columna derecha del CV con paridad inferior de 0.6px, simplificación de cabecera a "Portfolio", rediseño del menú de estilos con rotación viva predeterminada y feedback visual sin tiks espurios, y unificación de 7 paletas para los 7 días de la semana sincronizadas entre Web y CV con 8 PDFs A4 en 1 página).
