@@ -1,6 +1,6 @@
 # Task 21.1: Automatización de Pruebas E2E con Playwright
 
-**Status:** Planned  
+**Status:** Completed  
 **Scope:** `playwright.config.ts`, `tests/e2e/portfolio.spec.ts`, `tests/e2e/cv-print.spec.ts`, `package.json`
 
 ---

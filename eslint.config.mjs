@@ -9,6 +9,8 @@ export default [
       'node_modules/**',
       'public/**',
       'chrome/**',
+      'test-results/**',
+      'playwright-report/**',
       '.vercel/**',
       '.netlify/**',
     ],
