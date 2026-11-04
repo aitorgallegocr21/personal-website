@@ -1,6 +1,6 @@
 # Task 19.2: Hardening de Cabeceras de Seguridad en public/_headers
 
-**Status:** Planned  
+**Status:** Completed  
 **Scope:** `public/_headers`
 
 ---

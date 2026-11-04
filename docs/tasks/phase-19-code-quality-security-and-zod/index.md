@@ -23,7 +23,7 @@
 ## 2. Índice de Tareas
 
 - [x] **[Task 19.1: Configuración de ESLint y Prettier para Astro y TypeScript](task-19.1-eslint-and-prettier-tooling.md)** — Creación de `eslint.config.mjs`, `.prettierrc.mjs` y scripts de validación `npm run lint` y `npm run format`.
-- [ ] **[Task 19.2: Hardening de Cabeceras de Seguridad en public/\_headers](task-19.2-security-headers-hardening.md)** — Configuración de cabeceras de seguridad modernas (HSTS, CSP, Frameguard, Referrer-Policy y Permissions-Policy).
+- [x] **[Task 19.2: Hardening de Cabeceras de Seguridad en public/\_headers](task-19.2-security-headers-hardening.md)** — Configuración de cabeceras de seguridad modernas (HSTS, CSP, Frameguard, Referrer-Policy y Permissions-Policy).
 - [ ] **[Task 19.3: Esquemas Zod y Validación de Datos SSOT](task-19.3-zod-runtime-schema-validation.md)** — Modelado del esquema Zod de `ResumeData` y test unitario de validación continua.
 
 ---
