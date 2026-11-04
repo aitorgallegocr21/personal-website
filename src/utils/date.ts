@@ -12,6 +12,10 @@
  * @returns Completed age in years
  */
 export function calculateAge(birthDateString: string, referenceDate: Date = new Date()): number {
+  if (!/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(birthDateString)) {
+    throw new Error(`Invalid birthDate string format (expected YYYY-MM-DD): "${birthDateString}"`);
+  }
+
   const [yearStr, monthStr, dayStr] = birthDateString.split('-');
   const birthYear = parseInt(yearStr, 10);
   const birthMonth = parseInt(monthStr, 10) - 1; // 0-indexed month

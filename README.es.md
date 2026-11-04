@@ -170,7 +170,8 @@ cp .env.example .env
 | `npm run dev` | Inicia el servidor de desarrollo local en `http://localhost:4321`. |
 | `astro dev --background` | Arranca el servidor de desarrollo en segundo plano. |
 | `npm run check` | Valida tipos TypeScript y diagnóstico en archivos `.astro` sin compilar. |
-| `npm run build` | Compila el bundle de producción estático en `/dist` tras verificar tipos. |
+| `npm test` | Ejecuta la suite de pruebas unitarias con Vitest (32 tests cubriendo SSOT, fechas, temas y fuentes locales). |
+| `npm run build` | Compila el bundle de producción estático en `/dist` tras verificar tipos y compilar PDFs headless. |
 | `npm run preview` | Levanta un servidor local para previsualizar el contenido generado en `/dist`. |
 
 ---

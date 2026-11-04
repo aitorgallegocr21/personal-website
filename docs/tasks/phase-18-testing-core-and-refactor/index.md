@@ -1,6 +1,6 @@
 # Phase 18: Testing Core, Desacoplamiento & Fuentes Locales
 
-**Status:** Ready to Start  
+**Status:** Completed  
 **Branch:** `feat/phase-18-testing-core-and-refactor`  
 **Core Mission:** Establecer los cimientos de fiabilidad, rendimiento y desacoplamiento del proyecto introduciendo la primera suite de pruebas automatizadas con Vitest, desacoplando la lógica de cliente embebida en componentes `.astro` hacia servicios TypeScript puros en `src/lib/`, y auto-alojando las fuentes tipográficas con `@fontsource` para eliminar dependencias de red externas y lograr FCP instantáneo y compilación de PDFs determinista y offline.
 
@@ -23,9 +23,9 @@
 
 ## 2. Índice de Tareas
 
-- [ ] **[Task 18.1: Configuración de Vitest y Tests Unitarios Core](task-18.1-vitest-setup-and-unit-tests.md)** — Configuración de `vitest.config.ts`, aliases de importación y tests para `src/utils/date.ts` y consistencia de `src/data/cv-data.ts`.
-- [ ] **[Task 18.2: Desacoplamiento de Scripts a Módulos TypeScript en src/lib/](task-18.2-client-scripts-decoupling.md)** — Creación de `theme-manager.ts`, `modal-manager.ts` y `clipboard.ts`, y refactorización limpia de los componentes `.astro` correspondientes.
-- [ ] **[Task 18.3: Auto-alojamiento Tipográfico con @fontsource](task-18.3-fontsource-local-typography.md)** — Instalación de `@fontsource/inter` y `@fontsource/jetbrains-mono`, importación en CSS global y eliminación de dependencias externas en `BaseLayout.astro`.
+- [x] **[Task 18.1: Configuración de Vitest y Tests Unitarios Core](task-18.1-vitest-setup-and-unit-tests.md)** — Configuración de `vitest.config.ts`, aliases de importación y tests para `src/utils/date.ts` y consistencia de `src/data/cv-data.ts`.
+- [x] **[Task 18.2: Desacoplamiento de Scripts a Módulos TypeScript en src/lib/](task-18.2-client-scripts-decoupling.md)** — Creación de `theme-manager.ts`, `modal-manager.ts` y `clipboard.ts`, y refactorización limpia de los componentes `.astro` correspondientes.
+- [x] **[Task 18.3: Auto-alojamiento Tipográfico con @fontsource](task-18.3-fontsource-local-typography.md)** — Instalación de `@fontsource/inter` y `@fontsource/jetbrains-mono`, importación en CSS global y eliminación de dependencias externas en `BaseLayout.astro`.
 
 ---
 

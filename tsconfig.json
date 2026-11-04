@@ -3,11 +3,13 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist", "chrome"],
   "compilerOptions": {
+    "types": ["node"],
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@data/*": ["./src/data/*"],
+      "@lib/*": ["./src/lib/*"],
       "@types/*": ["./src/types/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"]
