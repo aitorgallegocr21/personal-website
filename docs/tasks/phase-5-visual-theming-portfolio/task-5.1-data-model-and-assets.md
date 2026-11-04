@@ -1,13 +1,16 @@
 # Task 5.1: Data Model & Asset Infrastructure
 
 ## Objective
+
 Extend the Single Source of Truth (SSOT) architecture in `src/types/resume.ts` and `src/data/cv-data.ts` to support dynamic birthdate/age calculation, project images, current project status, certificate document URLs, and hospitality location mapping.
 
 ## Context & Artifacts
+
 - **Files:** `src/types/resume.ts`, `src/data/cv-data.ts`, `src/utils/date.ts` (or inline helper)
 - **Asset Directories:** `public/images/`, `public/images/projects/`, `public/docs/certificates/`
 
 ## Detailed Requirements
+
 1. **Schema Extensions (`src/types/resume.ts`):**
    - Add `birthDate: string` (`YYYY-MM-DD`) and `avatarUrl?: string` to `PersonalInfo`.
    - Add `image?: string`, `isCurrentProject?: boolean` to `Project`.
@@ -21,6 +24,7 @@ Extend the Single Source of Truth (SSOT) architecture in `src/types/resume.ts` a
    - Add metadata placeholders for projects, hospitality company name in Arenas de San Juan, and certificate documents.
 
 ## Acceptance Criteria
+
 - [x] TypeScript schemas compiled strictly with 0 `any`.
 - [x] Age calculates dynamically to 19 years old (and updates automatically every Feb 21).
 - [x] Asset directories prepared with `.gitkeep` files.

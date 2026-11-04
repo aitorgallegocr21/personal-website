@@ -84,10 +84,10 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 
 ## 🌐 Live Views & Routes
 
-| Route | Purpose | Key Capabilities |
-|---|---|---|
-| **`/`** | Interactive Web Portfolio | Bento showcase, project live/code links, tech timeline, credential viewer, responsive layout. |
-| **`/cv`** | Printable / PDF CV | Bold editorial 2-column layout, strict single A4 page fit, prominent web portfolio CTA, repository links, interactive color bar, ATS-friendly semantic markup. |
+| Route     | Purpose                   | Key Capabilities                                                                                                                                               |
+| --------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`/`**   | Interactive Web Portfolio | Bento showcase, project live/code links, tech timeline, credential viewer, responsive layout.                                                                  |
+| **`/cv`** | Printable / PDF CV        | Bold editorial 2-column layout, strict single A4 page fit, prominent web portfolio CTA, repository links, interactive color bar, ATS-friendly semantic markup. |
 
 ---
 
@@ -96,7 +96,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **Core Framework:** [Astro 5.x](https://astro.build/) (Static Site Generation / SSG)
 - **Language:** [TypeScript 5.x](https://www.typescriptlang.org/) (Strict Mode enabled)
 - **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) with CSS Custom Properties
-- **Code Quality:** [Prettier](https://prettier.io/) with `prettier-plugin-tailwindcss` & `@astrojs/check`
+- **Code Quality & Validation:** ESLint (Flat Config), Prettier with `prettier-plugin-tailwindcss`, Zod runtime schemas & `@astrojs/check`
 - **Deployment:** GitHub Pages automated via GitHub Actions workflow (`.github/workflows/deploy.yml`)
 
 ---
@@ -165,14 +165,16 @@ cp .env.example .env
 
 ## 💻 Development Workflow & Scripts
 
-| Command | Action |
-|---|---|
-| `npm run dev` | Starts local development server at `http://localhost:4321`. |
-| `astro dev --background` | Runs development server in background mode. |
-| `npm run check` | Runs `@astrojs/check` and TypeScript validation without building. |
-| `npm test` | Runs the Vitest unit test suite (32 tests covering SSOT, dates, themes, and self-hosted fonts). |
-| `npm run build` | Full production build (`astro check && astro build && npm run build:pdf`). |
-| `npm run preview` | Spins up a local server to preview production output from `dist/`. |
+| Command                  | Action                                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `npm run dev`            | Starts local development server at `http://localhost:4321`.                                                  |
+| `astro dev --background` | Runs development server in background mode.                                                                  |
+| `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                                            |
+| `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                                         |
+| `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter.                                         |
+| `npm test`               | Runs the Vitest unit test suite (44 tests covering SSOT, dates, themes, self-hosted fonts, and Zod schemas). |
+| `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                                   |
+| `npm run preview`        | Spins up a local server to preview production output from `dist/`.                                           |
 
 ---
 
@@ -181,7 +183,7 @@ cp .env.example .env
 To generate a crisp, ATS-compliant PDF resume from the `/cv` view:
 
 1. Start the server (`npm run dev`) or visit the deployed `/cv` page.
-2. Select your desired accent palette in the floating top bar (e.g. *Emerald*, *Sky*, *Slate*).
+2. Select your desired accent palette in the floating top bar (e.g. _Emerald_, _Sky_, _Slate_).
 3. Open your browser print dialog:
    - **Shortcut:** `Ctrl + P` (Windows/Linux) or `Cmd + P` (macOS).
 4. Apply the following print dialog settings:

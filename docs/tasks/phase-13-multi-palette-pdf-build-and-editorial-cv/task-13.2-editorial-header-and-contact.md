@@ -2,16 +2,18 @@
 
 **Parent Phase:** [Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](index.md)  
 **Status:** Completed  
-**Completed At:** 2026-10-21  
+**Completed At:** 2026-10-21
 
 ---
 
 ## 1. Intent & Scope
+
 Modernize `CVHeader.astro` to adopt a structured rectangular portrait badge, integrate a distinct `// CONTACTO` section header above contact information, align contact items with a missing `Phone` icon, and calibrate `about.cvSummary` for optimal visual balance.
 
 ---
 
 ## 2. Implementation Steps
+
 1. **Rectangular Avatar Badge:**
    - Change container from `w-[23mm] h-[23mm] rounded-full` to a portrait aspect ratio: `w-[26mm] sm:w-[28mm] h-[33mm] sm:h-[35mm] rounded-xl overflow-hidden`.
    - Maintain `object-cover object-top` to display candidate portrait clearly.
@@ -33,6 +35,7 @@ Modernize `CVHeader.astro` to adopt a structured rectangular portrait badge, int
 ---
 
 ## 3. Verification Criteria
+
 - Avatar displays with a crisp rectangular aspect ratio and rounded corners.
 - Contact list displays an aligned `Phone` icon and clean `// Contacto` label.
 - Zero visual overlapping with adjacent elements.

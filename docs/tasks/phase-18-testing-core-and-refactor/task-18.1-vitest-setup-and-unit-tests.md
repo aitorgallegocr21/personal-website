@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Configurar Vitest como el test runner unitario oficial del proyecto, respetando los aliases de TypeScript definidos en `tsconfig.json` (`@/*`), y escribir pruebas unitarias exhaustivas para la lógica matemática y de fechas (`calculateAge`) y para la integridad estructural de los datos SSOT (`cvData`).
 
 ---
@@ -33,6 +34,7 @@ Configurar Vitest como el test runner unitario oficial del proyecto, respetando 
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run test
 npm run check

@@ -17,7 +17,7 @@
 2. **Column Symmetry & Bottom Whitespace Tuning:**
    - Currently, the left column ends lower than the right column because `Otras Experiencias` contains multiple bullets and chips.
    - By condensing `clases-tenis` and `hosteleria` into 1 high-impact bullet each, the left column shrinks to align with the right column.
-   - Adjusting right column vertical spacing (`space-y-*`) or optionally promoting a key certification (e.g., *Prompt Engineering with GenAI Tools*) allows both columns to terminate at the exact same horizontal baseline, leaving a clean, intentional bottom breathing space on the A4 page.
+   - Adjusting right column vertical spacing (`space-y-*`) or optionally promoting a key certification (e.g., _Prompt Engineering with GenAI Tools_) allows both columns to terminate at the exact same horizontal baseline, leaving a clean, intentional bottom breathing space on the A4 page.
 
 ---
 

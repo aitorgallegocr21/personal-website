@@ -1,14 +1,17 @@
 # Task 1.2: Consolidate Comprehensive Professional Dossier
 
 ## Objective
+
 Structure and review `docs/DOSSIER_PROFESIONAL.md` as the complete historical source of professional truth, preserving detailed academic, work, coaching, and certification history.
 
 ## Context & Source Material
+
 - **Location:** `docs/DOSSIER_PROFESIONAL.md`
 - **Purpose:** Centralized, exhaustive knowledge base containing every detail of Aitor's professional path (including NTT Data training, DAM & SMR grades, tennis coaching, and hospitality background).
 - **Target Consumer:** Informs `src/data/cv-data.ts` selection.
 
 ## Detailed Requirements
+
 1. **Academic Background:**
    - IES Hermógenes Rodríguez (DAM - 9.2 grade average, SMR - 9.0 grade average).
 2. **Corporate & Technical Training:**
@@ -20,5 +23,6 @@ Structure and review `docs/DOSSIER_PROFESIONAL.md` as the complete historical so
    - Detailed descriptions, technical stacks, architecture choices, and impact metrics.
 
 ## Acceptance Criteria
+
 - [x] Comprehensive data documented with exact dates, titles, and technologies.
 - [x] Clear distinction between CV-ready highlights and extended portfolio notes.

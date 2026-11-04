@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Configurar Playwright para ejecutar pruebas de integración y comportamiento en navegadores reales de manera automática antes de cada despliegue, garantizando que ninguna regresión visual ni funcional pase inadvertida.
 
 ---
@@ -30,6 +31,7 @@ Configurar Playwright para ejecutar pruebas de integración y comportamiento en 
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run test:e2e
 npm run check

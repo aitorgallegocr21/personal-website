@@ -84,9 +84,9 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 
 ## 🌐 Vistas del Proyecto & Rutas
 
-| Ruta | Propósito | Características Clave |
-|---|---|---|
-| **`/`** | Portfolio Web Interactivo | Bento showcase, enlaces a demos/código, timeline profesional, visor de títulos y diseño totalmente responsivo. |
+| Ruta      | Propósito                        | Características Clave                                                                                                                                                                          |
+| --------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`/`**   | Portfolio Web Interactivo        | Bento showcase, enlaces a demos/código, timeline profesional, visor de títulos y diseño totalmente responsivo.                                                                                 |
 | **`/cv`** | CV Imprimible / Exportable a PDF | Diseño editorial a 2 columnas, ajuste estricto a 1 página A4, CTA destacado a portfolio web, enlaces a repositorios, selector de color para impresión y estructura semántica legible para ATS. |
 
 ---
@@ -96,7 +96,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **Framework:** [Astro 5.x](https://astro.build/) (Static Site Generation / SSG)
 - **Lenguaje:** [TypeScript 5.x](https://www.typescriptlang.org/) (Modo estricto habilitado)
 - **Estilos:** [Tailwind CSS 4.x](https://tailwindcss.com/) con variables nativas CSS
-- **Calidad de Código:** [Prettier](https://prettier.io/) con plugin de Tailwind y `@astrojs/check`
+- **Calidad de Código & Validación:** ESLint (Flat Config), Prettier con plugin de Tailwind, esquemas runtime Zod y `@astrojs/check`
 - **Despliegue Continuo:** GitHub Pages automatizado vía GitHub Actions (`.github/workflows/deploy.yml`)
 
 ---
@@ -165,14 +165,16 @@ cp .env.example .env
 
 ## 💻 Flujo de Desarrollo & Scripts
 
-| Comando | Acción |
-|---|---|
-| `npm run dev` | Inicia el servidor de desarrollo local en `http://localhost:4321`. |
-| `astro dev --background` | Arranca el servidor de desarrollo en segundo plano. |
-| `npm run check` | Valida tipos TypeScript y diagnóstico en archivos `.astro` sin compilar. |
-| `npm test` | Ejecuta la suite de pruebas unitarias con Vitest (32 tests cubriendo SSOT, fechas, temas y fuentes locales). |
-| `npm run build` | Compila el bundle de producción estático en `/dist` tras verificar tipos y compilar PDFs headless. |
-| `npm run preview` | Levanta un servidor local para previsualizar el contenido generado en `/dist`. |
+| Comando                  | Acción                                                                                                                       |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`            | Inicia el servidor de desarrollo local en `http://localhost:4321`.                                                           |
+| `astro dev --background` | Arranca el servidor de desarrollo en segundo plano.                                                                          |
+| `npm run check`          | Valida tipos TypeScript y diagnóstico en archivos `.astro` sin compilar.                                                     |
+| `npm run lint`           | Ejecuta ESLint (flat config) validando reglas TypeScript, Astro y accesibilidad JSX.                                         |
+| `npm run format`         | Verifica el formateo del código con Prettier y ordenamiento de clases Tailwind CSS.                                          |
+| `npm test`               | Ejecuta la suite de pruebas unitarias con Vitest (44 tests cubriendo SSOT, fechas, temas, fuentes locales y validación Zod). |
+| `npm run build`          | Compila el bundle de producción estático en `/dist` tras verificar tipos y compilar PDFs headless.                           |
+| `npm run preview`        | Levanta un servidor local para previsualizar el contenido generado en `/dist`.                                               |
 
 ---
 
@@ -181,7 +183,7 @@ cp .env.example .env
 Para generar un CV en PDF nítido y optimizado desde la ruta `/cv`:
 
 1. Inicia el servidor (`npm run dev`) o entra a la página desplegada en `/cv`.
-2. En la barra superior flotante, elige el acento cromático deseado (*Esmeralda*, *Sky*, *Pizarra*, etc.).
+2. En la barra superior flotante, elige el acento cromático deseado (_Esmeralda_, _Sky_, _Pizarra_, etc.).
 3. Abre el cuadro de diálogo de impresión del navegador:
    - **Atajo:** `Ctrl + P` (Windows/Linux) o `Cmd + P` (macOS).
 4. Configura los siguientes parámetros en la ventana de impresión:

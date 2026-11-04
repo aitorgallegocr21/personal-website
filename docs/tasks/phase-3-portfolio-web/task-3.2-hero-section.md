@@ -1,14 +1,17 @@
 # Task 3.2: Create Hero Section Component (Hero.astro)
 
 ## Objective
+
 Create `src/components/portfolio/Hero.astro` featuring candidate introduction, availability badge, full biographical narrative, and contact action buttons.
 
 ## Context & Design System
+
 - **Location:** `src/components/portfolio/Hero.astro`
 - **Data Source:** `cvData.personal` and `cvData.about` from `@data/cv-data`.
 - **Patterns:** Availability pulsing indicator and "Copy Email" interaction from `docs/DESIGN_SYSTEM.md`.
 
 ## Detailed Requirements
+
 1. **Status Badge:**
    - Pulsing green indicator (`Disponible para proyectos & prácticas` / `Available for work`).
 2. **Typography Hierarchy:**
@@ -21,5 +24,6 @@ Create `src/components/portfolio/Hero.astro` featuring candidate introduction, a
    - Social links to GitHub and LinkedIn.
 
 ## Acceptance Criteria
+
 - [x] Uses only SSOT data.
 - [x] Includes working copy-to-clipboard functionality with zero third-party dependencies.

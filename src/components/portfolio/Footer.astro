@@ -25,7 +25,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
         </a>
 
         <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-2 max-w-sm leading-relaxed">
-          {personal.title}. Enfoque en código estructurado, rendimiento web con arquitectura SSOT y desarrollo de soluciones backend fiables.
+          {personal.title}. Enfoque en código estructurado, rendimiento web con
+          arquitectura SSOT y desarrollo de soluciones backend fiables.
         </p>
 
         <!-- Dynamic Availability Indicator -->
@@ -34,7 +35,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
           </span>
-          <span class="text-zinc-800 dark:text-zinc-200 font-medium">Disponible para nuevos retos</span>
+          <span class="text-zinc-800 dark:text-zinc-200 font-medium">
+            Disponible para nuevos retos
+          </span>
         </div>
       </div>
 
@@ -156,10 +159,17 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
     <!-- Bottom Bar -->
     <div class="pt-6 border-t border-zinc-200/80 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400 text-center sm:text-left">
       <p>
-        &copy; {currentYear} <span class="text-zinc-700 dark:text-zinc-300 font-medium">{personal.name}</span>. Todos los derechos reservados.
+        &copy; {currentYear}{' '}
+        <span class="text-zinc-700 dark:text-zinc-300 font-medium">
+          {personal.name}
+        </span>
+        . Todos los derechos reservados.
       </p>
       <p class="font-mono text-[11px] text-zinc-500 dark:text-zinc-500">
-        Construido con <span class="text-zinc-700 dark:text-zinc-400">Astro</span> &amp; <span class="text-zinc-700 dark:text-zinc-400">Tailwind CSS</span> (SSOT).
+        Construido con{' '}
+        <span class="text-zinc-700 dark:text-zinc-400">Astro</span> &amp;{' '}
+        <span class="text-zinc-700 dark:text-zinc-400">Tailwind CSS</span>{' '}
+        (SSOT).
       </p>
     </div>
   </div>

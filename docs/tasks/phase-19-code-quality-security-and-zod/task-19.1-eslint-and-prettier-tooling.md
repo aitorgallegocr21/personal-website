@@ -1,11 +1,12 @@
 # Task 19.1: Configuración de ESLint y Prettier para Astro y TypeScript
 
-**Status:** Planned  
+**Status:** Completed  
 **Scope:** `eslint.config.mjs`, `.prettierrc.mjs`, `.prettierignore`, `package.json`
 
 ---
 
 ## 1. Objetivo Técnico
+
 Establecer una configuración moderna de ESLint (formato flat config) compatible con Astro, TypeScript y accesibilidad JSX, junto con Prettier y el plugin oficial de Tailwind CSS para el ordenamiento automático de utilidades.
 
 ---
@@ -31,6 +32,7 @@ Establecer una configuración moderna de ESLint (formato flat config) compatible
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run lint
 npm run format

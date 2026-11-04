@@ -1,11 +1,12 @@
 # Task 19.2: Hardening de Cabeceras de Seguridad en public/_headers
 
-**Status:** Planned  
+**Status:** Completed  
 **Scope:** `public/_headers`
 
 ---
 
 ## 1. Objetivo Técnico
+
 Blindar la seguridad de la entrega web estática en producción incorporando directivas y cabeceras de respuesta HTTP estándar de la industria, previniendo ataques de tipo Clickjacking, Cross-Site Scripting (XSS), MIME sniffing e interceptación no autorizada de APIs de hardware.
 
 ---
@@ -31,5 +32,6 @@ Blindar la seguridad de la entrega web estática en producción incorporando dir
 ---
 
 ## 3. Verificación
+
 - Revisión de sintaxis de `public/_headers`.
 - Comprobar que en local `npm run preview` o inspección de cabeceras no bloquea la carga de estilos, iconos ni imágenes locales.

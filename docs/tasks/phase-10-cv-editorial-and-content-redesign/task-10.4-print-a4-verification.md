@@ -4,6 +4,7 @@
 **Branch:** `feat/phase-10-cv-editorial-and-content-redesign`
 
 ## Context & Requirements
+
 A printable CV is useless if it exceeds 1 page and forces an accidental 2nd page with 2 orphan lines.
 
 1. **A4 Geometry Rigor:**
@@ -16,5 +17,6 @@ A printable CV is useless if it exceeds 1 page and forces an accidental 2nd page
    - Run `npm run check` and `npm run build` to verify 0 errors.
 
 ## Acceptance Criteria
+
 - [x] Clean 1-page A4 print export verified (tested via headless Chrome PDF export with exact 1-page output and zero orphan content).
 - [x] 0 errors in `npm run build` (0 errors, 0 warnings, 0 hints across 29 files).

@@ -2,16 +2,18 @@
 
 **Parent Phase:** [Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](index.md)  
 **Status:** Completed  
-**Completed At:** 2026-10-21  
+**Completed At:** 2026-10-21
 
 ---
 
 ## 1. Intent & Scope
+
 Calibrate the vertical rhythm, card gaps, and padding of `src/pages/cv.astro` and its child components to harmoniously integrate the new content (tennis coaching, rectangular portrait, `CONTACTO` header, and optional interests) within exactly 1 single A4 page without spillover or artificial compression.
 
 ---
 
 ## 2. Implementation Steps
+
 1. **Vertical Rhythm Tuning:**
    - Calibrate `space-y-*` classes in the left column (Tech Experience, Projects, Complementary Experience) and right column (Skills, Education, Certificates, Competencies).
    - Ensure the left column ends within 1-2 mm of the right column baseline.
@@ -26,6 +28,7 @@ Calibrate the vertical rhythm, card gaps, and padding of `src/pages/cv.astro` an
 ---
 
 ## 3. Verification Criteria
+
 - Exported PDF contains exactly 1 page.
 - Both columns terminate symmetrically.
 - `npm run check && npm run build` completes with 0 errors.

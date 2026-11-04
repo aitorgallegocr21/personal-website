@@ -1,7 +1,14 @@
 ---
 import { cvData } from '@/data/cv-data';
 import { calculateAge } from '@/utils/date';
-import { FileText, Github, Linkedin, Copy, MapPin, ArrowUpRight } from 'lucide-astro';
+import {
+  FileText,
+  Github,
+  Linkedin,
+  Copy,
+  MapPin,
+  ArrowUpRight,
+} from 'lucide-astro';
 import ProfilePortrait from '@/components/portfolio/ProfilePortrait.astro';
 
 const { personal, about } = cvData;
@@ -17,11 +24,15 @@ const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
       </span>
-      <span class="font-semibold text-zinc-900 dark:text-zinc-100">{age} años</span>
+      <span class="font-semibold text-zinc-900 dark:text-zinc-100">
+        {age} años
+      </span>
       <span class="text-zinc-400 dark:text-zinc-600">·</span>
       <span>Estudiante DAM &amp; Jr Backend</span>
       <span class="text-zinc-400 dark:text-zinc-600">·</span>
-      <span class="text-zinc-700 dark:text-zinc-300 font-semibold">Disponible</span>
+      <span class="text-zinc-700 dark:text-zinc-300 font-semibold">
+        Disponible
+      </span>
     </div>
 
     <!-- Main Info -->

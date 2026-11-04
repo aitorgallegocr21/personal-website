@@ -54,8 +54,12 @@ const imageSrc = avatarUrl
         <div class="w-16 h-16 rounded-full bg-zinc-300/80 dark:bg-zinc-800 flex items-center justify-center mb-3 text-[var(--color-accent)] shadow-inner">
           <User class="w-8 h-8" />
         </div>
-        <span class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{name}</span>
-        <span class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">{title}</span>
+        <span class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+          {name}
+        </span>
+        <span class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+          {title}
+        </span>
       </div>
 
       <!-- Glossy Sheen Overlay (Interactive Glare) -->
@@ -82,7 +86,9 @@ const imageSrc = avatarUrl
           </span>
           <span class="text-zinc-200 font-semibold">{age} años</span>
         </span>
-        <span class="text-[10px] text-[var(--color-accent)] font-medium">DAM · Jr Dev</span>
+        <span class="text-[10px] text-[var(--color-accent)] font-medium">
+          DAM · Jr Dev
+        </span>
       </div>
     </div>
   </div>
@@ -137,7 +143,8 @@ const imageSrc = avatarUrl
     const onMouseLeave = () => {
       if (rafId) cancelAnimationFrame(rafId);
       card.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      card.style.transform =
+        'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
       if (glare) {
         glare.style.opacity = '0';
       }

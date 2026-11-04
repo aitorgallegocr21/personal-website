@@ -1,14 +1,17 @@
 # Task 2.3: Create CV Experience Component (CVExperience.astro)
 
 ## Objective
+
 Build `src/components/cv/CVExperience.astro` displaying professional experience items that have `featuredInCV: true`, using anti-overflow print techniques.
 
 ## Context & Rules
+
 - **Location:** `src/components/cv/CVExperience.astro`
 - **Data Source:** `cvData.experience.filter(e => e.featuredInCV)`.
 - **Print Rule:** Every card must include `break-inside-avoid`.
 
 ## Detailed Requirements
+
 1. **Filtering:**
    - Filter experiences where `featuredInCV === true` (prioritizing NTT Data software internship and relevant technical roles).
 2. **Card Structure:**
@@ -20,6 +23,7 @@ Build `src/components/cv/CVExperience.astro` displaying professional experience 
    - Apply `break-inside-avoid` to the container of each job entry.
 
 ## Acceptance Criteria
+
 - [x] Only featured items render in CV view.
 - [x] No hardcoded text; consumes SSOT.
 - [x] Clean bullet alignment and typography.

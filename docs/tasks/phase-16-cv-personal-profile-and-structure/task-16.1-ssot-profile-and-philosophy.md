@@ -43,25 +43,26 @@
 ## 2. Data Population in `src/data/cv-data.ts`
 
 1. **CFGS DAM (Desarrollo de Aplicaciones Multiplataforma):**
-   - *Rendimiento:* Nota media 1º curso: 9,2 / 10.
-   - *Detalles ampliados:*
+   - _Rendimiento:_ Nota media 1º curso: 9,2 / 10.
+   - _Detalles ampliados:_
      - Programación Orientada a Objetos avanzada en Java (colecciones, streams, patrones de diseño) y persistencia relacional SQL (MariaDB, SQLite, JDBC).
      - Desarrollo de interfaces de usuario multiplataforma y entornos de trabajo reproducibles con Git.
 2. **CFGM SMR (Sistemas Microinformáticos y Redes):**
-   - *Rendimiento:* Nota media final: 8,7 / 10.
-   - *Detalles ampliados:*
+   - _Rendimiento:_ Nota media final: 8,7 / 10.
+   - _Detalles ampliados:_
      - Administración de sistemas operativos Linux y Windows Server, virtualización y configuración de servicios de red (DNS, DHCP, SSH, VPN).
      - Seguridad perimetral, diagnóstico de hardware y despliegue automatizado de sistemas.
 3. **Personal Traits (para el CV):**
-   - *Organización y rigor:* Metodología estructurada, documentación clara y entornos limpios.
-   - *Disciplina y constancia:* Hábitos de superación y enfoque continuado en la entrega.
-   - *Deporte y resistencia mental:* Tenis de competición amateur, entrenamiento de fuerza y running.
-   - *Lectura analítica:* Novela de misterio, policiaca y ensayo orientados a la deducción y la concentración.
+   - _Organización y rigor:_ Metodología estructurada, documentación clara y entornos limpios.
+   - _Disciplina y constancia:_ Hábitos de superación y enfoque continuado en la entrega.
+   - _Deporte y resistencia mental:_ Tenis de competición amateur, entrenamiento de fuerza y running.
+   - _Lectura analítica:_ Novela de misterio, policiaca y ensayo orientados a la deducción y la concentración.
 4. **Engineering Philosophy (para la Web):**
    - Principios técnicos fundamentales y equilibrio pragmático.
 
 ---
 
 ## 3. Verification Criteria
+
 - [x] `npm run check` passes with 0 errors.
 - [x] Data exported cleanly without `any` types.

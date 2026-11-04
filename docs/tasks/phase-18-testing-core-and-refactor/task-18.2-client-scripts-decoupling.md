@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Desacoplar la lógica cliente imperativa incrustada en etiquetas `<script>` dentro de archivos `.astro` hacia servicios y módulos TypeScript puros en `src/lib/`. Esto reduce el tamaño de los componentes, mejora la legibilidad, facilita la reutilización y permite someter la lógica a pruebas automáticas.
 
 ---
@@ -34,10 +35,12 @@ Desacoplar la lógica cliente imperativa incrustada en etiquetas `<script>` dent
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run check
 npm run build
 ```
+
 - Comprobar manualmente que el selector de tema y paleta cambia los colores en tiempo real sin recargar.
 - Comprobar que los modales de certificados abren y cierran limpiamente.
 - Comprobar que la copia de email/teléfono funciona con el mensaje de confirmación correspondiente.

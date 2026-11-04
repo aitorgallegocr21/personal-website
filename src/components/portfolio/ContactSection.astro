@@ -1,6 +1,13 @@
 ---
 import { cvData } from '@/data/cv-data';
-import { Mail, Copy, MapPin, Github, Linkedin, ArrowUpRight } from 'lucide-astro';
+import {
+  Mail,
+  Copy,
+  MapPin,
+  Github,
+  Linkedin,
+  ArrowUpRight,
+} from 'lucide-astro';
 
 const { personal } = cvData;
 ---
@@ -19,7 +26,6 @@ const { personal } = cvData;
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-
     <!-- Email Card -->
     <div class="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/40 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[var(--color-accent)]/50 hover:shadow-xl hover:shadow-[var(--color-accent-glow)]/10 hover:-translate-y-0.5">
       <div class="flex items-center gap-3 mb-4">
@@ -27,8 +33,12 @@ const { personal } = cvData;
           <Mail class="w-5 h-5 text-[var(--color-accent)]" />
         </div>
         <div>
-          <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Email directo</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">{personal.email}</p>
+          <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+            Email directo
+          </h3>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+            {personal.email}
+          </p>
         </div>
       </div>
 
@@ -59,8 +69,12 @@ const { personal } = cvData;
           <MapPin class="w-5 h-5 text-[var(--color-accent)]" />
         </div>
         <div>
-          <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Ubicación</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400">{personal.location}</p>
+          <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+            Ubicación
+          </h3>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400">
+            {personal.location}
+          </p>
         </div>
       </div>
 
@@ -69,7 +83,9 @@ const { personal } = cvData;
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--color-accent)]"></span>
         </span>
-        <span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">Disponible presencial / remoto</span>
+        <span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+          Disponible presencial / remoto
+        </span>
       </div>
 
       <div class="flex flex-wrap gap-3">

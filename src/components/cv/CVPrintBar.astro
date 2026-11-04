@@ -1,15 +1,47 @@
 ---
-import { Printer, ArrowLeft, Palette, Download, AlertTriangle, X } from 'lucide-astro';
+import {
+  Printer,
+  ArrowLeft,
+  Palette,
+  Download,
+  AlertTriangle,
+  X,
+} from 'lucide-astro';
 
 const palettes = [
-  { id: 'emerald', label: 'Tech Emerald (Verde)', color: '#059669', bgClass: 'bg-[#059669]' },
+  {
+    id: 'emerald',
+    label: 'Tech Emerald (Verde)',
+    color: '#059669',
+    bgClass: 'bg-[#059669]',
+  },
   { id: 'teal', label: 'Turquesa', color: '#0d9488', bgClass: 'bg-[#0d9488]' },
   { id: 'sky', label: 'Azul Cielo', color: '#0284c7', bgClass: 'bg-[#0284c7]' },
-  { id: 'slate', label: 'Azul Marino (Corporativo)', color: '#1e3a8a', bgClass: 'bg-[#1e3a8a]' },
+  {
+    id: 'slate',
+    label: 'Azul Marino (Corporativo)',
+    color: '#1e3a8a',
+    bgClass: 'bg-[#1e3a8a]',
+  },
   { id: 'violet', label: 'Violeta', color: '#7c3aed', bgClass: 'bg-[#7c3aed]' },
-  { id: 'rose', label: 'Rosa Coral', color: '#e11d48', bgClass: 'bg-[#e11d48]' },
-  { id: 'amber', label: 'Ámbar Cálido', color: '#d97706', bgClass: 'bg-[#d97706]' },
-  { id: 'monochrome', label: 'Monocromo (Blanco y Negro Clásico)', color: '#18181b', bgClass: 'bg-[#18181b] border border-zinc-600' },
+  {
+    id: 'rose',
+    label: 'Rosa Coral',
+    color: '#e11d48',
+    bgClass: 'bg-[#e11d48]',
+  },
+  {
+    id: 'amber',
+    label: 'Ámbar Cálido',
+    color: '#d97706',
+    bgClass: 'bg-[#d97706]',
+  },
+  {
+    id: 'monochrome',
+    label: 'Monocromo (Blanco y Negro Clásico)',
+    color: '#18181b',
+    bgClass: 'bg-[#18181b] border border-zinc-600',
+  },
 ];
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -34,29 +66,35 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
   <span class="h-4 w-px bg-zinc-800" aria-hidden="true"></span>
 
   <!-- Dynamic Palette Selector Swatches -->
-  <div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-zinc-950/70 border border-zinc-800/80" role="group" aria-label="Selector de paleta para imprimir o descargar PDF">
+  <div
+    class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-zinc-950/70 border border-zinc-800/80"
+    role="group"
+    aria-label="Selector de paleta para imprimir o descargar PDF"
+  >
     <div class="flex items-center gap-1 text-[11px] font-mono text-zinc-400 mr-1 hidden md:flex">
       <Palette class="w-3.5 h-3.5 text-zinc-400" />
       <span>Color PDF:</span>
     </div>
 
-    <div class="flex items-center gap-2.5 sm:gap-3" role="radiogroup" aria-label="Color de acento del CV">
-      {
-        palettes.map((p) => (
-          <button
-            type="button"
-            role="radio"
-            data-palette-target={p.id}
-            aria-label={p.label}
-            title={p.label}
-            class:list={[
-              'palette-swatch-btn relative w-4.5 h-4.5 rounded-full transition-transform hover:scale-115 focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer',
-              p.bgClass,
-            ]}
-            aria-checked={p.id === 'emerald' ? 'true' : 'false'}
-          />
-        ))
-      }
+    <div
+      class="flex items-center gap-2.5 sm:gap-3"
+      role="radiogroup"
+      aria-label="Color de acento del CV"
+    >
+      {palettes.map((p) => (
+        <button
+          type="button"
+          role="radio"
+          data-palette-target={p.id}
+          aria-label={p.label}
+          title={p.label}
+          class:list={[
+            'palette-swatch-btn relative w-4.5 h-4.5 rounded-full transition-transform hover:scale-115 focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer',
+            p.bgClass,
+          ]}
+          aria-checked={p.id === 'emerald' ? 'true' : 'false'}
+        />
+      ))}
     </div>
   </div>
 
@@ -107,7 +145,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
           <h3 id="print-modal-title" class="text-sm font-bold text-white">
             Recomendación de Impresión
           </h3>
-          <p class="text-xs text-zinc-400">Calibración A4 y fidelidad de formato</p>
+          <p class="text-xs text-zinc-400">
+            Calibración A4 y fidelidad de formato
+          </p>
         </div>
       </div>
       <button
@@ -123,10 +163,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
     <!-- Body text -->
     <div class="text-xs text-zinc-300 leading-relaxed space-y-2 border-y border-zinc-800/80 py-3">
       <p>
-        El cuadro de diálogo de impresión de tu navegador puede alterar márgenes, fuentes o colores según el sistema operativo, navegador (Chrome, Brave, etc.) o la escala de pantalla (DPI).
+        El cuadro de diálogo de impresión de tu navegador puede alterar
+        márgenes, fuentes o colores según el sistema operativo, navegador
+        (Chrome, Brave, etc.) o la escala de pantalla (DPI).
       </p>
       <p class="text-zinc-400">
-        Para garantizar un documento <strong>100% exacto en 1 sola página A4</strong> con la paleta de color seleccionada, te recomendamos descargar el PDF oficial precompilado.
+        Para garantizar un documento{' '}
+        <strong>100% exacto en 1 sola página A4</strong> con la paleta de color
+        seleccionada, te recomendamos descargar el PDF oficial precompilado.
       </p>
     </div>
 
@@ -178,22 +222,38 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
 
     // Update download buttons href
-    const downloadBtn = document.getElementById('download-pdf-btn') as HTMLAnchorElement | null;
+    const downloadBtn = document.getElementById(
+      'download-pdf-btn'
+    ) as HTMLAnchorElement | null;
     if (downloadBtn) {
       downloadBtn.href = getPdfPath(paletteId);
       downloadBtn.download = `cv-aitor-gallego-${paletteId}.pdf`;
     }
 
     // Update active ring on buttons
-    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-palette-target]');
+    const buttons = document.querySelectorAll<HTMLButtonElement>(
+      '[data-palette-target]'
+    );
     buttons.forEach((btn) => {
       const target = btn.dataset.paletteTarget;
       const isActive = target === paletteId;
       btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
       if (isActive) {
-        btn.classList.add('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-950', 'scale-110');
+        btn.classList.add(
+          'ring-2',
+          'ring-white',
+          'ring-offset-2',
+          'ring-offset-zinc-950',
+          'scale-110'
+        );
       } else {
-        btn.classList.remove('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-zinc-950', 'scale-110');
+        btn.classList.remove(
+          'ring-2',
+          'ring-white',
+          'ring-offset-2',
+          'ring-offset-zinc-950',
+          'scale-110'
+        );
       }
     });
   }
@@ -218,20 +278,24 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
   applyPalette(initialPalette);
 
   // Bind swatch clicks
-  document.querySelectorAll<HTMLButtonElement>('[data-palette-target]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const paletteId = btn.dataset.paletteTarget;
-      if (paletteId) {
-        applyPalette(paletteId);
-      }
+  document
+    .querySelectorAll<HTMLButtonElement>('[data-palette-target]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const paletteId = btn.dataset.paletteTarget;
+        if (paletteId) {
+          applyPalette(paletteId);
+        }
+      });
     });
-  });
 
   // Modal logic
   const modal = document.getElementById('print-warning-modal');
   const openModalBtn = document.getElementById('open-print-modal-btn');
   const closeModalBtn = document.getElementById('close-print-modal-btn');
-  const modalProceedPrintBtn = document.getElementById('modal-proceed-print-btn');
+  const modalProceedPrintBtn = document.getElementById(
+    'modal-proceed-print-btn'
+  );
   const modalDownloadBtn = document.getElementById('modal-download-btn');
 
   function openModal() {
@@ -255,8 +319,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
   });
 
   modalDownloadBtn?.addEventListener('click', () => {
-    const currentPalette = document.documentElement.dataset.palette || defaultPalette;
-    const downloadBtn = document.getElementById('download-pdf-btn') as HTMLAnchorElement | null;
+    const currentPalette =
+      document.documentElement.dataset.palette || defaultPalette;
+    const downloadBtn = document.getElementById(
+      'download-pdf-btn'
+    ) as HTMLAnchorElement | null;
     closeModal();
     if (downloadBtn) {
       downloadBtn.click();

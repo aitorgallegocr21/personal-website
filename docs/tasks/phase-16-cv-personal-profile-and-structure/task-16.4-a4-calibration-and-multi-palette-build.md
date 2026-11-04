@@ -26,6 +26,7 @@
 ---
 
 ## 2. Documentation & Git Commit
+
 - [x] Mark tasks completed in `docs/tasks/phase-16-cv-personal-profile-and-structure/`.
 - [x] Update `docs/TASKS.md`.
 - [x] Synchronize `README.md` and `README.es.md`.

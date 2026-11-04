@@ -21,6 +21,7 @@
 ---
 
 ## 2. Verification Criteria
+
 - [x] Strictly consumes `cvData.engineeringPhilosophy` (SSOT).
 - [x] Responsive across mobile, tablet, and desktop breakpoints.
 - [x] `npm run check` passes with 0 errors.

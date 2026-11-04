@@ -37,7 +37,9 @@ cvData.certificates.forEach((cert) => {
 });
 
 // 2. Education (CFGM SMR Degree)
-const smrEdu = cvData.education.find((e) => e.degree.includes('SMR') || e.documentUrl);
+const smrEdu = cvData.education.find(
+  (e) => e.degree.includes('SMR') || e.documentUrl
+);
 if (smrEdu && smrEdu.documentUrl) {
   docRegistry['gm-smr'] = {
     title: smrEdu.degree,
@@ -65,7 +67,10 @@ if (smrEdu && smrEdu.documentUrl) {
         </div>
         <div class="min-w-0">
           <div class="flex items-center gap-2">
-            <h2 id="cert-modal-title" class="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-100 truncate">
+            <h2
+              id="cert-modal-title"
+              class="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-100 truncate"
+            >
               Visor de Documento
             </h2>
             <span
@@ -75,7 +80,10 @@ if (smrEdu && smrEdu.documentUrl) {
               1 de 1
             </span>
           </div>
-          <p id="cert-modal-subtitle" class="text-xs text-zinc-500 dark:text-zinc-400 font-mono truncate">
+          <p
+            id="cert-modal-subtitle"
+            class="text-xs text-zinc-500 dark:text-zinc-400 font-mono truncate"
+          >
             Acreditación oficial
           </p>
         </div>
@@ -139,14 +147,20 @@ if (smrEdu && smrEdu.documentUrl) {
       <span class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 font-semibold uppercase tracking-wider shrink-0">
         Módulos:
       </span>
-      <div id="cert-modal-nav-tabs" class="flex items-center gap-1.5 flex-nowrap">
+      <div
+        id="cert-modal-nav-tabs"
+        class="flex items-center gap-1.5 flex-nowrap"
+      >
         <!-- Injected dynamically -->
       </div>
     </div>
 
     <!-- Viewer Body -->
     <div class="relative flex-1 bg-zinc-100 dark:bg-zinc-950 overflow-hidden flex items-center justify-center">
-      <div id="cert-modal-loading" class="absolute inset-0 flex items-center justify-center text-xs font-mono text-zinc-500">
+      <div
+        id="cert-modal-loading"
+        class="absolute inset-0 flex items-center justify-center text-xs font-mono text-zinc-500"
+      >
         Cargando documento...
       </div>
       <iframe
@@ -160,8 +174,11 @@ if (smrEdu && smrEdu.documentUrl) {
 </dialog>
 
 <!-- Client Deep-Link Dictionary -->
-<script id="doc-registry-data" type="application/json" set:html={JSON.stringify(docRegistry)} />
-
+<script
+  id="doc-registry-data"
+  type="application/json"
+  set:html={JSON.stringify(docRegistry)}
+/>
 <style>
   dialog:not([open]) {
     display: none !important;

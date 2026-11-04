@@ -39,7 +39,9 @@ export async function downloadDocsZip(
     const fetchPromises = docs.map(async (doc) => {
       const response = await fetch(doc.url);
       if (!response.ok) {
-        throw new Error(`Error descargando documento: ${doc.url} (${response.statusText})`);
+        throw new Error(
+          `Error descargando documento: ${doc.url} (${response.statusText})`
+        );
       }
       const blob = await response.blob();
       let fileName = doc.url.split('/').pop() || `${doc.title}.pdf`;
@@ -83,9 +85,15 @@ export async function downloadDocsZip(
  * Switches the active document inside the modal viewer.
  */
 export function selectModalDoc(index: number): void {
-  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement | null;
-  const modalDownload = document.getElementById('cert-modal-download') as HTMLAnchorElement | null;
-  const modalExternal = document.getElementById('cert-modal-external') as HTMLAnchorElement | null;
+  const modalIframe = document.getElementById(
+    'cert-modal-iframe'
+  ) as HTMLIFrameElement | null;
+  const modalDownload = document.getElementById(
+    'cert-modal-download'
+  ) as HTMLAnchorElement | null;
+  const modalExternal = document.getElementById(
+    'cert-modal-external'
+  ) as HTMLAnchorElement | null;
   const modalCounterBadge = document.getElementById('cert-modal-counter-badge');
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalNavTabs = document.getElementById('cert-modal-nav-tabs');
@@ -107,7 +115,8 @@ export function selectModalDoc(index: number): void {
   }
 
   if (modalNavTabs) {
-    const tabButtons = modalNavTabs.querySelectorAll<HTMLButtonElement>('.doc-tab-btn');
+    const tabButtons =
+      modalNavTabs.querySelectorAll<HTMLButtonElement>('.doc-tab-btn');
     tabButtons.forEach((btn, i) => {
       if (i === index) {
         btn.className =
@@ -129,15 +138,27 @@ export function openCertificateModal(
   subtitle?: string,
   docsJson?: string
 ): void {
-  const modal = document.getElementById('certificate-modal') as HTMLDialogElement | null;
+  const modal = document.getElementById(
+    'certificate-modal'
+  ) as HTMLDialogElement | null;
   const modalTitle = document.getElementById('cert-modal-title');
   const modalSubtitle = document.getElementById('cert-modal-subtitle');
   const modalCounterBadge = document.getElementById('cert-modal-counter-badge');
-  const modalDownload = document.getElementById('cert-modal-download') as HTMLAnchorElement | null;
-  const modalDownloadAll = document.getElementById('cert-modal-download-all') as HTMLButtonElement | null;
-  const modalDownloadAllText = document.getElementById('cert-modal-download-all-text');
-  const modalExternal = document.getElementById('cert-modal-external') as HTMLAnchorElement | null;
-  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement | null;
+  const modalDownload = document.getElementById(
+    'cert-modal-download'
+  ) as HTMLAnchorElement | null;
+  const modalDownloadAll = document.getElementById(
+    'cert-modal-download-all'
+  ) as HTMLButtonElement | null;
+  const modalDownloadAllText = document.getElementById(
+    'cert-modal-download-all-text'
+  );
+  const modalExternal = document.getElementById(
+    'cert-modal-external'
+  ) as HTMLAnchorElement | null;
+  const modalIframe = document.getElementById(
+    'cert-modal-iframe'
+  ) as HTMLIFrameElement | null;
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalNavContainer = document.getElementById('cert-modal-nav-container');
   const modalNavTabs = document.getElementById('cert-modal-nav-tabs');
@@ -145,7 +166,8 @@ export function openCertificateModal(
   if (!modal || !modalIframe || !modalDownload) return;
 
   if (modalTitle) modalTitle.textContent = title;
-  if (modalSubtitle) modalSubtitle.textContent = subtitle || 'Acreditación oficial';
+  if (modalSubtitle)
+    modalSubtitle.textContent = subtitle || 'Acreditación oficial';
 
   let parsedDocs: DocItem[] = [];
   if (docsJson) {
@@ -168,9 +190,11 @@ export function openCertificateModal(
     if (modalNavContainer) modalNavContainer.classList.remove('hidden');
     if (modalDownloadAll) {
       modalDownloadAll.classList.remove('hidden');
-      modalDownloadAll.title = 'Descargar todos los documentos en un archivo ZIP';
+      modalDownloadAll.title =
+        'Descargar todos los documentos en un archivo ZIP';
     }
-    if (modalDownloadAllText) modalDownloadAllText.textContent = `Descargar ZIP (${currentDocsList.length})`;
+    if (modalDownloadAllText)
+      modalDownloadAllText.textContent = `Descargar ZIP (${currentDocsList.length})`;
     if (modalCounterBadge) modalCounterBadge.classList.remove('hidden');
 
     if (modalNavTabs) {
@@ -179,13 +203,17 @@ export function openCertificateModal(
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.textContent = doc.title;
-        btn.className = 'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs transition-all';
+        btn.className =
+          'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs transition-all';
         btn.addEventListener('click', () => selectModalDoc(i));
         modalNavTabs.appendChild(btn);
       });
     }
 
-    const targetIndex = Math.max(0, currentDocsList.findIndex((d) => d.url === url));
+    const targetIndex = Math.max(
+      0,
+      currentDocsList.findIndex((d) => d.url === url)
+    );
     selectModalDoc(targetIndex);
   } else {
     if (modalNavContainer) modalNavContainer.classList.add('hidden');
@@ -210,13 +238,23 @@ export function openCertificateModal(
  * Closes the certificate modal dialog and resets state.
  */
 export function closeCertificateModal(): void {
-  const modal = document.getElementById('certificate-modal') as HTMLDialogElement | null;
-  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement | null;
-  const modalDownload = document.getElementById('cert-modal-download') as HTMLAnchorElement | null;
-  const modalExternal = document.getElementById('cert-modal-external') as HTMLAnchorElement | null;
+  const modal = document.getElementById(
+    'certificate-modal'
+  ) as HTMLDialogElement | null;
+  const modalIframe = document.getElementById(
+    'cert-modal-iframe'
+  ) as HTMLIFrameElement | null;
+  const modalDownload = document.getElementById(
+    'cert-modal-download'
+  ) as HTMLAnchorElement | null;
+  const modalExternal = document.getElementById(
+    'cert-modal-external'
+  ) as HTMLAnchorElement | null;
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalNavContainer = document.getElementById('cert-modal-nav-container');
-  const modalDownloadAll = document.getElementById('cert-modal-download-all') as HTMLButtonElement | null;
+  const modalDownloadAll = document.getElementById(
+    'cert-modal-download-all'
+  ) as HTMLButtonElement | null;
 
   if (!modal) return;
   if (modal.open) {
@@ -255,7 +293,9 @@ export function checkUrlDeepLink(): void {
   try {
     const docRegistryEl = document.getElementById('doc-registry-data');
     if (!docRegistryEl || !docRegistryEl.textContent) return;
-    const registry: Record<string, CertificateRegistryItem> = JSON.parse(docRegistryEl.textContent);
+    const registry: Record<string, CertificateRegistryItem> = JSON.parse(
+      docRegistryEl.textContent
+    );
 
     const params = new URLSearchParams(window.location.search);
     const targetId = params.get('doc') || params.get('cert');
@@ -277,14 +317,26 @@ export function checkUrlDeepLink(): void {
  * Initializes all modal event handlers and triggers across the page.
  */
 export function initCertificateModal(): void {
-  const modal = document.getElementById('certificate-modal') as HTMLDialogElement | null;
+  const modal = document.getElementById(
+    'certificate-modal'
+  ) as HTMLDialogElement | null;
   const modalContainer = document.getElementById('cert-modal-container');
   const modalClose = document.getElementById('cert-modal-close');
-  const modalDownload = document.getElementById('cert-modal-download') as HTMLAnchorElement | null;
-  const modalDownloadAll = document.getElementById('cert-modal-download-all') as HTMLButtonElement | null;
-  const modalDownloadAllText = document.getElementById('cert-modal-download-all-text');
-  const modalExternal = document.getElementById('cert-modal-external') as HTMLAnchorElement | null;
-  const modalIframe = document.getElementById('cert-modal-iframe') as HTMLIFrameElement | null;
+  const modalDownload = document.getElementById(
+    'cert-modal-download'
+  ) as HTMLAnchorElement | null;
+  const modalDownloadAll = document.getElementById(
+    'cert-modal-download-all'
+  ) as HTMLButtonElement | null;
+  const modalDownloadAllText = document.getElementById(
+    'cert-modal-download-all-text'
+  );
+  const modalExternal = document.getElementById(
+    'cert-modal-external'
+  ) as HTMLAnchorElement | null;
+  const modalIframe = document.getElementById(
+    'cert-modal-iframe'
+  ) as HTMLIFrameElement | null;
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalTitle = document.getElementById('cert-modal-title');
 
@@ -315,7 +367,11 @@ export function initCertificateModal(): void {
 
   // Iframe loaded
   modalIframe?.addEventListener('load', () => {
-    if (modalLoading && modalIframe.src && !modalIframe.src.endsWith('about:blank')) {
+    if (
+      modalLoading &&
+      modalIframe.src &&
+      !modalIframe.src.endsWith('about:blank')
+    ) {
       modalLoading.classList.add('hidden');
     }
   });
@@ -350,7 +406,8 @@ export function initCertificateModal(): void {
       // handled inside downloadDocsZip
     } finally {
       setTimeout(() => {
-        if (modalDownloadAllText) modalDownloadAllText.textContent = originalText;
+        if (modalDownloadAllText)
+          modalDownloadAllText.textContent = originalText;
         if (modalDownloadAll) modalDownloadAll.disabled = false;
       }, 2500);
     }
@@ -358,7 +415,9 @@ export function initCertificateModal(): void {
 
   // Document trigger delegation across the whole document
   document.addEventListener('click', (e) => {
-    const target = (e.target as HTMLElement).closest('[data-doc-url], [data-docs]') as HTMLElement | null;
+    const target = (e.target as HTMLElement).closest(
+      '[data-doc-url], [data-docs]'
+    ) as HTMLElement | null;
     if (!target) return;
 
     e.preventDefault();

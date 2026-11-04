@@ -3,11 +3,13 @@
 > 🌐 **Language:** English | [Leer en Español](README.es.md)
 
 ## 1. Project Mission
+
 Build and maintain a personal portfolio and printable A4 PDF CV generator with Single Source of Truth (SSOT) architecture, maximum web performance (0 KB unnecessary client JS), and responsive/print layouts using Astro, TypeScript, and Tailwind CSS.
 
 ---
 
 ## 2. Inviolable Core Rules
+
 1. **Golden Rule (SSOT):** Strictly FORBIDDEN to hardcode biographical text, company names, dates, project descriptions, or skills inside `.astro` or `.html` components. Everything must be consumed from `src/data/cv-data.ts`.
 2. **Strict Typing:** Any new field or structure must first be modeled in `src/types/resume.ts`. Zero `any`.
 3. **Token & Context Optimization:**
@@ -18,6 +20,7 @@ Build and maintain a personal portfolio and printable A4 PDF CV generator with S
 ---
 
 ## 3. Mandatory Iteration Workflow
+
 On EVERY task or change executed by an agent, strictly follow this loop:
 
 ```
@@ -43,6 +46,7 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 ## 4. View-Specific Guidelines
 
 ### A. Web Portfolio View (`/` -> `src/pages/index.astro`)
+
 - Oriented towards recruiters and engineering leads: interactive, demo/repo links, sleek dual UI (dark/light mode).
 - Use pure Astro components (`.astro`). Only use client scripts or minimal vanilla JS when genuine client-side interactivity is required (theming, modals, copy feedback).
 - **Theming & Color Palettes:** Consume CSS custom properties (`--color-accent`, etc.) defined in `src/styles/global.css`. Never hardcode static color classes (`text-emerald-400`, `bg-emerald-500`) when semantic accent tokens apply.
@@ -53,6 +57,7 @@ On EVERY task or change executed by an agent, strictly follow this loop:
   - Certificate documents / diplomas: `public/docs/certificates/`
 
 ### B. Printable CV View (`/cv` -> `src/pages/cv.astro`)
+
 - **Target:** Exactly fit 1 A4 page (or maximum 2 pages if career length strictly justifies it), with zero orphan lines or vertical overflow.
 - **Mandatory Print Configuration:**
   ```css
@@ -69,6 +74,7 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 ---
 
 ## 5. Reference Scripts
+
 - `npm run dev`: Start local dev server.
 - `astro dev --background`: Run server in background (`astro dev stop`, `astro dev status`, `astro dev logs`).
 - `npm run check`: Check TypeScript types (`astro check`).
@@ -78,6 +84,7 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 ---
 
 ## 6. Privacy, Environment Variables & Anti-Scraping
+
 1. **Zero Plaintext Sensitive Data:** Strictly FORBIDDEN to commit personal phone numbers or exact residential addresses in versioned git files (`cv-data.ts`, components, or markdown).
 2. **Build-Time Injection:**
    - Phone numbers must be read via environment variable: `import.meta.env.PUBLIC_PHONE`.
@@ -96,7 +103,8 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 
 ## 7. Autonomous Execution Protocol & Zero-Ambiguity Standard
 
-When requested to progress on the project (e.g., *"next task"* or *"do task X"*), or when an agent joins the project without direct instructions:
+When requested to progress on the project (e.g., _"next task"_ or _"do task X"_), or when an agent joins the project without direct instructions:
+
 1. **Zero-Ambiguity Principle:** Project state and active direction must always be decipherable from `docs/TASKS.md` and the active phase in `docs/tasks/`. No agent should need to guess or ask obvious context questions if the documentation is properly maintained.
 2. **Strict Scope:** Select the next unchecked task `[ ]` in `docs/TASKS.md` (or the specific task indicated). Do not edit unrelated files.
 3. **JIT Context:** Refer to `docs/DESIGN_SYSTEM.md` for visual tokens and `src/types/resume.ts` for schemas. Never hardcode static copy (SSOT).

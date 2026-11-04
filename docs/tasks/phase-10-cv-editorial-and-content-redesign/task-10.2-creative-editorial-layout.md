@@ -4,6 +4,7 @@
 **Branch:** `feat/phase-10-cv-editorial-and-content-redesign`
 
 ## Context & Requirements
+
 1. **Diverge from Generic Corporate Templates:**
    - Create a memorable, high-impact editorial design (inspired by modern developer/designer resumes).
    - Use dynamic accent bars, sophisticated micro-grid lines, or asymmetric layout accents that print crisply in color or monochrome.
@@ -15,6 +16,7 @@
    - Compact margins ensuring zero wasted whitespace while preserving breathability.
 
 ## Acceptance Criteria
+
 - [x] Creative, non-conventional visual structure that elevates the candidate's personal brand.
 - [x] Prominent interactive call-to-action for the web portfolio.
 - [x] Dynamic color palette switcher (`CVPrintBar.astro`) continues to instantly update print themes.

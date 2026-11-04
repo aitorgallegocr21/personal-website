@@ -9,6 +9,6 @@ export default defineConfig({
   site: 'https://aitorgallegocr21.github.io',
   base: '/personal-website',
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
 });

@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Construir el servicio de gestión de skin activo con persistencia en `localStorage` (`portfolio-skin`), inyección de atributo raíz `data-skin="bento-modern"` en el layout HTML para evitar FOUC, e integración visual del selector de skins en el panel de personalización de la interfaz.
 
 ---
@@ -25,10 +26,12 @@ Construir el servicio de gestión de skin activo con persistencia en `localStora
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run check
 npm run test
 npm run build
 ```
+
 - Verificar que el atributo `data-skin` se establece correctamente en `<html>`.
 - Confirmar que la selección de skins se conserva al recargar la página.
