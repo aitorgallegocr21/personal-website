@@ -116,4 +116,38 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(bentoOption).toBeVisible();
     await expect(bentoOption.locator('.skin-check-icon')).toBeVisible();
   });
+
+  test('injects valid Schema.org JSON-LD structured data with Person and ProfilePage', async ({
+    page,
+  }) => {
+    await page.goto('./');
+
+    const jsonLdScript = page.locator('script[type="application/ld+json"]');
+    await expect(jsonLdScript).toBeAttached();
+
+    const textContent = await jsonLdScript.textContent();
+    expect(textContent).toBeTruthy();
+
+    const parsed = JSON.parse(textContent || '{}');
+    expect(parsed['@context']).toBe('https://schema.org');
+    expect(Array.isArray(parsed['@graph'])).toBe(true);
+
+    const graph = parsed['@graph'];
+    const profilePage = graph.find(
+      (item: { '@type': string }) => item['@type'] === 'ProfilePage'
+    );
+    const person = graph.find(
+      (item: { '@type': string }) => item['@type'] === 'Person'
+    );
+
+    expect(profilePage).toBeDefined();
+    expect(profilePage.inLanguage).toBe('es');
+
+    expect(person).toBeDefined();
+    expect(person.name).toBe('Aitor Gallego-Casilda Romero');
+    expect(person.jobTitle).toContain('Backend');
+    expect(Array.isArray(person.knowsAbout)).toBe(true);
+    expect(person.knowsAbout.length).toBeGreaterThan(0);
+    expect(Array.isArray(person.alumniOf)).toBe(true);
+  });
 });

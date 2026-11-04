@@ -1,0 +1,73 @@
+---
+import { cvData } from '@/data/cv-data';
+
+interface Props {
+  canonicalURL?: URL | string;
+  imageURL?: URL | string;
+}
+
+const { canonicalURL = Astro.url.href, imageURL } = Astro.props;
+
+const siteUrl = Astro.site?.toString() || cvData.personal.website;
+const resolvedCanonical = canonicalURL.toString();
+const resolvedImage = imageURL
+  ? imageURL.toString()
+  : new URL(
+      cvData.personal.avatarUrl || '/images/avatar.webp',
+      siteUrl
+    ).toString();
+
+// Flat skills array for knowsAbout
+const allSkills = cvData.skills.flatMap((s) => s.skills);
+
+// Alumni institutions for alumniOf
+const alumniInstitutions = cvData.education.map((e) => ({
+  '@type': 'EducationalOrganization',
+  name: e.institution,
+}));
+
+// Social links for sameAs
+const sameAs = [cvData.personal.github, cvData.personal.linkedin].filter(
+  Boolean
+);
+
+const schemaGraph = [
+  {
+    '@type': 'ProfilePage',
+    '@id': `${resolvedCanonical}#profilepage`,
+    url: resolvedCanonical,
+    name: `${cvData.personal.name} | ${cvData.personal.title}`,
+    description: cvData.about.shortSummary,
+    inLanguage: 'es',
+    mainEntity: {
+      '@id': `${resolvedCanonical}#person`,
+    },
+  },
+  {
+    '@type': 'Person',
+    '@id': `${resolvedCanonical}#person`,
+    name: cvData.personal.name,
+    jobTitle: cvData.personal.title,
+    description: cvData.about.shortSummary,
+    url: cvData.personal.website || resolvedCanonical,
+    image: resolvedImage,
+    sameAs,
+    knowsAbout: allSkills,
+    alumniOf: alumniInstitutions,
+    address: cvData.personal.location
+      ? {
+          '@type': 'PostalAddress',
+          addressLocality: cvData.personal.location,
+          addressCountry: 'ES',
+        }
+      : undefined,
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': schemaGraph,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
