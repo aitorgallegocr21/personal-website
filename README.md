@@ -71,6 +71,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 
 - **🎯 Centralized SSOT Data:** Biography, project catalog, tech skills, work experience, and educational credentials configured in one place.
 - **🎨 Dynamic Theming & Daily Rotation:** Multi-accent palette system (Emerald, Sky, Violet, Rose, Amber) with automatic weekday rotation, manual switching, and dark/light mode.
+- **🎭 Multi-Skin Architecture & Visual Switcher:** Modular skin engine (`bento-modern` default) allowing complete visual restyling from the same SSOT dataset, with local persistence (`localStorage`), zero-FOUC attribute injection, and UI switcher.
 - **🎴 Modern Bento Grid & Interactive Portrait:** 3D perspective tilt avatar card, real-time availability indicator, and GitHub/project direct links.
 - **📜 Multi-Document Credential & Deep-Linking Engine:** Integrated modal viewer supporting direct URL query deep-linking (`?doc=<id>`), module switcher, single PDF download, and single-click `.zip` batch archive generation via JSZip.
 - **✨ Accent Polish & Structured Footer:** Responsive 3-column footer with dynamic availability indicator, project card glow micro-interactions, illuminated tech chips, and non-overlapping status badges.
