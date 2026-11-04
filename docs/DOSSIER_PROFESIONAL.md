@@ -5,6 +5,7 @@ Documento exhaustivo con el historial formativo, técnico y laboral. Fuente prim
 ---
 
 ## 1. Datos Personales y Contacto
+
 - **Nombre completo:** Aitor Gallego-Casilda Romero
 - **Título profesional:** Desarrollador de Software Junior | Backend Java & Sistemas
 - **Ubicación:** Herencia, Ciudad Real, España
@@ -19,9 +20,11 @@ Documento exhaustivo con el historial formativo, técnico y laboral. Fuente prim
 ---
 
 ## 2. Perfil y Filosofía Profesional
+
 Desarrollador de software con base sólida en administración de sistemas y redes (SMR) y especialización en desarrollo multiplataforma (DAM, nota media de 1º: 9,2). Enfoque prioritario en desarrollo backend con Java, arquitectura limpia, tipado estricto y optimización de rendimiento.
 
 ### Cualidades Diferenciales
+
 - **Rigor organizativo:** Estructura modular, tipado exhaustivo (TypeScript/Java), documentación sistemática y arquitectura de componentes desacoplada.
 - **Mentalidad de mejora continua:** Afición por el refactor iterativo, la algoritmia eficiente y la optimización de recursos (0 KB JS innecesario en cliente).
 - **Resolución y serenidad bajo presión:** Templanza demostrada en hackathons y entregas aceleradas en NTT Data, soporte técnico en tiempo real en pruebas oficiales, y picos de alta demanda en hostelería.
@@ -33,6 +36,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 ## 3. Formación Académica
 
 ### 1. CFGS Desarrollo de Aplicaciones Multiplataforma (DAM)
+
 - **Centro:** IES Juan Bosco (Alcázar de San Juan, Ciudad Real)
 - **Periodo:** Septiembre 2025 - Junio 2027 (En curso, 2º año)
 - **Rendimiento:** Nota media de 1º curso: **9,2 / 10**.
@@ -44,6 +48,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 - **Inclusión en CV:** Sí (`featuredInCV: true`).
 
 ### 2. CFGM Sistemas Microinformáticos y Redes (SMR)
+
 - **Centro:** IES Juan Bosco (Alcázar de San Juan, Ciudad Real)
 - **Periodo:** Septiembre 2023 - Junio 2025
 - **Rendimiento:** Nota media final: **8,7 / 10**.
@@ -59,6 +64,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 ## 4. Experiencia Laboral y Formativa
 
 ### 1. Desarrollador Software en Prácticas — NTT DATA
+
 - **Entidad:** NTT DATA (Remoto / España)
 - **Periodo:** Marzo 2026 - Abril 2026 (~120 horas lectivas)
 - **Modalidad:** Formación corporativa técnica intensiva impartida íntegramente en inglés mediante plataforma Percipio y mentoría de ingeniería.
@@ -70,6 +76,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 - **Inclusión en CV:** Sí (`featuredInCV: true`).
 
 ### 2. Técnico de Sistemas en Prácticas (FCT) — IES Hermógenes Rodríguez
+
 - **Entidad:** IES Hermógenes Rodríguez (Herencia, Ciudad Real)
 - **Periodo:** Marzo 2025 - Junio 2025 (400 horas FCT SMR)
 - **Logros clave:**
@@ -80,6 +87,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 - **Inclusión en CV:** Sí (`featuredInCV: true`).
 
 ### 3. Profesor Particular de Tenis — Cuenta propia
+
 - **Entidad:** Club de Tenis / Cuenta propia (Herencia, Ciudad Real)
 - **Periodo:** Septiembre 2025 - Presente
 - **Logros clave:**
@@ -89,6 +97,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 - **Inclusión en CV:** No (`featuredInCV: false` - Visible en web y dossier para destacar soft skills y polivalencia).
 
 ### 4. Camarero y Servicio de Barra — Hostelería Local
+
 - **Entidad:** Sector Hostelería (Herencia, Ciudad Real)
 - **Periodo:** Mayo 2026 - Agosto 2026 (Jornada parcial 40%, 3,5 meses)
 - **Logros clave:**
@@ -102,6 +111,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 ## 5. Proyectos de Software
 
 ### 1. Local Music Management Engine (Music Manager)
+
 - **Descripción:** Motor open-source de catalogación, inferencia y descarga musical local orientado a privacidad y rendimiento.
 - **Autoría:** Desarrollador principal (autor de ~90% de la lógica del repositorio).
 - **Stack:** Python 3, YouTube Music API / `yt-dlp`, ListenBrainz API, Mutagen (metadatos ID3).
@@ -115,6 +125,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 - **Inclusión en CV:** Sí (`featuredInCV: true`).
 
 ### 2. Bookstack — Registro y Seguimiento de Lecturas
+
 - **Descripción:** Aplicación web moderna para catalogación personal y seguimiento del hábito lector con persistencia local.
 - **Stack:** Angular 17/18, TypeScript, Tailwind CSS, HTML5 semántico.
 - **Arquitectura y características:**
@@ -125,6 +136,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 - **Inclusión en CV:** Sí (`featuredInCV: true`).
 
 ### 3. Portal de Reservas Deportivas (Argamasilla de Alba)
+
 - **Descripción:** Plataforma web interactiva para gestión y reserva de instalaciones deportivas municipales.
 - **Contexto:** Proyecto Intermodular de 1º DAM desarrollado en equipo de 3 integrantes.
 - **Stack:** JavaScript moderno (ES6+ Vanilla), HTML5 semántico, CSS3, Git/GitHub.
@@ -136,6 +148,7 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 - **Inclusión en CV:** No (`featuredInCV: false` - Detallado en web y catálogo de proyectos).
 
 ### 4. Portfolio Web & Printable CV SSOT
+
 - **Descripción:** Portfolio personal y motor generador de CV impreso en A4 pixel-perfect con Single Source of Truth.
 - **Stack:** Astro, TypeScript, Tailwind CSS, Playwright.
 - **Arquitectura y características:**
@@ -151,42 +164,48 @@ Desarrollador de software con base sólida en administración de sistemas y rede
 ## 6. Certificaciones y Especializaciones Técnicas
 
 ### Itinerario Corporativo NTT DATA / Percipio (Inglés Técnico)
+
 Más de 120 horas lectivas cursadas en inglés, con certificados modulares individuales:
 
 #### A. Java & Backend
+
 1. **Java SE 8 Programmer I & II (NTT DATA / Percipio):**
    - Fundamentos avanzados de POO, sistema de tipos, jerarquía de colecciones Java, gestión de excepciones y concurrencia con hilos.
-   - *Inclusión en CV:* Sí (`featuredInCV: true`).
+   - _Inclusión en CV:_ Sí (`featuredInCV: true`).
 2. **Java SE 11 Programmer: Lambdas y Streams (NTT DATA / Percipio):**
    - Paradigma funcional en Java moderno, Interfaces Funcionales nativas (`Predicate`, `Function`, `Consumer`), expresiones Lambda y operaciones intermedias/terminales sobre Stream API.
-   - *Inclusión en CV:* Sí (`featuredInCV: true`).
+   - _Inclusión en CV:_ Sí (`featuredInCV: true`).
 3. **Desarrollo de REST APIs con Spring Boot (NTT DATA / Percipio):**
    - Creación de APIs RESTful, arquitectura Controller-Service-Repository, inyección de dependencias, configuración de rutas y serialización Jackson JSON.
-   - *Inclusión en CV:* Sí (`featuredInCV: true`).
+   - _Inclusión en CV:_ Sí (`featuredInCV: true`).
 4. **Testing Unitario con JUnit y Mockito (NTT DATA / Percipio):**
    - Diseño de suites de pruebas unitarias, mocking de servicios y repositorios con Mockito, aserciones y tests parametrizados en JUnit 5.
-   - *Inclusión en CV:* Sí (`featuredInCV: true`).
+   - _Inclusión en CV:_ Sí (`featuredInCV: true`).
 
 #### B. Frontend
+
 5. **Especialización Integral en Angular v16 a v18 (NTT DATA / Percipio — 9 certificaciones modulares / ~6 horas):**
    - Evolución de Angular: componentes modulares vs Standalone, reactividad basada en Signals, nueva sintaxis de control de flujo (`@if`, `@for`, `@switch`) y TypeScript avanzado.
-   - *Inclusión en CV:* Sí (`featuredInCV: true`).
+   - _Inclusión en CV:_ Sí (`featuredInCV: true`).
 
 #### C. Bases de Datos
+
 6. **Bases de Datos Relacionales y NoSQL (NTT DATA / Percipio — 3 certificaciones modulares / ~4.5 horas):**
    - Modelado de datos relacional, sentencias DDL y DML complejas, definición de constraints e integridad referencial, fundamentos de persistencia NoSQL.
-   - *Inclusión en CV:* Sí (`featuredInCV: true`).
+   - _Inclusión en CV:_ Sí (`featuredInCV: true`).
 
 #### D. Inteligencia Artificial
+
 7. **Prompt Engineering with Generative AI Tools (NTT DATA / Percipio):**
    - Directrices avanzadas de prompting, técnicas Few-Shot / Chain-of-Thought, y optimización de contexto con LLMs en flujos de desarrollo asistido.
-   - *Inclusión en CV:* No (`featuredInCV: false` - Visible en web).
+   - _Inclusión en CV:_ No (`featuredInCV: false` - Visible en web).
 8. **Iniciación al Desarrollo con IA (BIG School):**
    - Fundamentos de modelos de IA aplicados a la productividad y automatización de software.
-   - *Inclusión en CV:* No (`featuredInCV: false` - Visible en web).
+   - _Inclusión en CV:_ No (`featuredInCV: false` - Visible en web).
 
 ---
 
 ## 7. Idiomas
+
 - **Español:** Nativo.
 - **Inglés:** Técnico (B1/B2 funcional — formación técnica y documentación cursada íntegramente en inglés).

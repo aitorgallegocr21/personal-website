@@ -10,19 +10,24 @@
 ## 1. Context & Architectural Motivation
 
 ### A. The Browser Print Engine Variance Problem
+
 When relying exclusively on `window.print()`, different browsers (Chrome, Brave, Firefox), operating systems (Linux, Windows, macOS), and hardware setups (1080p vs. 2K with 125%/150% DPI display scaling) render printed PDFs inconsistently:
+
 1. **Unloaded Fonts:** `PrintLayout.astro` lacks Google Fonts (`Inter` and `JetBrains Mono`) declarations, forcing browsers without local installs to use fallback system fonts with divergent glyph widths and line heights.
 2. **Dialog-level Overrides:** User dialog margins (Default vs None), headers/footers, and background graphics checkboxes alter layout dimensions beyond CSS `@page` control.
 3. **Privacy Shields:** Browsers like Brave enforce fingerprinting mitigations that can affect canvas and font metric precision.
 
 ### B. The Deterministic Solution: Headless Multi-Palette Build Engine
-To achieve 100% WYSIWYG fidelity across every device in the world, the static build pipeline must precompile deterministic A4 PDFs for all supported color palettes (`emerald`, `slate`, `sky`, `violet`, `rose`, `monochrome`) via headless Chromium under strict laboratory conditions (fixed viewport, 0 margins, loaded fonts, exact color profile). 
+
+To achieve 100% WYSIWYG fidelity across every device in the world, the static build pipeline must precompile deterministic A4 PDFs for all supported color palettes (`emerald`, `slate`, `sky`, `violet`, `rose`, `monochrome`) via headless Chromium under strict laboratory conditions (fixed viewport, 0 margins, loaded fonts, exact color profile).
 
 The web UI then provides:
+
 - **Primary Action (1-Click Download):** Instantly downloads the precompiled `.pdf` corresponding to the currently selected palette.
 - **Secondary Action (Print with Modal Guard):** Warns the user that browser print settings may skew layout and recommends downloading the precompiled PDF instead, while still allowing them to proceed to `window.print()` if desired.
 
 ### C. Editorial Identity & Content Harmony
+
 - **Rectangular Portrait:** Replace circular avatar with a structured rectangular portrait badge (~28mm × 35mm, `rounded-xl`), creating a modern architectural presence.
 - **Header Structure:** Add a typographic `// CONTACTO` header above the contact info in the right column, incorporating a missing `Phone` icon for visual alignment.
 - **Content Expansion:** Activate `clases-tenis` under complementary experience to highlight pedagogical initiative, soft skills, and client management.

@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Inyectar metadatos estructurados compatibles con Schema.org en formato JSON-LD en el `<head>` de `BaseLayout.astro`, facilitando que Google y otros motores de búsqueda extraigan rich snippets con información del autor, experiencia profesional, educación y perfiles sociales directamente desde el SSOT `cvData`.
 
 ---
@@ -32,5 +33,6 @@ Inyectar metadatos estructurados compatibles con Schema.org en formato JSON-LD e
 ---
 
 ## 3. Verificación
+
 - Inspección del código fuente HTML generado para comprobar que el script JSON-LD contiene JSON válido y escapado.
 - Pasar el marcado por la herramienta de validación de Schema.org / Google Rich Results Test.

@@ -1,13 +1,16 @@
 # Task 4.3: Static Hosting Deployment Pipeline
 
 ## Objective
+
 Configure automated static hosting deployment on GitHub Pages or Cloudflare Pages from the `dist/` production build output.
 
 ## Context & Artifacts
+
 - **Output Directory:** `dist/`
 - **Output Mode:** Static HTML/CSS (`output: "static"` in `astro.config.mjs`).
 
 ## Detailed Requirements
+
 1. **Hosting Choice & Configuration:**
    - Configure GitHub Pages deployment workflow or Cloudflare Pages git integration.
 2. **Custom Domain & Canonical URL:**
@@ -16,5 +19,6 @@ Configure automated static hosting deployment on GitHub Pages or Cloudflare Page
    - Ensure static assets in `_astro/` have immutable cache headers.
 
 ## Acceptance Criteria
+
 - [x] Deployed production site loads under 1 second.
 - [x] Lighthouse Performance score > 98.

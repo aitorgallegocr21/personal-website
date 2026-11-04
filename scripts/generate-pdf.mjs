@@ -12,7 +12,16 @@ const distDir = path.join(rootDir, 'dist');
 const publicCvDir = path.join(rootDir, 'public', 'cv');
 const distCvDir = path.join(distDir, 'cv');
 
-const PALETTES = ['emerald', 'teal', 'sky', 'slate', 'violet', 'rose', 'amber', 'monochrome'];
+const PALETTES = [
+  'emerald',
+  'teal',
+  'sky',
+  'slate',
+  'violet',
+  'rose',
+  'amber',
+  'monochrome',
+];
 const DEFAULT_PALETTE = 'emerald';
 
 const MIME_TYPES = {
@@ -34,11 +43,20 @@ const MIME_TYPES = {
 };
 
 function findChromePath() {
-  if (process.env.PUPPETEER_EXECUTABLE_PATH && fs.existsSync(process.env.PUPPETEER_EXECUTABLE_PATH)) {
+  if (
+    process.env.PUPPETEER_EXECUTABLE_PATH &&
+    fs.existsSync(process.env.PUPPETEER_EXECUTABLE_PATH)
+  ) {
     return process.env.PUPPETEER_EXECUTABLE_PATH;
   }
   const candidates = [
-    path.join(rootDir, 'chrome', 'linux-156.0.8078.73', 'chrome-linux64', 'chrome'),
+    path.join(
+      rootDir,
+      'chrome',
+      'linux-156.0.8078.73',
+      'chrome-linux64',
+      'chrome'
+    ),
     '/usr/bin/google-chrome',
     '/usr/bin/google-chrome-stable',
     '/usr/bin/chromium',
@@ -54,10 +72,13 @@ function findChromePath() {
     }
   }
   try {
-    const whichOut = execSync('which google-chrome || which chromium || which chromium-browser', {
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'ignore'],
-    }).trim();
+    const whichOut = execSync(
+      'which google-chrome || which chromium || which chromium-browser',
+      {
+        encoding: 'utf-8',
+        stdio: ['pipe', 'pipe', 'ignore'],
+      }
+    ).trim();
     if (whichOut && fs.existsSync(whichOut)) {
       return whichOut;
     }
@@ -98,7 +119,7 @@ function startStaticServer() {
       const contentType = MIME_TYPES[ext] || 'application/octet-stream';
       res.writeHead(200, { 'Content-Type': contentType });
       fs.createReadStream(filePath).pipe(res);
-    } catch (err) {
+    } catch (_err) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('Internal Server Error');
     }
@@ -113,17 +134,25 @@ function startStaticServer() {
 }
 
 async function main() {
-  console.log('🚀 [PDF Engine] Starting multi-palette headless PDF compilation...');
+  console.log(
+    '🚀 [PDF Engine] Starting multi-palette headless PDF compilation...'
+  );
 
   if (!fs.existsSync(distDir)) {
-    console.error('❌ [PDF Engine] dist/ folder does not exist. Run "npm run build" first.');
+    console.error(
+      '❌ [PDF Engine] dist/ folder does not exist. Run "npm run build" first.'
+    );
     process.exit(1);
   }
 
   const chromePath = findChromePath();
   if (!chromePath) {
-    console.warn('⚠️ [PDF Engine] No Chrome or Chromium binary found on this system.');
-    console.warn('⚠️ [PDF Engine] Skipping automated PDF generation; precompiled public/ assets will be preserved.');
+    console.warn(
+      '⚠️ [PDF Engine] No Chrome or Chromium binary found on this system.'
+    );
+    console.warn(
+      '⚠️ [PDF Engine] Skipping automated PDF generation; precompiled public/ assets will be preserved.'
+    );
     process.exit(0);
   }
 
@@ -134,7 +163,9 @@ async function main() {
   fs.mkdirSync(distCvDir, { recursive: true });
 
   const { server, port } = await startStaticServer();
-  console.log(`🌐 [PDF Engine] Ephemeral static server listening on http://127.0.0.1:${port}`);
+  console.log(
+    `🌐 [PDF Engine] Ephemeral static server listening on http://127.0.0.1:${port}`
+  );
 
   let browser;
   try {
@@ -157,7 +188,9 @@ async function main() {
 
     for (const palette of PALETTES) {
       const targetUrl = `http://127.0.0.1:${port}/personal-website/cv?palette=${palette}`;
-      console.log(`📄 [PDF Engine] Rendering palette "${palette}" from ${targetUrl}...`);
+      console.log(
+        `📄 [PDF Engine] Rendering palette "${palette}" from ${targetUrl}...`
+      );
 
       await page.goto(targetUrl, { waitUntil: 'networkidle0' });
 
@@ -181,7 +214,9 @@ async function main() {
 
       fs.writeFileSync(publicPath, pdfBuffer);
       fs.writeFileSync(distPath, pdfBuffer);
-      console.log(`   ✓ Saved ${filename} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`);
+      console.log(
+        `   ✓ Saved ${filename} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`
+      );
 
       // If default palette, also save canonical cv-aitor-gallego.pdf
       if (palette === DEFAULT_PALETTE) {
@@ -192,7 +227,9 @@ async function main() {
       }
     }
 
-    console.log('✨ [PDF Engine] All multi-palette PDFs compiled successfully!');
+    console.log(
+      '✨ [PDF Engine] All multi-palette PDFs compiled successfully!'
+    );
   } catch (error) {
     console.error('❌ [PDF Engine] Error during PDF generation:', error);
     process.exit(1);

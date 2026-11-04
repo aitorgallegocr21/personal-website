@@ -11,9 +11,14 @@
  * @param referenceDate - Reference date to evaluate age against (defaults to current date)
  * @returns Completed age in years
  */
-export function calculateAge(birthDateString: string, referenceDate: Date = new Date()): number {
+export function calculateAge(
+  birthDateString: string,
+  referenceDate: Date = new Date()
+): number {
   if (!/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(birthDateString)) {
-    throw new Error(`Invalid birthDate string format (expected YYYY-MM-DD): "${birthDateString}"`);
+    throw new Error(
+      `Invalid birthDate string format (expected YYYY-MM-DD): "${birthDateString}"`
+    );
   }
 
   const [yearStr, monthStr, dayStr] = birthDateString.split('-');
@@ -22,7 +27,9 @@ export function calculateAge(birthDateString: string, referenceDate: Date = new 
   const birthDay = parseInt(dayStr, 10);
 
   if (isNaN(birthYear) || isNaN(birthMonth) || isNaN(birthDay)) {
-    throw new Error(`Invalid birthDate string format (expected YYYY-MM-DD): "${birthDateString}"`);
+    throw new Error(
+      `Invalid birthDate string format (expected YYYY-MM-DD): "${birthDateString}"`
+    );
   }
 
   const currentYear = referenceDate.getFullYear();

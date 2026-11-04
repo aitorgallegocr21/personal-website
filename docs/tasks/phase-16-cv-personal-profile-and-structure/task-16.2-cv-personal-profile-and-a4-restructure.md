@@ -8,14 +8,14 @@
 ## 1. Grid Reordering in `src/pages/cv.astro`
 
 1. **Left Column (7 cols) — Technical & Academic Core:**
-   - **Row 1:** `<CVEducation />` *(Promoted to top position; displays DAM and SMR with enriched bullets and average grades)*.
-   - **Row 2:** `<CVExperience category="tech" title="Experiencia Técnica" />` *(Cascaded to second position)*.
-   - **Row 3:** `<CVProjects title="Proyectos Software Destacados" />` *(Cascaded to third position)*.
+   - **Row 1:** `<CVEducation />` _(Promoted to top position; displays DAM and SMR with enriched bullets and average grades)_.
+   - **Row 2:** `<CVExperience category="tech" title="Experiencia Técnica" />` _(Cascaded to second position)_.
+   - **Row 3:** `<CVProjects title="Proyectos Software Destacados" />` _(Cascaded to third position)_.
 2. **Right Column (5 cols) — Skills, Credentials & Personal Profile:**
-   - **Row 1:** `<CVSkills />` *(Tech stack & tools)*.
-   - **Row 2:** `<CVCertificates />` *(Key certifications & deep-linking)*.
-   - **Row 3:** `<CVPersonalProfile title="Aspectos Personales & Aptitudes" />` *(New component: organization, sports discipline, reading, attention to detail)*.
-   - **Row 4:** `<CVCompetencies title="Idiomas & Movilidad" />` *(Languages & driver's license)*.
+   - **Row 1:** `<CVSkills />` _(Tech stack & tools)_.
+   - **Row 2:** `<CVCertificates />` _(Key certifications & deep-linking)_.
+   - **Row 3:** `<CVPersonalProfile title="Aspectos Personales & Aptitudes" />` _(New component: organization, sports discipline, reading, attention to detail)_.
+   - **Row 4:** `<CVCompetencies title="Idiomas & Movilidad" />` _(Languages & driver's license)_.
 
 ---
 
@@ -31,6 +31,7 @@
 ---
 
 ## 3. Verification Criteria
+
 - [x] Visual harmony and baseline alignment between the 7-col and 5-col layouts.
 - [x] Zero content loss in existing sections (experience and projects preserved intact).
 - [x] Zero hardcoded data in components.

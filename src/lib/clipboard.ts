@@ -25,7 +25,9 @@ export async function copyToClipboard(text: string): Promise<boolean> {
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
-      const legacyDoc = document as unknown as { execCommand?(cmd: string): boolean };
+      const legacyDoc = document as unknown as {
+        execCommand?(cmd: string): boolean;
+      };
       const successful = Boolean(legacyDoc.execCommand?.('copy'));
       document.body.removeChild(textArea);
       return successful;

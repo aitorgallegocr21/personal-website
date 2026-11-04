@@ -25,8 +25,12 @@ describe('clipboard utilities', () => {
   });
 
   it('handles writeText rejection gracefully', async () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const writeTextMock = vi.fn().mockRejectedValue(new Error('Permission denied'));
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const writeTextMock = vi
+      .fn()
+      .mockRejectedValue(new Error('Permission denied'));
     vi.stubGlobal('navigator', {
       clipboard: {
         writeText: writeTextMock,

@@ -28,7 +28,8 @@ export const PALETTE_STORAGE_KEY = 'portfolio-palette';
 
 function getLocalStorage(): Storage | null {
   if (typeof localStorage !== 'undefined') return localStorage;
-  if (typeof window !== 'undefined' && window.localStorage) return window.localStorage;
+  if (typeof window !== 'undefined' && window.localStorage)
+    return window.localStorage;
   return null;
 }
 
@@ -48,7 +49,9 @@ export function getStoredTheme(): ThemeMode {
   const stored = storage?.getItem(THEME_STORAGE_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
   if (typeof window !== 'undefined' && window.matchMedia) {
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    return window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark';
   }
   return 'dark';
 }
@@ -78,7 +81,11 @@ export function isAutoRotateEnabled(): boolean {
   const storage = getLocalStorage();
   if (!storage) return true;
   const currentStored = storage.getItem(PALETTE_STORAGE_KEY);
-  return !currentStored || currentStored === 'auto' || !DAY_PALETTES.some((p) => p.id === currentStored);
+  return (
+    !currentStored ||
+    currentStored === 'auto' ||
+    !DAY_PALETTES.some((p) => p.id === currentStored)
+  );
 }
 
 /**
@@ -116,7 +123,8 @@ export function setAutoRotate(enabled: boolean): void {
     }
   } else {
     const current =
-      (typeof document !== 'undefined' && document.documentElement.getAttribute('data-palette')) ||
+      (typeof document !== 'undefined' &&
+        document.documentElement.getAttribute('data-palette')) ||
       getTodayPalette().id;
     setPalette(current);
   }
@@ -163,7 +171,8 @@ export function syncPaletteUI(
     }
     if (autoStatusText) {
       autoStatusText.textContent = `Activa · Hoy: ${today.label} (${today.day})`;
-      autoStatusText.className = 'text-[10.5px] font-semibold text-[var(--color-accent)] truncate';
+      autoStatusText.className =
+        'text-[10.5px] font-semibold text-[var(--color-accent)] truncate';
     }
 
     checkIcons.forEach((icon) => icon.classList.add('hidden'));
@@ -202,7 +211,8 @@ export function syncPaletteUI(
     }
     if (autoStatusText) {
       autoStatusText.textContent = 'Pulsa para activar la rotación diaria';
-      autoStatusText.className = 'text-[10.5px] text-zinc-500 dark:text-zinc-400 truncate';
+      autoStatusText.className =
+        'text-[10.5px] text-zinc-500 dark:text-zinc-400 truncate';
     }
 
     paletteOptions.forEach((btn) => {
@@ -236,7 +246,9 @@ export function syncPaletteUI(
 /**
  * Initializes and binds interactive event listeners to theme and palette controls.
  */
-export function bindThemeControls(container: HTMLElement | Document = document): void {
+export function bindThemeControls(
+  container: HTMLElement | Document = document
+): void {
   const themeBtn = container.querySelector('#theme-toggle-btn');
   const paletteBtn = container.querySelector('#palette-menu-btn');
   const paletteDropdown = container.querySelector('#palette-dropdown');
@@ -265,7 +277,10 @@ export function bindThemeControls(container: HTMLElement | Document = document):
 
   // Outside click & Escape handlers
   document.addEventListener('click', (e) => {
-    if (!paletteDropdown?.contains(e.target as Node) && e.target !== paletteBtn) {
+    if (
+      !paletteDropdown?.contains(e.target as Node) &&
+      e.target !== paletteBtn
+    ) {
       paletteDropdown?.classList.add('hidden');
       paletteBtn?.setAttribute('aria-expanded', 'false');
     }

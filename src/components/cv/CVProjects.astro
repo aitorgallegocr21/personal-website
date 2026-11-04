@@ -11,67 +11,63 @@ const { title = 'Proyectos Destacados' } = Astro.props;
 const featuredProjects = cvData.projects.filter((proj) => proj.featuredInCV);
 ---
 
-{
-  featuredProjects.length > 0 && (
-    <section class="break-inside-avoid">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 print:mb-1.5 flex items-center gap-1.5">
-        <span class="w-1.5 h-3.5 rounded-xs bg-[var(--color-accent)] shrink-0" />
-        <span>{title}</span>
-      </h2>
+{featuredProjects.length > 0 && (
+  <section class="break-inside-avoid">
+    <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-200/90 pb-1 mb-2.5 print:mb-1.5 flex items-center gap-1.5">
+      <span class="w-1.5 h-3.5 rounded-xs bg-[var(--color-accent)] shrink-0" />
+      <span>{title}</span>
+    </h2>
 
-      <div class="space-y-3 print:space-y-2">
-        {featuredProjects.map((project) => (
-          <article class="break-inside-avoid border-l-2 border-[var(--color-accent-border)] hover:border-[var(--color-accent)] pl-2.5 transition-colors print:border-[var(--color-accent-border)]">
-            <div class="flex items-baseline justify-between gap-1.5">
-              <h3 class="text-xs font-bold text-zinc-900">
-                {project.title}
-              </h3>
-              <div class="flex items-center gap-2 shrink-0">
-                {project.repoUrl && (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-[var(--color-accent)] hover:underline"
-                    title={`Ver repositorio en GitHub de ${project.title}`}
-                  >
-                    <Github class="w-3 h-3 shrink-0" />
-                    <span>Repositorio ↗</span>
-                  </a>
-                )}
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1 text-[10px] font-mono text-[var(--color-accent)] hover:underline font-medium"
-                    title={`Visitar web de ${project.title}`}
-                  >
-                    <ExternalLink class="w-3 h-3 shrink-0" />
-                    <span>Web ↗</span>
-                  </a>
-                )}
-              </div>
+    <div class="space-y-3 print:space-y-2">
+      {featuredProjects.map((project) => (
+        <article class="break-inside-avoid border-l-2 border-[var(--color-accent-border)] hover:border-[var(--color-accent)] pl-2.5 transition-colors print:border-[var(--color-accent-border)]">
+          <div class="flex items-baseline justify-between gap-1.5">
+            <h3 class="text-xs font-bold text-zinc-900">{project.title}</h3>
+            <div class="flex items-center gap-2 shrink-0">
+              {project.repoUrl && (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-[var(--color-accent)] hover:underline"
+                  title={`Ver repositorio en GitHub de ${project.title}`}
+                >
+                  <Github class="w-3 h-3 shrink-0" />
+                  <span>Repositorio ↗</span>
+                </a>
+              )}
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-[10px] font-mono text-[var(--color-accent)] hover:underline font-medium"
+                  title={`Visitar web de ${project.title}`}
+                >
+                  <ExternalLink class="w-3 h-3 shrink-0" />
+                  <span>Web ↗</span>
+                </a>
+              )}
             </div>
+          </div>
 
-            {project.summary && (
-              <p class="mt-0.5 text-[10.5px] leading-snug text-zinc-600 text-pretty">
-                {project.summary}
-              </p>
-            )}
+          {project.summary && (
+            <p class="mt-0.5 text-[10.5px] leading-snug text-zinc-600 text-pretty">
+              {project.summary}
+            </p>
+          )}
 
-            {project.technologies && project.technologies.length > 0 && (
-              <div class="mt-1.5 print:mt-1 flex flex-wrap gap-1">
-                {project.technologies.map((tech) => (
-                  <span class="text-[9.5px] font-mono bg-[var(--color-accent-subtle)] text-zinc-800 px-1.5 py-0.2 rounded border border-[var(--color-accent-border)] print:border-zinc-300">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
+          {project.technologies && project.technologies.length > 0 && (
+            <div class="mt-1.5 print:mt-1 flex flex-wrap gap-1">
+              {project.technologies.map((tech) => (
+                <span class="text-[9.5px] font-mono bg-[var(--color-accent-subtle)] text-zinc-800 px-1.5 py-0.2 rounded border border-[var(--color-accent-border)] print:border-zinc-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+)}

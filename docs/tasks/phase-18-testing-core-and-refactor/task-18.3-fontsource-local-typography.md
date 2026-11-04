@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Eliminar las peticiones externas a `fonts.googleapis.com` y `fonts.gstatic.com`. Reemplazarlas instalando y sirviendo las tipografías oficiales del proyecto (`Inter` y `JetBrains Mono`) mediante paquetes de `@fontsource`. Esto garantiza cumplimiento estricto de GDPR, 0 bloqueos de red en el First Contentful Paint (FCP) y builds deterministas y sin red para Puppeteer.
 
 ---
@@ -32,9 +33,11 @@ Eliminar las peticiones externas a `fonts.googleapis.com` y `fonts.gstatic.com`.
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run check
 npm run build
 ```
-- Comprobar que en la pestaña *Network* de DevTools ya no se realiza ninguna petición externa a dominios de Google Fonts.
+
+- Comprobar que en la pestaña _Network_ de DevTools ya no se realiza ninguna petición externa a dominios de Google Fonts.
 - Verificar que los PDFs en `public/cv/*.pdf` se generan con la tipografía perfecta y sin cambios en la altura ni saltos de línea.

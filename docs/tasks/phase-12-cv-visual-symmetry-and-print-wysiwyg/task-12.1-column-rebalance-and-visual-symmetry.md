@@ -5,7 +5,9 @@
 **Components:** `src/pages/cv.astro`, `src/components/cv/CVExperience.astro`
 
 ## Context & Diagnostic
+
 In the current layout of `src/pages/cv.astro`, the 2-column layout has an acute vertical imbalance:
+
 - **Left Column:**
   - `CVExperience` (tech)
   - `CVProjects`
@@ -19,6 +21,7 @@ In the current layout of `src/pages/cv.astro`, the 2-column layout has an acute 
   - Total vertical height: ~610px (fills to the bottom).
 
 ## Specification & Architectural Plan
+
 1. **Redistribute Sections Semantically:**
    - **Left Column (Experiencia y Proyectos / Ejecución):**
      1. `CVExperience` (category="tech", title="Experiencia Técnica")

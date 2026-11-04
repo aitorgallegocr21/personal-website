@@ -2,11 +2,12 @@
 
 **Parent Phase:** [Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](index.md)  
 **Status:** Completed  
-**Completed At:** 2026-10-21  
+**Completed At:** 2026-10-21
 
 ---
 
 ## 1. Intent & Scope
+
 1. Update `src/types/resume.ts` to model optional personal `interests` (or personal development pursuits) under strict typing.
 2. In `src/data/cv-data.ts`:
    - Set `featuredInCV: true` on `clases-tenis` under `experience`.
@@ -17,6 +18,7 @@
 ---
 
 ## 2. Implementation Steps
+
 1. Edit `src/types/resume.ts`:
    ```ts
    export interface InterestItem {
@@ -68,6 +70,7 @@
 ---
 
 ## 3. Verification Criteria
+
 - `npm run check` passes with 0 TypeScript errors.
-- `clases-tenis` renders in the CV view under *Otras Experiencias*.
+- `clases-tenis` renders in the CV view under _Otras Experiencias_.
 - No fused company/location strings.

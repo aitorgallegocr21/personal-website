@@ -1,14 +1,17 @@
 # Task 2.1: Create Print Layout (PrintLayout.astro)
 
 ## Objective
+
 Create `src/layouts/PrintLayout.astro` specialized for paper and PDF export with millimetric A4 sizing, white background, and print CSS rules.
 
 ## Context & Architecture
+
 - **Location:** `src/layouts/PrintLayout.astro`
 - **Target Format:** Standard ISO A4 (210mm x 297mm).
 - **Styling:** Swiss minimalist design (pure white background, zinc typography, no dark mode styles).
 
 ## Detailed Requirements
+
 1. **HTML Shell:**
    - Standard HTML5 structure with `<html lang="es">`.
    - Title: Dynamic or defaulting to `cvData.personal.name - Curriculum Vitae`.
@@ -25,5 +28,6 @@ Create `src/layouts/PrintLayout.astro` specialized for paper and PDF export with
    - Max width matching A4 printable boundaries (`max-w-[210mm] mx-auto p-0`).
 
 ## Acceptance Criteria
+
 - [x] Layout compiles without errors in `astro check`.
 - [x] Pure white canvas with high-contrast text (`text-zinc-900`).

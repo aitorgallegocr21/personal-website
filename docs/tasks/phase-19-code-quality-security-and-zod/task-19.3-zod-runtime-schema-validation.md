@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Complementar el tipado estático de TypeScript con validación runtime estricta mediante Zod para garantizar que el archivo `cv-data.ts` nunca contenga errores tipográficos en correos, fechas que no sigan el estándar ISO `YYYY-MM-DD`, URLs rotas o campos obligatorios faltantes.
 
 ---
@@ -28,6 +29,7 @@ Complementar el tipado estático de TypeScript con validación runtime estricta 
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run test
 npm run check

@@ -16,7 +16,10 @@ const {
   image = cvData.personal.avatarUrl || '/images/avatar.webp',
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || cvData.personal.website || 'https://tuportfolio.dev');
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || cvData.personal.website || 'https://tuportfolio.dev'
+);
 const ogImageURL = new URL(image, canonicalURL);
 ---
 
@@ -25,10 +28,27 @@ const ogImageURL = new URL(image, canonicalURL);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.ico`} />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} />
-    <link rel="icon" type="image/png" sizes="32x32" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon-32x32.png`} />
-    <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/apple-touch-icon.png`} />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.ico`}
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon-32x32.png`}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/apple-touch-icon.png`}
+    />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#09090b" />
     <meta name="color-scheme" content="dark" />
@@ -58,18 +78,32 @@ const ogImageURL = new URL(image, canonicalURL);
     <script is:inline>
       (function () {
         try {
-          const PALETTES = ['amber', 'emerald', 'teal', 'sky', 'slate', 'violet', 'rose'];
+          const PALETTES = [
+            'amber',
+            'emerald',
+            'teal',
+            'sky',
+            'slate',
+            'violet',
+            'rose',
+          ];
           const storedTheme = localStorage.getItem('portfolio-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = storedTheme === 'light' || storedTheme === 'dark'
-            ? storedTheme
-            : (prefersDark ? 'dark' : 'light');
+          const prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+          ).matches;
+          const theme =
+            storedTheme === 'light' || storedTheme === 'dark'
+              ? storedTheme
+              : prefersDark
+                ? 'dark'
+                : 'light';
 
           const storedPalette = localStorage.getItem('portfolio-palette');
           const todayIndex = new Date().getDay(); // 0 (Domingo) - 6 (Sábado)
-          const palette = storedPalette && PALETTES.includes(storedPalette)
-            ? storedPalette
-            : PALETTES[todayIndex];
+          const palette =
+            storedPalette && PALETTES.includes(storedPalette)
+              ? storedPalette
+              : PALETTES[todayIndex];
 
           const root = document.documentElement;
           if (theme === 'dark') {
@@ -81,7 +115,7 @@ const ogImageURL = new URL(image, canonicalURL);
           }
           root.setAttribute('data-theme', theme);
           root.setAttribute('data-palette', palette);
-        } catch (e) {
+        } catch (_e) {
           document.documentElement.classList.add('dark');
           document.documentElement.setAttribute('data-theme', 'dark');
           document.documentElement.setAttribute('data-palette', 'emerald');

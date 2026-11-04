@@ -2,16 +2,18 @@
 
 **Parent Phase:** [Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](index.md)  
 **Status:** Completed  
-**Completed At:** 2026-10-21  
+**Completed At:** 2026-10-21
 
 ---
 
 ## 1. Intent & Scope
+
 Harden `PrintLayout.astro` and global print styles to guarantee identical rendering across different devices and operating systems by loading web typography, resolving FOUC, locking zero-margin page boxes, and aligning localStorage key naming conventions.
 
 ---
 
 ## 2. Implementation Steps
+
 1. **Font Synchronization in `PrintLayout.astro`:**
    - Add Google Fonts preconnect and stylesheets (`Inter` and `JetBrains Mono`) to `<head>`:
      ```html
@@ -32,6 +34,7 @@ Harden `PrintLayout.astro` and global print styles to guarantee identical render
 ---
 
 ## 3. Verification Criteria
+
 - `PrintLayout.astro` loads `Inter` and `JetBrains Mono`.
 - Changing palette in portfolio immediately reflects in `/cv` via unified `portfolio-palette` key.
 - URL parameter `?palette=...` overrides palette immediately without flash.

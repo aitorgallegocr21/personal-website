@@ -3,7 +3,9 @@
 ## 1. Problem Description & Root Cause Analysis
 
 ### Visual Bug Reported
+
 When a user navigates to the root web portfolio (`/` or `/personal-website/`), the `CertificateModal` (`Visor de Documento`) appears immediately rendered on top of the hero section without the user having clicked any certificate trigger:
+
 1. The modal iframe is completely white and blank (`src=""`).
 2. Clicking the close button (`X`) does not dismiss or hide the modal.
 3. Clicking the backdrop or outside container does not close it.
@@ -11,6 +13,7 @@ When a user navigates to the root web portfolio (`/` or `/personal-website/`), t
 5. Clicking "Abrir" opens the exact same page in a new tab because `href="#"`.
 
 ### Root Cause
+
 1. **CSS Selector Clash with Tailwind v4:**
    In [`src/components/portfolio/CertificateModal.astro`](src/components/portfolio/CertificateModal.astro#L7), the HTML `<dialog>` tag has the classes:
    ```html
@@ -32,7 +35,10 @@ When a user navigates to the root web portfolio (`/` or `/personal-website/`), t
 1. **Fix Dialog Display Rules:**
    - Change the `<dialog>` class declaration from `flex ... open:flex` to:
      ```html
-     class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none bg-transparent p-4 sm:p-6 md:p-10 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md z-50 items-center justify-center border-0 open:flex hidden"
+     class="fixed inset-0 m-0 h-screen w-screen max-h-none max-w-none
+     bg-transparent p-4 sm:p-6 md:p-10 backdrop:bg-zinc-950/80
+     backdrop:backdrop-blur-md z-50 items-center justify-center border-0
+     open:flex hidden"
      ```
      Or explicitly declare scoped CSS:
      ```css
@@ -55,12 +61,11 @@ When a user navigates to the root web portfolio (`/` or `/personal-website/`), t
      ```ts
      modal.addEventListener('click', (e) => {
        const rect = modalContainer.getBoundingClientRect();
-       const isInDialog = (
+       const isInDialog =
          rect.top <= e.clientY &&
          e.clientY <= rect.top + rect.height &&
          rect.left <= e.clientX &&
-         e.clientX <= rect.left + rect.width
-       );
+         e.clientX <= rect.left + rect.width;
        if (!isInDialog) {
          closeCertificateModal();
        }

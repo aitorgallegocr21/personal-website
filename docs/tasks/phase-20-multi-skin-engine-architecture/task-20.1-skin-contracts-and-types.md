@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Modelar el sistema de tipos y el catálogo centralizado de skins para el portfolio web, formalizando las propiedades que identifican cada diseño visual completo (identificador único, nombre descriptivo, autor, versión, preview/icono y capacidades).
 
 ---
@@ -34,6 +35,7 @@ Modelar el sistema de tipos y el catálogo centralizado de skins para el portfol
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run check
 npm run test

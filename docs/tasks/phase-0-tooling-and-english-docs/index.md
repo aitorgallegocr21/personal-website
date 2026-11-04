@@ -3,9 +3,11 @@
 **Status:** Completed (2026-10-17)
 
 ## Objective
+
 Initialize the project infrastructure, strict TypeScript configuration, Tailwind CSS v4, path aliases, print CSS rules, and English documentation.
 
 ## Tasks
+
 - [x] Initialize Astro repository with Tailwind CSS and strict TypeScript.
 - [x] Configure agent operating guidelines in [`AGENTS.md`](../../../AGENTS.md).
 - [x] Configure TypeScript path aliases (`@/*`, `@components/*`, `@layouts/*`, `@data/*`, `@styles/*`).

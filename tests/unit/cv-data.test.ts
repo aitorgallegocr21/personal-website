@@ -24,19 +24,29 @@ describe('cvData SSOT integrity', () => {
       expect(cvData.personal.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
       expect(cvData.personal.location.trim().length).toBeGreaterThan(0);
       expect(cvData.personal.github).toMatch(/^https:\/\/github\.com\//);
-      expect(cvData.personal.linkedin).toMatch(/^https:\/\/(www\.)?linkedin\.com\//);
+      expect(cvData.personal.linkedin).toMatch(
+        /^https:\/\/(www\.)?linkedin\.com\//
+      );
     });
 
     it('has a valid ISO birthDate matching YYYY-MM-DD', () => {
-      expect(cvData.personal.birthDate).toMatch(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/);
+      expect(cvData.personal.birthDate).toMatch(
+        /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/
+      );
       const age = calculateAge(cvData.personal.birthDate);
       expect(age).toBeGreaterThanOrEqual(18);
     });
 
     it('has an existing avatar image file if defined', () => {
       if (cvData.personal.avatarUrl) {
-        const filePath = resolve(import.meta.dirname, '../../public', cvData.personal.avatarUrl.replace(/^\//, ''));
-        expect(existsSync(filePath), `Avatar file not found: ${filePath}`).toBe(true);
+        const filePath = resolve(
+          import.meta.dirname,
+          '../../public',
+          cvData.personal.avatarUrl.replace(/^\//, '')
+        );
+        expect(existsSync(filePath), `Avatar file not found: ${filePath}`).toBe(
+          true
+        );
       }
     });
   });
@@ -79,8 +89,15 @@ describe('cvData SSOT integrity', () => {
           expect(project.liveUrl).toMatch(/^https?:\/\//);
         }
         if (project.image) {
-          const filePath = resolve(import.meta.dirname, '../../public', project.image.replace(/^\//, ''));
-          expect(existsSync(filePath), `Project image not found: ${filePath}`).toBe(true);
+          const filePath = resolve(
+            import.meta.dirname,
+            '../../public',
+            project.image.replace(/^\//, '')
+          );
+          expect(
+            existsSync(filePath),
+            `Project image not found: ${filePath}`
+          ).toBe(true);
         }
       }
     });
@@ -98,8 +115,15 @@ describe('cvData SSOT integrity', () => {
           if (cert.documentUrl.startsWith('http')) {
             expect(cert.documentUrl).toMatch(/^https?:\/\//);
           } else {
-            const filePath = resolve(import.meta.dirname, '../../public', cert.documentUrl.replace(/^\//, ''));
-            expect(existsSync(filePath), `Certificate document not found: ${filePath}`).toBe(true);
+            const filePath = resolve(
+              import.meta.dirname,
+              '../../public',
+              cert.documentUrl.replace(/^\//, '')
+            );
+            expect(
+              existsSync(filePath),
+              `Certificate document not found: ${filePath}`
+            ).toBe(true);
           }
         }
 
@@ -109,8 +133,15 @@ describe('cvData SSOT integrity', () => {
             if (doc.url.startsWith('http')) {
               expect(doc.url).toMatch(/^https?:\/\//);
             } else {
-              const filePath = resolve(import.meta.dirname, '../../public', doc.url.replace(/^\//, ''));
-              expect(existsSync(filePath), `Sub-document not found: ${filePath}`).toBe(true);
+              const filePath = resolve(
+                import.meta.dirname,
+                '../../public',
+                doc.url.replace(/^\//, '')
+              );
+              expect(
+                existsSync(filePath),
+                `Sub-document not found: ${filePath}`
+              ).toBe(true);
             }
           }
         }
@@ -159,8 +190,14 @@ describe('cvData SSOT integrity', () => {
 
   describe('typography self-hosting', () => {
     it('does not contain external Google Fonts references in layouts', () => {
-      const baseLayoutPath = resolve(import.meta.dirname, '../../src/layouts/BaseLayout.astro');
-      const printLayoutPath = resolve(import.meta.dirname, '../../src/layouts/PrintLayout.astro');
+      const baseLayoutPath = resolve(
+        import.meta.dirname,
+        '../../src/layouts/BaseLayout.astro'
+      );
+      const printLayoutPath = resolve(
+        import.meta.dirname,
+        '../../src/layouts/PrintLayout.astro'
+      );
       const baseLayoutContent = readFileSync(baseLayoutPath, 'utf8');
       const printLayoutContent = readFileSync(printLayoutPath, 'utf8');
 

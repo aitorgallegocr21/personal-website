@@ -2,12 +2,14 @@
 
 **Parent Phase:** [Phase 13: Multi-Palette PDF Build Engine, Editorial CV Architecture & Print Hardening](index.md)  
 **Status:** Completed  
-**Completed At:** 2026-10-21  
+**Completed At:** 2026-10-21
 
 ---
 
 ## 1. Intent & Scope
+
 Create an automated Node.js build script (`scripts/generate-pdf.mjs`) that spins up headless Chromium during build to render and save 100% deterministic, pixel-perfect A4 PDFs for each of the 6 color palettes:
+
 - `cv-aitor-gallego-emerald.pdf` (default)
 - `cv-aitor-gallego-slate.pdf`
 - `cv-aitor-gallego-sky.pdf`
@@ -19,6 +21,7 @@ Create an automated Node.js build script (`scripts/generate-pdf.mjs`) that spins
 ---
 
 ## 2. Implementation Steps
+
 1. **Script Architecture (`scripts/generate-pdf.mjs`):**
    - Use `puppeteer` (or `puppeteer-core` with system Chrome fallback `/usr/bin/google-chrome`) to launch headless browser.
    - Serve static `dist` or connect to preview server.
@@ -37,6 +40,7 @@ Create an automated Node.js build script (`scripts/generate-pdf.mjs`) that spins
 ---
 
 ## 3. Verification Criteria
+
 - Running `npm run build:pdf` produces valid, selectable A4 PDFs for all 6 palettes.
 - All PDF files are located in `dist/cv/` and `public/cv/`.
 - Download links in `CVPrintBar` successfully serve the generated PDFs.

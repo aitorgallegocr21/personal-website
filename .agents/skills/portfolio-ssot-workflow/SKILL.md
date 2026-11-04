@@ -12,15 +12,18 @@ This skill guides AI agents and developers working on this repository to uphold 
 ## 1. Golden Architectural Principles
 
 ### A. Single Source of Truth (SSOT)
+
 - **Rule:** Never hardcode biographical copy, project names, descriptions, tech stacks, credentials, or companies inside `.astro` or `.html` components.
 - **Data Source:** Everything must be consumed from `src/data/cv-data.ts`.
 - **Typing:** Any new field or structure must first be modeled in `src/types/resume.ts` with strict TypeScript types (zero `any`).
 
 ### B. Dynamic Calculations
+
 - **Age:** Never hardcode age strings (e.g., "19 años") in text. Compute dynamically using `birthDate: "YYYY-MM-DD"` from `cvData.personal.birthDate`.
 - **Years/Periods:** Calculate durations dynamically or format strictly via utility functions.
 
 ### C. Asset Storage Conventions
+
 - Avatars and personal portraits: `public/images/`
 - Project screenshots and preview mockups: `public/images/projects/`
 - Certificate documents and degree PDFs: `public/docs/certificates/`
@@ -58,6 +61,7 @@ This skill guides AI agents and developers working on this repository to uphold 
 ## 4. Verification & Quality Gates
 
 Before concluding any iteration or proposing a commit:
+
 1. Run `npm run check` (`astro check && tsc --noEmit`).
 2. Run `npm run build` (`astro check && astro build`).
 3. Confirm zero TypeScript errors, zero warnings, and zero broken assets in `dist/`.

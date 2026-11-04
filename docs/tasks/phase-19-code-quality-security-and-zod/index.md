@@ -1,6 +1,6 @@
 # Phase 19: Calidad de Código, Seguridad HTTP & Validación Zod
 
-**Status:** Planned  
+**Status:** In Progress  
 **Branch:** `feat/phase-19-code-quality-security-and-zod`  
 **Core Mission:** Implementar tooling profesional de análisis estático y formateo automático (ESLint + Prettier para Astro/TS/Tailwind), blindar la seguridad de la aplicación con cabeceras HTTP de protección moderna en `_headers`, e incorporar validación de esquema en tiempo de ejecución para el archivo maestro de datos `cvData` mediante Zod.
 
@@ -22,8 +22,8 @@
 
 ## 2. Índice de Tareas
 
-- [ ] **[Task 19.1: Configuración de ESLint y Prettier para Astro y TypeScript](task-19.1-eslint-and-prettier-tooling.md)** — Creación de `eslint.config.mjs`, `.prettierrc.mjs` y scripts de validación `npm run lint` y `npm run format`.
-- [ ] **[Task 19.2: Hardening de Cabeceras de Seguridad en public/_headers](task-19.2-security-headers-hardening.md)** — Configuración de cabeceras de seguridad modernas (HSTS, CSP, Frameguard, Referrer-Policy y Permissions-Policy).
+- [x] **[Task 19.1: Configuración de ESLint y Prettier para Astro y TypeScript](task-19.1-eslint-and-prettier-tooling.md)** — Creación de `eslint.config.mjs`, `.prettierrc.mjs` y scripts de validación `npm run lint` y `npm run format`.
+- [ ] **[Task 19.2: Hardening de Cabeceras de Seguridad en public/\_headers](task-19.2-security-headers-hardening.md)** — Configuración de cabeceras de seguridad modernas (HSTS, CSP, Frameguard, Referrer-Policy y Permissions-Policy).
 - [ ] **[Task 19.3: Esquemas Zod y Validación de Datos SSOT](task-19.3-zod-runtime-schema-validation.md)** — Modelado del esquema Zod de `ResumeData` y test unitario de validación continua.
 
 ---

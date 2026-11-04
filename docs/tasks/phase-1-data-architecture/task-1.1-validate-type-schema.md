@@ -1,14 +1,17 @@
 # Task 1.1: Validate Strict Type Schema
 
 ## Objective
+
 Ensure `src/types/resume.ts` defines complete, strictly-typed TypeScript interfaces covering all CV and portfolio requirements without any usage of `any`.
 
 ## Context & Architecture
+
 - **Location:** `src/types/resume.ts`
 - **SSOT Requirement:** Every field consumed in web and print templates must be strictly typed here first.
 - **Rules:** Zero `any`. Optional fields must use explicit `?` markers with safe unions (`string | undefined`).
 
 ## Detailed Specifications
+
 1. **`ContactInfo`:**
    - `name: string`
    - `title: string`
@@ -29,6 +32,7 @@ Ensure `src/types/resume.ts` defines complete, strictly-typed TypeScript interfa
    - Must contain `personal`, `about`, `skills`, `experience`, `projects`, `certificates`, `education`, and optional `languages`.
 
 ## Acceptance Criteria
+
 - [x] TypeScript compilation (`npm run check`) passes with 0 errors.
 - [x] No `any` type in `src/types/resume.ts`.
 - [x] Types exported and ready for consumption in `src/data/cv-data.ts`.

@@ -4,12 +4,15 @@
 **Branch:** `feat/phase-9-portfolio-creativity-and-modals`
 
 ## Context & Problem
+
 Currently, each certificate only supported a single `documentUrl?: string`. However:
+
 - Several certifications (such as NTT Data Java, Unit Testing, Spring APIs, Prompt Engineering, Angular) possess multiple PDF files (main certificate plus multiple granular syllabus/content modules).
 - Some courses lack a single "diploma" and only consist of multiple module PDFs.
 - Previously, users could not view all related PDFs or download them cohesively; either only one arbitrary PDF was linked or content modules remained inaccessible from the UI.
 
 ## Requirements
+
 1. **Schema Evolution (`src/types/resume.ts`):**
    - Extended `Certificate` interface with `CertificateDocument`:
      ```typescript
@@ -39,6 +42,7 @@ Currently, each certificate only supported a single `documentUrl?: string`. Howe
    - Modal trigger button displays `Ver documentos ({count})` and passes structured document payload via `data-docs` attribute without requiring bundle bloat.
 
 ## Acceptance Criteria
+
 - [x] Schema strictly typed with 0 `any`.
 - [x] All multi-document certificates allow inspecting and downloading their associated PDFs.
 - [x] UI provides clear indicator of document count and clean switching controls.

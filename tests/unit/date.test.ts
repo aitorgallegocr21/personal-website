@@ -67,12 +67,22 @@ describe('calculateAge', () => {
 
   describe('format error handling', () => {
     it('throws descriptive error on invalid format strings', () => {
-      expect(() => calculateAge('invalid-date')).toThrow(/Invalid birthDate string format/);
-      expect(() => calculateAge('2000/01/01')).toThrow(/Invalid birthDate string format/);
-      expect(() => calculateAge('2000-1-1')).toThrow(/Invalid birthDate string format/);
+      expect(() => calculateAge('invalid-date')).toThrow(
+        /Invalid birthDate string format/
+      );
+      expect(() => calculateAge('2000/01/01')).toThrow(
+        /Invalid birthDate string format/
+      );
+      expect(() => calculateAge('2000-1-1')).toThrow(
+        /Invalid birthDate string format/
+      );
       expect(() => calculateAge('')).toThrow(/Invalid birthDate string format/);
-      expect(() => calculateAge('2000-13-45')).toThrow(/Invalid birthDate string format/);
-      expect(() => calculateAge('2000-00-10')).toThrow(/Invalid birthDate string format/);
+      expect(() => calculateAge('2000-13-45')).toThrow(
+        /Invalid birthDate string format/
+      );
+      expect(() => calculateAge('2000-00-10')).toThrow(
+        /Invalid birthDate string format/
+      );
     });
   });
 });

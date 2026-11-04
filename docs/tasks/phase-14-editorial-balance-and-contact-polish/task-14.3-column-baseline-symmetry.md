@@ -1,16 +1,18 @@
 # Task 14.3: Column Baseline Symmetry & Complementary Experience Condensation
 
 **Parent Phase:** [Phase 14: Editorial Balance, Contact Architecture & Symmetrical Bottom Rhythm](index.md)  
-**Status:** Completed  
+**Status:** Completed
 
 ---
 
 ## 1. Intent & Scope
+
 Harmonize the bottom of both columns so they terminate at the exact same horizontal baseline, leaving a clean, balanced margin at the bottom of the A4 page without spillover or uneven emptiness.
 
 ---
 
 ## 2. Implementation Steps
+
 1. In `src/data/cv-data.ts`:
    - Condense `clases-tenis` to 1 focused bullet highlighting technical planning, communication, and adaptability:
      ```ts
@@ -25,7 +27,7 @@ Harmonize the bottom of both columns so they terminate at the exact same horizon
      ],
      ```
 2. Calibrate vertical rhythm in `src/pages/cv.astro`:
-   - Adjust `space-y-*` or side column density so that the left column (terminating at *Hostelería Local*) aligns horizontally with the right column (terminating at *Idiomas & Movilidad*).
+   - Adjust `space-y-*` or side column density so that the left column (terminating at _Hostelería Local_) aligns horizontally with the right column (terminating at _Idiomas & Movilidad_).
    - If needed for perfect baseline parity, activate `prompt-engineering-genai` under `certificates` or fine-tune card margins.
 3. Verify with `npm run build`:
    - Confirm all 7 PDFs in `public/cv/` and `dist/cv/` compile cleanly in 1 single page with zero overflow.
@@ -34,6 +36,7 @@ Harmonize the bottom of both columns so they terminate at the exact same horizon
 ---
 
 ## 3. Verification Criteria
+
 - Left and right columns end at the same horizontal baseline.
 - Exactly 1 single page A4 PDF generated across all palettes.
 - `npm run check && npm run build` completes with 0 errors.

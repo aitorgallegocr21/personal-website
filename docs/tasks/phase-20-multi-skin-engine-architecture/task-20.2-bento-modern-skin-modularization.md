@@ -6,6 +6,7 @@
 ---
 
 ## 1. Objetivo Técnico
+
 Modularizar la implementación visual existente del portfolio bajo la carpeta de skin `src/components/skins/bento/` sin alterar su comportamiento ni estilos, permitiendo que la página principal delegue el renderizado a un orquestador de skins limpio y escalable.
 
 ---
@@ -30,8 +31,10 @@ Modularizar la implementación visual existente del portfolio bajo la carpeta de
 ---
 
 ## 3. Verificación
+
 ```bash
 npm run check
 npm run build
 ```
+
 - Verificar en navegador que `http://localhost:4321/personal-website/` es visualmente indistinguible del estado actual previo a la modularización.
