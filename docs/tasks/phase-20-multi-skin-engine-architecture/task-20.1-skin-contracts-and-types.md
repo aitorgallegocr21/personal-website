@@ -1,7 +1,7 @@
 # Task 20.1: Definición de Tipos, Contratos y Registro de Skins
 
-**Status:** Planned  
-**Scope:** `src/types/skin.ts`, `src/components/skins/registry.ts`
+**Status:** Completed  
+**Scope:** `src/types/skin.ts`, `src/components/skins/registry.ts`, `tests/unit/skin-registry.test.ts`
 
 ---
 

@@ -8,6 +8,7 @@ export default [
       '.astro/**',
       'node_modules/**',
       'public/**',
+      'chrome/**',
       '.vercel/**',
       '.netlify/**',
     ],
