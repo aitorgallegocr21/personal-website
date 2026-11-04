@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { cvData } from '@/data/cv-data';
 import { VALID_PALETTES } from '@/types/resume';
@@ -154,6 +154,20 @@ describe('cvData SSOT integrity', () => {
       ];
       expect(VALID_PALETTES).toEqual(expectedPalettes);
       expect(VALID_PALETTES.length).toBe(8);
+    });
+  });
+
+  describe('typography self-hosting', () => {
+    it('does not contain external Google Fonts references in layouts', () => {
+      const baseLayoutPath = resolve(import.meta.dirname, '../../src/layouts/BaseLayout.astro');
+      const printLayoutPath = resolve(import.meta.dirname, '../../src/layouts/PrintLayout.astro');
+      const baseLayoutContent = readFileSync(baseLayoutPath, 'utf8');
+      const printLayoutContent = readFileSync(printLayoutPath, 'utf8');
+
+      expect(baseLayoutContent).not.toContain('fonts.googleapis.com');
+      expect(baseLayoutContent).not.toContain('fonts.gstatic.com');
+      expect(printLayoutContent).not.toContain('fonts.googleapis.com');
+      expect(printLayoutContent).not.toContain('fonts.gstatic.com');
     });
   });
 });

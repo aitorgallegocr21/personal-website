@@ -170,7 +170,8 @@ cp .env.example .env
 | `npm run dev` | Starts local development server at `http://localhost:4321`. |
 | `astro dev --background` | Runs development server in background mode. |
 | `npm run check` | Runs `@astrojs/check` and TypeScript validation without building. |
-| `npm run build` | Full production build (`astro check && astro build`) into `dist/`. |
+| `npm test` | Runs the Vitest unit test suite (32 tests covering SSOT, dates, themes, and self-hosted fonts). |
+| `npm run build` | Full production build (`astro check && astro build && npm run build:pdf`). |
 | `npm run preview` | Spins up a local server to preview production output from `dist/`. |
 
 ---

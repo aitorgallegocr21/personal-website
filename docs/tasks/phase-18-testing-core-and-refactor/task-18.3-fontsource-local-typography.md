@@ -1,6 +1,6 @@
 # Task 18.3: Auto-alojamiento Tipográfico con @fontsource
 
-**Status:** Ready  
+**Status:** Completed  
 **Scope:** `package.json`, `src/styles/global.css`, `src/layouts/BaseLayout.astro`, `src/layouts/PrintLayout.astro`
 
 ---
