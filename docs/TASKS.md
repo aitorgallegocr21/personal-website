@@ -7,7 +7,14 @@
 ---
 
 ## Active Phase
-*None currently active. Project is fully synchronized and up to date.*
+- [ ] **[Phase 18: Testing Core, Desacoplamiento & Fuentes Locales](tasks/phase-18-testing-core-and-refactor/index.md)** — *In Progress / Ready to Start* (Testing unitario con Vitest para cálculos dinámicos de edad y consistencia SSOT, desacoplamiento de scripts clientes a `src/lib/` y auto-alojamiento tipográfico local con `@fontsource`).
+
+---
+
+## Upcoming Phases (Roadmap)
+- [ ] **[Phase 19: Calidad de Código, Seguridad HTTP & Validación Zod](tasks/phase-19-code-quality-security-and-zod/index.md)** — *Planned* (ESLint flat config, Prettier con ordenamiento de clases Tailwind, hardening de cabeceras de seguridad en `public/_headers` y validación runtime de `cvData` con esquemas Zod).
+- [ ] **[Phase 20: Arquitectura del Motor Multi-Skin](tasks/phase-20-multi-skin-engine-architecture/index.md)** — *Planned* (Modularización de la vista Bento actual como skin por defecto `bento-modern`, contratos de interfaz para futuros estilos visuales completos intercambiables, y selector con persistencia local).
+- [ ] **[Phase 21: Testing E2E & SEO Enriquecido](tasks/phase-21-e2e-testing-and-structured-seo/index.md)** — *Planned* (Automatización de pruebas de navegación e integración con Playwright, calibración A4 desatendida, marcado Schema.org JSON-LD para Google y generación de sitemap/robots).
 
 ---
 
