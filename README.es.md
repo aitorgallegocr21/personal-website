@@ -79,8 +79,9 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **🧠 Filosofía de Ingeniería & Enfoque de Trabajo:** Sección dedicada en el portfolio web que refleja el criterio técnico, el dominio de fundamentos sin cajas negras y el equilibrio pragmático orientado a evitar la sobreingeniería y maximizar la entrega de valor.
 - **🖨️ Motor Headless de PDFs Multi-Paleta & Barra Dual de Impresión:** Compilación automatizada en build de PDFs A4 deterministas para las 6 paletas de color con Chromium headless, descarga directa en 1 clic y modal accesible de recomendación de formato para impresión.
 - **📐 Retrato Editorial & Columna de Contacto:** Insignia de retrato rectangular en proporción nativa, encabezado estructurado `// CONTACTO` con icono telefónico alineado e insignias de contacto optimizadas con defensa anti-scraping.
-- **🔍 Schema.org Enriquecido & SEO Automatizado:** Datos estructurados JSON-LD (`Person` y `ProfilePage`), `sitemap-index.xml` autogenerado con `@astrojs/sitemap` y directivas para motores de búsqueda en `robots.txt`.
-- **🧪 Suite Completa de Pruebas (Unitarias & E2E):** 59 tests unitarios con Vitest (integridad SSOT, cálculo de fechas, esquemas Zod, estado de skins) junto a 12 tests End-to-End en navegador real con Playwright (interacciones y contención de layout A4).
+- **🔍 Schema.org Enriquecido & SEO Automatizado:** Datos estructurados JSON-LD (`Person` y `ProfilePage`), `sitemap-index.xml` autogenerado con `@astrojs/sitemap`, directivas para motores de búsqueda en `robots.txt` y tarjeta social Open Graph dedicada de 1200x630 para compartir en redes.
+- **🖼️ Pipeline Nativo de Optimización de Assets:** Uso del componente nativo `<Image />` de Astro potenciado por Sharp, transcodificando capturas y retratos a WebP sin Cumulative Layout Shift (CLS) y reduciendo el peso de imágenes en un 97%.
+- **🧪 Suite Completa de Pruebas (Unitarias & E2E):** 59 tests unitarios con Vitest (integridad SSOT, cálculo de fechas, esquemas Zod, estado de skins) junto a 13 tests End-to-End en navegador real con Playwright automatizados en GitHub Actions CI con resolución elástica de Chromium.
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 
 ---

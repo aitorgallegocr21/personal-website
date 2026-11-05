@@ -1,6 +1,9 @@
 ---
 import { Sun, Moon, Palette, Sparkles, Check, LayoutGrid } from 'lucide-astro';
 import { SKINS } from '@/components/skins/registry';
+import { getTodayPalette } from '@/lib/theme-manager';
+
+const today = getTodayPalette();
 
 const palettes = [
   {
@@ -150,13 +153,13 @@ const palettes = [
         <button
           type="button"
           id="palette-auto-rotate-btn"
-          class="group flex w-full cursor-pointer items-center justify-between rounded-xl border p-2 text-left transition-all"
+          class="group flex w-full cursor-pointer items-center justify-between rounded-xl border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] p-2 text-left shadow-xs transition-all"
           role="menuitem"
         >
           <div class="flex min-w-0 items-center gap-2.5">
             <div
               id="auto-icon-box"
-              class="shrink-0 rounded-lg bg-[var(--color-accent-subtle)] p-1.5 text-[var(--color-accent)] transition-colors"
+              class="shrink-0 rounded-lg bg-[var(--color-accent)] p-1.5 text-[var(--color-accent-contrast)] shadow-xs transition-colors"
             >
               <Sparkles class="h-4 w-4" />
             </div>
@@ -172,9 +175,9 @@ const palettes = [
               </div>
               <span
                 id="auto-status-text"
-                class="truncate text-[10.5px] text-zinc-500 dark:text-zinc-400"
+                class="truncate text-[10.5px] font-semibold text-[var(--color-accent)]"
               >
-                Activa · Hoy: Verde Tech
+                Activa · Hoy: {today.label} ({today.day})
               </span>
             </div>
           </div>

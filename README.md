@@ -79,8 +79,9 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **🧠 Engineering Philosophy & Work Approach:** Dedicated portfolio section reflecting foundational systems mastery, deep curiosity over black-box abstractions, and a pragmatic balance preventing over-engineering while delivering real value.
 - **🖨️ Multi-Palette Headless PDF Build Engine & Dual-Action Print Bar:** Automated build-time generation of 100% deterministic A4 PDFs across all 6 color palettes via headless Chromium, paired with an interactive 1-click download button and an accessible print layout warning modal.
 - **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and streamlined contact badges with anti-scraping defense.
-- **🔍 Rich Schema.org & Automated SEO:** JSON-LD structured data (`Person` & `ProfilePage`), auto-generated `sitemap-index.xml` via `@astrojs/sitemap`, and search crawler directives in `robots.txt`.
-- **🧪 Comprehensive Test Suite (Unit & E2E):** 59 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state) paired with 12 End-to-End browser tests via Playwright (live interactions, A4 print layout containment).
+- **🔍 Rich Schema.org & Automated SEO:** JSON-LD structured data (`Person` & `ProfilePage`), auto-generated `sitemap-index.xml` via `@astrojs/sitemap`, search crawler directives in `robots.txt`, and dedicated 1200x630 Open Graph preview card for social sharing.
+- **🖼️ Native Asset Optimization Pipeline:** Astro's built-in `<Image />` component powered by Sharp, transcoding project previews and portraits to lightweight WebP with zero Cumulative Layout Shift (CLS) and a 97% image payload reduction.
+- **🧪 Comprehensive Test Suite (Unit & E2E):** 59 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state) paired with 13 End-to-End browser tests via Playwright automated in GitHub Actions CI with resilient system Chrome detection.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
 ---

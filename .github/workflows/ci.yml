@@ -38,3 +38,17 @@ jobs:
         env:
           PUBLIC_PHONE: ${{ secrets.PUBLIC_PHONE || '+34 000 00 00 00' }}
         run: npm run build
+
+      - name: Install Playwright Browsers & Dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright E2E Tests
+        run: npm run test:e2e
+
+      - name: Upload Playwright Report
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

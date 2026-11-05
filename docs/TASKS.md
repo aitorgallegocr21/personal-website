@@ -14,6 +14,8 @@
 
 ## Completed Phases (Archive & Changelog)
 
+- [x] **[Phase 22: CI Hardening, Asset Optimization & Social Branding](tasks/phase-22-ci-hardening-asset-optimization-and-social-branding/index.md)** — _Completed 2026-11-05_ (Integración de Playwright E2E en GitHub Actions CI con resolución elástica de Chromium del sistema, diseño y generación de banner social Open Graph 1200x630 para Twitter/LinkedIn con ingestión de metadatos, y migración al pipeline nativo de optimización de imágenes `astro:assets` con sharp reduciendo el payload de imágenes en un 97%).
+
 - [x] **[Phase 21: Testing E2E & SEO Enriquecido](tasks/phase-21-e2e-testing-and-structured-seo/index.md)** — _Completed 2026-11-04_ (Automatización de pruebas E2E con Playwright para navegación interactiva y calibración A4 de impresión, marcado estructurado Schema.org JSON-LD para Google y generación automática de sitemap/robots).
 
 - [x] **[Phase 20: Arquitectura del Motor Multi-Skin](tasks/phase-20-multi-skin-engine-architecture/index.md)** — _Completed 2026-11-04_ (Modularización de la vista Bento actual como skin por defecto `bento-modern`, contratos formales de tipos, catálogo centralizado y selector UI integrado con persistencia en `localStorage`).

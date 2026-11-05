@@ -70,6 +70,36 @@ test.describe('Web Portfolio Interactive E2E', () => {
     expect(storedPalette).toBe('sky');
   });
 
+  test('always defaults to live rotation mode upon loading the page', async ({
+    page,
+  }) => {
+    await page.goto('./');
+
+    // Open dropdown to inspect controls
+    const paletteBtn = page.locator('#palette-menu-btn');
+    await paletteBtn.click();
+
+    // Confirm that upon loading, live rotation is active
+    const autoStatusText = page.locator('#auto-status-text');
+    await expect(autoStatusText).toContainText('Activa');
+
+    const autoLiveIndicator = page.locator('#auto-live-indicator');
+    await expect(autoLiveIndicator).toBeVisible();
+
+    // Select a manual palette
+    const skyOption = page.locator(
+      '.palette-select-option[data-palette-id="sky"]'
+    );
+    await skyOption.click();
+    await expect(page.locator('html')).toHaveAttribute('data-palette', 'sky');
+
+    // Reload the page: must default back to live rotation
+    await page.reload();
+    await paletteBtn.click();
+    await expect(autoStatusText).toContainText('Activa');
+    await expect(autoLiveIndicator).toBeVisible();
+  });
+
   test('opens certificate modal viewer and closes it on Escape key press', async ({
     page,
   }) => {
@@ -166,5 +196,26 @@ test.describe('Web Portfolio Interactive E2E', () => {
 
     const body = await response?.text();
     expect(body).toContain('sitemap');
+  });
+
+  test('serves dedicated Open Graph and Twitter card preview metadata', async ({
+    page,
+  }) => {
+    await page.goto('./');
+
+    const ogImage = page.locator('meta[property="og:image"]');
+    await expect(ogImage).toHaveAttribute('content', /images\/og-image\.png$/);
+
+    const ogWidth = page.locator('meta[property="og:image:width"]');
+    await expect(ogWidth).toHaveAttribute('content', '1200');
+
+    const ogHeight = page.locator('meta[property="og:image:height"]');
+    await expect(ogHeight).toHaveAttribute('content', '630');
+
+    const ogType = page.locator('meta[property="og:image:type"]');
+    await expect(ogType).toHaveAttribute('content', 'image/png');
+
+    const twitterCard = page.locator('meta[name="twitter:card"]');
+    await expect(twitterCard).toHaveAttribute('content', 'summary_large_image');
   });
 });
