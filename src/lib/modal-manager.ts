@@ -94,6 +94,9 @@ export function selectModalDoc(index: number): void {
   const modalExternal = document.getElementById(
     'cert-modal-external'
   ) as HTMLAnchorElement | null;
+  const modalMobileOpen = document.getElementById(
+    'cert-modal-mobile-open'
+  ) as HTMLAnchorElement | null;
   const modalCounterBadge = document.getElementById('cert-modal-counter-badge');
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalNavTabs = document.getElementById('cert-modal-nav-tabs');
@@ -109,6 +112,9 @@ export function selectModalDoc(index: number): void {
   if (modalExternal) {
     modalExternal.href = doc.url;
   }
+  if (modalMobileOpen) {
+    modalMobileOpen.href = doc.url;
+  }
 
   if (modalCounterBadge) {
     modalCounterBadge.textContent = `${index + 1} de ${currentDocsList.length}`;
@@ -120,10 +126,15 @@ export function selectModalDoc(index: number): void {
     tabButtons.forEach((btn, i) => {
       if (i === index) {
         btn.className =
-          'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] border border-[var(--color-accent)] shadow-xs transition-all cursor-default';
+          'doc-tab-btn shrink-0 min-h-[32px] px-3 py-1 rounded-lg text-xs font-semibold bg-[var(--color-accent)] text-[var(--color-accent-contrast)] border border-[var(--color-accent)] shadow-xs transition-all cursor-default';
+        btn.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        });
       } else {
         btn.className =
-          'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700/60 hover:border-[var(--color-accent-border)] transition-all cursor-pointer';
+          'doc-tab-btn shrink-0 min-h-[32px] px-3 py-1 rounded-lg text-xs font-medium bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700/60 hover:border-[var(--color-accent-border)] transition-all cursor-pointer';
       }
     });
   }
@@ -155,6 +166,9 @@ export function openCertificateModal(
   );
   const modalExternal = document.getElementById(
     'cert-modal-external'
+  ) as HTMLAnchorElement | null;
+  const modalMobileOpen = document.getElementById(
+    'cert-modal-mobile-open'
   ) as HTMLAnchorElement | null;
   const modalIframe = document.getElementById(
     'cert-modal-iframe'
@@ -194,7 +208,7 @@ export function openCertificateModal(
         'Descargar todos los documentos en un archivo ZIP';
     }
     if (modalDownloadAllText)
-      modalDownloadAllText.textContent = `Descargar ZIP (${currentDocsList.length})`;
+      modalDownloadAllText.textContent = `ZIP (${currentDocsList.length})`;
     if (modalCounterBadge) modalCounterBadge.classList.remove('hidden');
 
     if (modalNavTabs) {
@@ -204,7 +218,7 @@ export function openCertificateModal(
         btn.type = 'button';
         btn.textContent = doc.title;
         btn.className =
-          'doc-tab-btn shrink-0 px-2.5 py-1 rounded-md text-xs transition-all';
+          'doc-tab-btn shrink-0 min-h-[32px] px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer';
         btn.addEventListener('click', () => selectModalDoc(i));
         modalNavTabs.appendChild(btn);
       });
@@ -228,6 +242,9 @@ export function openCertificateModal(
     if (modalExternal) {
       modalExternal.href = singleUrl;
     }
+    if (modalMobileOpen) {
+      modalMobileOpen.href = singleUrl;
+    }
   }
 
   modal.showModal();
@@ -250,6 +267,9 @@ export function closeCertificateModal(): void {
   const modalExternal = document.getElementById(
     'cert-modal-external'
   ) as HTMLAnchorElement | null;
+  const modalMobileOpen = document.getElementById(
+    'cert-modal-mobile-open'
+  ) as HTMLAnchorElement | null;
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalNavContainer = document.getElementById('cert-modal-nav-container');
   const modalDownloadAll = document.getElementById(
@@ -267,6 +287,9 @@ export function closeCertificateModal(): void {
   }
   if (modalExternal) {
     modalExternal.href = '#';
+  }
+  if (modalMobileOpen) {
+    modalMobileOpen.href = '#';
   }
   if (modalLoading) modalLoading.classList.remove('hidden');
   if (modalNavContainer) modalNavContainer.classList.add('hidden');
@@ -320,7 +343,12 @@ export function initCertificateModal(): void {
   const modal = document.getElementById(
     'certificate-modal'
   ) as HTMLDialogElement | null;
+  if (!modal) return;
+  if (modal.dataset.bound === 'true') return;
+  modal.dataset.bound = 'true';
+
   const modalContainer = document.getElementById('cert-modal-container');
+  const closeTriggers = modal.querySelectorAll('.cert-modal-close-trigger');
   const modalClose = document.getElementById('cert-modal-close');
   const modalDownload = document.getElementById(
     'cert-modal-download'
@@ -334,20 +362,29 @@ export function initCertificateModal(): void {
   const modalExternal = document.getElementById(
     'cert-modal-external'
   ) as HTMLAnchorElement | null;
+  const modalMobileOpen = document.getElementById(
+    'cert-modal-mobile-open'
+  ) as HTMLAnchorElement | null;
   const modalIframe = document.getElementById(
     'cert-modal-iframe'
   ) as HTMLIFrameElement | null;
   const modalLoading = document.getElementById('cert-modal-loading');
   const modalTitle = document.getElementById('cert-modal-title');
 
-  // Close Button
+  // Close Buttons (mobile & desktop)
+  closeTriggers.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeCertificateModal();
+    });
+  });
   modalClose?.addEventListener('click', (e) => {
     e.stopPropagation();
     closeCertificateModal();
   });
 
   // Backdrop click
-  modal?.addEventListener('click', (e) => {
+  modal.addEventListener('click', (e) => {
     if (!modalContainer) return;
     const rect = modalContainer.getBoundingClientRect();
     const isInDialog =
@@ -361,7 +398,7 @@ export function initCertificateModal(): void {
   });
 
   // Native cancel (Esc key)
-  modal?.addEventListener('cancel', () => {
+  modal.addEventListener('cancel', () => {
     closeCertificateModal();
   });
 
@@ -377,24 +414,19 @@ export function initCertificateModal(): void {
   });
 
   // Prevent default if download/external links not configured
-  modalDownload?.addEventListener('click', (e) => {
-    const href = modalDownload.getAttribute('href');
-    if (!href || href === '#' || href === 'about:blank') {
-      e.preventDefault();
-    }
-  });
-
-  modalExternal?.addEventListener('click', (e) => {
-    const href = modalExternal.getAttribute('href');
-    if (!href || href === '#' || href === 'about:blank') {
-      e.preventDefault();
-    }
+  [modalDownload, modalExternal, modalMobileOpen].forEach((link) => {
+    link?.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href === 'about:blank') {
+        e.preventDefault();
+      }
+    });
   });
 
   // Batch ZIP Download
   modalDownloadAll?.addEventListener('click', async () => {
     if (currentDocsList.length === 0) return;
-    const originalText = modalDownloadAllText?.textContent || 'Descargar ZIP';
+    const originalText = modalDownloadAllText?.textContent || 'ZIP';
     modalDownloadAll.disabled = true;
 
     try {

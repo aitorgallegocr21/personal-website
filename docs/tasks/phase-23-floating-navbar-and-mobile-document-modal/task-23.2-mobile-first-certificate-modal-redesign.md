@@ -1,39 +1,34 @@
 # Task 23.2: Mobile-First Certificate Modal Redesign
 
-**Status:** Pending  
+**Status:** Completed  
 **Assignee:** Agent  
-**Context:** `CertificateModal.astro` and `src/lib/modal-manager.ts` display documents inside a desktop-centric dialog. On mobile screens, iframe-embedded PDFs suffer from browser rendering limitations (especially on iOS Safari), action buttons cause header wrapping and overflow, and multi-document tab scrolling needs enhanced touch usability.
+**Context:** `CertificateModal.astro` and `src/lib/modal-manager.ts` previously displayed documents inside a desktop-centric dialog with rigid margins, wrapping header buttons on small screens, and lack of resilient PDF handling for mobile browsers.
 
 ---
 
 ## Technical Objectives
 
 1. **Responsive Modal Container & Geometry:**
-   - On mobile screens (< 640px), expand the modal container to optimal viewing proportions (full viewport height or maximized sheet with minimal outer margins, `h-full sm:h-[90vh] rounded-none sm:rounded-2xl`).
-   - Remove clunky outer padding on phones to provide maximum visual area for document review.
+   - [x] Configured `<dialog>` with `p-0 sm:p-6 md:p-8`, eliminating outer margin waste on mobile screens.
+   - [x] Sized modal container with `h-[100dvh] sm:h-[90vh] sm:max-h-[920px] w-full max-w-none sm:max-w-5xl rounded-none sm:rounded-2xl border-0 sm:border` for native app-like fullscreen viewing on mobile devices.
 
 2. **Mobile-Optimized Header & Actions:**
-   - Re-architect modal header action bar to avoid wrapping:
-     - Group secondary actions or adapt labels dynamically (e.g. icon-only or shortened labels on mobile: "Descargar PDF" -> icon with tooltip or compact badge; "Descargar todos (ZIP)" -> "ZIP" / icon with badge on small viewports).
-     - Keep title and credential counter visible and truncated gracefully.
-     - Ensure prominent and easy-to-tap close button (`min-h-[44px] min-w-[44px]` touch target).
+   - [x] Implemented a responsive 2-tier header on mobile and unified 1-row header on desktop (`sm:flex-row`).
+   - [x] Provided a dedicated mobile close button (`min-h-[44px] min-w-[44px]` touch target) in the top title row and retained desktop close button (`#cert-modal-close`).
+   - [x] Structured action buttons with `flex-1 sm:flex-initial` and compact adaptive labels (`Descargar` / `Descargar PDF`, `ZIP (count)`).
 
 3. **Touch-Friendly Multi-Document Navigation:**
-   - Enhance `#cert-modal-nav-container` with smooth horizontal touch-scrolling (`overflow-x-auto scrollbar-none`), tactile pill tab buttons, and active indicator tokens using `var(--color-accent)`.
-   - Show document index badge and clear module names.
+   - [x] Enhanced `#cert-modal-nav-container` with smooth horizontal touch-scrolling (`overflow-x-auto scrollbar-none [-webkit-overflow-scrolling:touch]`).
+   - [x] Implemented tactile pill tabs (`doc-tab-btn`) with `min-h-[32px]`, dynamic accent styling (`var(--color-accent)`), and smooth auto-centering on selection.
 
 4. **Mobile PDF Viewing Resilience & Fallback Engine:**
-   - Introduce an intelligent mobile helper / banner inside the viewer body:
-     - When viewed on mobile devices where PDF iframes have inconsistent inline scrolling, surface a sleek floating/top banner: "Vista previa de documento · Toca para abrir o descargar".
-     - Provide immediate high-visibility quick actions: "Abrir en pestaña nueva" (opens browser's native PDF reader) and "Descargar PDF".
-     - Maintain the standard iframe viewer on desktop browsers where native PDF controls are well supported.
+   - [x] Added mobile helper banner (`#cert-modal-mobile-banner`) visible on small viewports (`sm:hidden`).
+   - [x] Provided direct "Ver PDF" native quick action (`#cert-modal-mobile-open`, `target="_blank"`) to bypass mobile Safari/Chrome inline iframe limitations.
+   - [x] Synchronized active document URLs across iframe, download button, external button, and mobile banner.
 
 ---
 
-## Verification Plan
+## Verification Results
 
-1. Test single-document certificates (e.g. Prompt Engineering, SQL) on mobile and desktop viewports.
-2. Test multi-document credentials (e.g. NTT Data Java backend modules) with 4 PDFs and batch ZIP download.
-3. Test education diploma modal trigger from Bento timeline.
-4. Verify ZIP generation feedback and single PDF direct download on mobile viewports.
-5. Confirm no visual overflows, clipping, or broken buttons across all screen widths.
+1. **E2E Playwright Suite:** Added `adapts certificate modal for mobile viewports with multi-document tabs and resilient PDF helpers` covering mobile viewport (375x667), tab switching, iframe src updates, touch targets >= 44px, and desktop banner hiding (16/16 passed).
+2. **Quality Gate:** `npm run verify` passed with 0 errors across Astro checks, TypeScript types, ESLint, Prettier, Vitest unit tests (59/59), and static production build.
