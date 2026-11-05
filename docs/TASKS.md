@@ -8,7 +8,7 @@
 
 ## Active Phase
 
-- _None / Backlog Clean_ — Todas las fases planificadas del roadmap han sido completadas satisfactoriamente al 100%.
+- **[Phase 23: Floating Navbar & Mobile Document Modal Experience](tasks/phase-23-floating-navbar-and-mobile-document-modal/index.md)** — _In Progress_ (Rediseño del header a barra flotante glassmorphic con offset superior, modernización de enlaces/botones, menú responsive móvil con drawer animado, y overhaul móvil del visor de certificados PDF con navegación táctil, acciones compactas y descarga directa/ZIP).
 
 ---
 
