@@ -1,65 +1,215 @@
 ---
 import { cvData } from '@/data/cv-data';
-import { FileDown } from 'lucide-astro';
+import { FileDown, Menu, X } from 'lucide-astro';
 import ThemeToggle from '@/components/portfolio/ThemeToggle.astro';
 
 const { personal } = cvData;
+
+const navItems = [
+  { label: 'Proyectos', href: '#proyectos', number: '01' },
+  { label: 'Trayectoria', href: '#trayectoria', number: '02' },
+  { label: 'Certificaciones', href: '#certificaciones', number: '03' },
+  { label: 'Filosofía', href: '#filosofia', number: '04' },
+  { label: 'Contacto', href: '#contacto', number: '05' },
+];
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/75 backdrop-blur-md">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+<header
+  id="site-header"
+  class="sticky top-3 sm:top-4 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-5xl mx-auto rounded-2xl md:rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-white/85 dark:bg-zinc-950/85 backdrop-blur-md shadow-lg shadow-zinc-950/5 dark:shadow-zinc-950/30 hover:border-zinc-300 dark:hover:border-zinc-700/80 hover:shadow-[0_4px_24px_-4px_var(--color-accent-glow)] transition-all duration-300"
+>
+  <div class="px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
+    <!-- Brand / Logo -->
     <a
       href={import.meta.env.BASE_URL}
-      class="group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-colors"
+      class="group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-2 -ml-1"
       aria-label={`Inicio - Portfolio de ${personal.name}`}
     >
-      <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]"></span>
-      <span class="text-sm sm:text-base font-bold tracking-tight">
+      <span class="relative flex h-2.5 w-2.5 items-center justify-center">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40 duration-1000"></span>
+        <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]"></span>
+      </span>
+      <span class="text-sm sm:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-colors">
         Portfolio
       </span>
     </a>
 
-    <nav class="flex items-center gap-1 sm:gap-2.5 text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400">
-      <a
-        href="#proyectos"
-        class="hidden sm:inline-block px-2.5 py-1.5 rounded-md hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900/60 transition-colors"
-      >
-        Proyectos
-      </a>
-      <a
-        href="#trayectoria"
-        class="hidden sm:inline-block px-2.5 py-1.5 rounded-md hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900/60 transition-colors"
-      >
-        Trayectoria
-      </a>
-      <a
-        href="#certificaciones"
-        class="hidden md:inline-block px-2.5 py-1.5 rounded-md hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900/60 transition-colors"
-      >
-        Certificaciones
-      </a>
-      <a
-        href="#filosofia"
-        class="hidden md:inline-block px-2.5 py-1.5 rounded-md hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900/60 transition-colors"
-      >
-        Filosofía
-      </a>
-      <a
-        href="#contacto"
-        class="hidden md:inline-block px-2.5 py-1.5 rounded-md hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-900/60 transition-colors"
-      >
-        Contacto
-      </a>
+    <!-- Desktop Navigation Links -->
+    <nav
+      class="hidden md:flex items-center gap-1 lg:gap-1.5 text-xs lg:text-sm font-medium text-zinc-600 dark:text-zinc-400"
+      aria-label="Navegación principal"
+    >
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="nav-link relative px-3 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/80 transition-all duration-200 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        >
+          <span>{item.label}</span>
+          <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[var(--color-accent)] rounded-full transition-all duration-200 group-hover:w-3.5 opacity-0 group-hover:opacity-100"></span>
+        </a>
+      ))}
+    </nav>
+
+    <!-- Action Controls: CV PDF, Theme Picker & Mobile Menu Toggle -->
+    <div class="flex items-center gap-1.5 sm:gap-2">
+      <!-- CV PDF Link -->
       <a
         href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
-        class="inline-flex items-center gap-1.5 ml-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white transition-all shadow-xs"
+        class="group relative inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-[0_0_12px_var(--color-accent-glow)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        aria-label="Ver y descargar currículum en PDF"
       >
-        <FileDown class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-        <span>CV PDF</span>
+        <FileDown class="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+        <span class="hidden sm:inline">CV PDF</span>
+        <span class="sm:hidden font-mono text-[11px]">CV</span>
       </a>
 
       <!-- Theme & Accent Controls -->
       <ThemeToggle />
-    </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        type="button"
+        id="mobile-nav-toggle"
+        class="md:hidden relative inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] cursor-pointer"
+        aria-expanded="false"
+        aria-controls="mobile-nav-menu"
+        aria-label="Abrir menú de navegación"
+      >
+        <Menu class="w-5 h-5 menu-open-icon transition-transform duration-200" />
+        <X class="w-5 h-5 menu-close-icon hidden transition-transform duration-200" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Dropdown -->
+  <div
+    id="mobile-nav-menu"
+    class="hidden md:hidden border-t border-zinc-200/70 dark:border-zinc-800/70 px-3.5 pt-2 pb-4 space-y-1 transition-all"
+    role="region"
+    aria-label="Menú de navegación para dispositivos móviles"
+  >
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class="mobile-nav-link group flex items-center justify-between min-h-[44px] px-3.5 py-2 rounded-xl text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+      >
+        <span class="group-hover:translate-x-1 transition-transform duration-150">
+          {item.label}
+        </span>
+        <span class="text-xs text-zinc-400 dark:text-zinc-500 font-mono group-hover:text-[var(--color-accent)] transition-colors">
+          {item.number}
+        </span>
+      </a>
+    ))}
+
+    <!-- Mobile CV Action Card -->
+    <div class="pt-2 mt-1.5 border-t border-zinc-200/60 dark:border-zinc-800/60">
+      <a
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
+        class="mobile-nav-link flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white transition-all shadow-xs active:scale-98"
+      >
+        <FileDown class="w-4 h-4" />
+        <span>Ver y Descargar CV (PDF A4)</span>
+      </a>
+    </div>
   </div>
 </header>
+
+<script>
+  function setupMobileNav() {
+    const toggleBtn = document.getElementById('mobile-nav-toggle');
+    const navMenu = document.getElementById('mobile-nav-menu');
+    const header = document.getElementById('site-header');
+
+    if (!toggleBtn || !navMenu || !header) return;
+    if (toggleBtn.dataset.bound === 'true') return;
+    toggleBtn.dataset.bound = 'true';
+
+    const openIcon = toggleBtn.querySelector('.menu-open-icon');
+    const closeIcon = toggleBtn.querySelector('.menu-close-icon');
+    const navLinks = navMenu.querySelectorAll('.mobile-nav-link');
+
+    const openMenu = () => {
+      navMenu.classList.remove('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.setAttribute('aria-label', 'Cerrar menú de navegación');
+      openIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      header.classList.remove('md:rounded-full');
+
+      // Close theme palette popover if open to prevent overlaps
+      const paletteDropdown = document.getElementById('palette-dropdown');
+      const paletteBtn = document.getElementById('palette-menu-btn');
+      if (paletteDropdown && !paletteDropdown.classList.contains('hidden')) {
+        paletteDropdown.classList.add('hidden');
+        paletteBtn?.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    const closeMenu = () => {
+      navMenu.classList.add('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+      openIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      header.classList.add('md:rounded-full');
+    };
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close on navigation link tap
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+
+    // Close on click outside header
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node | null;
+      if (target && !header.contains(target)) {
+        if (toggleBtn.getAttribute('aria-expanded') === 'true') {
+          closeMenu();
+        }
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.key === 'Escape' &&
+        toggleBtn.getAttribute('aria-expanded') === 'true'
+      ) {
+        closeMenu();
+        toggleBtn.focus();
+      }
+    });
+
+    // Close on resize to tablet/desktop
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    mediaQuery.addEventListener('change', (e) => {
+      if (e.matches && toggleBtn.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      }
+    });
+
+    // Mutual close when palette button is clicked
+    const paletteBtn = document.getElementById('palette-menu-btn');
+    paletteBtn?.addEventListener('click', () => {
+      if (toggleBtn.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      }
+    });
+  }
+
+  setupMobileNav();
+  document.addEventListener('astro:after-swap', setupMobileNav);
+</script>

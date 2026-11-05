@@ -8,11 +8,13 @@
 
 ## Active Phase
 
-- _None / Backlog Clean_ — Todas las fases planificadas del roadmap han sido completadas satisfactoriamente al 100%.
+_None currently active. Phase 23 completed._
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+
+- [x] **[Phase 23: Floating Navbar & Mobile Document Modal Experience](tasks/phase-23-floating-navbar-and-mobile-document-modal/index.md)** — _Completed 2026-11-05_ (Rediseño del header a barra flotante glassmorphic estilo pill con offset superior y sombra de acento dinámica, microinteracciones en enlaces, menú móvil responsive con botón hamburguesa accesible y drawer animado, y overhaul móvil del visor de certificados PDF con geometría fullscreen, navegación táctil entre módulos, descarga directa/ZIP y banner de apertura nativa).
 
 - [x] **[Phase 22: CI Hardening, Asset Optimization & Social Branding](tasks/phase-22-ci-hardening-asset-optimization-and-social-branding/index.md)** — _Completed 2026-11-05_ (Integración de Playwright E2E en GitHub Actions CI con resolución elástica de Chromium del sistema, diseño y generación de banner social Open Graph 1200x630 para Twitter/LinkedIn con ingestión de metadatos, y migración al pipeline nativo de optimización de imágenes `astro:assets` con sharp reduciendo el payload de imágenes en un 97%).
 

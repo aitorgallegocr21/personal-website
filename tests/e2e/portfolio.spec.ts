@@ -41,6 +41,53 @@ test.describe('Web Portfolio Interactive E2E', () => {
     }
   });
 
+  test('renders floating navbar and supports responsive mobile navigation drawer', async ({
+    page,
+  }) => {
+    // 1. Desktop viewport verification
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+
+    const header = page.locator('#site-header');
+    await expect(header).toBeVisible();
+
+    const desktopNav = header.locator('nav[aria-label="Navegación principal"]');
+    await expect(desktopNav).toBeVisible();
+
+    const mobileToggle = page.locator('#mobile-nav-toggle');
+    await expect(mobileToggle).toBeHidden();
+
+    // 2. Mobile viewport verification (iPhone-like 375x667)
+    await page.setViewportSize({ width: 375, height: 667 });
+
+    await expect(desktopNav).toBeHidden();
+    await expect(mobileToggle).toBeVisible();
+    await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
+
+    const mobileMenu = page.locator('#mobile-nav-menu');
+    await expect(mobileMenu).toBeHidden();
+
+    // Open mobile menu
+    await mobileToggle.click();
+    await expect(mobileToggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(mobileMenu).toBeVisible();
+
+    // Check all mobile links exist
+    const mobileLinks = mobileMenu.locator('.mobile-nav-link');
+    await expect(mobileLinks).toHaveCount(6); // 5 sections + CV button
+
+    // Close on Escape
+    await page.keyboard.press('Escape');
+    await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(mobileMenu).toBeHidden();
+
+    // Open again and click a section link to test auto-close
+    await mobileToggle.click();
+    await expect(mobileMenu).toBeVisible();
+    await mobileLinks.first().click();
+    await expect(mobileMenu).toBeHidden();
+  });
+
   test('toggles and persists color palette selection in DOM and localStorage', async ({
     page,
   }) => {
@@ -126,6 +173,76 @@ test.describe('Web Portfolio Interactive E2E', () => {
       (dialog: HTMLDialogElement) => !dialog.open
     );
     expect(isClosed).toBe(true);
+  });
+
+  test('adapts certificate modal for mobile viewports with multi-document tabs and resilient PDF helpers', async ({
+    page,
+  }) => {
+    // 1. Mobile viewport test (375x667)
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('./');
+
+    const multiDocTrigger = page.locator('button[data-docs]').first();
+    await expect(multiDocTrigger).toBeVisible();
+    await multiDocTrigger.click();
+
+    const modal = page.locator('#certificate-modal');
+    await expect(modal).toBeVisible();
+    expect(
+      await modal.evaluate((dialog: HTMLDialogElement) => dialog.open)
+    ).toBe(true);
+
+    // Mobile fallback banner should be visible on small viewport
+    const mobileBanner = page.locator('#cert-modal-mobile-banner');
+    await expect(mobileBanner).toBeVisible();
+
+    const mobileNativeOpen = page.locator('#cert-modal-mobile-open');
+    await expect(mobileNativeOpen).toBeVisible();
+    await expect(mobileNativeOpen).toHaveAttribute('href', /\.pdf$/i);
+
+    // Multi-document tab bar should be visible with multiple tab buttons
+    const navContainer = page.locator('#cert-modal-nav-container');
+    await expect(navContainer).toBeVisible();
+
+    const tabButtons = navContainer.locator('.doc-tab-btn');
+    const tabCount = await tabButtons.count();
+    expect(tabCount).toBeGreaterThan(1);
+
+    // Switching tabs updates iframe src
+    const iframe = page.locator('#cert-modal-iframe');
+    const initialSrc = await iframe.getAttribute('src');
+
+    await tabButtons.nth(1).click();
+    const updatedSrc = await iframe.getAttribute('src');
+    expect(updatedSrc).not.toBe(initialSrc);
+
+    // Mobile close button has touch target >= 44x44px and closes modal
+    const mobileClose = modal.locator('.cert-modal-close-trigger:visible');
+    const box = await mobileClose.boundingBox();
+    expect(box).not.toBeNull();
+    if (box) {
+      expect(box.width).toBeGreaterThanOrEqual(44);
+      expect(box.height).toBeGreaterThanOrEqual(44);
+    }
+
+    await mobileClose.click();
+    expect(
+      await modal.evaluate((dialog: HTMLDialogElement) => !dialog.open)
+    ).toBe(true);
+
+    // 2. Desktop viewport test (1280x800): Mobile banner should be hidden
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await multiDocTrigger.click();
+    await expect(modal).toBeVisible();
+    await expect(mobileBanner).toBeHidden();
+
+    // Close via desktop close button
+    const desktopClose = page.locator('#cert-modal-close');
+    await expect(desktopClose).toBeVisible();
+    await desktopClose.click();
+    expect(
+      await modal.evaluate((dialog: HTMLDialogElement) => !dialog.open)
+    ).toBe(true);
   });
 
   test('activates and exposes bento-modern skin contract on root html', async ({

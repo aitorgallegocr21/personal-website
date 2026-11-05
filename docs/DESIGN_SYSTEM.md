@@ -272,54 +272,188 @@ The system supports real-time accent shifting across both Dark and Light modes u
 
 ---
 
-### F. In-Page Certificate Viewer Modal
+### F. Floating Island Navbar & Responsive Mobile Drawer
 
-The modal utilizes the native HTML5 `<dialog>` element. To prevent user-agent CSS clashes with utility frameworks like Tailwind CSS, the modal MUST enforce `display: none` when closed and `display: flex` when open:
+```html
+<!-- Floating Pill Container -->
+<header
+  id="site-header"
+  class="sticky top-3 z-50 mx-auto w-[calc(100%-1.5rem)] max-w-5xl rounded-2xl border border-zinc-200/80 bg-white/85 shadow-lg shadow-zinc-950/5 backdrop-blur-md transition-all duration-300 hover:border-zinc-300 hover:shadow-[0_4px_24px_-4px_var(--color-accent-glow)] sm:top-4 sm:w-[calc(100%-2rem)] md:rounded-full dark:border-zinc-800/80 dark:bg-zinc-950/85 dark:shadow-zinc-950/30 dark:hover:border-zinc-700/80"
+>
+  <div
+    class="flex h-14 items-center justify-between gap-2 px-3.5 sm:h-16 sm:gap-4 sm:px-6"
+  >
+    <!-- Brand with glowing pulse dot -->
+    <a href="/" class="group flex items-center gap-2.5 font-semibold">
+      <span class="relative flex h-2.5 w-2.5 items-center justify-center">
+        <span
+          class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40"
+        ></span>
+        <span
+          class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]"
+        ></span>
+      </span>
+      <span class="text-sm font-bold tracking-tight sm:text-base"
+        >Portfolio</span
+      >
+    </a>
+
+    <!-- Desktop Nav Links with hover underline micro-indicator -->
+    <nav
+      class="hidden items-center gap-1.5 text-xs font-medium md:flex lg:text-sm"
+    >
+      <a
+        href="#proyectos"
+        class="group relative rounded-full px-3 py-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900/80"
+      >
+        <span>Proyectos</span>
+        <span
+          class="absolute bottom-1 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-[var(--color-accent)] opacity-0 transition-all group-hover:w-3.5 group-hover:opacity-100"
+        ></span>
+      </a>
+    </nav>
+
+    <!-- Right Controls: CV PDF, Theme Picker & Mobile Menu Trigger -->
+    <div class="flex items-center gap-1.5 sm:gap-2">
+      <a
+        href="/cv"
+        class="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] px-3 py-1.5 text-xs font-semibold text-[var(--color-accent)] transition-all hover:bg-[var(--color-accent)] hover:text-white"
+      >
+        <span>CV PDF</span>
+      </a>
+      <ThemeToggle />
+      <button
+        id="mobile-nav-toggle"
+        class="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full md:hidden"
+        aria-expanded="false"
+      >
+        <menu class="menu-open-icon h-5 w-5" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div
+    id="mobile-nav-menu"
+    class="hidden space-y-1 border-t border-zinc-200/70 px-3.5 pt-2 pb-4 md:hidden dark:border-zinc-800/70"
+  >
+    <a
+      href="#proyectos"
+      class="mobile-nav-link flex min-h-[44px] items-center justify-between rounded-xl px-3.5 py-2 text-sm font-medium"
+    >
+      <span>Proyectos</span>
+      <span class="font-mono text-xs text-zinc-500">01</span>
+    </a>
+  </div>
+</header>
+```
+
+---
+
+### G. Mobile-First Certificate & PDF Viewer (`CertificateModal.astro`)
 
 ```html
 <dialog
   id="certificate-modal"
-  class="fixed inset-0 z-50 m-0 hidden h-screen max-h-none w-screen max-w-none items-center justify-center border-0 bg-transparent p-4 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md open:flex sm:p-6 md:p-10"
+  class="fixed inset-0 z-50 m-0 h-screen max-h-none w-screen max-w-none items-center justify-center border-0 bg-transparent p-0 backdrop:bg-zinc-950/80 backdrop:backdrop-blur-md sm:p-6 md:p-8"
+  aria-labelledby="cert-modal-title"
+  aria-modal="true"
 >
-  <!-- Modal Container -->
   <div
-    class="relative flex h-[85vh] max-h-[900px] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
+    class="relative flex h-[100dvh] w-full max-w-5xl flex-col overflow-hidden rounded-none border-0 border-zinc-200 bg-white shadow-2xl sm:h-[90vh] sm:max-h-[920px] sm:rounded-2xl sm:border dark:border-zinc-800 dark:bg-zinc-900"
+    id="cert-modal-container"
   >
-    <!-- Header bar with title and actions -->
+    <!-- Modal Header with mobile close and compact action buttons -->
     <div
-      class="flex items-center justify-between border-b border-zinc-200 bg-zinc-50/70 px-5 py-4 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80"
+      class="flex shrink-0 flex-col gap-2.5 border-b border-zinc-200 bg-zinc-50/90 px-3.5 py-2.5 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-3.5 dark:border-zinc-800 dark:bg-zinc-900/95"
     >
-      <h2
-        id="cert-modal-title"
-        class="text-sm font-semibold text-zinc-900 sm:text-base dark:text-zinc-100"
+      <div
+        class="flex min-w-0 items-center justify-between gap-2.5 sm:justify-start"
       >
-        Visor de Documento
-      </h2>
-      <div class="flex items-center gap-2">
+        <div class="flex min-w-0 items-center gap-2.5">
+          <FileText class="h-4 w-4 text-[var(--color-accent)]" />
+          <h2
+            id="cert-modal-title"
+            class="truncate text-sm font-semibold sm:text-base"
+          >
+            Visor de Documento
+          </h2>
+        </div>
+        <button
+          type="button"
+          class="cert-modal-close-trigger flex min-h-[44px] min-w-[44px] items-center justify-center sm:hidden"
+          aria-label="Cerrar visor"
+        >
+          <X class="h-5 w-5" />
+        </button>
+      </div>
+
+      <div
+        class="flex w-full shrink-0 items-center justify-end gap-1.5 sm:w-auto sm:gap-2"
+      >
+        <button
+          id="cert-modal-download-all"
+          class="hidden min-h-[38px] flex-1 rounded-lg px-3 py-1.5 text-xs font-semibold sm:flex-initial"
+        >
+          ZIP
+        </button>
         <a
           id="cert-modal-download"
           href="#"
           download
-          class="rounded-lg bg-[var(--color-accent)] px-3 py-1.5 text-xs font-semibold text-white"
-          >Descargar PDF</a
+          class="inline-flex min-h-[38px] flex-1 items-center justify-center rounded-lg bg-[var(--color-accent)] px-3 py-1.5 text-xs font-semibold text-white sm:flex-initial"
+          >Descargar</a
         >
+        <a
+          id="cert-modal-external"
+          href="#"
+          target="_blank"
+          class="shrink-0 rounded-lg border p-2 text-xs"
+          ><ExternalLink class="h-4 w-4"
+        /></a>
         <button
           id="cert-modal-close"
-          class="rounded-lg p-1.5 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
-          aria-label="Cerrar visor"
+          class="cert-modal-close-trigger hidden shrink-0 rounded-lg p-2 sm:flex"
         >
-          ✕
+          <X class="h-5 w-5" />
         </button>
       </div>
     </div>
-    <!-- Embedded document preview container -->
+
+    <!-- Multi-document Touch Tabs -->
     <div
-      class="relative flex flex-1 items-center justify-center overflow-hidden bg-zinc-100 dark:bg-zinc-950"
+      id="cert-modal-nav-container"
+      class="flex hidden shrink-0 scrollbar-none items-center gap-2 overflow-x-auto border-b border-zinc-200 bg-zinc-100/90 px-3.5 py-2 sm:px-5 dark:border-zinc-800/80 dark:bg-zinc-800/70"
     >
+      <div
+        id="cert-modal-nav-tabs"
+        class="flex flex-nowrap items-center gap-1.5"
+      ></div>
+    </div>
+
+    <!-- Viewer Body with Mobile PDF Helper Banner -->
+    <div
+      class="relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-zinc-100 dark:bg-zinc-950"
+    >
+      <div
+        id="cert-modal-mobile-banner"
+        class="z-20 flex w-full shrink-0 items-center justify-between gap-2 bg-zinc-900 px-3 py-2 text-white sm:hidden"
+      >
+        <span class="truncate text-[11px] text-zinc-300"
+          >Vista móvil · ¿Deseas ver a pantalla completa?</span
+        >
+        <a
+          id="cert-modal-mobile-open"
+          href="#"
+          target="_blank"
+          class="rounded-md bg-[var(--color-accent)] px-2.5 py-1 text-[11px] font-semibold text-white"
+          >Ver PDF</a
+        >
+      </div>
       <iframe
         id="cert-modal-iframe"
-        src=""
-        class="relative z-10 h-full w-full border-0"
+        src="about:blank"
+        class="relative z-10 w-full flex-1 border-0"
         title="Vista previa del documento"
       ></iframe>
     </div>
