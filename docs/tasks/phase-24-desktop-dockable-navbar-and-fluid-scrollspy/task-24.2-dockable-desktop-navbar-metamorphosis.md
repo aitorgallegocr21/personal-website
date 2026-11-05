@@ -1,7 +1,7 @@
 # Task 24.2: Dockable Desktop Navbar & Layout Metamorphosis
 
-**Status:** Pending  
-**Component Scope:** `src/lib/dock-manager.ts`, `src/components/portfolio/Navbar.astro`, `src/styles/global.css`
+**Status:** Completed  
+**Component Scope:** `src/lib/dock-manager.ts`, `src/components/portfolio/Navbar.astro`, `tests/unit/dock-manager.test.ts`
 
 ---
 
@@ -26,19 +26,20 @@
 
 ---
 
-## 2. Implementation Plan
+## 2. Implementation Summary
 
 1. **`src/lib/dock-manager.ts`:**
-   - Define type `DockPosition = 'top' | 'bottom' | 'left' | 'right'`.
-   - Setup drag event handlers (`pointerdown`, `pointermove`, `pointerup`) with edge threshold detection.
-   - Implement snap preview visual cues (subtle boundary indicator when dragging near an edge).
-   - Provide `setDockPosition(pos: DockPosition)` with class toggling on the navbar container.
-2. **`Navbar.astro` modifications:**
-   - Integrate drag grip handle with ARIA attributes and title.
-   - Integrate quick-dock popover trigger and modal/popover dialog.
-   - Add icon representations alongside existing text links, styled for vertical column flex.
-   - Embed glassmorphic tooltips (`role="tooltip"`) visible when docked vertically.
+   - Implemented `detectSnapEdge` calculating minimum Euclidean distance to screen edges for corner-resilient magnetic snapping.
+   - Added `getStoredDockPosition` and `saveDockPosition` with `localStorage` validation and fallback to `'top'`.
+   - Built PointerEvent drag controller (`pointerdown`, `pointermove`, `pointerup`) with pointer capture, dynamic snap preview element (`#dock-snap-preview`), and double-click reset handler.
+   - Built accessible quick-dock menu popover controller with click-outside and Escape key management.
+2. **`Navbar.astro` Layout Metamorphosis:**
+   - Added `#dock-drag-handle` with tactile `GripVertical` icon and grab cursors.
+   - Added `#dock-menu-btn` and `#dock-menu-popover` offering 1-click docking to Top, Bottom, Left, Right, and Reset.
+   - Integrated semantic Lucide icons (`FolderGit2`, `Briefcase`, `Award`, `Sparkles`, `Mail`) on section links with inside-facing floating tooltips (`role="tooltip"`).
+   - Styled CSS transitions for vertical rails (~56px wide, `flex-col`, icon-only, vertical indicator bar alignment, compact CV button) and bottom dock (`fixed bottom-4 left-1/2 -translate-x-1/2`).
+   - Gated all docking features strictly to `@media (min-width: 1024px)`.
 3. **Verification:**
-   - Test seamless transition between all 4 dock positions.
-   - Test double-click reset to top.
-   - Verify tooltips render correctly without clipping.
+   - Added 12 unit tests in `tests/unit/dock-manager.test.ts` verifying boundary snapping, corner collision resolution, and storage persistence.
+   - Verified 86/86 unit tests and 16/16 Playwright E2E tests green.
+   - Confirmed full static build and PDF generation with 0 errors.

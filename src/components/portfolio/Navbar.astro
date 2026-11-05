@@ -1,43 +1,83 @@
 ---
 import { cvData } from '@/data/cv-data';
-import { FileDown, Menu, X } from 'lucide-astro';
+import {
+  FileDown,
+  Menu,
+  X,
+  GripVertical,
+  PanelTop,
+  PanelBottom,
+  PanelLeft,
+  PanelRight,
+  RotateCcw,
+  SlidersHorizontal,
+  FolderGit2,
+  Briefcase,
+  Award,
+  Sparkles,
+  Mail,
+} from 'lucide-astro';
 import ThemeToggle from '@/components/portfolio/ThemeToggle.astro';
 
 const { personal } = cvData;
 
 const navItems = [
-  { label: 'Proyectos', href: '#proyectos', number: '01' },
-  { label: 'Trayectoria', href: '#trayectoria', number: '02' },
-  { label: 'Certificaciones', href: '#certificaciones', number: '03' },
-  { label: 'Filosofía', href: '#filosofia', number: '04' },
-  { label: 'Contacto', href: '#contacto', number: '05' },
+  { label: 'Proyectos', href: '#proyectos', number: '01', icon: FolderGit2 },
+  { label: 'Trayectoria', href: '#trayectoria', number: '02', icon: Briefcase },
+  {
+    label: 'Certificaciones',
+    href: '#certificaciones',
+    number: '03',
+    icon: Award,
+  },
+  { label: 'Filosofía', href: '#filosofia', number: '04', icon: Sparkles },
+  { label: 'Contacto', href: '#contacto', number: '05', icon: Mail },
 ];
 ---
 
 <header
   id="site-header"
+  data-dock="top"
   class="sticky top-3 sm:top-4 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-5xl mx-auto rounded-2xl md:rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-white/85 dark:bg-zinc-950/85 backdrop-blur-md shadow-lg shadow-zinc-950/5 dark:shadow-zinc-950/30 hover:border-zinc-300 dark:hover:border-zinc-700/80 hover:shadow-[0_4px_24px_-4px_var(--color-accent-glow)] transition-all duration-300"
 >
-  <div class="px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
-    <!-- Brand / Logo -->
-    <a
-      href={import.meta.env.BASE_URL}
-      class="group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-2 -ml-1"
-      aria-label={`Inicio - Portfolio de ${personal.name}`}
-    >
-      <span class="relative flex h-2.5 w-2.5 items-center justify-center">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40 duration-1000"></span>
-        <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]"></span>
-      </span>
-      <span class="text-sm sm:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-colors">
-        Portfolio
-      </span>
-    </a>
+  <div
+    id="site-header-inner"
+    class="px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300"
+  >
+    <!-- Left Cluster: Tactile Drag Grip & Brand Logo -->
+    <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+      <!-- Desktop Drag Grip Handle -->
+      <div
+        id="dock-drag-handle"
+        class="hidden lg:flex items-center justify-center w-6 h-8 rounded-lg text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 cursor-grab active:cursor-grabbing hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors touch-none select-none -ml-2"
+        role="button"
+        tabindex="0"
+        aria-label="Arrastrar dock (Doble clic para restaurar arriba)"
+        title="Arrastrar dock a cualquier borde (Doble clic para restaurar)"
+      >
+        <GripVertical class="w-4 h-4" />
+      </div>
+
+      <!-- Brand / Logo -->
+      <a
+        href={import.meta.env.BASE_URL}
+        class="brand-logo group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-2 -ml-1 shrink-0"
+        aria-label={`Inicio - Portfolio de ${personal.name}`}
+      >
+        <span class="relative flex h-2.5 w-2.5 items-center justify-center">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40 duration-1000"></span>
+          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]"></span>
+        </span>
+        <span class="brand-text text-sm sm:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-colors">
+          Portfolio
+        </span>
+      </a>
+    </div>
 
     <!-- Desktop Navigation Links -->
     <nav
       id="desktop-nav"
-      class="hidden md:flex relative items-center gap-1 lg:gap-1.5 text-xs lg:text-sm font-medium text-zinc-600 dark:text-zinc-400"
+      class="hidden md:flex relative items-center gap-1 lg:gap-1.5 text-xs lg:text-sm font-medium text-zinc-600 dark:text-zinc-400 transition-all duration-300"
       aria-label="Navegación principal"
     >
       <!-- Fluid Scroll-Spy Animated Accent Pill -->
@@ -46,36 +86,119 @@ const navItems = [
         class="pointer-events-none absolute left-0 top-0 rounded-full opacity-0 z-0 bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)] shadow-[0_0_14px_var(--color-accent-glow)] transition-opacity duration-200"
         aria-hidden="true"
       >
-        <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--color-accent)] rounded-full shadow-[0_0_8px_var(--color-accent)]"></span>
+        <span class="indicator-bar absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--color-accent)] rounded-full shadow-[0_0_8px_var(--color-accent)] transition-all duration-300"></span>
       </div>
 
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="nav-link relative z-10 px-3 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          class="nav-link group relative z-10 flex items-center justify-center px-3 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
+          <item.icon class="nav-icon hidden w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110" />
           <span class="nav-link-text transition-colors duration-150">
+            {item.label}
+          </span>
+          <span
+            class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
+            role="tooltip"
+          >
             {item.label}
           </span>
         </a>
       ))}
     </nav>
 
-    <!-- Action Controls: CV PDF, Theme Picker & Mobile Menu Toggle -->
-    <div class="flex items-center gap-1.5 sm:gap-2">
+    <!-- Action Controls: CV PDF, Theme Picker, Quick Dock & Mobile Menu Toggle -->
+    <div class="header-actions flex items-center gap-1.5 sm:gap-2 shrink-0">
       <!-- CV PDF Link -->
       <a
         href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
-        class="group relative inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-[0_0_12px_var(--color-accent-glow)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        class="cv-btn group relative inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-[0_0_12px_var(--color-accent-glow)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         aria-label="Ver y descargar currículum en PDF"
+        title="Ver y descargar CV (PDF A4)"
       >
         <FileDown class="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-        <span class="hidden sm:inline">CV PDF</span>
-        <span class="sm:hidden font-mono text-[11px]">CV</span>
+        <span class="cv-text hidden sm:inline">CV PDF</span>
+        <span class="cv-mobile-text sm:hidden font-mono text-[11px]">CV</span>
+        <span
+          class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
+          role="tooltip"
+        >
+          CV PDF
+        </span>
       </a>
 
       <!-- Theme & Accent Controls -->
       <ThemeToggle />
+
+      <!-- Quick Dock Trigger & Popover -->
+      <div class="relative hidden lg:block">
+        <button
+          type="button"
+          id="dock-menu-btn"
+          class="inline-flex items-center justify-center w-8 h-8 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] cursor-pointer"
+          aria-expanded="false"
+          aria-controls="dock-menu-popover"
+          aria-label="Opciones de anclaje del dock"
+          title="Cambiar posición del dock"
+        >
+          <SlidersHorizontal class="w-3.5 h-3.5" />
+        </button>
+
+        <!-- Popover -->
+        <div
+          id="dock-menu-popover"
+          class="hidden absolute z-50 p-2 rounded-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl shadow-zinc-950/20 min-w-[170px] text-xs font-medium space-y-0.5"
+          role="dialog"
+          aria-label="Posición de anclaje del dock"
+        >
+          <div class="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 border-b border-zinc-100 dark:border-zinc-800/60 mb-1">
+            Posición del dock
+          </div>
+          <button
+            type="button"
+            data-dock-target="top"
+            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
+          >
+            <PanelTop class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+            <span>Arriba (Top)</span>
+          </button>
+          <button
+            type="button"
+            data-dock-target="bottom"
+            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
+          >
+            <PanelBottom class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+            <span>Abajo (Bottom)</span>
+          </button>
+          <button
+            type="button"
+            data-dock-target="left"
+            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
+          >
+            <PanelLeft class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+            <span>Izquierda (Left)</span>
+          </button>
+          <button
+            type="button"
+            data-dock-target="right"
+            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
+          >
+            <PanelRight class="w-3.5 h-3.5 text-[var(--color-accent)]" />
+            <span>Derecha (Right)</span>
+          </button>
+          <div class="border-t border-zinc-100 dark:border-zinc-800/60 pt-1 mt-1">
+            <button
+              type="button"
+              data-dock-target="top"
+              class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left font-mono text-[11px]"
+            >
+              <RotateCcw class="w-3.5 h-3.5" />
+              <span>Restaurar posición</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Mobile Hamburger Button -->
       <button
@@ -228,8 +351,13 @@ const navItems = [
     initFluidScrollSpy,
     type FluidScrollSpyController,
   } from '@/lib/scroll-spy';
+  import {
+    initDockManager,
+    type DockManagerController,
+  } from '@/lib/dock-manager';
 
   let scrollSpyController: FluidScrollSpyController | null = null;
+  let dockController: DockManagerController | null = null;
 
   function setupDesktopScrollSpy() {
     scrollSpyController?.destroy();
@@ -257,8 +385,37 @@ const navItems = [
     });
   }
 
-  setupDesktopScrollSpy();
-  document.addEventListener('astro:after-swap', setupDesktopScrollSpy);
+  function setupDesktopDock() {
+    dockController?.destroy();
+    dockController = null;
+
+    if (window.innerWidth < 1024) return;
+
+    const header = document.getElementById('site-header');
+    if (!header) return;
+
+    const dragHandle = document.getElementById('dock-drag-handle');
+    const menuBtn = document.getElementById('dock-menu-btn');
+    const menuPopover = document.getElementById('dock-menu-popover');
+
+    dockController = initDockManager({
+      header,
+      dragHandle,
+      menuButton: menuBtn,
+      menuPopover,
+      onPositionChange: () => {
+        scrollSpyController?.refresh();
+      },
+    });
+  }
+
+  function setupAllDesktopNav() {
+    setupDesktopScrollSpy();
+    setupDesktopDock();
+  }
+
+  setupAllDesktopNav();
+  document.addEventListener('astro:after-swap', setupAllDesktopNav);
 
   const desktopMq = window.matchMedia('(min-width: 768px)');
   desktopMq.addEventListener('change', (e) => {
@@ -267,6 +424,18 @@ const navItems = [
     } else {
       scrollSpyController?.destroy();
       scrollSpyController = null;
+    }
+  });
+
+  const desktopDockMq = window.matchMedia('(min-width: 1024px)');
+  desktopDockMq.addEventListener('change', (e) => {
+    if (e.matches) {
+      setupDesktopDock();
+    } else {
+      dockController?.destroy();
+      dockController = null;
+      const header = document.getElementById('site-header');
+      header?.setAttribute('data-dock', 'top');
     }
   });
 </script>
@@ -285,5 +454,193 @@ const navItems = [
   }
   .nav-link[data-active='true'] {
     color: var(--color-accent);
+  }
+
+  /* Desktop Metamorphic Dock Positions & Geometry (>= 1024px) */
+  @media (min-width: 1024px) {
+    #site-header {
+      transition:
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+    }
+
+    #site-header.is-dragging {
+      opacity: 0.85;
+      transform: scale(0.98);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Bottom Dock: macOS-style floating dock */
+    #site-header[data-dock='bottom'] {
+      position: fixed;
+      top: auto;
+      bottom: 1.25rem;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      margin: 0;
+      box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.35);
+    }
+    #site-header[data-dock='bottom'] #dock-menu-popover {
+      bottom: calc(100% + 0.5rem);
+      top: auto;
+      right: 0;
+    }
+
+    /* Top Dock Popover Placement */
+    #site-header[data-dock='top'] #dock-menu-popover {
+      top: calc(100% + 0.5rem);
+      bottom: auto;
+      right: 0;
+    }
+
+    /* Left & Right Vertical Docks: Compact Icon-First Rail (~56-60px wide) */
+    #site-header[data-dock='left'],
+    #site-header[data-dock='right'] {
+      position: fixed;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      width: auto;
+      max-width: none;
+      margin: 0;
+      border-radius: 2rem;
+      box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.4);
+    }
+
+    #site-header[data-dock='left'] {
+      left: 1.25rem;
+      right: auto;
+    }
+
+    #site-header[data-dock='right'] {
+      right: 1.25rem;
+      left: auto;
+    }
+
+    #site-header[data-dock='left'] #site-header-inner,
+    #site-header[data-dock='right'] #site-header-inner {
+      flex-direction: column;
+      height: auto;
+      width: auto;
+      padding: 0.875rem 0.5rem;
+      gap: 0.75rem;
+    }
+
+    #site-header[data-dock='left'] #desktop-nav,
+    #site-header[data-dock='right'] #desktop-nav {
+      flex-direction: column;
+      gap: 0.375rem;
+      width: 100%;
+    }
+
+    #site-header[data-dock='left'] .brand-text,
+    #site-header[data-dock='right'] .brand-text,
+    #site-header[data-dock='left'] .nav-link-text,
+    #site-header[data-dock='right'] .nav-link-text,
+    #site-header[data-dock='left'] .cv-text,
+    #site-header[data-dock='right'] .cv-text {
+      display: none;
+    }
+
+    #site-header[data-dock='left'] .nav-icon,
+    #site-header[data-dock='right'] .nav-icon {
+      display: block;
+    }
+
+    #site-header[data-dock='left'] .nav-link,
+    #site-header[data-dock='right'] .nav-link {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+      border-radius: 0.875rem;
+    }
+
+    #site-header[data-dock='left'] .cv-btn,
+    #site-header[data-dock='right'] .cv-btn {
+      width: 2.25rem;
+      height: 2.25rem;
+      padding: 0;
+    }
+
+    #site-header[data-dock='left'] .header-actions,
+    #site-header[data-dock='right'] .header-actions {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    #site-header[data-dock='left'] #dock-drag-handle,
+    #site-header[data-dock='right'] #dock-drag-handle {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    /* Indicator bar adaptation for vertical docks */
+    #site-header[data-dock='left'] #navbar-fluid-indicator .indicator-bar {
+      left: 3px;
+      right: auto;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 14px;
+    }
+
+    #site-header[data-dock='right'] #navbar-fluid-indicator .indicator-bar {
+      right: 3px;
+      left: auto;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 14px;
+    }
+
+    /* Tooltip flyouts for Left dock */
+    #site-header[data-dock='left'] .group:hover .nav-tooltip {
+      display: block;
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    #site-header[data-dock='left'] .nav-tooltip {
+      left: calc(100% + 12px);
+      right: auto;
+      top: 50%;
+      transform: translateY(-50%) scale(0.95);
+    }
+    #site-header[data-dock='left'] #dock-menu-popover {
+      left: calc(100% + 0.75rem);
+      right: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Tooltip flyouts for Right dock */
+    #site-header[data-dock='right'] .group:hover .nav-tooltip {
+      display: block;
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    #site-header[data-dock='right'] .nav-tooltip {
+      right: calc(100% + 12px);
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%) scale(0.95);
+    }
+    #site-header[data-dock='right'] #dock-menu-popover {
+      right: calc(100% + 0.75rem);
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #site-header {
+      transition: none !important;
+    }
   }
 </style>
