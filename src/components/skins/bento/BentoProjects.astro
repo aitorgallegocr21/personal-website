@@ -79,6 +79,8 @@ function getProjectImage(imagePath?: string): ImageMetadata | undefined {
                       decoding="async"
                       width={600}
                       height={240}
+                      densities={[1, 2]}
+                      quality={88}
                       format="webp"
                     />
                   );
