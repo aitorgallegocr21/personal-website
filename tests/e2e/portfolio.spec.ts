@@ -335,4 +335,106 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const twitterCard = page.locator('meta[name="twitter:card"]');
     await expect(twitterCard).toHaveAttribute('content', 'summary_large_image');
   });
+
+  test('supports desktop dock repositioning to left, right, bottom and reset to top', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const header = page.locator('#site-header');
+    await expect(header).toBeVisible();
+    await expect(header).toHaveAttribute('data-dock', 'top');
+
+    const dockMenuBtn = page.locator('#dock-menu-btn');
+    await expect(dockMenuBtn).toBeVisible();
+
+    const popover = page.locator('#dock-menu-popover');
+    await expect(popover).toBeHidden();
+
+    // 1. Open quick-dock menu and select Left
+    await dockMenuBtn.click();
+    await expect(popover).toBeVisible();
+    await page.locator('[data-dock-target="left"]').click();
+    await expect(header).toHaveAttribute('data-dock', 'left');
+    await expect(popover).toBeHidden();
+
+    // Verify localStorage persistence
+    const savedPosLeft = await page.evaluate(() =>
+      localStorage.getItem('portfolio-dock-position')
+    );
+    expect(savedPosLeft).toBe('left');
+
+    // 2. Double click handle to reset to Top
+    const dragHandle = page.locator('#dock-drag-handle');
+    await expect(dragHandle).toBeVisible();
+    await dragHandle.dblclick();
+    await expect(header).toHaveAttribute('data-dock', 'top');
+
+    const savedPosReset = await page.evaluate(() =>
+      localStorage.getItem('portfolio-dock-position')
+    );
+    expect(savedPosReset).toBe('top');
+
+    // 3. Switch to Bottom dock and reload to verify state persistence
+    await dockMenuBtn.click();
+    await page.locator('[data-dock-target="bottom"]').click();
+    await expect(header).toHaveAttribute('data-dock', 'bottom');
+
+    await page.reload();
+    await page.waitForLoadState('networkidle');
+    const headerAfterReload = page.locator('#site-header');
+    await expect(headerAfterReload).toHaveAttribute('data-dock', 'bottom');
+
+    // Clean up back to default Top
+    const handleAfterReload = page.locator('#dock-drag-handle');
+    await handleAfterReload.dblclick();
+    await expect(headerAfterReload).toHaveAttribute('data-dock', 'top');
+  });
+
+  test('tracks fluid scroll-spy indicator during desktop section scrolling', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const indicator = page.locator('#navbar-fluid-indicator');
+    await expect(indicator).toBeAttached();
+
+    // Scroll down to Projects section
+    await page.locator('#proyectos').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(100);
+
+    const projectsLink = page.locator('.nav-link[href="#proyectos"]');
+    await expect(projectsLink).toHaveAttribute('data-active', 'true');
+
+    // Scroll down to Career/Timeline section
+    await page.locator('#trayectoria').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(100);
+
+    const timelineLink = page.locator('.nav-link[href="#trayectoria"]');
+    await expect(timelineLink).toHaveAttribute('data-active', 'true');
+  });
+
+  test('preserves mobile top navigation and drawer on mobile viewports without docking overhead', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    // Dock drag handle and quick dock button must remain hidden on mobile
+    await expect(page.locator('#dock-drag-handle')).toBeHidden();
+    await expect(page.locator('#dock-menu-btn')).toBeHidden();
+
+    // Standard header remains at top with mobile toggle
+    const mobileToggle = page.locator('#mobile-nav-toggle');
+    await expect(mobileToggle).toBeVisible();
+    await expect(page.locator('#site-header')).toHaveAttribute(
+      'data-dock',
+      'top'
+    );
+  });
 });

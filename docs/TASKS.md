@@ -8,11 +8,13 @@
 
 ## Active Phase
 
-- [ ] **[Phase 24: Desktop Dockable Navbar & Fluid Scroll-Spy Experience](tasks/phase-24-desktop-dockable-navbar-and-fluid-scrollspy/index.md)** — _In Progress (Active)_ (Desktop dockable navigation island with magnetic snap repositioning across Top, Bottom, Left, and Right edges, horizontal-to-vertical layout metamorphosis with compact icon dock and floating tooltips, and a continuous fluid scroll-spy indicator tracking exact scroll progress between sections at 60/120 FPS).
+- _None (All current backlog phases completed. Ready for next sprint/phase specification)._
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+
+- [x] **[Phase 24: Desktop Dockable Navbar & Fluid Scroll-Spy Experience](tasks/phase-24-desktop-dockable-navbar-and-fluid-scrollspy/index.md)** — _Completed 2026-11-05_ (Desktop dockable navigation island with magnetic edge snapping across Top, Bottom, Left, and Right edges, horizontal-to-vertical layout metamorphosis with compact icon dock and floating tooltips, and a continuous fluid scroll-spy indicator tracking exact scroll progress between sections at 60/120 FPS).
 
 - [x] **[Phase 23: Floating Navbar & Mobile Document Modal Experience](tasks/phase-23-floating-navbar-and-mobile-document-modal/index.md)** — _Completed 2026-11-05_ (Rediseño del header a barra flotante glassmorphic estilo pill con offset superior y sombra de acento dinámica, microinteracciones en enlaces, menú móvil responsive con botón hamburguesa accesible y drawer animado, y overhaul móvil del visor de certificados PDF con geometría fullscreen, navegación táctil entre módulos, descarga directa/ZIP y banner de apertura nativa).
 
