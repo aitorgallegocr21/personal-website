@@ -315,21 +315,21 @@ export function bindThemeControls(
     paletteBtn?.setAttribute('aria-expanded', 'false');
   });
 
-  // Initial UI sync
-  const isAuto = isAutoRotateEnabled();
-  const activePalette = isAuto ? getTodayPalette().id : getStoredPalette();
-  document.documentElement.setAttribute('data-palette', activePalette);
-  syncPaletteUI(container, activePalette, isAuto);
+  // Initial UI sync: always default to live rotation upon page load
+  setAutoRotate(true);
+  const daily = getTodayPalette();
+  document.documentElement.setAttribute('data-palette', daily.id);
+  syncPaletteUI(container, daily.id, true);
 }
 
 /**
  * Initializes theme and palette on page load.
  */
 export function initThemeEngine(): void {
-  const isAuto = isAutoRotateEnabled();
-  const activePalette = isAuto ? getTodayPalette().id : getStoredPalette();
+  setAutoRotate(true);
+  const daily = getTodayPalette();
   if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute('data-palette', activePalette);
+    document.documentElement.setAttribute('data-palette', daily.id);
   }
 
   const activeTheme = getStoredTheme();

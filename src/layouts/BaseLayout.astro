@@ -108,12 +108,10 @@ const ogImageURL = new URL(image, canonicalURL);
                 ? 'dark'
                 : 'light';
 
-          const storedPalette = localStorage.getItem('portfolio-palette');
+          // Por defecto al abrir/cargar la web, siempre se activa Rotación viva (paleta del día)
+          localStorage.removeItem('portfolio-palette');
           const todayIndex = new Date().getDay(); // 0 (Domingo) - 6 (Sábado)
-          const palette =
-            storedPalette && PALETTES.includes(storedPalette)
-              ? storedPalette
-              : PALETTES[todayIndex];
+          const palette = PALETTES[todayIndex];
 
           const storedSkin = localStorage.getItem('portfolio-skin');
           const skin = storedSkin || 'bento-modern';
