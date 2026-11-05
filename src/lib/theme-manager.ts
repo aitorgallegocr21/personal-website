@@ -262,17 +262,33 @@ export function bindThemeControls(
     setTheme(newTheme);
   });
 
+  const paletteBackdrop = document.getElementById('palette-backdrop');
+
+  const openPaletteMenu = () => {
+    paletteDropdown?.classList.remove('hidden');
+    paletteBackdrop?.classList.remove('hidden');
+    paletteBtn?.setAttribute('aria-expanded', 'true');
+  };
+
+  const closePaletteMenu = () => {
+    paletteDropdown?.classList.add('hidden');
+    paletteBackdrop?.classList.add('hidden');
+    paletteBtn?.setAttribute('aria-expanded', 'false');
+  };
+
   // Toggle Dropdown
   paletteBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     const isHidden = paletteDropdown?.classList.contains('hidden');
     if (isHidden) {
-      paletteDropdown?.classList.remove('hidden');
-      paletteBtn.setAttribute('aria-expanded', 'true');
+      openPaletteMenu();
     } else {
-      paletteDropdown?.classList.add('hidden');
-      paletteBtn.setAttribute('aria-expanded', 'false');
+      closePaletteMenu();
     }
+  });
+
+  paletteBackdrop?.addEventListener('click', () => {
+    closePaletteMenu();
   });
 
   // Outside click & Escape handlers
@@ -281,15 +297,13 @@ export function bindThemeControls(
       !paletteDropdown?.contains(e.target as Node) &&
       e.target !== paletteBtn
     ) {
-      paletteDropdown?.classList.add('hidden');
-      paletteBtn?.setAttribute('aria-expanded', 'false');
+      closePaletteMenu();
     }
   });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !paletteDropdown?.classList.contains('hidden')) {
-      paletteDropdown?.classList.add('hidden');
-      paletteBtn?.setAttribute('aria-expanded', 'false');
+      closePaletteMenu();
     }
   });
 

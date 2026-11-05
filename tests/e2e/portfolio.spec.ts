@@ -437,4 +437,39 @@ test.describe('Web Portfolio Interactive E2E', () => {
       'top'
     );
   });
+
+  test('opens palette modal centered with blurred backdrop when in vertical dock', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    // Switch to Left dock
+    const dockMenuBtn = page.locator('#dock-menu-btn');
+    await dockMenuBtn.click();
+    await page.locator('[data-dock-target="left"]').click();
+    await expect(page.locator('#site-header')).toHaveAttribute(
+      'data-dock',
+      'left'
+    );
+
+    // Open palette menu
+    const paletteBtn = page.locator('#palette-menu-btn');
+    await paletteBtn.click();
+
+    const dropdown = page.locator('#palette-dropdown');
+    await expect(dropdown).toBeVisible();
+
+    const backdrop = page.locator('#palette-backdrop');
+    await expect(backdrop).toBeVisible();
+
+    // Verify backdrop click closes modal
+    await backdrop.click({ position: { x: 50, y: 50 } });
+    await expect(dropdown).toBeHidden();
+    await expect(backdrop).toBeHidden();
+
+    // Reset back to Top
+    await page.locator('#dock-drag-handle').dblclick();
+  });
 });

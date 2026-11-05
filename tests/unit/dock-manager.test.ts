@@ -69,44 +69,46 @@ describe('Dock Manager Helper Functions', () => {
     });
   });
 
-  describe('detectSnapEdge', () => {
+  describe('detectSnapEdge (Early Magnetic Snapping)', () => {
     const width = 1920;
     const height = 1080;
-    const threshold = 100;
+    const deadzone = 40;
 
-    it('returns null when cursor is inside central viewport', () => {
-      expect(detectSnapEdge(960, 540, width, height, threshold)).toBe(null);
-      expect(detectSnapEdge(300, 300, width, height, threshold)).toBe(null);
+    it('returns null when cursor is inside the deadzone at exact center', () => {
+      expect(detectSnapEdge(960, 540, width, height, deadzone)).toBe(null);
+      expect(detectSnapEdge(970, 545, width, height, deadzone)).toBe(null);
     });
 
-    it('detects top edge when near top boundary', () => {
-      expect(detectSnapEdge(960, 40, width, height, threshold)).toBe('top');
-      expect(detectSnapEdge(500, 99, width, height, threshold)).toBe('top');
+    it('early snaps to left when moving left of center', () => {
+      // (600, 540) is left of center (dx = -360, dy = 0)
+      expect(detectSnapEdge(600, 540, width, height, deadzone)).toBe('left');
+      expect(detectSnapEdge(100, 540, width, height, deadzone)).toBe('left');
     });
 
-    it('detects bottom edge when near bottom boundary', () => {
-      expect(detectSnapEdge(960, 1020, width, height, threshold)).toBe(
-        'bottom'
-      );
+    it('early snaps to right when moving right of center', () => {
+      // (1300, 540) is right of center (dx = +340, dy = 0)
+      expect(detectSnapEdge(1300, 540, width, height, deadzone)).toBe('right');
+      expect(detectSnapEdge(1800, 540, width, height, deadzone)).toBe('right');
     });
 
-    it('detects left edge when near left boundary', () => {
-      expect(detectSnapEdge(50, 540, width, height, threshold)).toBe('left');
+    it('early snaps to top when moving above center', () => {
+      // (960, 300) is above center (dx = 0, dy = -240)
+      expect(detectSnapEdge(960, 300, width, height, deadzone)).toBe('top');
+      expect(detectSnapEdge(960, 50, width, height, deadzone)).toBe('top');
     });
 
-    it('detects right edge when near right boundary', () => {
-      expect(detectSnapEdge(1880, 540, width, height, threshold)).toBe('right');
+    it('early snaps to bottom when moving below center', () => {
+      // (960, 800) is below center (dx = 0, dy = +260)
+      expect(detectSnapEdge(960, 800, width, height, deadzone)).toBe('bottom');
+      expect(detectSnapEdge(960, 1000, width, height, deadzone)).toBe('bottom');
     });
 
-    it('resolves corners based on closest boundary distance', () => {
-      // Near top-left: x=40, y=20 -> y distance to top is 20 < 40 -> top
-      expect(detectSnapEdge(40, 20, width, height, threshold)).toBe('top');
-      // Near top-left: x=20, y=40 -> x distance to left is 20 < 40 -> left
-      expect(detectSnapEdge(20, 40, width, height, threshold)).toBe('left');
-      // Near bottom-right: x=1900 (dx=20), y=1050 (dy=30) -> right
-      expect(detectSnapEdge(1900, 1050, width, height, threshold)).toBe(
-        'right'
-      );
+    it('correctly decides between horizontal and vertical quadrants', () => {
+      // normX = -500/960 ≈ -0.52, normY = -100/540 ≈ -0.18 -> dominant horizontal left
+      expect(detectSnapEdge(460, 440, width, height, deadzone)).toBe('left');
+
+      // normX = -100/960 ≈ -0.10, normY = -300/540 ≈ -0.55 -> dominant vertical top
+      expect(detectSnapEdge(860, 240, width, height, deadzone)).toBe('top');
     });
   });
 });

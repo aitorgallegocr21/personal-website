@@ -45,7 +45,7 @@ const navItems = [
     class="px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300"
   >
     <!-- Left Cluster: Tactile Drag Grip & Brand Logo -->
-    <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+    <div class="brand-cluster flex items-center gap-1 sm:gap-2 shrink-0">
       <!-- Desktop Drag Grip Handle -->
       <div
         id="dock-drag-handle"
@@ -456,6 +456,30 @@ const navItems = [
     color: var(--color-accent);
   }
 
+  /* Dedicated Document Chromatic Identity for CV Button */
+  .cv-btn {
+    color: #4f46e5;
+    background: rgba(79, 70, 229, 0.08);
+    border-color: rgba(79, 70, 229, 0.22);
+  }
+  :global(.dark) .cv-btn {
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.12);
+    border-color: rgba(99, 102, 241, 0.25);
+  }
+  .cv-btn:hover {
+    background: #4f46e5;
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 14px rgba(79, 70, 229, 0.35);
+  }
+  :global(.dark) .cv-btn:hover {
+    background: #6366f1;
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
+  }
+
   /* Desktop Metamorphic Dock Positions & Geometry (>= 1024px) */
   @media (min-width: 1024px) {
     #site-header {
@@ -530,6 +554,29 @@ const navItems = [
       gap: 0.75rem;
     }
 
+    /* Strict vertical alignment: stack drag grip and brand logo vertically */
+    #site-header[data-dock='left'] .brand-cluster,
+    #site-header[data-dock='right'] .brand-cluster {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.375rem;
+      width: 100%;
+    }
+
+    #site-header[data-dock='left'] #dock-drag-handle,
+    #site-header[data-dock='right'] #dock-drag-handle {
+      margin-left: 0;
+      width: 2rem;
+      height: 1.5rem;
+    }
+
+    #site-header[data-dock='left'] .brand-logo,
+    #site-header[data-dock='right'] .brand-logo {
+      margin: 0;
+      padding: 0.25rem;
+      justify-content: center;
+    }
+
     #site-header[data-dock='left'] #desktop-nav,
     #site-header[data-dock='right'] #desktop-nav {
       flex-direction: column;
@@ -566,16 +613,40 @@ const navItems = [
       padding: 0;
     }
 
+    /* Strict vertical alignment: stack all footer action controls vertically */
     #site-header[data-dock='left'] .header-actions,
     #site-header[data-dock='right'] .header-actions {
       flex-direction: column;
+      align-items: center;
       gap: 0.5rem;
+      width: 100%;
     }
 
-    #site-header[data-dock='left'] #dock-drag-handle,
-    #site-header[data-dock='right'] #dock-drag-handle {
-      margin-left: 0;
+    /* Stack palette button and theme toggle vertically in vertical docks */
+    #site-header[data-dock='left'] #theme-controls-container,
+    #site-header[data-dock='right'] #theme-controls-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
       width: 100%;
+    }
+
+    /* Centered Palette Modal with backdrop when docked vertically or at bottom */
+    #site-header[data-dock='left'] #palette-dropdown,
+    #site-header[data-dock='right'] #palette-dropdown,
+    #site-header[data-dock='bottom'] #palette-dropdown {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      z-index: 50;
+      max-height: 85vh;
+      overflow-y: auto;
+      width: min(340px, calc(100vw - 2rem));
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
     /* Indicator bar adaptation for vertical docks */

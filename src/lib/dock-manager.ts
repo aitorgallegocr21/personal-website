@@ -13,7 +13,7 @@ export interface DockManagerOptions {
   dragHandle?: HTMLElement | null;
   menuButton?: HTMLElement | null;
   menuPopover?: HTMLElement | null;
-  snapThreshold?: number;
+  deadzoneRadius?: number;
   onPositionChange?: (position: DockPosition) => void;
 }
 
@@ -66,31 +66,37 @@ export function saveDockPosition(pos: DockPosition, storage?: Storage): void {
 }
 
 /**
- * Detects the nearest viewport snap edge if cursor is within snap threshold.
- * Uses exact Euclidean distance to boundaries to resolve corner conflicts.
+ * Detects the nearest viewport snap edge using early magnetic attraction.
+ * Divides the viewport into normalized directional attraction quadrants
+ * relative to the center, with an optional deadzone in the exact center.
  */
 export function detectSnapEdge(
   x: number,
   y: number,
   viewportWidth: number,
   viewportHeight: number,
-  threshold = 110
+  deadzoneRadius = 40
 ): DockPosition | null {
-  const dTop = y;
-  const dBottom = viewportHeight - y;
-  const dLeft = x;
-  const dRight = viewportWidth - x;
+  const centerX = viewportWidth / 2;
+  const centerY = viewportHeight / 2;
 
-  const minDistance = Math.min(dTop, dBottom, dLeft, dRight);
+  const dx = x - centerX;
+  const dy = y - centerY;
+  const distance = Math.hypot(dx, dy);
 
-  if (minDistance > threshold) {
+  if (distance < deadzoneRadius) {
     return null;
   }
 
-  if (minDistance === dTop) return 'top';
-  if (minDistance === dBottom) return 'bottom';
-  if (minDistance === dLeft) return 'left';
-  return 'right';
+  // Normalized coordinates [-1, 1] accounting for viewport aspect ratio
+  const normX = dx / (viewportWidth / 2);
+  const normY = dy / (viewportHeight / 2);
+
+  if (Math.abs(normX) > Math.abs(normY)) {
+    return normX > 0 ? 'right' : 'left';
+  } else {
+    return normY > 0 ? 'bottom' : 'top';
+  }
 }
 
 /**
@@ -102,7 +108,7 @@ function getOrCreateSnapIndicator(): HTMLElement {
     indicator = document.createElement('div');
     indicator.id = 'dock-snap-preview';
     indicator.className =
-      'pointer-events-none fixed z-40 transition-all duration-200 opacity-0 bg-[var(--color-accent-subtle)] border-2 border-dashed border-[var(--color-accent)] rounded-2xl shadow-[0_0_24px_var(--color-accent-glow)]';
+      'pointer-events-none fixed z-40 transition-all duration-200 opacity-0 bg-[var(--color-accent-subtle)] border-2 border-dashed border-[var(--color-accent)] shadow-[0_0_24px_var(--color-accent-glow)]';
     document.body.appendChild(indicator);
   }
   return indicator;
@@ -131,6 +137,7 @@ function updateSnapIndicator(
       indicator.style.transform = 'translateX(-50%)';
       indicator.style.width = 'min(1024px, calc(100% - 2rem))';
       indicator.style.height = '60px';
+      indicator.style.borderRadius = '9999px';
       break;
     case 'bottom':
       indicator.style.bottom = '16px';
@@ -140,6 +147,7 @@ function updateSnapIndicator(
       indicator.style.transform = 'translateX(-50%)';
       indicator.style.width = 'min(1024px, calc(100% - 2rem))';
       indicator.style.height = '60px';
+      indicator.style.borderRadius = '9999px';
       break;
     case 'left':
       indicator.style.left = '16px';
@@ -148,7 +156,8 @@ function updateSnapIndicator(
       indicator.style.bottom = 'auto';
       indicator.style.transform = 'translateY(-50%)';
       indicator.style.width = '60px';
-      indicator.style.height = 'min(500px, calc(100% - 4rem))';
+      indicator.style.height = 'min(520px, calc(100% - 4rem))';
+      indicator.style.borderRadius = '2rem';
       break;
     case 'right':
       indicator.style.right = '16px';
@@ -157,7 +166,8 @@ function updateSnapIndicator(
       indicator.style.bottom = 'auto';
       indicator.style.transform = 'translateY(-50%)';
       indicator.style.width = '60px';
-      indicator.style.height = 'min(500px, calc(100% - 4rem))';
+      indicator.style.height = 'min(520px, calc(100% - 4rem))';
+      indicator.style.borderRadius = '2rem';
       break;
   }
 }
@@ -173,7 +183,7 @@ export function initDockManager(
     dragHandle,
     menuButton,
     menuPopover,
-    snapThreshold = 110,
+    deadzoneRadius = 40,
   } = options;
 
   let currentPosition: DockPosition = getStoredDockPosition();
@@ -214,7 +224,13 @@ export function initDockManager(
     isDragging = true;
     startX = e.clientX;
     startY = e.clientY;
-    candidateEdge = null;
+    candidateEdge = detectSnapEdge(
+      e.clientX,
+      e.clientY,
+      window.innerWidth,
+      window.innerHeight,
+      deadzoneRadius
+    );
     snapIndicator = getOrCreateSnapIndicator();
 
     if (dragHandle && 'setPointerCapture' in dragHandle) {
@@ -234,13 +250,14 @@ export function initDockManager(
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
 
-    if (Math.hypot(dx, dy) > 8) {
+    // Show snap preview immediately on initial subtle movement (4px)
+    if (Math.hypot(dx, dy) >= 4) {
       candidateEdge = detectSnapEdge(
         e.clientX,
         e.clientY,
         window.innerWidth,
         window.innerHeight,
-        snapThreshold
+        deadzoneRadius
       );
 
       if (snapIndicator) {
