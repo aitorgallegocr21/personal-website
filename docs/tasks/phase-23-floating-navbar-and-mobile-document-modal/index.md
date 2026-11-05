@@ -28,7 +28,7 @@
 
 ## 2. Task Breakdown
 
-- [ ] **[Task 23.1: Floating Navbar & Responsive Navigation](task-23.1-floating-navbar-and-responsive-navigation.md)** — Implement floating island geometry, modern link aesthetics, mobile hamburger toggle, and responsive drawer navigation.
+- [x] **[Task 23.1: Floating Navbar & Responsive Navigation](task-23.1-floating-navbar-and-responsive-navigation.md)** — Implement floating island geometry, modern link aesthetics, mobile hamburger toggle, and responsive drawer navigation.
 - [ ] **[Task 23.2: Mobile-First Certificate Modal Redesign](task-23.2-mobile-first-certificate-modal-redesign.md)** — Overhaul certificate viewer modal geometry, compact mobile actions, touch-friendly multi-document tabs, and resilient mobile PDF handling.
 - [ ] **[Task 23.3: Verification, E2E Mobile Testing & Sync](task-23.3-verification-e2e-testing-and-sync.md)** — Automate Playwright E2E tests for mobile navbar interactions and modal preview, verify zero regressions, and update project documentation.
 

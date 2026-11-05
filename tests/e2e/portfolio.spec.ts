@@ -41,6 +41,53 @@ test.describe('Web Portfolio Interactive E2E', () => {
     }
   });
 
+  test('renders floating navbar and supports responsive mobile navigation drawer', async ({
+    page,
+  }) => {
+    // 1. Desktop viewport verification
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+
+    const header = page.locator('#site-header');
+    await expect(header).toBeVisible();
+
+    const desktopNav = header.locator('nav[aria-label="Navegación principal"]');
+    await expect(desktopNav).toBeVisible();
+
+    const mobileToggle = page.locator('#mobile-nav-toggle');
+    await expect(mobileToggle).toBeHidden();
+
+    // 2. Mobile viewport verification (iPhone-like 375x667)
+    await page.setViewportSize({ width: 375, height: 667 });
+
+    await expect(desktopNav).toBeHidden();
+    await expect(mobileToggle).toBeVisible();
+    await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
+
+    const mobileMenu = page.locator('#mobile-nav-menu');
+    await expect(mobileMenu).toBeHidden();
+
+    // Open mobile menu
+    await mobileToggle.click();
+    await expect(mobileToggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(mobileMenu).toBeVisible();
+
+    // Check all mobile links exist
+    const mobileLinks = mobileMenu.locator('.mobile-nav-link');
+    await expect(mobileLinks).toHaveCount(6); // 5 sections + CV button
+
+    // Close on Escape
+    await page.keyboard.press('Escape');
+    await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(mobileMenu).toBeHidden();
+
+    // Open again and click a section link to test auto-close
+    await mobileToggle.click();
+    await expect(mobileMenu).toBeVisible();
+    await mobileLinks.first().click();
+    await expect(mobileMenu).toBeHidden();
+  });
+
   test('toggles and persists color palette selection in DOM and localStorage', async ({
     page,
   }) => {
