@@ -8,7 +8,7 @@
 
 ## Active Phase
 
-- _None / Backlog Clean_ — Todas las fases planificadas del roadmap han sido completadas satisfactoriamente al 100%.
+- [ ] **[Phase 22: CI Hardening, Asset Optimization & Social Branding](tasks/phase-22-ci-hardening-asset-optimization-and-social-branding/index.md)** — _Active Sprint_ (Integración de Playwright E2E en GitHub Actions CI con resolución elástica de Chromium, diseño de banner social Open Graph 1200x630 para Twitter/LinkedIn y migración al pipeline nativo de imágenes `astro:assets`).
 
 ---
 
