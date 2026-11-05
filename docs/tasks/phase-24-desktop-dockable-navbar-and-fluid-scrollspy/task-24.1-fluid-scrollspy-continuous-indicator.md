@@ -1,7 +1,7 @@
 # Task 24.1: Fluid Scroll-Spy & Interpolated Indicator Engine
 
-**Status:** Pending  
-**Component Scope:** `src/lib/scroll-spy.ts`, `src/components/portfolio/Navbar.astro`
+**Status:** Completed  
+**Component Scope:** `src/lib/scroll-spy.ts`, `src/components/portfolio/Navbar.astro`, `tests/unit/scroll-spy.test.ts`
 
 ---
 
@@ -22,22 +22,19 @@
 
 ---
 
-## 2. Implementation Plan
+## 2. Implementation Summary
 
 1. **`src/lib/scroll-spy.ts`:**
-   - Define type contracts: `ScrollSection`, `IndicatorBounds`, `ScrollSpyOptions`.
-   - Implement `initFluidScrollSpy(container: HTMLElement, links: NodeListOf<HTMLAnchorElement>, indicator: HTMLElement)`.
-   - Implement `cacheOffsets()`: read and store top coordinates of target section elements (`#proyectos`, `#trayectoria`, `#certificaciones`, `#filosofia`, `#contacto`).
-   - Implement render loop via `requestAnimationFrame` calculating:
-     ```ts
-     const activeIndex = findCurrentSectionIndex(scrollY);
-     const progress = computeProgress(scrollY, activeIndex);
-     updateIndicatorPill(indicator, activeIndex, progress, isVertical);
-     updateGlowStates(links, activeIndex, progress);
-     ```
+   - Implemented pure mathematical calculations: `calculateScrollProgress`, `interpolateGeometry`, `computeGlowIntensities`.
+   - Built cached offsets observer: caches section tops and relative link bounding boxes (`measureLinkCoords`).
+   - Integrated `ResizeObserver` on container and `document.fonts.ready` to ensure exact geometry recalculation without layout thrashing.
+   - Passive RAF scroll render loop updating `--nav-glow` custom CSS properties, `data-active` attributes, and GPU-composited `translate3d` indicator styles.
+   - Provided clean lifecycle management with `refresh()` and `destroy()`.
 2. **`Navbar.astro` integration:**
-   - Add a dedicated `<div id="navbar-fluid-indicator" class="pointer-events-none absolute ..."></div>` with accent background, rounded geometry, and subtle glow.
-   - Provide visual styling for the sliding pill and cross-fading text opacity/glow.
-3. **Verification:**
-   - Verify smooth gliding across all section links during manual scrolling.
-   - Verify zero frame drops or CPU usage spikes in browser performance profiler.
+   - Added `#navbar-fluid-indicator` element with subtle accent background, rounded geometry, and illuminated bottom bar.
+   - Styled `.nav-link .nav-link-text` using modern `color-mix` and dynamic `text-shadow` proportional to `--nav-glow`.
+   - Wired `setupDesktopScrollSpy` on load, on `astro:after-swap`, and gated strictly to desktop viewports (`window.matchMedia('(min-width: 768px)')`).
+3. **Unit & E2E Verification:**
+   - Added 15 comprehensive unit tests in `tests/unit/scroll-spy.test.ts` covering boundary conditions, hero fade zones, bottom-of-page clamping, 2D geometry interpolation, and proportional glow distribution.
+   - Verified 100% green status across all 74 unit tests and 16 Playwright E2E tests.
+   - Verified Astro build and typecheck with 0 errors.

@@ -35,7 +35,7 @@
 
 ## 2. Task Breakdown
 
-- [ ] **[Task 24.1: Fluid Scroll-Spy & Interpolated Indicator Engine](task-24.1-fluid-scrollspy-continuous-indicator.md)** — Implement high-performance scroll observer, cached offset interpolation math, fluid sliding pill/underline, proportional text glow cross-fading, and 2D axis adaptation.
+- [x] **[Task 24.1: Fluid Scroll-Spy & Interpolated Indicator Engine](task-24.1-fluid-scrollspy-continuous-indicator.md)** — Implement high-performance scroll observer, cached offset interpolation math, fluid sliding pill/underline, proportional text glow cross-fading, and 2D axis adaptation.
 - [ ] **[Task 24.2: Dockable Desktop Navbar & Layout Metamorphosis](task-24.2-dockable-desktop-navbar-metamorphosis.md)** — Implement drag-and-drop snap engine, quick-dock options popover, double-click reset, vertical icon-first dock with floating tooltips, and state persistence.
 - [ ] **[Task 24.3: Verification, E2E Testing & Documentation Sync](task-24.3-verification-e2e-testing-and-sync.md)** — Automate Playwright E2E tests for desktop docking, fluid scroll-spy tracking, verify zero mobile regressions, and update project documentation.
 
