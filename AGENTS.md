@@ -15,7 +15,8 @@ Build and maintain a personal portfolio and printable A4 PDF CV generator with S
 3. **Token & Context Optimization:**
    - Do not re-read entire files unnecessarily; inspect only affected interfaces or line ranges.
    - Keep agent responses and logs ultra-concise: show only new/modified code diffs, zero filler prose.
-4. **Pre-delivery Verification:** No task is complete without verifying that `npm run build` succeeds with 0 TypeScript/Astro errors.
+4. **Pre-delivery Verification:** No task is complete without verifying that `npm run build` (or `npm run verify`) succeeds with 0 TypeScript/Astro errors.
+5. **Mobile-First Parity:** Any visual or interactive modification to the portfolio must be verified against mobile viewports (375px/390px) ensuring touch targets >= 44x44px, safe area insets, and zero horizontal overflow. Follow `.agents/skills/responsive-mobile-design/SKILL.md`.
 
 ---
 
@@ -75,6 +76,8 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 
 ## 5. Reference Scripts
 
+- `npm run verify`: Full deterministic quality gate (`check` + `lint` + `test` + `build`).
+- `npm run verify:fast`: Quick quality gate (`check` + `lint` + `test`).
 - `npm run dev`: Start local dev server.
 - `astro dev --background`: Run server in background (`astro dev stop`, `astro dev status`, `astro dev logs`).
 - `npm run check`: Check TypeScript types (`astro check`).
