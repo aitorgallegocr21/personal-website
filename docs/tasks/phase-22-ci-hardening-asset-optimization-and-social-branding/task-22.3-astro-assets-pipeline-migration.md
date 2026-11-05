@@ -1,6 +1,6 @@
 # Task 22.3: Native Asset Pipeline Migration with `astro:assets`
 
-**Status:** Pending  
+**Status:** Completed  
 **Scope:** `src/components/portfolio/ProfilePortrait.astro`, `src/components/skins/bento/BentoHero.astro`, `src/components/skins/bento/BentoProjects.astro`, `astro.config.mjs`
 
 ---

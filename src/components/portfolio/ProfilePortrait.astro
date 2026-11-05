@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import defaultAvatar from '@/assets/images/avatar.webp';
 import { calculateAge } from '@/utils/date';
 import { User } from 'lucide-astro';
 
@@ -11,9 +13,6 @@ interface Props {
 
 const { name, avatarUrl, title, birthDate } = Astro.props;
 const age = birthDate ? calculateAge(birthDate) : 19;
-const imageSrc = avatarUrl
-  ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${avatarUrl}`
-  : undefined;
 ---
 
 <div class="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[280px] mx-auto md:mx-0 select-none">
@@ -31,15 +30,16 @@ const imageSrc = avatarUrl
 
     <!-- Inner Card Surface -->
     <div class="relative rounded-[14px] overflow-hidden bg-zinc-100 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 aspect-[3/4] flex items-center justify-center">
-      {imageSrc ? (
-        <img
-          src={imageSrc}
+      {avatarUrl ? (
+        <Image
+          src={defaultAvatar}
           alt={`Retrato profesional de ${name}`}
           class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
           loading="eager"
           decoding="async"
-          width="400"
-          height="533"
+          width={400}
+          height={533}
+          format="webp"
         />
       ) : null}
 
@@ -48,7 +48,7 @@ const imageSrc = avatarUrl
         id="portrait-avatar-fallback"
         class:list={[
           'w-full h-full flex flex-col items-center justify-center bg-zinc-200/80 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 p-6 text-center',
-          imageSrc ? 'hidden' : 'flex',
+          avatarUrl ? 'hidden' : 'flex',
         ]}
       >
         <div class="w-16 h-16 rounded-full bg-zinc-300/80 dark:bg-zinc-800 flex items-center justify-center mb-3 text-[var(--color-accent)] shadow-inner">

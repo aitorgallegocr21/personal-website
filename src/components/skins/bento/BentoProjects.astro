@@ -1,9 +1,24 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { cvData } from '@/data/cv-data';
 import { Github, ExternalLink, ArrowUpRight } from 'lucide-astro';
 
 const { projects } = cvData;
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const projectImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/projects/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+
+function getProjectImage(imagePath?: string): ImageMetadata | undefined {
+  if (!imagePath) return undefined;
+  const fileName = imagePath.split('/').pop();
+  if (!fileName) return undefined;
+  const key = `/src/assets/images/projects/${fileName}`;
+  return projectImages[key]?.default;
+}
 ---
 
 <section id="proyectos" class="py-12 sm:py-16 scroll-mt-20">
@@ -52,16 +67,36 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
           {project.image ? (
             <div class="overflow-hidden rounded-lg mb-4 border border-zinc-200 dark:border-zinc-800/60 group-hover:border-[var(--color-accent-border)] transition-colors duration-300">
-              <img
-                src={
-                  project.image.startsWith('http')
-                    ? project.image
-                    : `${baseUrl}${project.image}`
+              {(() => {
+                const imgMeta = getProjectImage(project.image);
+                if (imgMeta) {
+                  return (
+                    <Image
+                      src={imgMeta}
+                      alt={`Preview de ${project.title}`}
+                      class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                      width={600}
+                      height={240}
+                      format="webp"
+                    />
+                  );
                 }
-                alt={`Preview de ${project.title}`}
-                class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
+                return (
+                  <img
+                    src={
+                      project.image.startsWith('http')
+                        ? project.image
+                        : `${baseUrl}${project.image}`
+                    }
+                    alt={`Preview de ${project.title}`}
+                    class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                );
+              })()}
             </div>
           ) : (
             <div class="w-full h-40 rounded-lg mb-4 bg-gradient-to-br from-zinc-100 via-zinc-200 to-zinc-300 dark:from-zinc-800 dark:via-zinc-800/70 dark:to-zinc-900 border border-zinc-200 dark:border-zinc-800/60 group-hover:border-[var(--color-accent-border)] transition-colors duration-300 flex items-center justify-center">

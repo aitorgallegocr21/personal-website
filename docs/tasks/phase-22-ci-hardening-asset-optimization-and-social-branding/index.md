@@ -1,6 +1,6 @@
 # Phase 22: CI Hardening, Asset Optimization & Social Branding
 
-**Status:** In Progress  
+**Status:** Completed (2026-11-05)  
 **Branch:** `feat/phase-22-ci-hardening-asset-optimization-and-social-branding`  
 **Core Mission:** Enhance the project's non-visible infrastructure and media delivery pipeline by integrating Playwright E2E verification into GitHub Actions CI with robust system browser detection, providing a dedicated 1200x630 Open Graph social preview banner for social sharing, and migrating portfolio media to Astro's native asset optimization pipeline (`astro:assets`).
 
@@ -27,7 +27,7 @@
 
 - [x] **[Task 22.1: Playwright CI Automation & Browser Detection](task-22.1-playwright-ci-and-browser-resolution.md)** — Configure resilient Chrome executable resolution in `playwright.config.ts` and integrate E2E testing into `.github/workflows/ci.yml`.
 - [x] **[Task 22.2: Dedicated Open Graph Social Image & Meta Ingestion](task-22.2-dedicated-social-og-image.md)** — Create a 1200x630 px branding card and update `BaseLayout.astro` social metadata.
-- [ ] **[Task 22.3: Native Asset Pipeline Migration with `astro:assets`](task-22.3-astro-assets-pipeline-migration.md)** — Adopt Astro's `<Image />` component for hero portrait and project preview assets.
+- [x] **[Task 22.3: Native Asset Pipeline Migration with `astro:assets`](task-22.3-astro-assets-pipeline-migration.md)** — Adopt Astro's `<Image />` component for hero portrait and project preview assets.
 
 ---
 
