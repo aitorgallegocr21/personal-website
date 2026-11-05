@@ -8,7 +8,7 @@
 
 ## Active Phase
 
-_None currently active. Phase 23 completed._
+- [ ] **[Phase 24: Desktop Dockable Navbar & Fluid Scroll-Spy Experience](tasks/phase-24-desktop-dockable-navbar-and-fluid-scrollspy/index.md)** — _In Progress (Active)_ (Desktop dockable navigation island with magnetic snap repositioning across Top, Bottom, Left, and Right edges, horizontal-to-vertical layout metamorphosis with compact icon dock and floating tooltips, and a continuous fluid scroll-spy indicator tracking exact scroll progress between sections at 60/120 FPS).
 
 ---
 
