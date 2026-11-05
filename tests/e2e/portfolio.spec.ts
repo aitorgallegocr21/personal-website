@@ -167,4 +167,25 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const body = await response?.text();
     expect(body).toContain('sitemap');
   });
+
+  test('serves dedicated Open Graph and Twitter card preview metadata', async ({
+    page,
+  }) => {
+    await page.goto('./');
+
+    const ogImage = page.locator('meta[property="og:image"]');
+    await expect(ogImage).toHaveAttribute('content', /images\/og-image\.png$/);
+
+    const ogWidth = page.locator('meta[property="og:image:width"]');
+    await expect(ogWidth).toHaveAttribute('content', '1200');
+
+    const ogHeight = page.locator('meta[property="og:image:height"]');
+    await expect(ogHeight).toHaveAttribute('content', '630');
+
+    const ogType = page.locator('meta[property="og:image:type"]');
+    await expect(ogType).toHaveAttribute('content', 'image/png');
+
+    const twitterCard = page.locator('meta[name="twitter:card"]');
+    await expect(twitterCard).toHaveAttribute('content', 'summary_large_image');
+  });
 });

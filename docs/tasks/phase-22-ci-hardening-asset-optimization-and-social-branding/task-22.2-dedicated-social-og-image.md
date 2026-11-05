@@ -1,6 +1,6 @@
 # Task 22.2: Dedicated Open Graph Social Image & Meta Ingestion
 
-**Status:** Pending  
+**Status:** Completed  
 **Scope:** `public/images/og-image.png`, `src/layouts/BaseLayout.astro`, `src/data/cv-data.ts`, `tests/unit/schema-org.test.ts`
 
 ---

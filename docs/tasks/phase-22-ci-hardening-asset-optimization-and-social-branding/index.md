@@ -26,7 +26,7 @@
 ## 2. Task Breakdown
 
 - [x] **[Task 22.1: Playwright CI Automation & Browser Detection](task-22.1-playwright-ci-and-browser-resolution.md)** — Configure resilient Chrome executable resolution in `playwright.config.ts` and integrate E2E testing into `.github/workflows/ci.yml`.
-- [ ] **[Task 22.2: Dedicated Open Graph Social Image & Meta Ingestion](task-22.2-dedicated-social-og-image.md)** — Create a 1200x630 px branding card and update `BaseLayout.astro` social metadata.
+- [x] **[Task 22.2: Dedicated Open Graph Social Image & Meta Ingestion](task-22.2-dedicated-social-og-image.md)** — Create a 1200x630 px branding card and update `BaseLayout.astro` social metadata.
 - [ ] **[Task 22.3: Native Asset Pipeline Migration with `astro:assets`](task-22.3-astro-assets-pipeline-migration.md)** — Adopt Astro's `<Image />` component for hero portrait and project preview assets.
 
 ---
