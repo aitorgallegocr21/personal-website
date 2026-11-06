@@ -19,7 +19,17 @@ describe('Scroll-Spy Math Engine', () => {
         targetIndex: 0,
         progress: 0,
         opacity: 0,
+        isHero: true,
       });
+    });
+
+    it('identifies Hero zone when scroll is well above first section', () => {
+      const result = calculateScrollProgress(100, sectionTops, {
+        headerOffset,
+        fadeDistance,
+      });
+      expect(result.isHero).toBe(true);
+      expect(result.opacity).toBe(0);
     });
 
     it('returns opacity 0 when scroll is well above first section', () => {

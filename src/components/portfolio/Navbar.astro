@@ -38,6 +38,7 @@ const navItems = [
 <header
   id="site-header"
   data-dock="top"
+  data-hero-active="true"
   class="sticky top-3 sm:top-4 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-5xl mx-auto rounded-2xl md:rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-white/85 dark:bg-zinc-950/85 backdrop-blur-md shadow-lg shadow-zinc-950/5 dark:shadow-zinc-950/30 hover:border-zinc-300 dark:hover:border-zinc-700/80 hover:shadow-[0_4px_24px_-4px_var(--color-accent-glow)] transition-all duration-300"
 >
   <div
@@ -61,14 +62,14 @@ const navItems = [
       <!-- Brand / Logo -->
       <a
         href={import.meta.env.BASE_URL}
-        class="brand-logo group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-2 -ml-1 shrink-0"
+        class="brand-logo group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-2.5 -ml-1 shrink-0"
         aria-label={`Inicio - Portfolio de ${personal.name}`}
       >
-        <span class="relative flex h-2.5 w-2.5 items-center justify-center">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40 duration-1000"></span>
-          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]"></span>
+        <span class="brand-beacon relative flex h-2.5 w-2.5 items-center justify-center">
+          <span class="beacon-pulse absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40 duration-1000"></span>
+          <span class="beacon-dot relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)] transition-all duration-300"></span>
         </span>
-        <span class="brand-text text-sm sm:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-colors">
+        <span class="brand-text text-sm sm:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-all duration-300">
           Portfolio
         </span>
       </a>
@@ -350,6 +351,16 @@ const navItems = [
         closeMenu();
       }
     });
+
+    const syncMobileHero = () => {
+      if (window.scrollY < 120) {
+        header.setAttribute('data-hero-active', 'true');
+      } else {
+        header.removeAttribute('data-hero-active');
+      }
+    };
+    window.addEventListener('scroll', syncMobileHero, { passive: true });
+    syncMobileHero();
   }
 
   setupMobileNav();
@@ -377,6 +388,7 @@ const navItems = [
     const indicator = document.getElementById(
       'navbar-fluid-indicator'
     ) as HTMLElement | null;
+    const header = document.getElementById('site-header');
     if (!nav || !indicator) return;
 
     const links = Array.from(
@@ -384,12 +396,23 @@ const navItems = [
     );
     if (links.length === 0) return;
 
+    if (window.scrollY < 120) {
+      header?.setAttribute('data-hero-active', 'true');
+    }
+
     scrollSpyController = initFluidScrollSpy({
       container: nav,
       links,
       indicator,
       headerOffset: 100,
       fadeDistance: 160,
+      onUpdate: (result) => {
+        if (result.isHero) {
+          header?.setAttribute('data-hero-active', 'true');
+        } else {
+          header?.removeAttribute('data-hero-active');
+        }
+      },
     });
   }
 
@@ -761,6 +784,193 @@ const navItems = [
     :global(button[aria-expanded='true'] + .nav-tooltip),
     :global(.group:has(button[aria-expanded='true']) .nav-tooltip) {
       display: none !important;
+    }
+  }
+
+  /* Hero Origin Active Indicator (Horizontal) */
+  #site-header[data-hero-active='true'] .brand-logo {
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-accent-border);
+    box-shadow: 0 0 14px var(--color-accent-glow);
+  }
+  #site-header[data-hero-active='true'] .brand-text {
+    color: var(--color-accent);
+    text-shadow: 0 0 10px var(--color-accent-glow);
+  }
+
+  /* Hero Beacon Pulse in Vertical Docks */
+  #site-header[data-hero-active='true'][data-dock='left'] .brand-logo,
+  #site-header[data-hero-active='true'][data-dock='right'] .brand-logo {
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-accent-border);
+    box-shadow: 0 0 14px var(--color-accent-glow);
+    border-radius: 9999px;
+  }
+  #site-header[data-hero-active='true'][data-dock='left'] .beacon-dot,
+  #site-header[data-hero-active='true'][data-dock='right'] .beacon-dot {
+    box-shadow:
+      0 0 0 3px var(--color-accent-subtle),
+      0 0 16px 2px var(--color-accent-glow);
+    transform: scale(1.15);
+  }
+  #site-header[data-hero-active='true'][data-dock='left'] .beacon-pulse,
+  #site-header[data-hero-active='true'][data-dock='right'] .beacon-pulse {
+    animation-duration: 1.2s;
+    opacity: 0.8;
+    transform: scale(1.6);
+  }
+
+  /* Directional popover springs (open & close) */
+  @keyframes popover-spring-top {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes popover-exit-top {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.97);
+    }
+  }
+
+  @keyframes popover-spring-bottom {
+    0% {
+      opacity: 0;
+      transform: translateY(8px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes popover-exit-bottom {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(4px) scale(0.97);
+    }
+  }
+
+  @keyframes popover-spring-left {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(-8px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0) scale(1);
+    }
+  }
+
+  @keyframes popover-exit-left {
+    0% {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(-4px) scale(0.97);
+    }
+  }
+
+  @keyframes popover-spring-right {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(8px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0) scale(1);
+    }
+  }
+
+  @keyframes popover-exit-right {
+    0% {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(4px) scale(0.97);
+    }
+  }
+
+  /* Default Top & Mobile: Directional Popover Animation */
+  :global(#palette-dropdown[data-state='open']),
+  #dock-menu-popover[data-state='open'] {
+    animation: popover-spring-top 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  :global(#palette-dropdown[data-state='closed']),
+  #dock-menu-popover[data-state='closed'] {
+    animation: popover-exit-top 120ms ease forwards;
+  }
+
+  /* Bottom Dock: Popovers emerge upwards */
+  #site-header[data-dock='bottom']
+    :global(#palette-dropdown[data-state='open']),
+  #site-header[data-dock='bottom'] #dock-menu-popover[data-state='open'] {
+    animation: popover-spring-bottom 180ms cubic-bezier(0.16, 1, 0.3, 1)
+      forwards;
+  }
+  #site-header[data-dock='bottom']
+    :global(#palette-dropdown[data-state='closed']),
+  #site-header[data-dock='bottom'] #dock-menu-popover[data-state='closed'] {
+    animation: popover-exit-bottom 120ms ease forwards;
+  }
+
+  /* Left Dock: Popovers emerge to the right */
+  #site-header[data-dock='left'] :global(#palette-dropdown[data-state='open']),
+  #site-header[data-dock='left'] #dock-menu-popover[data-state='open'] {
+    animation: popover-spring-left 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  #site-header[data-dock='left']
+    :global(#palette-dropdown[data-state='closed']),
+  #site-header[data-dock='left'] #dock-menu-popover[data-state='closed'] {
+    animation: popover-exit-left 120ms ease forwards;
+  }
+
+  /* Right Dock: Popovers emerge to the left */
+  #site-header[data-dock='right'] :global(#palette-dropdown[data-state='open']),
+  #site-header[data-dock='right'] #dock-menu-popover[data-state='open'] {
+    animation: popover-spring-right 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  #site-header[data-dock='right']
+    :global(#palette-dropdown[data-state='closed']),
+  #site-header[data-dock='right'] #dock-menu-popover[data-state='closed'] {
+    animation: popover-exit-right 120ms ease forwards;
+  }
+
+  /* Backdrop Transition */
+  :global(#palette-backdrop) {
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+  :global(#palette-backdrop[data-state='open']) {
+    opacity: 1;
+  }
+  :global(#palette-backdrop[data-state='closed']) {
+    opacity: 0;
+    transition: opacity 120ms ease;
+  }
+
+  @media (max-height: 600px) {
+    :global(.palette-colors-list) {
+      max-height: 11rem !important;
+      overflow-y: auto !important;
     }
   }
 

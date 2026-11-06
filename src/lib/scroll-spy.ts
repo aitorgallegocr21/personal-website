@@ -18,6 +18,7 @@ export interface ScrollProgressResult {
   targetIndex: number;
   progress: number;
   opacity: number;
+  isHero?: boolean;
 }
 
 export interface FluidScrollSpyOptions {
@@ -53,7 +54,13 @@ export function calculateScrollProgress(
   const count = sectionTops.length;
 
   if (count === 0) {
-    return { activeIndex: 0, targetIndex: 0, progress: 0, opacity: 0 };
+    return {
+      activeIndex: 0,
+      targetIndex: 0,
+      progress: 0,
+      opacity: 0,
+      isHero: true,
+    };
   }
 
   const headerOffset = options.headerOffset ?? 100;
@@ -67,6 +74,7 @@ export function calculateScrollProgress(
       targetIndex: count - 1,
       progress: 0,
       opacity: 1,
+      isHero: false,
     };
   }
 
@@ -76,7 +84,13 @@ export function calculateScrollProgress(
   // Case 2: Above the first section (e.g. Hero zone)
   if (triggerY < firstTop) {
     if (triggerY < firstTop - fadeDistance) {
-      return { activeIndex: 0, targetIndex: 0, progress: 0, opacity: 0 };
+      return {
+        activeIndex: 0,
+        targetIndex: 0,
+        progress: 0,
+        opacity: 0,
+        isHero: true,
+      };
     }
     const fadeRatio = (triggerY - (firstTop - fadeDistance)) / fadeDistance;
     const clampedFade = Math.max(0, Math.min(1, fadeRatio));
@@ -85,6 +99,7 @@ export function calculateScrollProgress(
       targetIndex: 0,
       progress: 0,
       opacity: clampedFade,
+      isHero: clampedFade < 0.5,
     };
   }
 
@@ -96,6 +111,7 @@ export function calculateScrollProgress(
       targetIndex: count - 1,
       progress: 0,
       opacity: 1,
+      isHero: false,
     };
   }
 
@@ -114,11 +130,18 @@ export function calculateScrollProgress(
         targetIndex: i + 1,
         progress: clampedProgress,
         opacity: 1,
+        isHero: false,
       };
     }
   }
 
-  return { activeIndex: 0, targetIndex: 0, progress: 0, opacity: 1 };
+  return {
+    activeIndex: 0,
+    targetIndex: 0,
+    progress: 0,
+    opacity: 1,
+    isHero: false,
+  };
 }
 
 /**

@@ -262,6 +262,8 @@ export function getOrCreatePaletteBackdrop(): HTMLElement {
   return backdrop;
 }
 
+let paletteCloseTimeout: number | null = null;
+
 /**
  * Closes the palette and skin selector dropdown popover and hides the blurred page backdrop.
  */
@@ -270,9 +272,29 @@ export function closePaletteMenu(): void {
   const paletteBackdrop = document.getElementById('palette-backdrop');
   const paletteBtn = document.getElementById('palette-menu-btn');
 
-  paletteDropdown?.classList.add('hidden');
-  paletteBackdrop?.classList.add('hidden');
+  if (!paletteDropdown || paletteDropdown.classList.contains('hidden')) {
+    paletteBackdrop?.classList.add('hidden');
+    paletteBackdrop?.removeAttribute('data-state');
+    paletteBtn?.setAttribute('aria-expanded', 'false');
+    return;
+  }
+
+  if (paletteCloseTimeout !== null) {
+    window.clearTimeout(paletteCloseTimeout);
+    paletteCloseTimeout = null;
+  }
+
+  paletteDropdown.setAttribute('data-state', 'closed');
+  paletteBackdrop?.setAttribute('data-state', 'closed');
   paletteBtn?.setAttribute('aria-expanded', 'false');
+
+  paletteCloseTimeout = window.setTimeout(() => {
+    paletteDropdown.classList.add('hidden');
+    paletteDropdown.removeAttribute('data-state');
+    paletteBackdrop?.classList.add('hidden');
+    paletteBackdrop?.removeAttribute('data-state');
+    paletteCloseTimeout = null;
+  }, 120);
 }
 
 /**
@@ -283,8 +305,15 @@ export function openPaletteMenu(): void {
   const backdrop = getOrCreatePaletteBackdrop();
   const paletteBtn = document.getElementById('palette-menu-btn');
 
+  if (paletteCloseTimeout !== null) {
+    window.clearTimeout(paletteCloseTimeout);
+    paletteCloseTimeout = null;
+  }
+
   paletteDropdown?.classList.remove('hidden');
+  paletteDropdown?.setAttribute('data-state', 'open');
   backdrop.classList.remove('hidden');
+  backdrop.setAttribute('data-state', 'open');
   paletteBtn?.setAttribute('aria-expanded', 'true');
 }
 
@@ -312,8 +341,10 @@ export function bindThemeControls(
   // Toggle Dropdown
   paletteBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isHidden = paletteDropdown?.classList.contains('hidden');
-    if (isHidden) {
+    const isClosed =
+      paletteDropdown?.classList.contains('hidden') ||
+      paletteDropdown?.getAttribute('data-state') === 'closed';
+    if (isClosed) {
       openPaletteMenu();
     } else {
       closePaletteMenu();

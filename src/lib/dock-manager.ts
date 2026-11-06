@@ -201,10 +201,7 @@ export function initDockManager(
     }
 
     // Close popover if open
-    if (menuPopover && !menuPopover.classList.contains('hidden')) {
-      menuPopover.classList.add('hidden');
-      menuButton?.setAttribute('aria-expanded', 'false');
-    }
+    closeMenu();
   }
 
   // Initial application
@@ -303,17 +300,46 @@ export function initDockManager(
     dragHandle.addEventListener('dblclick', onDoubleClick);
   }
 
-  // Quick-dock menu popover controls
+  // Quick-dock menu popover controls with GPU directional transitions
+  let menuCloseTimeout: number | null = null;
+
+  function openMenu() {
+    if (!menuPopover) return;
+    if (menuCloseTimeout !== null) {
+      window.clearTimeout(menuCloseTimeout);
+      menuCloseTimeout = null;
+    }
+    menuPopover.classList.remove('hidden');
+    menuPopover.setAttribute('data-state', 'open');
+    menuButton?.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    if (!menuPopover || menuPopover.classList.contains('hidden')) return;
+    if (menuCloseTimeout !== null) {
+      window.clearTimeout(menuCloseTimeout);
+      menuCloseTimeout = null;
+    }
+    menuPopover.setAttribute('data-state', 'closed');
+    menuButton?.setAttribute('aria-expanded', 'false');
+
+    menuCloseTimeout = window.setTimeout(() => {
+      menuPopover.classList.add('hidden');
+      menuPopover.removeAttribute('data-state');
+      menuCloseTimeout = null;
+    }, 120);
+  }
+
   function toggleMenu(e: Event) {
     e.stopPropagation();
     if (!menuPopover) return;
-    const isHidden = menuPopover.classList.contains('hidden');
-    if (isHidden) {
-      menuPopover.classList.remove('hidden');
-      menuButton?.setAttribute('aria-expanded', 'true');
+    const isClosed =
+      menuPopover.classList.contains('hidden') ||
+      menuPopover.getAttribute('data-state') === 'closed';
+    if (isClosed) {
+      openMenu();
     } else {
-      menuPopover.classList.add('hidden');
-      menuButton?.setAttribute('aria-expanded', 'false');
+      closeMenu();
     }
   }
 
@@ -326,21 +352,13 @@ export function initDockManager(
       menuButton &&
       !menuButton.contains(target)
     ) {
-      if (!menuPopover.classList.contains('hidden')) {
-        menuPopover.classList.add('hidden');
-        menuButton.setAttribute('aria-expanded', 'false');
-      }
+      closeMenu();
     }
   }
 
   function onKeyDown(e: KeyboardEvent) {
-    if (
-      e.key === 'Escape' &&
-      menuPopover &&
-      !menuPopover.classList.contains('hidden')
-    ) {
-      menuPopover.classList.add('hidden');
-      menuButton?.setAttribute('aria-expanded', 'false');
+    if (e.key === 'Escape') {
+      closeMenu();
       menuButton?.focus();
     }
   }
@@ -369,6 +387,10 @@ export function initDockManager(
     setPosition: (pos: DockPosition) => applyPosition(pos, true),
     reset: () => applyPosition('top', true),
     destroy: () => {
+      if (menuCloseTimeout !== null) {
+        window.clearTimeout(menuCloseTimeout);
+        menuCloseTimeout = null;
+      }
       if (dragHandle) {
         dragHandle.removeEventListener('pointerdown', onPointerDown);
         dragHandle.removeEventListener('pointermove', onPointerMove);

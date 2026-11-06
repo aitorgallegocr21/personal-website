@@ -438,32 +438,44 @@ test.describe('Web Portfolio Interactive E2E', () => {
     );
   });
 
-  test('supports directional palette popover, blurred page backdrop and vertical alignment in dock', async ({
+  test('supports directional palette popover, blurred page backdrop, vertical alignment and hero active indicator', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('./');
     await page.waitForLoadState('networkidle');
 
-    // Switch to Left dock
+    const header = page.locator('#site-header');
+
+    // 1. Verify Hero active origin indicator at top of page
+    await expect(header).toHaveAttribute('data-hero-active', 'true');
+
+    // 2. Switch to Left dock
     const dockMenuBtn = page.locator('#dock-menu-btn');
     await dockMenuBtn.click();
     await page.locator('[data-dock-target="left"]').click();
-    await expect(page.locator('#site-header')).toHaveAttribute(
-      'data-dock',
-      'left'
-    );
+    await expect(header).toHaveAttribute('data-dock', 'left');
+    await expect(header).toHaveAttribute('data-hero-active', 'true');
 
     // Verify Theme controls container is vertically aligned
     const themeControls = page.locator('#theme-controls-container');
     await expect(themeControls).toHaveCSS('flex-direction', 'column');
 
-    // Open palette menu
+    // 3. Open palette menu
     const paletteBtn = page.locator('#palette-menu-btn');
     await paletteBtn.click();
 
     const dropdown = page.locator('#palette-dropdown');
     await expect(dropdown).toBeVisible();
+    await expect(dropdown).toHaveAttribute('data-state', 'open');
+
+    // Verify colors list in desktop displays all colors without scrollbar overflow
+    const colorsList = page.locator('.palette-colors-list');
+    await expect(colorsList).toBeVisible();
+    const hasScrollbar = await colorsList.evaluate(
+      (el) => el.scrollHeight > el.clientHeight
+    );
+    expect(hasScrollbar).toBe(false);
 
     const backdrop = page.locator('#palette-backdrop');
     await expect(backdrop).toBeVisible();
@@ -473,7 +485,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(dropdown).toBeHidden();
     await expect(backdrop).toBeHidden();
 
-    // Reopen palette and select a palette color: must close both dropdown & backdrop immediately
+    // Reopen palette and select a palette color: must close both dropdown & backdrop
     await paletteBtn.click();
     await expect(dropdown).toBeVisible();
     await expect(backdrop).toBeVisible();
@@ -483,11 +495,13 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(dropdown).toBeHidden();
     await expect(backdrop).toBeHidden();
 
-    // Reset back to Top
+    // 4. Scroll down to projects section and verify hero active is removed
+    await page.locator('#proyectos').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(100);
+    await expect(header).not.toHaveAttribute('data-hero-active', 'true');
+
+    // 5. Reset back to Top
     await page.locator('#dock-drag-handle').dblclick();
-    await expect(page.locator('#site-header')).toHaveAttribute(
-      'data-dock',
-      'top'
-    );
+    await expect(header).toHaveAttribute('data-dock', 'top');
   });
 });
