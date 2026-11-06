@@ -59,6 +59,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
 
     // 2. Mobile viewport verification (iPhone-like 375x667)
     await page.setViewportSize({ width: 375, height: 667 });
+    await page.waitForTimeout(350); // Allow header height transition (h-16 sm to h-14 mobile) to settle
 
     await expect(desktopNav).toBeHidden();
     await expect(mobileToggle).toBeVisible();
@@ -67,9 +68,14 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const mobileMenu = page.locator('#mobile-nav-menu');
     await expect(mobileMenu).toBeHidden();
 
-    // Measure main element position before opening menu
+    // Measure header height and main element document position before opening menu
     const mainElement = page.locator('main');
-    const mainBoxBefore = await mainElement.boundingBox();
+    const headerHeightBefore = await header.evaluate(
+      (el: HTMLElement) => el.offsetHeight
+    );
+    const mainTopBefore = await mainElement.evaluate(
+      (el: HTMLElement) => el.offsetTop
+    );
 
     // Open mobile menu
     await mobileToggle.click();
@@ -80,11 +86,15 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const mobileBackdrop = page.locator('#mobile-nav-backdrop');
     await expect(mobileBackdrop).toBeVisible();
 
-    // Verify zero layout shift on page content (overlay architecture, within subpixel tolerance)
-    const mainBoxAfter = await mainElement.boundingBox();
-    expect(
-      Math.abs((mainBoxAfter?.y ?? 0) - (mainBoxBefore?.y ?? 0))
-    ).toBeLessThanOrEqual(1);
+    // Verify zero layout shift: header pill height stays constant and main offset is stationary
+    const headerHeightAfter = await header.evaluate(
+      (el: HTMLElement) => el.offsetHeight
+    );
+    const mainTopAfter = await mainElement.evaluate(
+      (el: HTMLElement) => el.offsetTop
+    );
+    expect(headerHeightAfter).toBe(headerHeightBefore);
+    expect(mainTopAfter).toBe(mainTopBefore);
 
     // Check all mobile links exist
     const mobileLinks = mobileMenu.locator('.mobile-nav-link');
