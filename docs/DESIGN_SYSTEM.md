@@ -480,3 +480,27 @@ The system supports real-time accent shifting across both Dark and Light modes u
 3. **Conditional Visibility:**
    - Use `print:hidden` on floating toolbars, navigation bars, and language switchers.
    - Use `print:block` or `print:text-zinc-900` to enforce high contrast on pure white PDF backgrounds.
+
+---
+
+## 6. Desktop Dockable Navbar & Fluid Scroll-Spy System
+
+### A. Magnetic Dock Positions (`data-dock`)
+
+Desktop viewports (`>= 1024px`) support 4 distinct hardware-accelerated dock positions managed via `src/lib/dock-manager.ts`:
+
+| Position        | Container Layout | Anchor Style                               | Visual Characteristics                                                                 |
+| :-------------- | :--------------- | :----------------------------------------- | :------------------------------------------------------------------------------------- |
+| `top` (Default) | Horizontal pill  | `sticky top-4 left-1/2 -translate-x-1/2`   | Full typography labels, brand logo, action controls                                    |
+| `bottom`        | Horizontal dock  | `fixed bottom-5 left-1/2 -translate-x-1/2` | macOS-style floating dock with elevated drop shadow                                    |
+| `left`          | Vertical rail    | `fixed left-5 top-1/2 -translate-y-1/2`    | Compact ~56px icon-first rail with inside-facing floating tooltips (`left-full ml-3`)  |
+| `right`         | Vertical rail    | `fixed right-5 top-1/2 -translate-y-1/2`   | Compact ~56px icon-first rail with inside-facing floating tooltips (`right-full mr-3`) |
+
+### B. Fluid Scroll-Spy Engine (`src/lib/scroll-spy.ts`)
+
+Replaces discrete threshold toggling with continuous mathematical interpolation across the active sections (`#proyectos`, `#trayectoria`, `#certificaciones`, `#filosofia`, `#contacto`):
+
+- **Continuous 2D Pill Glide:** GPU-composited `transform: translate3d(x, y, 0)` smoothly moving between link boundaries on both X and Y axes.
+- **Dynamic Text Glow:** Real-time CSS property `--nav-glow` interpolating typography brightness with `color-mix(in srgb, var(--color-accent) calc(var(--nav-glow) * 100%), currentColor)`.
+- **Zero-Jank Guarantee:** Caches section tops and relative link bounding boxes via `ResizeObserver`; updates exclusively inside passive `requestAnimationFrame`.
+- **Mobile Isolation:** Gated strictly to tablet/desktop viewports (`min-width: 768px` for scroll-spy, `min-width: 1024px` for dock controls), keeping mobile viewports (< 768px) 100% pure and lightweight.

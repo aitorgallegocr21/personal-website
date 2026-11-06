@@ -8,11 +8,13 @@
 
 ## Active Phase
 
-_None currently active. Phase 23 completed._
+- _None (All current backlog phases completed. Ready for next sprint/phase specification)._
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+
+- [x] **[Phase 24: Desktop Dockable Navbar & Fluid Scroll-Spy Experience](tasks/phase-24-desktop-dockable-navbar-and-fluid-scrollspy/index.md)** — _Completed 2026-11-06_ (Desktop dockable navigation island with early magnetic edge snapping, layout metamorphosis with single-column vertical icon dock, directional flyout popovers in 4 orientations, page-level subtle backdrop blur keeping the dock visible, Hero origin indicator in horizontal and Beacon pulse in vertical, GPU-accelerated directional spring transitions for popovers, responsive colors fit without desktop scrollbar, continuous fluid scroll-spy indicator tracking exact scroll progress between sections at 60/120 FPS, and mobile navigation overlay drawer with zero layout shift, backdrop blur, and hardware-accelerated spring animations).
 
 - [x] **[Phase 23: Floating Navbar & Mobile Document Modal Experience](tasks/phase-23-floating-navbar-and-mobile-document-modal/index.md)** — _Completed 2026-11-05_ (Rediseño del header a barra flotante glassmorphic estilo pill con offset superior y sombra de acento dinámica, microinteracciones en enlaces, menú móvil responsive con botón hamburguesa accesible y drawer animado, y overhaul móvil del visor de certificados PDF con geometría fullscreen, navegación táctil entre módulos, descarga directa/ZIP y banner de apertura nativa).
 

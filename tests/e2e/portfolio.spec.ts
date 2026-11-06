@@ -67,10 +67,24 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const mobileMenu = page.locator('#mobile-nav-menu');
     await expect(mobileMenu).toBeHidden();
 
+    // Measure main element position before opening menu
+    const mainElement = page.locator('main');
+    const mainBoxBefore = await mainElement.boundingBox();
+
     // Open mobile menu
     await mobileToggle.click();
     await expect(mobileToggle).toHaveAttribute('aria-expanded', 'true');
     await expect(mobileMenu).toBeVisible();
+
+    // Verify background backdrop is visible and blurred
+    const mobileBackdrop = page.locator('#mobile-nav-backdrop');
+    await expect(mobileBackdrop).toBeVisible();
+
+    // Verify zero layout shift on page content (overlay architecture, within subpixel tolerance)
+    const mainBoxAfter = await mainElement.boundingBox();
+    expect(
+      Math.abs((mainBoxAfter?.y ?? 0) - (mainBoxBefore?.y ?? 0))
+    ).toBeLessThanOrEqual(1);
 
     // Check all mobile links exist
     const mobileLinks = mobileMenu.locator('.mobile-nav-link');
@@ -80,6 +94,15 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await page.keyboard.press('Escape');
     await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
     await expect(mobileMenu).toBeHidden();
+    await expect(mobileBackdrop).toBeHidden();
+
+    // Open again and click backdrop to test auto-close
+    await mobileToggle.click();
+    await expect(mobileMenu).toBeVisible();
+    await expect(mobileBackdrop).toBeVisible();
+    await mobileBackdrop.click({ position: { x: 10, y: 350 } });
+    await expect(mobileMenu).toBeHidden();
+    await expect(mobileBackdrop).toBeHidden();
 
     // Open again and click a section link to test auto-close
     await mobileToggle.click();
@@ -334,5 +357,174 @@ test.describe('Web Portfolio Interactive E2E', () => {
 
     const twitterCard = page.locator('meta[name="twitter:card"]');
     await expect(twitterCard).toHaveAttribute('content', 'summary_large_image');
+  });
+
+  test('supports desktop dock repositioning to left, right, bottom and reset to top', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const header = page.locator('#site-header');
+    await expect(header).toBeVisible();
+    await expect(header).toHaveAttribute('data-dock', 'top');
+
+    const dockMenuBtn = page.locator('#dock-menu-btn');
+    await expect(dockMenuBtn).toBeVisible();
+
+    const popover = page.locator('#dock-menu-popover');
+    await expect(popover).toBeHidden();
+
+    // 1. Open quick-dock menu and select Left
+    await dockMenuBtn.click();
+    await expect(popover).toBeVisible();
+    await page.locator('[data-dock-target="left"]').click();
+    await expect(header).toHaveAttribute('data-dock', 'left');
+    await expect(popover).toBeHidden();
+
+    // Verify localStorage persistence
+    const savedPosLeft = await page.evaluate(() =>
+      localStorage.getItem('portfolio-dock-position')
+    );
+    expect(savedPosLeft).toBe('left');
+
+    // 2. Double click handle to reset to Top
+    const dragHandle = page.locator('#dock-drag-handle');
+    await expect(dragHandle).toBeVisible();
+    await dragHandle.dblclick();
+    await expect(header).toHaveAttribute('data-dock', 'top');
+
+    const savedPosReset = await page.evaluate(() =>
+      localStorage.getItem('portfolio-dock-position')
+    );
+    expect(savedPosReset).toBe('top');
+
+    // 3. Switch to Bottom dock and reload to verify state persistence
+    await dockMenuBtn.click();
+    await page.locator('[data-dock-target="bottom"]').click();
+    await expect(header).toHaveAttribute('data-dock', 'bottom');
+
+    await page.reload();
+    await page.waitForLoadState('networkidle');
+    const headerAfterReload = page.locator('#site-header');
+    await expect(headerAfterReload).toHaveAttribute('data-dock', 'bottom');
+
+    // Clean up back to default Top
+    const handleAfterReload = page.locator('#dock-drag-handle');
+    await handleAfterReload.dblclick();
+    await expect(headerAfterReload).toHaveAttribute('data-dock', 'top');
+  });
+
+  test('tracks fluid scroll-spy indicator during desktop section scrolling', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const indicator = page.locator('#navbar-fluid-indicator');
+    await expect(indicator).toBeAttached();
+
+    // Scroll down to Projects section
+    await page.locator('#proyectos').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(100);
+
+    const projectsLink = page.locator('.nav-link[href="#proyectos"]');
+    await expect(projectsLink).toHaveAttribute('data-active', 'true');
+
+    // Scroll down to Career/Timeline section
+    await page.locator('#trayectoria').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(100);
+
+    const timelineLink = page.locator('.nav-link[href="#trayectoria"]');
+    await expect(timelineLink).toHaveAttribute('data-active', 'true');
+  });
+
+  test('preserves mobile top navigation and drawer on mobile viewports without docking overhead', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    // Dock drag handle and quick dock button must remain hidden on mobile
+    await expect(page.locator('#dock-drag-handle')).toBeHidden();
+    await expect(page.locator('#dock-menu-btn')).toBeHidden();
+
+    // Standard header remains at top with mobile toggle
+    const mobileToggle = page.locator('#mobile-nav-toggle');
+    await expect(mobileToggle).toBeVisible();
+    await expect(page.locator('#site-header')).toHaveAttribute(
+      'data-dock',
+      'top'
+    );
+  });
+
+  test('supports directional palette popover, blurred page backdrop, vertical alignment and hero active indicator', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const header = page.locator('#site-header');
+
+    // 1. Verify Hero active origin indicator at top of page
+    await expect(header).toHaveAttribute('data-hero-active', 'true');
+
+    // 2. Switch to Left dock
+    const dockMenuBtn = page.locator('#dock-menu-btn');
+    await dockMenuBtn.click();
+    await page.locator('[data-dock-target="left"]').click();
+    await expect(header).toHaveAttribute('data-dock', 'left');
+    await expect(header).toHaveAttribute('data-hero-active', 'true');
+
+    // Verify Theme controls container is vertically aligned
+    const themeControls = page.locator('#theme-controls-container');
+    await expect(themeControls).toHaveCSS('flex-direction', 'column');
+
+    // 3. Open palette menu
+    const paletteBtn = page.locator('#palette-menu-btn');
+    await paletteBtn.click();
+
+    const dropdown = page.locator('#palette-dropdown');
+    await expect(dropdown).toBeVisible();
+    await expect(dropdown).toHaveAttribute('data-state', 'open');
+
+    // Verify colors list in desktop displays all colors without scrollbar overflow
+    const colorsList = page.locator('.palette-colors-list');
+    await expect(colorsList).toBeVisible();
+    const hasScrollbar = await colorsList.evaluate(
+      (el) => el.scrollHeight > el.clientHeight
+    );
+    expect(hasScrollbar).toBe(false);
+
+    const backdrop = page.locator('#palette-backdrop');
+    await expect(backdrop).toBeVisible();
+
+    // Verify backdrop click closes popover and hides backdrop
+    await backdrop.click({ position: { x: 50, y: 50 } });
+    await expect(dropdown).toBeHidden();
+    await expect(backdrop).toBeHidden();
+
+    // Reopen palette and select a palette color: must close both dropdown & backdrop
+    await paletteBtn.click();
+    await expect(dropdown).toBeVisible();
+    await expect(backdrop).toBeVisible();
+
+    const firstPaletteOption = page.locator('.palette-select-option').first();
+    await firstPaletteOption.click();
+    await expect(dropdown).toBeHidden();
+    await expect(backdrop).toBeHidden();
+
+    // 4. Scroll down to projects section and verify hero active is removed
+    await page.locator('#proyectos').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(100);
+    await expect(header).not.toHaveAttribute('data-hero-active', 'true');
+
+    // 5. Reset back to Top
+    await page.locator('#dock-drag-handle').dblclick();
+    await expect(header).toHaveAttribute('data-dock', 'top');
   });
 });

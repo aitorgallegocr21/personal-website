@@ -3,6 +3,7 @@ import {
   isValidSkinId,
   getSkinMetadata,
 } from '@/components/skins/registry';
+import { closePaletteMenu } from '@/lib/theme-manager';
 import type { SkinId } from '@/types/skin';
 
 export const SKIN_STORAGE_KEY = 'portfolio-skin';
@@ -117,8 +118,6 @@ export function bindSkinControls(
   const skinButtons = container.querySelectorAll<HTMLButtonElement>(
     '.skin-select-option'
   );
-  const paletteDropdown = container.querySelector('#palette-dropdown');
-  const paletteBtn = container.querySelector('#palette-menu-btn');
 
   skinButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -129,9 +128,7 @@ export function bindSkinControls(
       if (skinId && isValidSkinId(skinId)) {
         setSkin(skinId);
         syncSkinUI(container, skinId);
-        // Close dropdown
-        paletteDropdown?.classList.add('hidden');
-        paletteBtn?.setAttribute('aria-expanded', 'false');
+        closePaletteMenu();
       }
     });
   });
