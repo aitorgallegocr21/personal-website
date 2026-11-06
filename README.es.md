@@ -2,11 +2,14 @@
 
 <div align="center">
 
+[![CI & Quality Check](https://github.com/aitorgallegocr21/personal-website/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aitorgallegocr21/personal-website/actions/workflows/ci.yml)
+[![Deploy to GitHub Pages](https://github.com/aitorgallegocr21/personal-website/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/aitorgallegocr21/personal-website/actions/workflows/deploy.yml)
 [![Astro](https://img.shields.io/badge/Astro-5.x-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x_Strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Playwright](https://img.shields.io/badge/Playwright-E2E_Tests-2EAD33?style=flat-square&logo=playwright&logoColor=white)](https://playwright.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-Unit_Tests-6E9F18?style=flat-square&logo=vitest&logoColor=white)](https://vitest.dev/)
 [![Licencia: MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg?style=flat-square)](LICENSE)
-[![CI/CD](https://img.shields.io/badge/GitHub_Actions-Despliegue_Automático-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/aitorgallegocr21/personal-website/actions)
 
 <p align="center">
   <strong>Portfolio web de alto rendimiento y generador milimétrico de currículum vitae en PDF A4.</strong><br>
