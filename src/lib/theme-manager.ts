@@ -244,6 +244,51 @@ export function syncPaletteUI(
 }
 
 /**
+ * Ensures the palette backdrop overlay exists directly under <body> to prevent
+ * stacking context and containing block traps from transformed header ancestors.
+ */
+export function getOrCreatePaletteBackdrop(): HTMLElement {
+  let backdrop = document.getElementById('palette-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.id = 'palette-backdrop';
+    document.body.appendChild(backdrop);
+  } else if (backdrop.parentElement !== document.body) {
+    document.body.appendChild(backdrop);
+  }
+  backdrop.className =
+    'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200';
+  backdrop.setAttribute('aria-hidden', 'true');
+  return backdrop;
+}
+
+/**
+ * Closes the palette and skin selector dropdown popover and hides the blurred page backdrop.
+ */
+export function closePaletteMenu(): void {
+  const paletteDropdown = document.getElementById('palette-dropdown');
+  const paletteBackdrop = document.getElementById('palette-backdrop');
+  const paletteBtn = document.getElementById('palette-menu-btn');
+
+  paletteDropdown?.classList.add('hidden');
+  paletteBackdrop?.classList.add('hidden');
+  paletteBtn?.setAttribute('aria-expanded', 'false');
+}
+
+/**
+ * Opens the palette dropdown popover and displays the subtle page-blur backdrop.
+ */
+export function openPaletteMenu(): void {
+  const paletteDropdown = document.getElementById('palette-dropdown');
+  const backdrop = getOrCreatePaletteBackdrop();
+  const paletteBtn = document.getElementById('palette-menu-btn');
+
+  paletteDropdown?.classList.remove('hidden');
+  backdrop.classList.remove('hidden');
+  paletteBtn?.setAttribute('aria-expanded', 'true');
+}
+
+/**
  * Initializes and binds interactive event listeners to theme and palette controls.
  */
 export function bindThemeControls(
@@ -262,19 +307,7 @@ export function bindThemeControls(
     setTheme(newTheme);
   });
 
-  const paletteBackdrop = document.getElementById('palette-backdrop');
-
-  const openPaletteMenu = () => {
-    paletteDropdown?.classList.remove('hidden');
-    paletteBackdrop?.classList.remove('hidden');
-    paletteBtn?.setAttribute('aria-expanded', 'true');
-  };
-
-  const closePaletteMenu = () => {
-    paletteDropdown?.classList.add('hidden');
-    paletteBackdrop?.classList.add('hidden');
-    paletteBtn?.setAttribute('aria-expanded', 'false');
-  };
+  const backdrop = getOrCreatePaletteBackdrop();
 
   // Toggle Dropdown
   paletteBtn?.addEventListener('click', (e) => {
@@ -287,22 +320,26 @@ export function bindThemeControls(
     }
   });
 
-  paletteBackdrop?.addEventListener('click', () => {
+  backdrop.addEventListener('click', () => {
     closePaletteMenu();
   });
 
   // Outside click & Escape handlers
   document.addEventListener('click', (e) => {
+    const target = e.target as Node | null;
     if (
-      !paletteDropdown?.contains(e.target as Node) &&
-      e.target !== paletteBtn
+      target &&
+      paletteDropdown &&
+      !paletteDropdown.contains(target) &&
+      paletteBtn &&
+      !paletteBtn.contains(target)
     ) {
       closePaletteMenu();
     }
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !paletteDropdown?.classList.contains('hidden')) {
+    if (e.key === 'Escape') {
       closePaletteMenu();
     }
   });
@@ -314,8 +351,7 @@ export function bindThemeControls(
       if (selected && DAY_PALETTES.some((p) => p.id === selected)) {
         setPalette(selected);
         syncPaletteUI(container, selected, false);
-        paletteDropdown?.classList.add('hidden');
-        paletteBtn?.setAttribute('aria-expanded', 'false');
+        closePaletteMenu();
       }
     });
   });
@@ -325,8 +361,7 @@ export function bindThemeControls(
     setAutoRotate(true);
     const daily = getTodayPalette();
     syncPaletteUI(container, daily.id, true);
-    paletteDropdown?.classList.add('hidden');
-    paletteBtn?.setAttribute('aria-expanded', 'false');
+    closePaletteMenu();
   });
 
   // Initial UI sync: always default to live rotation upon page load

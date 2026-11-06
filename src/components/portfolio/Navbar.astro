@@ -132,7 +132,7 @@ const navItems = [
       <ThemeToggle />
 
       <!-- Quick Dock Trigger & Popover -->
-      <div class="relative hidden lg:block">
+      <div class="relative group hidden lg:block">
         <button
           type="button"
           id="dock-menu-btn"
@@ -144,6 +144,12 @@ const navItems = [
         >
           <SlidersHorizontal class="w-3.5 h-3.5" />
         </button>
+        <span
+          class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
+          role="tooltip"
+        >
+          Posición del dock
+        </span>
 
         <!-- Popover -->
         <div
@@ -273,9 +279,11 @@ const navItems = [
 
       // Close theme palette popover if open to prevent overlaps
       const paletteDropdown = document.getElementById('palette-dropdown');
+      const paletteBackdrop = document.getElementById('palette-backdrop');
       const paletteBtn = document.getElementById('palette-menu-btn');
       if (paletteDropdown && !paletteDropdown.classList.contains('hidden')) {
         paletteDropdown.classList.add('hidden');
+        paletteBackdrop?.classList.add('hidden');
         paletteBtn?.setAttribute('aria-expanded', 'false');
       }
     };
@@ -623,30 +631,71 @@ const navItems = [
     }
 
     /* Stack palette button and theme toggle vertically in vertical docks */
-    #site-header[data-dock='left'] #theme-controls-container,
-    #site-header[data-dock='right'] #theme-controls-container {
+    #site-header[data-dock='left'] :global(#theme-controls-container),
+    #site-header[data-dock='right'] :global(#theme-controls-container) {
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
       width: 100%;
     }
 
-    /* Centered Palette Modal with backdrop when docked vertically or at bottom */
-    #site-header[data-dock='left'] #palette-dropdown,
-    #site-header[data-dock='right'] #palette-dropdown,
-    #site-header[data-dock='bottom'] #palette-dropdown {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      right: auto;
-      bottom: auto;
-      transform: translate(-50%, -50%);
+    #site-header[data-dock='left'] :global(#palette-menu-btn),
+    #site-header[data-dock='right'] :global(#palette-menu-btn),
+    #site-header[data-dock='left'] :global(#theme-toggle-btn),
+    #site-header[data-dock='right'] :global(#theme-toggle-btn) {
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Bottom Dock: Palette popover flies upwards */
+    #site-header[data-dock='bottom'] :global(#palette-dropdown) {
+      bottom: calc(100% + 0.5rem);
+      top: auto;
+      right: 0;
+      left: auto;
       margin: 0;
-      z-index: 50;
-      max-height: 85vh;
+      max-height: calc(100vh - 6rem);
       overflow-y: auto;
-      width: min(340px, calc(100vw - 2rem));
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Top Dock: Palette popover flies downwards */
+    #site-header[data-dock='top'] :global(#palette-dropdown) {
+      top: calc(100% + 0.5rem);
+      bottom: auto;
+      right: 0;
+      left: auto;
+      margin: 0;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+    }
+
+    /* Left Dock: Palette popover flies to the right */
+    #site-header[data-dock='left'] :global(#palette-dropdown) {
+      left: calc(100% + 0.75rem);
+      right: auto;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      margin: 0;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+    }
+
+    /* Right Dock: Palette popover flies to the left */
+    #site-header[data-dock='right'] :global(#palette-dropdown) {
+      right: calc(100% + 0.75rem);
+      left: auto;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      margin: 0;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
     }
 
     /* Indicator bar adaptation for vertical docks */
@@ -671,12 +720,12 @@ const navItems = [
     }
 
     /* Tooltip flyouts for Left dock */
-    #site-header[data-dock='left'] .group:hover .nav-tooltip {
+    #site-header[data-dock='left'] :global(.group:hover .nav-tooltip) {
       display: block;
       opacity: 1;
       transform: translateY(-50%) scale(1);
     }
-    #site-header[data-dock='left'] .nav-tooltip {
+    #site-header[data-dock='left'] :global(.nav-tooltip) {
       left: calc(100% + 12px);
       right: auto;
       top: 50%;
@@ -690,12 +739,12 @@ const navItems = [
     }
 
     /* Tooltip flyouts for Right dock */
-    #site-header[data-dock='right'] .group:hover .nav-tooltip {
+    #site-header[data-dock='right'] :global(.group:hover .nav-tooltip) {
       display: block;
       opacity: 1;
       transform: translateY(-50%) scale(1);
     }
-    #site-header[data-dock='right'] .nav-tooltip {
+    #site-header[data-dock='right'] :global(.nav-tooltip) {
       right: calc(100% + 12px);
       left: auto;
       top: 50%;
@@ -706,6 +755,12 @@ const navItems = [
       left: auto;
       top: 50%;
       transform: translateY(-50%);
+    }
+
+    /* Hide tooltips when popovers or menus are open */
+    :global(button[aria-expanded='true'] + .nav-tooltip),
+    :global(.group:has(button[aria-expanded='true']) .nav-tooltip) {
+      display: none !important;
     }
   }
 

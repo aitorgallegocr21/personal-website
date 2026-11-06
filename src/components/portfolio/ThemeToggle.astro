@@ -60,7 +60,7 @@ const palettes = [
 
 <div class="relative flex items-center gap-1.5" id="theme-controls-container">
   <!-- Palette & Skin Picker Button -->
-  <div class="relative">
+  <div class="relative group">
     <button
       type="button"
       id="palette-menu-btn"
@@ -76,11 +76,17 @@ const palettes = [
         class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full border border-white bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent-glow)] transition-colors dark:border-zinc-950"
       ></span>
     </button>
+    <span
+      class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
+      role="tooltip"
+    >
+      Estilos y colores
+    </span>
 
     <!-- Backdrop blur overlay when dropdown is open -->
     <div
       id="palette-backdrop"
-      class="fixed inset-0 z-40 hidden bg-black/40 backdrop-blur-sm transition-opacity duration-200"
+      class="fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200"
       aria-hidden="true"
     ></div>
 
@@ -240,16 +246,24 @@ const palettes = [
   </div>
 
   <!-- Light / Dark Mode Toggle Button -->
-  <button
-    type="button"
-    id="theme-toggle-btn"
-    class="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-200/60 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900/60 dark:hover:text-zinc-100"
-    aria-label="Cambiar entre modo claro y oscuro"
-    title="Alternar tema claro/oscuro"
-  >
-    <Sun class="theme-icon-sun hidden h-4 w-4 dark:block" />
-    <Moon class="theme-icon-moon block h-4 w-4 dark:hidden" />
-  </button>
+  <div class="relative group">
+    <button
+      type="button"
+      id="theme-toggle-btn"
+      class="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-200/60 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900/60 dark:hover:text-zinc-100"
+      aria-label="Cambiar entre modo claro y oscuro"
+      title="Alternar tema claro/oscuro"
+    >
+      <Sun class="theme-icon-sun hidden h-4 w-4 dark:block" />
+      <Moon class="theme-icon-moon block h-4 w-4 dark:hidden" />
+    </button>
+    <span
+      class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
+      role="tooltip"
+    >
+      Tema claro/oscuro
+    </span>
+  </div>
 </div>
 
 <script>

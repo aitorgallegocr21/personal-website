@@ -438,7 +438,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
     );
   });
 
-  test('opens palette modal centered with blurred backdrop when in vertical dock', async ({
+  test('supports directional palette popover, blurred page backdrop and vertical alignment in dock', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
@@ -454,6 +454,10 @@ test.describe('Web Portfolio Interactive E2E', () => {
       'left'
     );
 
+    // Verify Theme controls container is vertically aligned
+    const themeControls = page.locator('#theme-controls-container');
+    await expect(themeControls).toHaveCSS('flex-direction', 'column');
+
     // Open palette menu
     const paletteBtn = page.locator('#palette-menu-btn');
     await paletteBtn.click();
@@ -464,12 +468,26 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const backdrop = page.locator('#palette-backdrop');
     await expect(backdrop).toBeVisible();
 
-    // Verify backdrop click closes modal
+    // Verify backdrop click closes popover and hides backdrop
     await backdrop.click({ position: { x: 50, y: 50 } });
+    await expect(dropdown).toBeHidden();
+    await expect(backdrop).toBeHidden();
+
+    // Reopen palette and select a palette color: must close both dropdown & backdrop immediately
+    await paletteBtn.click();
+    await expect(dropdown).toBeVisible();
+    await expect(backdrop).toBeVisible();
+
+    const firstPaletteOption = page.locator('.palette-select-option').first();
+    await firstPaletteOption.click();
     await expect(dropdown).toBeHidden();
     await expect(backdrop).toBeHidden();
 
     // Reset back to Top
     await page.locator('#dock-drag-handle').dblclick();
+    await expect(page.locator('#site-header')).toHaveAttribute(
+      'data-dock',
+      'top'
+    );
   });
 });

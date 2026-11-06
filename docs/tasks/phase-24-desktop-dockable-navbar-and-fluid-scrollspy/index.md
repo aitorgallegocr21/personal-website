@@ -39,6 +39,7 @@
 - [x] **[Task 24.2: Dockable Desktop Navbar & Layout Metamorphosis](task-24.2-dockable-desktop-navbar-metamorphosis.md)** — Implement drag-and-drop snap engine, quick-dock options popover, double-click reset, vertical icon-first dock with floating tooltips, and state persistence.
 - [x] **[Task 24.3: Verification, E2E Testing & Documentation Sync](task-24.3-verification-e2e-testing-and-sync.md)** — Automate Playwright E2E tests for desktop docking, fluid scroll-spy tracking, verify zero mobile regressions, and update project documentation.
 - [x] **[Task 24.4: Dock Ergonomics, Centered Palette Modal & Early Magnetic Drag](task-24.4-dock-ergonomics-palette-modal-and-magnetic-drag.md)** — Strict single-column vertical alignment, centered palette modal with backdrop blur, early magnetic quadrant snapping, and chromatic CV button contrast.
+- [x] **[Task 24.5: Dock Vertical Alignment, Directional Popovers, Page Backdrop & Tooltip Unification](task-24.5-dock-vertical-popovers-and-page-backdrop.md)** — Strict single-column ThemeToggle alignment via global scoping, directional popover placement (Bottom/Left/Right/Top), page-level subtle backdrop blur keeping dock visible, selection close bug fix, and unified floating tooltips.
 
 ---
 
