@@ -41,6 +41,7 @@
 - [x] **[Task 24.4: Dock Ergonomics, Centered Palette Modal & Early Magnetic Drag](task-24.4-dock-ergonomics-palette-modal-and-magnetic-drag.md)** — Strict single-column vertical alignment, centered palette modal with backdrop blur, early magnetic quadrant snapping, and chromatic CV button contrast.
 - [x] **[Task 24.5: Dock Vertical Alignment, Directional Popovers, Page Backdrop & Tooltip Unification](task-24.5-dock-vertical-popovers-and-page-backdrop.md)** — Strict single-column ThemeToggle alignment via global scoping, directional popover placement (Bottom/Left/Right/Top), page-level subtle backdrop blur keeping dock visible, selection close bug fix, and unified floating tooltips.
 - [x] **[Task 24.6: Hero Origin Dock Indicator, Directional Popover Transitions & Colors Viewport Fit](task-24.6-hero-indicator-popover-transitions-and-colors-fit.md)** — Hero origin identifying style for 'Portfolio' in horizontal and Beacon orb pulse in vertical, GPU-accelerated directional spring transitions for popovers, and responsive fit without scrollbar for colors on desktop.
+- [x] **[Task 24.7: Mobile Navigation Overlay Drawer, Backdrop Blur & Spring Transitions](task-24.7-mobile-overlay-drawer-and-backdrop.md)** — Overlay positioning (`position: absolute`) with zero layout shift on page content, dedicated `#mobile-nav-backdrop` with background blur and dimming, GPU-accelerated spring animations (180ms/120ms), and touch dismissal.
 
 ---
 

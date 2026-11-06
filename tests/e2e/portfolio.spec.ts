@@ -67,10 +67,24 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const mobileMenu = page.locator('#mobile-nav-menu');
     await expect(mobileMenu).toBeHidden();
 
+    // Measure main element position before opening menu
+    const mainElement = page.locator('main');
+    const mainBoxBefore = await mainElement.boundingBox();
+
     // Open mobile menu
     await mobileToggle.click();
     await expect(mobileToggle).toHaveAttribute('aria-expanded', 'true');
     await expect(mobileMenu).toBeVisible();
+
+    // Verify background backdrop is visible and blurred
+    const mobileBackdrop = page.locator('#mobile-nav-backdrop');
+    await expect(mobileBackdrop).toBeVisible();
+
+    // Verify zero layout shift on page content (overlay architecture, within subpixel tolerance)
+    const mainBoxAfter = await mainElement.boundingBox();
+    expect(
+      Math.abs((mainBoxAfter?.y ?? 0) - (mainBoxBefore?.y ?? 0))
+    ).toBeLessThanOrEqual(1);
 
     // Check all mobile links exist
     const mobileLinks = mobileMenu.locator('.mobile-nav-link');
@@ -80,6 +94,15 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await page.keyboard.press('Escape');
     await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
     await expect(mobileMenu).toBeHidden();
+    await expect(mobileBackdrop).toBeHidden();
+
+    // Open again and click backdrop to test auto-close
+    await mobileToggle.click();
+    await expect(mobileMenu).toBeVisible();
+    await expect(mobileBackdrop).toBeVisible();
+    await mobileBackdrop.click({ position: { x: 10, y: 350 } });
+    await expect(mobileMenu).toBeHidden();
+    await expect(mobileBackdrop).toBeHidden();
 
     // Open again and click a section link to test auto-close
     await mobileToggle.click();
