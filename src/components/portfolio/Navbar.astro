@@ -219,10 +219,17 @@ const navItems = [
         return;
       }
 
-      // Unlock document scroll
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      document.body.style.touchAction = '';
+      // Unlock document scroll unless palette menu is open
+      const paletteDropdown = document.getElementById('palette-dropdown');
+      const isPaletteOpen =
+        paletteDropdown &&
+        !paletteDropdown.classList.contains('hidden') &&
+        paletteDropdown.getAttribute('data-state') === 'open';
+      if (!isPaletteOpen) {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        document.body.style.touchAction = '';
+      }
 
       toggleBtn.setAttribute('aria-expanded', 'false');
       toggleBtn.setAttribute('aria-label', 'Abrir menú de navegación');

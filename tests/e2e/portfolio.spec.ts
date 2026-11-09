@@ -558,6 +558,14 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(dropdown).toBeVisible();
     await expect(dropdown).toHaveAttribute('data-state', 'open');
 
+    // Verify document scroll is locked when palette menu is open
+    const isScrollLocked = await page.evaluate(
+      () =>
+        document.body.style.overflow === 'hidden' &&
+        document.documentElement.style.overflow === 'hidden'
+    );
+    expect(isScrollLocked).toBe(true);
+
     // Verify colors list in desktop displays all colors without scrollbar overflow
     const colorsList = page.locator('.palette-colors-list');
     await expect(colorsList).toBeVisible();
@@ -573,6 +581,14 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await backdrop.click({ position: { x: 50, y: 50 } });
     await expect(dropdown).toBeHidden();
     await expect(backdrop).toBeHidden();
+
+    // Verify document scroll is restored when palette menu closes
+    const isScrollUnlocked = await page.evaluate(
+      () =>
+        document.body.style.overflow === '' &&
+        document.documentElement.style.overflow === ''
+    );
+    expect(isScrollUnlocked).toBe(true);
 
     // Reopen palette and select a palette color: must close both dropdown & backdrop
     await paletteBtn.click();
@@ -627,5 +643,36 @@ test.describe('Web Portfolio Interactive E2E', () => {
     expect(mobileBox?.y).toBeLessThan(25);
     expect(mobileBox?.y).toBeGreaterThanOrEqual(8);
     await expect(header).toBeVisible();
+  });
+
+  test('Interface Hub displays 1 column on screens < 768px (including 640px-767px) and 3 columns on >= 768px', async ({
+    page,
+  }) => {
+    // 1. Tablet 700px (between 640px and 767px)
+    await page.setViewportSize({ width: 700, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const paletteBtn = page.locator('#palette-menu-btn');
+    await paletteBtn.click();
+    const dropdown = page.locator('#palette-dropdown');
+    await expect(dropdown).toBeVisible();
+
+    const gridEl = dropdown.locator('> div');
+    const cols700 = await gridEl.evaluate((el) => {
+      return window.getComputedStyle(el).gridTemplateColumns.split(' ').length;
+    });
+    // Must be 1 column on 700px (not 3!)
+    expect(cols700).toBe(1);
+
+    // 2. Desktop 1024px
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.waitForTimeout(100);
+
+    const cols1024 = await gridEl.evaluate((el) => {
+      return window.getComputedStyle(el).gridTemplateColumns.split(' ').length;
+    });
+    // Must be 3 columns on 1024px
+    expect(cols1024).toBe(3);
   });
 });

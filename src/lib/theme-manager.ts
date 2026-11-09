@@ -296,7 +296,7 @@ export function getOrCreatePaletteBackdrop(): HTMLElement {
     document.body.appendChild(backdrop);
   }
   backdrop.className =
-    'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200';
+    'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200 touch-none';
   backdrop.setAttribute('aria-hidden', 'true');
   return backdrop;
 }
@@ -310,6 +310,20 @@ export function closePaletteMenu(): void {
   const paletteDropdown = document.getElementById('palette-dropdown');
   const paletteBackdrop = document.getElementById('palette-backdrop');
   const paletteBtn = document.getElementById('palette-menu-btn');
+
+  // Unlock document scroll unless mobile drawer is actively open
+  if (typeof document !== 'undefined') {
+    const mobileMenu = document.getElementById('mobile-nav-menu');
+    const isMobileMenuOpen =
+      mobileMenu &&
+      !mobileMenu.classList.contains('hidden') &&
+      mobileMenu.getAttribute('data-state') === 'open';
+    if (!isMobileMenuOpen) {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+  }
 
   if (!paletteDropdown || paletteDropdown.classList.contains('hidden')) {
     paletteBackdrop?.classList.add('hidden');
@@ -347,6 +361,13 @@ export function openPaletteMenu(): void {
   if (paletteCloseTimeout !== null) {
     window.clearTimeout(paletteCloseTimeout);
     paletteCloseTimeout = null;
+  }
+
+  // Lock document scroll while interface hub popover is open
+  if (typeof document !== 'undefined') {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
   }
 
   paletteDropdown?.classList.remove('hidden');

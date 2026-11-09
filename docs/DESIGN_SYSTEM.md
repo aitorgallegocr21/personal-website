@@ -513,13 +513,14 @@ Horizontal docks (`top` and `bottom`) adopt a space-efficient icon + micro-label
 
 A consolidated command center replacing multiple independent action buttons with a single `Sliders` icon button featuring a live accent dot:
 
-- **Desktop Layout:** 3-column Bento grid (`sm:w-[680px] lg:w-[720px] rounded-3xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl p-3.5 sm:p-4`):
-  - **Symmetric Spacing Architecture:** Equal lateral padding across all columns (`sm:pr-4` for Col 1, `sm:px-4` for Col 2, `sm:pl-4` for Col 3) framing vertical divider borders.
+- **Desktop Layout (`>= 768px`):** 3-column Bento grid (`md:w-[680px] lg:w-[720px] rounded-3xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl p-3.5 md:p-4`):
+  - **Symmetric Spacing Architecture:** Equal lateral padding across all columns (`md:pr-4` for Col 1, `md:px-4` for Col 2, `md:pl-4` for Col 3) framing vertical divider borders.
   - **Concise Non-Truncated Typography:** Ultra-brief descriptions without text truncation (`Cuadrícula modular`, `Consola CRT hacker`, `Tipografía suiza`, `Activa · {Día}`, `Fijado manual`, `Laterales en ≥ 1024px`) ensuring crisp presentation in any viewport.
   - **Column 1 (Modo & Aspecto):** Segmented Light (`☀️ Claro`) vs Dark (`🌙 Oscuro`) switcher + visual skin picker (`bento-modern`).
   - **Column 2 (Acento Cromático):** "Rotación Viva 7 Días" hero card + 7 weekday accent palette swatches with active check indicators.
   - **Column 3 (Posición del Dock):** 4-quadrant visual placement selector (Top, Bottom, Left, Right) + double-click restore action.
-- **Mobile Geometry (`< 768px`):** Fixed viewport alignment (`fixed inset-x-3 max-w-sm mx-auto`) with safe-area offsets (`top: calc(4.75rem + env(safe-area-inset-top))` or `bottom: calc(4.75rem + env(safe-area-inset-bottom))`), preventing any lateral canvas overflow or clipping.
+- **Mobile & Narrow Viewport Geometry (`< 768px`):** Clean 1-column vertical stack (3 rows) with `max-w-sm mx-auto w-[calc(100vw-2rem)]` and internal scroll (`max-h-[80dvh] overflow-y-auto`). Avoids 3-column distortion in the 640px–767px range by triggering the multi-column Bento strictly at `md:` (`768px`).
+- **Document Scroll Lock & Backdrop:** Opening `#palette-dropdown` locks page scroll (`overflow: hidden` on `html`/`body` and `touch-action: none` on `#palette-backdrop`). Closing restores scroll smoothly unless the mobile navigation drawer is actively open. Fixed viewport alignment (`fixed inset-x-3`) with safe-area offsets (`top: calc(4.75rem + env(safe-area-inset-top))` or `bottom: calc(4.75rem + env(safe-area-inset-bottom))`) completely prevents lateral canvas overflow or clipping.
 - **Directional Animations:** Popover dynamically emerges from the active dock edge (`popover-spring-top`, `popover-spring-bottom`, `popover-spring-left`, `popover-spring-right`).
 
 ### D. Upward-Opening Mobile Menu Drawer & Touch Drag Snapping

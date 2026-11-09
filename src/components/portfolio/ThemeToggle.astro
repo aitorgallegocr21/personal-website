@@ -99,22 +99,22 @@ const palettes = [
     <!-- Backdrop blur overlay when dropdown is open -->
     <div
       id="palette-backdrop"
-      class="fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200"
+      class="fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200 touch-none"
       aria-hidden="true"
     ></div>
 
-    <!-- Interface Hub Popover (3-Column Bento on Desktop, Vertical Stack on Mobile) -->
+    <!-- Interface Hub Popover (3-Column Bento on Desktop >= 768px, 1-Column Vertical Stack on < 768px) -->
     <div
       id="palette-dropdown"
-      class="absolute right-0 z-50 mt-2 hidden w-[calc(100vw-2rem)] max-w-sm sm:max-w-none sm:w-[680px] lg:w-[720px] rounded-3xl border border-zinc-200/90 bg-white/95 p-3.5 sm:p-4 text-xs font-medium shadow-2xl shadow-zinc-950/20 backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-900/95 dark:shadow-zinc-950/60"
+      class="absolute right-0 z-50 mt-2 hidden w-[calc(100vw-2rem)] max-w-sm md:max-w-none md:w-[680px] lg:w-[720px] rounded-3xl border border-zinc-200/90 bg-white/95 p-3.5 md:p-4 text-xs font-medium shadow-2xl shadow-zinc-950/20 backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-900/95 dark:shadow-zinc-950/60"
       role="dialog"
       aria-label="Panel de control de interfaz general"
     >
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200/70 dark:divide-zinc-800/70 max-h-[80dvh] sm:max-h-none overflow-y-auto sm:overflow-visible">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-zinc-200/70 dark:divide-zinc-800/70 max-h-[80dvh] md:max-h-none overflow-y-auto md:overflow-visible">
         <!-- ============================================ -->
         <!-- COLUMNA 1: MODO & APARIENCIA (Theme & Skin)  -->
         <!-- ============================================ -->
-        <div class="space-y-3 pb-3 sm:pb-0 sm:pr-4">
+        <div class="space-y-3 pb-3 md:pb-0 md:pr-4">
           <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
             <span>Modo & Aspecto</span>
             <span class="rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-0.2 text-[9.5px] font-semibold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
@@ -196,7 +196,7 @@ const palettes = [
         <!-- ============================================ -->
         <!-- COLUMNA 2: ACENTO CROMÁTICO (Colors & Days)  -->
         <!-- ============================================ -->
-        <div class="space-y-2.5 py-3 sm:py-0 sm:px-4">
+        <div class="space-y-2.5 py-3 md:py-0 md:px-4">
           <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
             <span>Color de Acento</span>
             <span class="rounded-full border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] px-1.5 py-0.2 text-[9.5px] font-semibold text-[var(--color-accent)]">
@@ -246,7 +246,7 @@ const palettes = [
           </button>
 
           <!-- 7 Fixed Palettes Grid / List -->
-          <div class="palette-colors-list space-y-1 max-h-44 sm:max-h-52 overflow-y-auto pr-0.5">
+          <div class="palette-colors-list space-y-1 max-h-44 md:max-h-52 overflow-y-auto pr-0.5">
             {palettes.map((p) => (
               <button
                 type="button"
@@ -281,7 +281,7 @@ const palettes = [
         <!-- ============================================ -->
         <!-- COLUMNA 3: DISPOSICIÓN DOCK (Dock Position)  -->
         <!-- ============================================ -->
-        <div class="space-y-2.5 pt-3 sm:pt-0 sm:pl-4">
+        <div class="space-y-2.5 pt-3 md:pt-0 md:pl-4">
           <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
             <span>Posición del Dock</span>
             <span class="rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-0.2 text-[9.5px] font-semibold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
