@@ -41,10 +41,10 @@ const navItems = [
   >
     <!-- Left Cluster: Tactile Drag Grip & Brand Logo -->
     <div class="brand-cluster flex items-center gap-1 sm:gap-2 shrink-0">
-      <!-- Desktop Drag Grip Handle -->
+      <!-- Tactile Drag Grip Handle -->
       <div
         id="dock-drag-handle"
-        class="hidden lg:flex items-center justify-center w-6 h-8 rounded-lg text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 cursor-grab active:cursor-grabbing hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors touch-none select-none -ml-2"
+        class="flex items-center justify-center w-5 sm:w-6 h-7 sm:h-8 rounded-lg text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 cursor-grab active:cursor-grabbing hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors touch-none select-none -ml-1 sm:-ml-2"
         role="button"
         tabindex="0"
         aria-label="Arrastrar dock (Doble clic para restaurar arriba)"
@@ -387,37 +387,31 @@ const navItems = [
     });
   }
 
-  function setupDesktopDock() {
+  function setupDock() {
     dockController?.destroy();
     dockController = null;
-
-    if (window.innerWidth < 1024) return;
 
     const header = document.getElementById('site-header');
     if (!header) return;
 
     const dragHandle = document.getElementById('dock-drag-handle');
-    const menuBtn = document.getElementById('palette-menu-btn');
-    const menuPopover = document.getElementById('palette-dropdown');
 
     dockController = initDockManager({
       header,
       dragHandle,
-      menuButton: menuBtn,
-      menuPopover,
       onPositionChange: () => {
         scrollSpyController?.refresh();
       },
     });
   }
 
-  function setupAllDesktopNav() {
+  function setupAllNav() {
     setupDesktopScrollSpy();
-    setupDesktopDock();
+    setupDock();
   }
 
-  setupAllDesktopNav();
-  document.addEventListener('astro:after-swap', setupAllDesktopNav);
+  setupAllNav();
+  document.addEventListener('astro:after-swap', setupAllNav);
 
   const desktopMq = window.matchMedia('(min-width: 768px)');
   desktopMq.addEventListener('change', (e) => {
@@ -426,18 +420,6 @@ const navItems = [
     } else {
       scrollSpyController?.destroy();
       scrollSpyController = null;
-    }
-  });
-
-  const desktopDockMq = window.matchMedia('(min-width: 1024px)');
-  desktopDockMq.addEventListener('change', (e) => {
-    if (e.matches) {
-      setupDesktopDock();
-    } else {
-      dockController?.destroy();
-      dockController = null;
-      const header = document.getElementById('site-header');
-      header?.setAttribute('data-dock', 'top');
     }
   });
 </script>
@@ -495,35 +477,76 @@ const navItems = [
     box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
   }
 
-  /* Desktop Metamorphic Dock Positions & Geometry (>= 1024px) */
-  @media (min-width: 1024px) {
-    #site-header {
-      transition:
-        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-        border-radius 0.3s ease,
-        box-shadow 0.3s ease,
-        background-color 0.3s ease;
-    }
+  /* Universal Dock Positions: Top & Bottom available across all viewports */
+  #site-header {
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      border-radius 0.3s ease,
+      box-shadow 0.3s ease,
+      background-color 0.3s ease;
+  }
 
-    #site-header.is-dragging {
-      opacity: 0.85;
-      transform: scale(0.98);
-      user-select: none;
-      pointer-events: none;
-    }
+  #site-header.is-dragging {
+    opacity: 0.85;
+    transform: scale(0.98);
+    user-select: none;
+    pointer-events: none;
+  }
 
-    /* Bottom Dock: macOS-style floating dock */
+  /* Bottom Dock: macOS-style floating dock across mobile, tablet & desktop */
+  #site-header[data-dock='bottom'] {
+    position: fixed;
+    top: auto;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    margin: 0;
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (min-width: 640px) {
     #site-header[data-dock='bottom'] {
-      position: fixed;
-      top: auto;
-      bottom: 1.25rem;
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
-      margin: 0;
-      box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.35);
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
     }
+  }
 
+  /* Bottom Dock: Palette popover flies upwards */
+  #site-header[data-dock='bottom'] :global(#palette-dropdown) {
+    bottom: calc(100% + 0.5rem);
+    top: auto;
+    right: 0;
+    left: auto;
+    margin: 0;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  /* Bottom Dock: Mobile Nav Drawer opens upwards */
+  #site-header[data-dock='bottom'] #mobile-nav-menu {
+    top: auto;
+    bottom: calc(100% + 0.5rem);
+  }
+
+  /* Top Dock: Palette popover flies downwards */
+  #site-header[data-dock='top'] :global(#palette-dropdown) {
+    top: calc(100% + 0.5rem);
+    bottom: auto;
+    right: 0;
+    left: auto;
+    margin: 0;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  /* Top Dock: Mobile Nav Drawer opens downwards */
+  #site-header[data-dock='top'] #mobile-nav-menu {
+    top: calc(100% + 0.5rem);
+    bottom: auto;
+  }
+
+  /* Desktop-Only Lateral Docks (>= 1024px) */
+  @media (min-width: 1024px) {
     /* Left & Right Vertical Docks: Compact Icon-First Rail (~56-60px wide) */
     #site-header[data-dock='left'],
     #site-header[data-dock='right'] {
@@ -649,28 +672,6 @@ const navItems = [
       display: inline-flex;
       align-items: center;
       justify-content: center;
-    }
-
-    /* Bottom Dock: Palette popover flies upwards */
-    #site-header[data-dock='bottom'] :global(#palette-dropdown) {
-      bottom: calc(100% + 0.5rem);
-      top: auto;
-      right: 0;
-      left: auto;
-      margin: 0;
-      max-height: calc(100vh - 6rem);
-      overflow-y: auto;
-    }
-
-    /* Top Dock: Palette popover flies downwards */
-    #site-header[data-dock='top'] :global(#palette-dropdown) {
-      top: calc(100% + 0.5rem);
-      bottom: auto;
-      right: 0;
-      left: auto;
-      margin: 0;
-      max-height: calc(100vh - 6rem);
-      overflow-y: auto;
     }
 
     /* Left Dock: Palette popover flies to the right */
@@ -950,12 +951,43 @@ const navItems = [
     }
   }
 
+  @keyframes mobile-drawer-open-bottom {
+    0% {
+      opacity: 0;
+      transform: translateY(8px) scale(0.97);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes mobile-drawer-close-bottom {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(6px) scale(0.98);
+    }
+  }
+
   #mobile-nav-menu[data-state='open'] {
     animation: mobile-drawer-open 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   #mobile-nav-menu[data-state='closed'] {
     animation: mobile-drawer-close 120ms ease forwards;
+  }
+
+  #site-header[data-dock='bottom'] #mobile-nav-menu[data-state='open'] {
+    animation: mobile-drawer-open-bottom 180ms cubic-bezier(0.16, 1, 0.3, 1)
+      forwards;
+  }
+
+  #site-header[data-dock='bottom'] #mobile-nav-menu[data-state='closed'] {
+    animation: mobile-drawer-close-bottom 120ms ease forwards;
   }
 
   @media (max-height: 600px) {

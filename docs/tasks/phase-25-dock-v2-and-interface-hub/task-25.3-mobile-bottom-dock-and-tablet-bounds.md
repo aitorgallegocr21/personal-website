@@ -1,6 +1,6 @@
 # Task 25.3: Mobile Bottom Dock & Tablet Bounds
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Branch:** `feat/phase-25-dock-v2-and-interface-hub`  
 **Goal:** Expand dock positioning to mobile and tablet devices with strict viewport bounds (disabling side docks where they obscure content), supporting bottom dock positioning with safe-area handling, tactile vertical touch drag snapping, and an upward-opening mobile navigation drawer.
 
@@ -56,10 +56,10 @@ In Phase 24, docking was restricted to desktop screens (`>= 1024px`) to ensure m
 
 ## 3. Verification Checklist
 
-- [ ] Tablets (768px – 1023px) allow Top and Bottom docking, with Left and Right options cleanly disabled/hidden.
-- [ ] If window is resized from desktop to tablet while docked at Left or Right, dock automatically snaps back to Top.
-- [ ] Mobile devices (< 768px) allow positioning the dock at Bottom.
-- [ ] When docked at Bottom on mobile, tapping hamburger opens the menu upwards with zero horizontal overflow or clipping.
-- [ ] Safe area insets (`env(safe-area-inset-bottom)`) prevent home indicator collision on modern iOS/Android phones.
-- [ ] Vertical touch drag allows dragging the dock between top and bottom on touch devices.
-- [ ] Automated Playwright tests verify both top and bottom mobile drawer states.
+- [x] Tablets (768px – 1023px) allow Top and Bottom docking, with Left and Right options cleanly disabled/hidden.
+- [x] If window is resized from desktop to tablet while docked at Left or Right, dock automatically snaps back to Top.
+- [x] Mobile devices (< 768px) allow positioning the dock at Bottom.
+- [x] When docked at Bottom on mobile, tapping hamburger opens the menu upwards with zero horizontal overflow or clipping.
+- [x] Safe area insets (`env(safe-area-inset-bottom)`) prevent home indicator collision on modern iOS/Android phones.
+- [x] Vertical touch drag allows dragging the dock between top and bottom on touch devices.
+- [x] Automated Playwright tests verify both top and bottom mobile drawer states.

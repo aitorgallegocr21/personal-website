@@ -64,6 +64,17 @@ describe('Dock Manager Helper Functions', () => {
       expect(getStoredDockPosition(mockStorage)).toBe(DEFAULT_DOCK_POSITION);
     });
 
+    it('falls back to top if stored value is lateral on viewports < 1024px', () => {
+      mockStorage.setItem(DOCK_STORAGE_KEY, 'left');
+      vi.stubGlobal('window', { innerWidth: 768 });
+      expect(getStoredDockPosition(mockStorage)).toBe('top');
+
+      mockStorage.setItem(DOCK_STORAGE_KEY, 'bottom');
+      expect(getStoredDockPosition(mockStorage)).toBe('bottom');
+
+      vi.unstubAllGlobals();
+    });
+
     it('saves dock position to storage correctly', () => {
       saveDockPosition('right', mockStorage);
       expect(mockStorage.getItem(DOCK_STORAGE_KEY)).toBe('right');
@@ -110,6 +121,24 @@ describe('Dock Manager Helper Functions', () => {
 
       // normX = -100/960 ≈ -0.10, normY = -300/540 ≈ -0.55 -> dominant vertical top
       expect(detectSnapEdge(860, 240, width, height, deadzone)).toBe('top');
+    });
+
+    it('strictly constrains to top/bottom on viewports < 1024px (mobile/tablet)', () => {
+      const mobileWidth = 390;
+      const mobileHeight = 844;
+
+      // Above center -> top
+      expect(detectSnapEdge(50, 200, mobileWidth, mobileHeight, deadzone)).toBe(
+        'top'
+      );
+      // Below center -> bottom
+      expect(
+        detectSnapEdge(350, 700, mobileWidth, mobileHeight, deadzone)
+      ).toBe('bottom');
+      // Deadzone around center -> null
+      expect(
+        detectSnapEdge(195, 422, mobileWidth, mobileHeight, deadzone)
+      ).toBe(null);
     });
   });
 

@@ -369,7 +369,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(twitterCard).toHaveAttribute('content', 'summary_large_image');
   });
 
-  test('supports desktop dock repositioning to left, right, bottom and reset to top', async ({
+  test('supports desktop dock repositioning to left, right, bottom and reset to top via interface hub', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
@@ -380,14 +380,14 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(header).toBeVisible();
     await expect(header).toHaveAttribute('data-dock', 'top');
 
-    const dockMenuBtn = page.locator('#dock-menu-btn');
-    await expect(dockMenuBtn).toBeVisible();
+    const interfaceHubBtn = page.locator('#palette-menu-btn');
+    await expect(interfaceHubBtn).toBeVisible();
 
-    const popover = page.locator('#dock-menu-popover');
+    const popover = page.locator('#palette-dropdown');
     await expect(popover).toBeHidden();
 
-    // 1. Open quick-dock menu and select Left
-    await dockMenuBtn.click();
+    // 1. Open interface hub popover and select Left
+    await interfaceHubBtn.click();
     await expect(popover).toBeVisible();
     await page.locator('[data-dock-target="left"]').click();
     await expect(header).toHaveAttribute('data-dock', 'left');
@@ -411,7 +411,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
     expect(savedPosReset).toBe('top');
 
     // 3. Switch to Bottom dock and reload to verify state persistence
-    await dockMenuBtn.click();
+    await interfaceHubBtn.click();
     await page.locator('[data-dock-target="bottom"]').click();
     await expect(header).toHaveAttribute('data-dock', 'bottom');
 
@@ -451,24 +451,62 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(timelineLink).toHaveAttribute('data-active', 'true');
   });
 
-  test('preserves mobile top navigation and drawer on mobile viewports without docking overhead', async ({
+  test('supports mobile bottom docking and upward mobile drawer navigation', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('./');
     await page.waitForLoadState('networkidle');
 
-    // Dock drag handle and quick dock button must remain hidden on mobile
-    await expect(page.locator('#dock-drag-handle')).toBeHidden();
-    await expect(page.locator('#dock-menu-btn')).toBeHidden();
+    const header = page.locator('#site-header');
+    await expect(header).toHaveAttribute('data-dock', 'top');
 
-    // Standard header remains at top with mobile toggle
+    // Drag handle is tactile and visible on mobile
+    const dragHandle = page.locator('#dock-drag-handle');
+    await expect(dragHandle).toBeVisible();
+
+    // Standard header starts at top with mobile toggle
     const mobileToggle = page.locator('#mobile-nav-toggle');
     await expect(mobileToggle).toBeVisible();
-    await expect(page.locator('#site-header')).toHaveAttribute(
-      'data-dock',
-      'top'
-    );
+
+    // Open Interface Hub and switch to Bottom dock
+    const interfaceHubBtn = page.locator('#palette-menu-btn');
+    await interfaceHubBtn.click();
+    const dropdown = page.locator('#palette-dropdown');
+    await expect(dropdown).toBeVisible();
+
+    // Left and Right buttons are hidden on mobile
+    const leftDockBtn = page.locator('[data-dock-target="left"]');
+    await expect(leftDockBtn).toBeHidden();
+
+    // Click Bottom dock
+    await page.locator('[data-dock-target="bottom"]').click();
+    await expect(header).toHaveAttribute('data-dock', 'bottom');
+    await expect(dropdown).toBeHidden();
+
+    // Open mobile menu while docked at bottom
+    await mobileToggle.click();
+    const mobileMenu = page.locator('#mobile-nav-menu');
+    await expect(mobileMenu).toBeVisible();
+
+    // Verify upward placement: mobile menu top is above header top
+    const headerBox = await header.boundingBox();
+    const menuBox = await mobileMenu.boundingBox();
+    expect(headerBox).not.toBeNull();
+    expect(menuBox).not.toBeNull();
+    if (headerBox && menuBox) {
+      expect(menuBox.y).toBeLessThan(headerBox.y);
+    }
+
+    // Close menu by clicking a link
+    const firstLink = mobileMenu.locator('.mobile-nav-link').first();
+    await firstLink.click();
+    await expect(mobileMenu).toBeHidden();
+
+    // Reset back to Top
+    await interfaceHubBtn.click();
+    await page.locator('[data-dock-target="top"]').first().click();
+    await expect(header).toHaveAttribute('data-dock', 'top');
   });
 
   test('supports directional palette popover, blurred page backdrop, vertical alignment and hero active indicator', async ({
@@ -484,8 +522,8 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(header).toHaveAttribute('data-hero-active', 'true');
 
     // 2. Switch to Left dock
-    const dockMenuBtn = page.locator('#dock-menu-btn');
-    await dockMenuBtn.click();
+    const interfaceHubBtn = page.locator('#palette-menu-btn');
+    await interfaceHubBtn.click();
     await page.locator('[data-dock-target="left"]').click();
     await expect(header).toHaveAttribute('data-dock', 'left');
     await expect(header).toHaveAttribute('data-hero-active', 'true');
