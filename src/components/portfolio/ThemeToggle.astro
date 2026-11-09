@@ -110,11 +110,11 @@ const palettes = [
       role="dialog"
       aria-label="Panel de control de interfaz general"
     >
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200/70 dark:divide-zinc-800/70 max-h-[80dvh] sm:max-h-none overflow-y-auto sm:overflow-visible pr-0.5">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200/70 dark:divide-zinc-800/70 max-h-[80dvh] sm:max-h-none overflow-y-auto sm:overflow-visible">
         <!-- ============================================ -->
         <!-- COLUMNA 1: MODO & APARIENCIA (Theme & Skin)  -->
         <!-- ============================================ -->
-        <div class="space-y-3 pt-1 sm:pt-0">
+        <div class="space-y-3 pb-3 sm:pb-0 sm:pr-4">
           <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
             <span>Modo & Aspecto</span>
             <span class="rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-0.2 text-[9.5px] font-semibold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
@@ -196,7 +196,7 @@ const palettes = [
         <!-- ============================================ -->
         <!-- COLUMNA 2: ACENTO CROMÁTICO (Colors & Days)  -->
         <!-- ============================================ -->
-        <div class="space-y-2.5 pt-3 sm:pt-0 sm:pl-3.5">
+        <div class="space-y-2.5 py-3 sm:py-0 sm:px-4">
           <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
             <span>Color de Acento</span>
             <span class="rounded-full border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] px-1.5 py-0.2 text-[9.5px] font-semibold text-[var(--color-accent)]">
@@ -235,7 +235,7 @@ const palettes = [
                   id="auto-status-text"
                   class="truncate text-[10px] font-semibold text-[var(--color-accent)]"
                 >
-                  Activa · Hoy: {today.label}
+                  Activa · {today.day}
                 </span>
               </div>
             </div>
@@ -281,7 +281,7 @@ const palettes = [
         <!-- ============================================ -->
         <!-- COLUMNA 3: DISPOSICIÓN DOCK (Dock Position)  -->
         <!-- ============================================ -->
-        <div class="space-y-2.5 pt-3 sm:pt-0 sm:pl-3.5">
+        <div class="space-y-2.5 pt-3 sm:pt-0 sm:pl-4">
           <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
             <span>Posición del Dock</span>
             <span class="rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-0.2 text-[9.5px] font-semibold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
@@ -332,8 +332,8 @@ const palettes = [
             </button>
           </div>
 
-          <p class="block lg:hidden text-[9.5px] text-zinc-400 dark:text-zinc-500 text-center font-mono pt-0.5">
-            Laterales disponibles en pantallas &ge; 1024px
+          <p class="block lg:hidden text-[9px] text-zinc-400 dark:text-zinc-500 text-center font-mono pt-0.5">
+            Laterales en &ge; 1024px
           </p>
 
           <!-- Reset to Top Action -->

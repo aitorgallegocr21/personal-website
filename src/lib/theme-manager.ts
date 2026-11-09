@@ -209,7 +209,7 @@ export function syncPaletteUI(
       autoCheckContainer.classList.remove('hidden');
     }
     if (autoStatusText) {
-      autoStatusText.textContent = `Activa · Hoy: ${today.label} (${today.day})`;
+      autoStatusText.textContent = `Activa · ${today.day}`;
       autoStatusText.className =
         'text-[10.5px] font-semibold text-[var(--color-accent)] truncate';
     }
@@ -249,7 +249,7 @@ export function syncPaletteUI(
       autoCheckContainer.classList.add('hidden');
     }
     if (autoStatusText) {
-      autoStatusText.textContent = 'Pulsa para activar la rotación diaria';
+      autoStatusText.textContent = 'Fijado manual';
       autoStatusText.className =
         'text-[10.5px] text-zinc-500 dark:text-zinc-400 truncate';
     }

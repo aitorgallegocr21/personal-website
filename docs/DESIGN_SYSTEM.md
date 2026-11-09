@@ -513,17 +513,21 @@ Horizontal docks (`top` and `bottom`) adopt a space-efficient icon + micro-label
 
 A consolidated command center replacing multiple independent action buttons with a single `Sliders` icon button featuring a live accent dot:
 
-- **Desktop Layout:** 3-column Bento grid (`sm:w-[680px] lg:w-[720px] rounded-3xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl p-3.5`):
+- **Desktop Layout:** 3-column Bento grid (`sm:w-[680px] lg:w-[720px] rounded-3xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl p-3.5 sm:p-4`):
+  - **Symmetric Spacing Architecture:** Equal lateral padding across all columns (`sm:pr-4` for Col 1, `sm:px-4` for Col 2, `sm:pl-4` for Col 3) framing vertical divider borders.
+  - **Concise Non-Truncated Typography:** Ultra-brief descriptions without text truncation (`Cuadrícula modular`, `Consola CRT hacker`, `Tipografía suiza`, `Activa · {Día}`, `Fijado manual`, `Laterales en ≥ 1024px`) ensuring crisp presentation in any viewport.
   - **Column 1 (Modo & Aspecto):** Segmented Light (`☀️ Claro`) vs Dark (`🌙 Oscuro`) switcher + visual skin picker (`bento-modern`).
   - **Column 2 (Acento Cromático):** "Rotación Viva 7 Días" hero card + 7 weekday accent palette swatches with active check indicators.
   - **Column 3 (Posición del Dock):** 4-quadrant visual placement selector (Top, Bottom, Left, Right) + double-click restore action.
-- **Mobile Layout:** High-density vertically stacked sheet with smooth scrolling, clear section dividers, and >= 44x44px touch targets.
+- **Mobile Geometry (`< 768px`):** Fixed viewport alignment (`fixed inset-x-3 max-w-sm mx-auto`) with safe-area offsets (`top: calc(4.75rem + env(safe-area-inset-top))` or `bottom: calc(4.75rem + env(safe-area-inset-bottom))`), preventing any lateral canvas overflow or clipping.
 - **Directional Animations:** Popover dynamically emerges from the active dock edge (`popover-spring-top`, `popover-spring-bottom`, `popover-spring-left`, `popover-spring-right`).
 
 ### D. Upward-Opening Mobile Menu Drawer & Touch Drag Snapping
 
 - **Upward Drawer:** When docked at the bottom on mobile, `#mobile-nav-menu` opens above the dock (`bottom-[calc(100%+0.5rem)]`) using `mobile-drawer-open-bottom` spring keyframes.
 - **Vertical Touch Drag:** Tactile grip handle (`#dock-drag-handle`) with `touch-action: none` allows dragging the dock vertically along the Y-axis. Dragging past the viewport midpoint (`window.innerHeight / 2`) magnetically snaps to `top` or `bottom`.
+- **Tablet Anti-Collision Geometry (`768px – 850px`):** Responsive link padding (`px-1.5 min-w-[38px] text-[8px] sm:text-[8.5px] lg:text-[9.5px]`) and action scaling (`CV` label on tablet, `CV PDF` on desktop) ensuring dock controls never wrap or push action triggers outside the dock bounds.
+- **Global Zero-Scroll Guarantee:** Hidden tooltip defaults (`:global(.nav-tooltip) { display: none; }` on horizontal docks) and canvas clamping (`html, body { overflow-x: hidden; max-width: 100vw; }`) completely eliminate phantom horizontal scrollbars or blank right margins on resize.
 
 ### E. Fluid Scroll-Spy Engine (`src/lib/scroll-spy.ts`)
 

@@ -37,7 +37,7 @@ const navItems = [
 >
   <div
     id="site-header-inner"
-    class="px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300"
+    class="px-3 sm:px-4 lg:px-6 h-14 sm:h-16 flex items-center justify-between gap-1.5 sm:gap-2 lg:gap-4 transition-all duration-300"
   >
     <!-- Left Cluster: Tactile Drag Grip & Brand Logo -->
     <div class="brand-cluster flex items-center gap-1 sm:gap-2 shrink-0">
@@ -56,14 +56,14 @@ const navItems = [
       <!-- Brand / Logo -->
       <a
         href={import.meta.env.BASE_URL}
-        class="brand-logo group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-2.5 -ml-1 shrink-0"
+        class="brand-logo group flex items-center gap-2 lg:gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-1.5 sm:px-2.5 -ml-1 shrink-0"
         aria-label={`Inicio - Portfolio de ${personal.name}`}
       >
         <span class="brand-beacon relative flex h-2.5 w-2.5 items-center justify-center">
           <span class="beacon-pulse absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40 duration-1000"></span>
           <span class="beacon-dot relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)] transition-all duration-300"></span>
         </span>
-        <span class="brand-text text-sm sm:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-all duration-300">
+        <span class="brand-text text-xs sm:text-sm lg:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-all duration-300">
           Portfolio
         </span>
       </a>
@@ -72,7 +72,7 @@ const navItems = [
     <!-- Desktop Navigation Links -->
     <nav
       id="desktop-nav"
-      class="hidden md:flex relative items-center gap-1 lg:gap-1.5 text-xs lg:text-sm font-medium text-zinc-600 dark:text-zinc-400 transition-all duration-300"
+      class="hidden md:flex relative items-center gap-0.5 lg:gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 transition-all duration-300"
       aria-label="Navegación principal"
     >
       <!-- Fluid Scroll-Spy Animated Accent Pill -->
@@ -87,10 +87,10 @@ const navItems = [
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="nav-link group relative z-10 flex flex-col items-center justify-center px-2.5 py-1 min-w-[50px] rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          class="nav-link group relative z-10 flex flex-col items-center justify-center px-1.5 lg:px-2.5 py-1 min-w-[38px] lg:min-w-[50px] rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
-          <item.icon class="nav-icon w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110" />
-          <span class="nav-link-text text-[9.5px] font-semibold tracking-wider uppercase transition-colors duration-150 leading-tight select-none mt-0.5">
+          <item.icon class="nav-icon w-3.5 h-3.5 lg:w-4 lg:h-4 shrink-0 transition-transform duration-150 group-hover:scale-110" />
+          <span class="nav-link-text text-[8px] sm:text-[8.5px] lg:text-[9.5px] font-semibold tracking-wider uppercase transition-colors duration-150 leading-tight select-none mt-0.5">
             {item.label}
           </span>
           <span
@@ -104,17 +104,17 @@ const navItems = [
     </nav>
 
     <!-- Action Controls: CV PDF, Theme Picker, Quick Dock & Mobile Menu Toggle -->
-    <div class="header-actions flex items-center gap-1.5 sm:gap-2 shrink-0">
+    <div class="header-actions flex items-center gap-1 sm:gap-1.5 lg:gap-2 shrink-0">
       <!-- CV PDF Link -->
       <a
         href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
-        class="cv-btn group relative inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-[0_0_12px_var(--color-accent-glow)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        class="cv-btn group relative inline-flex items-center justify-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-full text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-[0_0_12px_var(--color-accent-glow)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         aria-label="Ver y descargar currículum en PDF"
         title="Ver y descargar CV (PDF A4)"
       >
         <FileDown class="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-        <span class="cv-text hidden sm:inline">CV PDF</span>
-        <span class="cv-mobile-text sm:hidden font-mono text-[11px]">CV</span>
+        <span class="cv-text hidden lg:inline">CV PDF</span>
+        <span class="cv-mobile-text lg:hidden font-mono text-[11px]">CV</span>
         <span
           class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
           role="tooltip"
@@ -511,6 +511,27 @@ const navItems = [
     }
   }
 
+  /* Mobile & Small Screens (< 768px): Popover stays centered and safely inset within viewport margins */
+  @media (max-width: 767px) {
+    :global(#palette-dropdown) {
+      position: fixed !important;
+      left: 0.75rem !important;
+      right: 0.75rem !important;
+      width: auto !important;
+      max-width: 26rem !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    #site-header[data-dock='bottom'] :global(#palette-dropdown) {
+      bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
+      top: auto !important;
+    }
+    #site-header[data-dock='top'] :global(#palette-dropdown) {
+      top: calc(4.75rem + env(safe-area-inset-top, 0px)) !important;
+      bottom: auto !important;
+    }
+  }
+
   /* Bottom Dock: Palette popover flies upwards */
   #site-header[data-dock='bottom'] :global(#palette-dropdown) {
     bottom: calc(100% + 0.5rem);
@@ -543,6 +564,11 @@ const navItems = [
   #site-header[data-dock='top'] #mobile-nav-menu {
     top: calc(100% + 0.5rem);
     bottom: auto;
+  }
+
+  /* By default, hide tooltips on horizontal docks to eliminate accidental horizontal overflow */
+  :global(.nav-tooltip) {
+    display: none;
   }
 
   /* Desktop-Only Lateral Docks (>= 1024px) */
