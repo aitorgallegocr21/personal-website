@@ -8,7 +8,13 @@
 
 ## Active Phase
 
-- _None (All current backlog phases completed. Ready for next sprint/phase specification)._
+- [ ] **[Phase 25: Dock Metamorphosis V2, Unified Interface Hub & Mobile Bottom Dock](tasks/phase-25-dock-v2-and-interface-hub/index.md)** — _In Progress_ (Restructure navigation links with icon + micro-labels macOS-dock style, consolidate theme, colors, and dock controls into a unified 3-column Bento Interface Hub, enforce tablet viewport docking bounds, enable mobile bottom dock with tactile vertical touch drag snapping, and implement upward-opening mobile navigation drawer).
+
+---
+
+## Upcoming Phases (Backlog & Roadmapped)
+
+- [ ] **[Phase 26: GitHub Live Metrics Engine & Bento Showcase](tasks/phase-26-github-activity-metrics/index.md)** — _Roadmapped_ (Automated GitHub Actions daily cron fetching GraphQL contribution metrics into typed SSOT snapshot, native theme-adaptive contribution calendar heatmap, live streak statistics, top languages distribution bars, and portfolio flow integration between Certificaciones and Filosofía).
 
 ---
 
