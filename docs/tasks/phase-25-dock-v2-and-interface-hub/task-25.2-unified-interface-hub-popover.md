@@ -1,6 +1,6 @@
 # Task 25.2: Unified Interface Hub Popover
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Branch:** `feat/phase-25-dock-v2-and-interface-hub`  
 **Goal:** Consolidate the scattered navigation controls (Theme Toggle, Color Palettes/Skins, and Dock Position) into a single, cohesive "Interface Hub" (Control de Interfaz General) triggered by a `Sliders` icon button with a dynamic accent dot, rendering a 3-column Bento popover on desktop and a vertically stacked sheet on mobile.
 
@@ -28,15 +28,15 @@ Having multiple separate popovers and icons creates visual clutter and fragments
 ## 2. Technical Implementation Spec
 
 1. **Trigger Component (`src/components/portfolio/Navbar.astro` or unified `InterfaceHub.astro`):**
-   - Single button: `id="interface-hub-btn"`.
+   - Single button: `id="palette-menu-btn"`.
    - Icon: `Sliders` (Lucide) `w-4 h-4`.
    - Indicator: Pulsing/glowing dot in the top-right corner reflecting `var(--color-accent)`.
    - Accessible attributes: `aria-expanded="false"`, `aria-haspopup="dialog"`, `aria-label="Ajustes de interfaz y apariencia"`.
    - Dedicated glassmorphic floating tooltip: "Ajustes de Interfaz".
 
 2. **Panel Structure (3-Column Bento on Desktop):**
-   - Container: `id="interface-hub-popover"`.
-   - Desktop layout: `grid grid-cols-3 gap-3 p-3.5 min-w-[640px] max-w-3xl rounded-3xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl`.
+   - Container: `id="palette-dropdown"`.
+   - Desktop layout: `grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 sm:w-[680px] lg:w-[720px] rounded-3xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl`.
    - Directional positioning: Smart placement relative to dock position (below in Top dock, above in Bottom dock, to the right in Left dock, to the left in Right dock).
    - **Column 1: Modo & Aspecto (Appearance & Mode):**
      - Section title: `// MODO & APARIENCIA`.
@@ -67,9 +67,9 @@ Having multiple separate popovers and icons creates visual clutter and fragments
 
 ## 3. Verification Checklist
 
-- [ ] Single `Sliders` button replaces separate palette, sun/moon, and dock position buttons.
-- [ ] Desktop popover renders a balanced 3-column Bento grid with Mode, Colors, and Dock controls.
-- [ ] Mobile view renders a comfortable vertically stacked sheet with safe scrolling.
-- [ ] Switching mode (Light/Dark), palette (Live or fixed), skin, or dock position updates the UI instantly without FOUC.
-- [ ] Backdrop blur overlay activates smoothly and dismisses on outside tap or Escape key.
-- [ ] TypeScript check and Vitest test suites pass with 0 errors.
+- [x] Single `Sliders` button replaces separate palette, sun/moon, and dock position buttons.
+- [x] Desktop popover renders a balanced 3-column Bento grid with Mode, Colors, and Dock controls.
+- [x] Mobile view renders a comfortable vertically stacked sheet with safe scrolling.
+- [x] Switching mode (Light/Dark), palette (Live or fixed), skin, or dock position updates the UI instantly without FOUC.
+- [x] Backdrop blur overlay activates smoothly and dismisses on outside tap or Escape key.
+- [x] TypeScript check and Vitest test suites pass with 0 errors.

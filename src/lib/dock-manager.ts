@@ -173,6 +173,33 @@ function updateSnapIndicator(
 }
 
 /**
+ * Synchronizes the visual active state on dock position selector buttons.
+ */
+export function syncDockUI(currentPos: DockPosition): void {
+  if (typeof document === 'undefined') return;
+  const buttons =
+    document.querySelectorAll<HTMLButtonElement>('[data-dock-target]');
+  buttons.forEach((btn) => {
+    const target = btn.getAttribute('data-dock-target');
+    if (target === currentPos) {
+      btn.classList.add(
+        'border-[var(--color-accent-border)]',
+        'bg-[var(--color-accent-subtle)]',
+        'text-[var(--color-accent)]'
+      );
+      btn.classList.remove('bg-zinc-50/50', 'dark:bg-zinc-800/30');
+    } else {
+      btn.classList.remove(
+        'border-[var(--color-accent-border)]',
+        'bg-[var(--color-accent-subtle)]',
+        'text-[var(--color-accent)]'
+      );
+      btn.classList.add('bg-zinc-50/50', 'dark:bg-zinc-800/30');
+    }
+  });
+}
+
+/**
  * Initializes desktop dock management.
  */
 export function initDockManager(
@@ -196,12 +223,23 @@ export function initDockManager(
       saveDockPosition(pos);
     }
 
+    syncDockUI(pos);
+
     if (options.onPositionChange) {
       options.onPositionChange(pos);
     }
 
-    // Close popover if open
+    // Close popovers if open
     closeMenu();
+    const paletteMenu = document.getElementById('palette-dropdown');
+    if (paletteMenu && !paletteMenu.classList.contains('hidden')) {
+      const paletteBackdrop = document.getElementById('palette-backdrop');
+      paletteMenu.classList.add('hidden');
+      paletteBackdrop?.classList.add('hidden');
+      document
+        .getElementById('palette-menu-btn')
+        ?.setAttribute('aria-expanded', 'false');
+    }
   }
 
   // Initial application
@@ -369,10 +407,10 @@ export function initDockManager(
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onKeyDown);
 
-  // Wire dock option buttons in popover
+  // Wire dock option buttons across popover and document
   const optionButtons =
-    menuPopover?.querySelectorAll<HTMLButtonElement>('[data-dock-target]');
-  optionButtons?.forEach((btn) => {
+    document.querySelectorAll<HTMLButtonElement>('[data-dock-target]');
+  optionButtons.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const target = btn.getAttribute('data-dock-target');

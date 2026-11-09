@@ -4,6 +4,7 @@ import {
   getTodayPalette,
   getStoredTheme,
   setTheme,
+  syncThemeModeUI,
   isAutoRotateEnabled,
   getStoredPalette,
   setPalette,
@@ -67,6 +68,47 @@ describe('theme-manager', () => {
       setTheme('light');
       expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe('light');
       expect(getStoredTheme()).toBe('light');
+    });
+
+    it('syncs segmented light/dark buttons classes', () => {
+      const createMockElement = () => {
+        const classes = new Set<string>();
+        return {
+          classList: {
+            add: (...cls: string[]) => cls.forEach((c) => classes.add(c)),
+            remove: (...cls: string[]) => cls.forEach((c) => classes.delete(c)),
+            contains: (c: string) => classes.has(c),
+          },
+        };
+      };
+
+      const lightBtn = createMockElement();
+      const darkBtn = createMockElement();
+
+      const mockDocument = {
+        documentElement: {
+          classList: {
+            contains: (cls: string) => cls === 'dark',
+            add: vi.fn(),
+            remove: vi.fn(),
+          },
+          setAttribute: vi.fn(),
+          removeAttribute: vi.fn(),
+        },
+        querySelector: (sel: string) => {
+          if (sel.includes('light')) return lightBtn;
+          if (sel.includes('dark')) return darkBtn;
+          return null;
+        },
+      };
+
+      vi.stubGlobal('document', mockDocument);
+
+      syncThemeModeUI(mockDocument as unknown as Document);
+      expect(darkBtn.classList.contains('font-semibold')).toBe(true);
+      expect(lightBtn.classList.contains('font-semibold')).toBe(false);
+
+      vi.unstubAllGlobals();
     });
   });
 

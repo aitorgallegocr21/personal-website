@@ -57,6 +57,44 @@ export function getStoredTheme(): ThemeMode {
 }
 
 /**
+ * Synchronizes the visual state of the segmented Light/Dark toggle buttons.
+ */
+export function syncThemeModeUI(
+  container: HTMLElement | Document = document
+): void {
+  if (typeof document === 'undefined') return;
+  const isDark = document.documentElement.classList.contains('dark');
+  const lightBtn = container.querySelector(
+    '#theme-mode-light-btn, [data-theme-set="light"]'
+  );
+  const darkBtn = container.querySelector(
+    '#theme-mode-dark-btn, [data-theme-set="dark"]'
+  );
+
+  const activeClasses = [
+    'bg-white',
+    'dark:bg-zinc-900',
+    'text-zinc-950',
+    'dark:text-zinc-100',
+    'shadow-xs',
+    'font-semibold',
+  ];
+  const inactiveClasses = ['text-zinc-600', 'dark:text-zinc-400'];
+
+  if (isDark) {
+    darkBtn?.classList.add(...activeClasses);
+    darkBtn?.classList.remove(...inactiveClasses);
+    lightBtn?.classList.remove(...activeClasses);
+    lightBtn?.classList.add(...inactiveClasses);
+  } else {
+    lightBtn?.classList.add(...activeClasses);
+    lightBtn?.classList.remove(...inactiveClasses);
+    darkBtn?.classList.remove(...activeClasses);
+    darkBtn?.classList.add(...inactiveClasses);
+  }
+}
+
+/**
  * Applies and persists theme mode (light or dark).
  */
 export function setTheme(theme: ThemeMode): void {
@@ -69,6 +107,7 @@ export function setTheme(theme: ThemeMode): void {
       document.documentElement.classList.remove('dark');
     }
     document.documentElement.setAttribute('data-theme', theme);
+    syncThemeModeUI();
   }
   const storage = getLocalStorage();
   storage?.setItem(THEME_STORAGE_KEY, theme);
@@ -335,6 +374,23 @@ export function bindThemeControls(
     const newTheme: ThemeMode = isDark ? 'light' : 'dark';
     setTheme(newTheme);
   });
+
+  const lightBtn = container.querySelector(
+    '#theme-mode-light-btn, [data-theme-set="light"]'
+  );
+  const darkBtn = container.querySelector(
+    '#theme-mode-dark-btn, [data-theme-set="dark"]'
+  );
+
+  lightBtn?.addEventListener('click', () => {
+    setTheme('light');
+  });
+
+  darkBtn?.addEventListener('click', () => {
+    setTheme('dark');
+  });
+
+  syncThemeModeUI(container);
 
   const backdrop = getOrCreatePaletteBackdrop();
 

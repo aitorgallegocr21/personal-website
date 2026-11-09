@@ -5,12 +5,6 @@ import {
   Menu,
   X,
   GripVertical,
-  PanelTop,
-  PanelBottom,
-  PanelLeft,
-  PanelRight,
-  RotateCcw,
-  SlidersHorizontal,
   FolderGit2,
   Briefcase,
   Award,
@@ -129,83 +123,8 @@ const navItems = [
         </span>
       </a>
 
-      <!-- Theme & Accent Controls -->
+      <!-- Interface Hub (Theme, Palettes, Skins & Dock Controls) -->
       <ThemeToggle />
-
-      <!-- Quick Dock Trigger & Popover -->
-      <div class="relative group hidden lg:block">
-        <button
-          type="button"
-          id="dock-menu-btn"
-          class="inline-flex items-center justify-center w-8 h-8 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] cursor-pointer"
-          aria-expanded="false"
-          aria-controls="dock-menu-popover"
-          aria-label="Opciones de anclaje del dock"
-          title="Cambiar posición del dock"
-        >
-          <SlidersHorizontal class="w-3.5 h-3.5" />
-        </button>
-        <span
-          class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
-          role="tooltip"
-        >
-          Posición del dock
-        </span>
-
-        <!-- Popover -->
-        <div
-          id="dock-menu-popover"
-          class="hidden absolute z-50 p-2 rounded-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl shadow-zinc-950/20 min-w-[170px] text-xs font-medium space-y-0.5"
-          role="dialog"
-          aria-label="Posición de anclaje del dock"
-        >
-          <div class="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 border-b border-zinc-100 dark:border-zinc-800/60 mb-1">
-            Posición del dock
-          </div>
-          <button
-            type="button"
-            data-dock-target="top"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelTop class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Arriba (Top)</span>
-          </button>
-          <button
-            type="button"
-            data-dock-target="bottom"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelBottom class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Abajo (Bottom)</span>
-          </button>
-          <button
-            type="button"
-            data-dock-target="left"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelLeft class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Izquierda (Left)</span>
-          </button>
-          <button
-            type="button"
-            data-dock-target="right"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelRight class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Derecha (Right)</span>
-          </button>
-          <div class="border-t border-zinc-100 dark:border-zinc-800/60 pt-1 mt-1">
-            <button
-              type="button"
-              data-dock-target="top"
-              class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left font-mono text-[11px]"
-            >
-              <RotateCcw class="w-3.5 h-3.5" />
-              <span>Restaurar posición</span>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Mobile Hamburger Button -->
       <button
@@ -478,8 +397,8 @@ const navItems = [
     if (!header) return;
 
     const dragHandle = document.getElementById('dock-drag-handle');
-    const menuBtn = document.getElementById('dock-menu-btn');
-    const menuPopover = document.getElementById('dock-menu-popover');
+    const menuBtn = document.getElementById('palette-menu-btn');
+    const menuPopover = document.getElementById('palette-dropdown');
 
     dockController = initDockManager({
       header,
@@ -603,18 +522,6 @@ const navItems = [
       transform: translateX(-50%);
       margin: 0;
       box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.35);
-    }
-    #site-header[data-dock='bottom'] #dock-menu-popover {
-      bottom: calc(100% + 0.5rem);
-      top: auto;
-      right: 0;
-    }
-
-    /* Top Dock Popover Placement */
-    #site-header[data-dock='top'] #dock-menu-popover {
-      top: calc(100% + 0.5rem);
-      bottom: auto;
-      right: 0;
     }
 
     /* Left & Right Vertical Docks: Compact Icon-First Rail (~56-60px wide) */
@@ -823,12 +730,6 @@ const navItems = [
       top: 50%;
       transform: translateY(-50%) scale(0.95);
     }
-    #site-header[data-dock='left'] #dock-menu-popover {
-      left: calc(100% + 0.75rem);
-      right: auto;
-      top: 50%;
-      transform: translateY(-50%);
-    }
 
     /* Tooltip flyouts for Right dock */
     #site-header[data-dock='right'] :global(.group:hover .nav-tooltip) {
@@ -841,12 +742,6 @@ const navItems = [
       left: auto;
       top: 50%;
       transform: translateY(-50%) scale(0.95);
-    }
-    #site-header[data-dock='right'] #dock-menu-popover {
-      right: calc(100% + 0.75rem);
-      left: auto;
-      top: 50%;
-      transform: translateY(-50%);
     }
 
     /* Hide tooltips when popovers or menus are open */
@@ -979,47 +874,40 @@ const navItems = [
   }
 
   /* Default Top & Mobile: Directional Popover Animation */
-  :global(#palette-dropdown[data-state='open']),
-  #dock-menu-popover[data-state='open'] {
+  :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-top 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-  :global(#palette-dropdown[data-state='closed']),
-  #dock-menu-popover[data-state='closed'] {
+  :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-top 120ms ease forwards;
   }
 
   /* Bottom Dock: Popovers emerge upwards */
   #site-header[data-dock='bottom']
-    :global(#palette-dropdown[data-state='open']),
-  #site-header[data-dock='bottom'] #dock-menu-popover[data-state='open'] {
+    :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-bottom 180ms cubic-bezier(0.16, 1, 0.3, 1)
       forwards;
   }
   #site-header[data-dock='bottom']
-    :global(#palette-dropdown[data-state='closed']),
-  #site-header[data-dock='bottom'] #dock-menu-popover[data-state='closed'] {
+    :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-bottom 120ms ease forwards;
   }
 
   /* Left Dock: Popovers emerge to the right */
-  #site-header[data-dock='left'] :global(#palette-dropdown[data-state='open']),
-  #site-header[data-dock='left'] #dock-menu-popover[data-state='open'] {
+  #site-header[data-dock='left'] :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-left 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   #site-header[data-dock='left']
-    :global(#palette-dropdown[data-state='closed']),
-  #site-header[data-dock='left'] #dock-menu-popover[data-state='closed'] {
+    :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-left 120ms ease forwards;
   }
 
   /* Right Dock: Popovers emerge to the left */
-  #site-header[data-dock='right'] :global(#palette-dropdown[data-state='open']),
-  #site-header[data-dock='right'] #dock-menu-popover[data-state='open'] {
+  #site-header[data-dock='right']
+    :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-right 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   #site-header[data-dock='right']
-    :global(#palette-dropdown[data-state='closed']),
-  #site-header[data-dock='right'] #dock-menu-popover[data-state='closed'] {
+    :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-right 120ms ease forwards;
   }
 

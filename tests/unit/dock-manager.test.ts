@@ -1,9 +1,10 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {
   isValidDockPosition,
   getStoredDockPosition,
   saveDockPosition,
   detectSnapEdge,
+  syncDockUI,
   DOCK_STORAGE_KEY,
   DEFAULT_DOCK_POSITION,
   type DockPosition,
@@ -109,6 +110,53 @@ describe('Dock Manager Helper Functions', () => {
 
       // normX = -100/960 ≈ -0.10, normY = -300/540 ≈ -0.55 -> dominant vertical top
       expect(detectSnapEdge(860, 240, width, height, deadzone)).toBe('top');
+    });
+  });
+
+  describe('syncDockUI', () => {
+    it('updates active styles for dock target buttons', () => {
+      const createMockBtn = (target: string) => {
+        const classes = new Set<string>();
+        return {
+          getAttribute: (attr: string) =>
+            attr === 'data-dock-target' ? target : null,
+          classList: {
+            add: (...cls: string[]) => cls.forEach((c) => classes.add(c)),
+            remove: (...cls: string[]) => cls.forEach((c) => classes.delete(c)),
+            contains: (c: string) => classes.has(c),
+          },
+        };
+      };
+
+      const buttons = [
+        createMockBtn('top'),
+        createMockBtn('bottom'),
+        createMockBtn('left'),
+        createMockBtn('right'),
+      ];
+
+      vi.stubGlobal('document', {
+        querySelectorAll: () => buttons,
+      });
+
+      syncDockUI('bottom');
+
+      expect(buttons[1].classList.contains('text-[var(--color-accent)]')).toBe(
+        true
+      );
+      expect(buttons[0].classList.contains('text-[var(--color-accent)]')).toBe(
+        false
+      );
+
+      syncDockUI('left');
+      expect(buttons[2].classList.contains('text-[var(--color-accent)]')).toBe(
+        true
+      );
+      expect(buttons[1].classList.contains('text-[var(--color-accent)]')).toBe(
+        false
+      );
+
+      vi.unstubAllGlobals();
     });
   });
 });
