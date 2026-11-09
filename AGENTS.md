@@ -11,12 +11,19 @@ Build and maintain a personal portfolio and printable A4 PDF CV generator with S
 ## 2. Inviolable Core Rules
 
 1. **Golden Rule (SSOT):** Strictly FORBIDDEN to hardcode biographical text, company names, dates, project descriptions, or skills inside `.astro` or `.html` components. Everything must be consumed from `src/data/cv-data.ts`.
-2. **Strict Typing:** Any new field or structure must first be modeled in `src/types/resume.ts`. Zero `any`.
-3. **Token & Context Optimization:**
+2. **Strict Typing & Runtime Validation:** Any new field or structure must first be modeled in `src/types/resume.ts` and validated in `src/schemas/resume.schema.ts`. Zero `any`.
+3. **Continuous Documentation & Context Synchronization (Zero Loss of Context):**
+   - It is strictly mandatory to update documentation on **EVERY** change made to the codebase.
+   - If a change affects code, architecture, component props, styles, design tokens, data schema, or operational commands, immediately update the corresponding docs (`docs/TASKS.md`, `docs/tasks/`, `docs/DESIGN_SYSTEM.md`, `README.md`, and `README.es.md`).
+   - Never postpone documentation updates. No task or PR is considered complete without synchronized documentation.
+4. **Dual-Branch Strategy (`main` & `develop`):**
+   - `main`: Production release branch. Clean, stable, and deployable at all times.
+   - `develop`: Primary integration and active development branch. All feature or fix branches must branch from and merge into `develop`. Once validated, `develop` merges into `main`.
+5. **Pre-delivery Verification Gate:** No task is complete without verifying that `npm run check` (0 errors), `npm test` (all unit tests passing), and `npm run build` (or `npm run verify`) succeed with 0 TypeScript/Astro errors.
+6. **Mobile-First Parity:** Any visual or interactive modification to the portfolio must be verified against mobile viewports (375px/390px) ensuring touch targets >= 44x44px, safe area insets, and zero horizontal overflow. Follow `.agents/skills/responsive-mobile-design/SKILL.md`.
+7. **Token & Context Optimization:**
    - Do not re-read entire files unnecessarily; inspect only affected interfaces or line ranges.
    - Keep agent responses and logs ultra-concise: show only new/modified code diffs, zero filler prose.
-4. **Pre-delivery Verification:** No task is complete without verifying that `npm run build` (or `npm run verify`) succeeds with 0 TypeScript/Astro errors.
-5. **Mobile-First Parity:** Any visual or interactive modification to the portfolio must be verified against mobile viewports (375px/390px) ensuring touch targets >= 44x44px, safe area insets, and zero horizontal overflow. Follow `.agents/skills/responsive-mobile-design/SKILL.md`.
 
 ---
 
@@ -76,12 +83,18 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 
 ## 5. Reference Scripts
 
-- `npm run verify`: Full deterministic quality gate (`check` + `lint` + `test` + `build`).
-- `npm run verify:fast`: Quick quality gate (`check` + `lint` + `test`).
+- `npm run verify`: Full deterministic quality gate (`check` + `lint` + `format` + `test` + `build`).
+- `npm run verify:fast`: Quick quality gate (`check` + `lint` + `format` + `test`).
 - `npm run dev`: Start local dev server.
 - `astro dev --background`: Run server in background (`astro dev stop`, `astro dev status`, `astro dev logs`).
-- `npm run check`: Check TypeScript types (`astro check`).
-- `npm run build`: Type-check and compile static output to `/dist`.
+- `npm run check`: Check TypeScript and Astro types (`astro check && tsc --noEmit`).
+- `npm run lint`: Run ESLint checks across codebase.
+- `npm run format`: Check Prettier formatting and Tailwind class ordering.
+- `npm test`: Run Vitest unit tests (87 tests).
+- `npm run test:e2e`: Run Playwright End-to-End browser tests.
+- `npm run build`: Type-check and compile static output to `/dist` and build PDF variants.
+- `npm run build:pdf`: Compile deterministic headless Chromium A4 PDFs across all 8 color palettes.
+- `npm run build:og`: Generate 1200x630 Open Graph banner image for social sharing.
 - `npm run preview`: Preview production build locally.
 
 ---
