@@ -483,24 +483,53 @@ The system supports real-time accent shifting across both Dark and Light modes u
 
 ---
 
-## 6. Desktop Dockable Navbar & Fluid Scroll-Spy System
+## 6. Dockable Navigation, Interface Hub & Fluid Scroll-Spy System
 
-### A. Magnetic Dock Positions (`data-dock`)
+### A. Viewport Capability Tiers & Magnetic Dock Positions (`data-dock`)
 
-Desktop viewports (`>= 1024px`) support 4 distinct hardware-accelerated dock positions managed via `src/lib/dock-manager.ts`:
+Navigation island geometry adapts across responsive tiers managed via `src/lib/dock-manager.ts`:
 
-| Position        | Container Layout | Anchor Style                               | Visual Characteristics                                                                 |
-| :-------------- | :--------------- | :----------------------------------------- | :------------------------------------------------------------------------------------- |
-| `top` (Default) | Horizontal pill  | `sticky top-4 left-1/2 -translate-x-1/2`   | Full typography labels, brand logo, action controls                                    |
-| `bottom`        | Horizontal dock  | `fixed bottom-5 left-1/2 -translate-x-1/2` | macOS-style floating dock with elevated drop shadow                                    |
-| `left`          | Vertical rail    | `fixed left-5 top-1/2 -translate-y-1/2`    | Compact ~56px icon-first rail with inside-facing floating tooltips (`left-full ml-3`)  |
-| `right`         | Vertical rail    | `fixed right-5 top-1/2 -translate-y-1/2`   | Compact ~56px icon-first rail with inside-facing floating tooltips (`right-full mr-3`) |
+- **Desktop (`>= 1024px`):** Full 4-edge positioning (`top`, `bottom`, `left`, `right`).
+- **Tablet (`768px – 1023px`):** Constrained strictly to `top` and `bottom` (lateral docks disabled to avoid covering central cards).
+- **Mobile (`< 768px`):** Supports `top` and `bottom` with `env(safe-area-inset-bottom)` home indicator padding, tactile vertical touch drag snapping, and an upward-opening mobile menu drawer.
 
-### B. Fluid Scroll-Spy Engine (`src/lib/scroll-spy.ts`)
+| Position        | Viewports Supported  | Anchor Style                                           | Visual Characteristics                                                                 |
+| :-------------- | :------------------- | :----------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| `top` (Default) | Universal (All)      | `sticky top-3 sm:top-4 left-1/2 -translate-x-1/2`      | Micro-label dock on desktop, full mobile header on small screens                       |
+| `bottom`        | Universal (All)      | `fixed bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2` | macOS-style floating dock; mobile menu and popovers open upwards (`bottom-up`)         |
+| `left`          | Desktop (`>=1024px`) | `fixed left-5 top-1/2 -translate-y-1/2`                | Compact ~56px icon-first rail with inside-facing floating tooltips (`left-full ml-3`)  |
+| `right`         | Desktop (`>=1024px`) | `fixed right-5 top-1/2 -translate-y-1/2`               | Compact ~56px icon-first rail with inside-facing floating tooltips (`right-full mr-3`) |
+
+### B. Dock Navigation Link Geometry (macOS Dock Style)
+
+Horizontal docks (`top` and `bottom`) adopt a space-efficient icon + micro-label column layout:
+
+- **Cell Structure:** `flex flex-col items-center justify-center px-2.5 py-1 min-w-[50px] rounded-xl`.
+- **Micro-Label:** `text-[9.5px] font-semibold tracking-wider uppercase` with tabular numbers.
+- **Dynamic Glow:** Real-time CSS property `--nav-glow` interpolating typography and icon drop shadow with `color-mix(in srgb, var(--color-accent) calc(var(--nav-glow) * 100%), currentColor)`.
+- **Vertical Rails (`left` / `right`):** Clean icon-only square cells (`w-10 h-10`) with floating directional glassmorphic tooltips.
+
+### C. Unified Interface Hub (`#palette-dropdown`)
+
+A consolidated command center replacing multiple independent action buttons with a single `Sliders` icon button featuring a live accent dot:
+
+- **Desktop Layout:** 3-column Bento grid (`sm:w-[680px] lg:w-[720px] rounded-3xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl p-3.5`):
+  - **Column 1 (Modo & Aspecto):** Segmented Light (`☀️ Claro`) vs Dark (`🌙 Oscuro`) switcher + visual skin picker (`bento-modern`).
+  - **Column 2 (Acento Cromático):** "Rotación Viva 7 Días" hero card + 7 weekday accent palette swatches with active check indicators.
+  - **Column 3 (Posición del Dock):** 4-quadrant visual placement selector (Top, Bottom, Left, Right) + double-click restore action.
+- **Mobile Layout:** High-density vertically stacked sheet with smooth scrolling, clear section dividers, and >= 44x44px touch targets.
+- **Directional Animations:** Popover dynamically emerges from the active dock edge (`popover-spring-top`, `popover-spring-bottom`, `popover-spring-left`, `popover-spring-right`).
+
+### D. Upward-Opening Mobile Menu Drawer & Touch Drag Snapping
+
+- **Upward Drawer:** When docked at the bottom on mobile, `#mobile-nav-menu` opens above the dock (`bottom-[calc(100%+0.5rem)]`) using `mobile-drawer-open-bottom` spring keyframes.
+- **Vertical Touch Drag:** Tactile grip handle (`#dock-drag-handle`) with `touch-action: none` allows dragging the dock vertically along the Y-axis. Dragging past the viewport midpoint (`window.innerHeight / 2`) magnetically snaps to `top` or `bottom`.
+
+### E. Fluid Scroll-Spy Engine (`src/lib/scroll-spy.ts`)
 
 Replaces discrete threshold toggling with continuous mathematical interpolation across the active sections (`#proyectos`, `#trayectoria`, `#certificaciones`, `#filosofia`, `#contacto`):
 
 - **Continuous 2D Pill Glide:** GPU-composited `transform: translate3d(x, y, 0)` smoothly moving between link boundaries on both X and Y axes.
 - **Dynamic Text Glow:** Real-time CSS property `--nav-glow` interpolating typography brightness with `color-mix(in srgb, var(--color-accent) calc(var(--nav-glow) * 100%), currentColor)`.
 - **Zero-Jank Guarantee:** Caches section tops and relative link bounding boxes via `ResizeObserver`; updates exclusively inside passive `requestAnimationFrame`.
-- **Mobile Isolation:** Gated strictly to tablet/desktop viewports (`min-width: 768px` for scroll-spy, `min-width: 1024px` for dock controls), keeping mobile viewports (< 768px) 100% pure and lightweight.
+- **Viewport Isolation:** Gated strictly to tablet/desktop viewports (`min-width: 768px` for scroll-spy), maintaining mobile drawer simplicity.

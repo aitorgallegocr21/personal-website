@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {
   isValidDockPosition,
+  getAllowedDockPositions,
   getStoredDockPosition,
   saveDockPosition,
   detectSnapEdge,
@@ -46,6 +47,29 @@ describe('Dock Manager Helper Functions', () => {
       expect(isValidDockPosition(null)).toBe(false);
       expect(isValidDockPosition(undefined)).toBe(false);
       expect(isValidDockPosition(123)).toBe(false);
+    });
+  });
+
+  describe('getAllowedDockPositions', () => {
+    it('returns top and bottom only for viewports < 1024px', () => {
+      expect(getAllowedDockPositions(375)).toEqual(['top', 'bottom']);
+      expect(getAllowedDockPositions(768)).toEqual(['top', 'bottom']);
+      expect(getAllowedDockPositions(1023)).toEqual(['top', 'bottom']);
+    });
+
+    it('returns all 4 positions for viewports >= 1024px', () => {
+      expect(getAllowedDockPositions(1024)).toEqual([
+        'top',
+        'bottom',
+        'left',
+        'right',
+      ]);
+      expect(getAllowedDockPositions(1920)).toEqual([
+        'top',
+        'bottom',
+        'left',
+        'right',
+      ]);
     });
   });
 

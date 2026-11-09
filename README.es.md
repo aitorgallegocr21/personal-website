@@ -76,7 +76,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **🎨 Theming Dinámico & Rotación Diaria:** Sistema de paletas multi-acento para los 7 días de la semana (Ámbar, Esmeralda, Turquesa, Sky, Pizarra, Violeta, Rosa) con rotación automática viva, selector manual y conmutación modo oscuro/claro.
 - **🎭 Motor Arquitectónico Multi-Skin & Selector Visual:** Sistema modular de skins visuales intercambiables (`bento-modern` predeterminado) sobre el mismo SSOT `cvData`, con persistencia en `localStorage`, inicialización zero-FOUC y menú selector interactivo.
 - **🎴 Bento Grid Moderno & Retrato Interactivo:** Tarjeta de perfil con micro-interacción 3D tilt, indicador de disponibilidad en tiempo real y enlaces directos a código/demos.
-- **🏝️ Navbar Flotante Acoplable & Scroll-Spy Fluido:** Isla de navegación reposicionable en escritorio (>= 1024px) con anclaje magnético a los bordes de la pantalla (Top, Bottom, Left, Right), metamorfosis de layout a riel vertical compacto de iconos (~56px) con tooltips flotantes, reseteo con doble clic, selector rápido de posición y un indicador continuo de scroll-spy con interpolación matemática fluida a 60/120 FPS y atenuación progresiva de iluminación de texto.
+- **🏝️ Dock Metamórfico, Centro de Interfaz & Dock Inferior Móvil:** Isla de navegación reposicionable con diseño estilo dock de macOS (icono + microetiqueta) en horizontal y riel vertical compacto de iconos (~56px) en lateral. Integra un Centro de Interfaz General tipo Bento en 3 columnas en escritorio (panel vertical en móvil) que unifica Modo (Claro/Oscuro), Paletas Vivas/Fijas de 7 días y Posición del Dock. Soporta anclaje inferior en móvil/tablet con safe-area, cajón de navegación móvil que se despliega hacia arriba y arrastre táctil vertical con acople magnético.
 - **📜 Motor Modal Multi-Documental & Enlaces Profundos:** Visor móvil a pantalla completa (`h-[100dvh]`), pestañas táctiles con scroll horizontal suave, banner de soporte para PDFs móviles con apertura nativa directa, enlaces URL (`?doc=<id>`), descarga individual y empaquetado en lote `.zip` mediante JSZip.
 - **✨ Micro-interacciones con Acento & Footer Estructurado:** Pie de página responsivo en 3 columnas con indicador dinámico de disponibilidad, bordes con brillo ambiental reactivo a la paleta activa y badges de proyecto sin colisiones.
 - **📰 Maquetación Editorial del CV a 2 Columnas:** Diseño editorial para impresión A4 en 2 columnas con insignia destacada hacia el portfolio interactivo, educación reglada (DAM con media 9,2 y SMR con 8,7) en cabecera principal, proyectos de software con enlaces a repositorios GitHub, certificaciones clave, bloque de aspectos personales & virtudes humanas (organización, tenis de competición, lectura), e idiomas/permiso B.
@@ -85,7 +85,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **📐 Retrato Editorial & Columna de Contacto:** Insignia de retrato rectangular en proporción nativa, encabezado estructurado `// CONTACTO` con icono telefónico alineado e insignias de contacto optimizadas con defensa anti-scraping.
 - **🔍 Schema.org Enriquecido & SEO Automatizado:** Datos estructurados JSON-LD (`Person` y `ProfilePage`), `sitemap-index.xml` autogenerado con `@astrojs/sitemap`, directivas para motores de búsqueda en `robots.txt` y tarjeta social Open Graph dedicada de 1200x630 para compartir en redes.
 - **🖼️ Pipeline Nativo de Optimización de Assets:** Uso del componente nativo `<Image />` de Astro potenciado por Sharp, transcodificando capturas y retratos a WebP sin Cumulative Layout Shift (CLS) y reduciendo el peso de imágenes en un 97%.
-- **🧪 Suite Completa de Pruebas (Unitarias & E2E):** 87 tests unitarios con Vitest (integridad SSOT, cálculo de fechas, esquemas Zod, estado de skins, motor de scroll-spy, gestor de dock, schema-org, portapapeles) junto a 19 tests End-to-End en navegador real con Playwright automatizados en GitHub Actions CI con resolución elástica de Chromium.
+- **🧪 Suite Completa de Pruebas (Unitarias & E2E):** 94 tests unitarios con Vitest (integridad SSOT, cálculo de fechas, esquemas Zod, estado de skins, motor de scroll-spy, gestor de dock, schema-org, portapapeles) junto a 20 tests End-to-End en navegador real con Playwright automatizados en GitHub Actions CI con resolución elástica de Chromium.
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 
 ---
@@ -106,7 +106,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **Estilos:** [Tailwind CSS 4.x](https://tailwindcss.com/) con variables nativas CSS
 - **Validación Runtime:** [Zod](https://zod.dev/) para verificación estricta de esquemas de datos
 - **Calidad de Código & Formateo:** ESLint (Flat Config), Prettier con plugin de Tailwind y `@astrojs/check`
-- **Testing & Calibración:** Vitest (87 tests unitarios), Playwright (19 tests E2E y verificación A4 de impresión)
+- **Testing & Calibración:** Vitest (94 tests unitarios), Playwright (20 tests E2E y verificación A4 de impresión)
 - **Motor de PDFs & Assets:** Puppeteer Core (compilación Chromium headless de PDFs A4), Sharp (optimización WebP) y JSZip
 - **SEO & Indexación:** `@astrojs/sitemap` (sitemap automatizado) y metadatos Schema.org JSON-LD
 - **Despliegue Continuo:** GitHub Pages automatizado vía GitHub Actions (`.github/workflows/deploy.yml`)
@@ -122,7 +122,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 ├── docs/                        # Documentación técnica completa y especificaciones
 │   ├── DESIGN_SYSTEM.md         # Tokens de diseño, paletas y especificaciones de impresión
 │   ├── DOSSIER_PROFESIONAL.md   # Historial completo, trayectoria y datos de referencia
-│   ├── tasks/                   # Desglose exhaustivo de fases y tareas técnicas (Fases 0 a 24)
+│   ├── tasks/                   # Desglose exhaustivo de fases y tareas técnicas (Fases 0 a 25)
 │   └── TASKS.md                 # Índice del backlog activo y roadmap
 ├── public/                      # Archivos estáticos servidos en la raíz
 │   ├── cv/                      # PDFs A4 precompilados en 8 paletas de color

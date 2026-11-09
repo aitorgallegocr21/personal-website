@@ -37,6 +37,19 @@ export function isValidDockPosition(val: unknown): val is DockPosition {
 }
 
 /**
+ * Returns allowed dock positions based on viewport width capability tiers:
+ * - < 1024px (Tablets & Mobile): ['top', 'bottom']
+ * - >= 1024px (Desktop): ['top', 'bottom', 'left', 'right']
+ */
+export function getAllowedDockPositions(
+  viewportWidth: number
+): readonly DockPosition[] {
+  return viewportWidth < 1024
+    ? (['top', 'bottom'] as const)
+    : (['top', 'bottom', 'left', 'right'] as const);
+}
+
+/**
  * Reads the persisted dock position from storage with fallback.
  * Automatically falls back to 'top' if stored value is 'left' or 'right'
  * on viewports smaller than 1024px.

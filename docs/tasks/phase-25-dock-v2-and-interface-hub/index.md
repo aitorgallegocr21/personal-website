@@ -1,6 +1,6 @@
 # Phase 25: Dock Metamorphosis V2, Unified Interface Hub & Mobile Bottom Dock
 
-**Status:** In Progress  
+**Status:** Completed  
 **Branch:** `feat/phase-25-dock-v2-and-interface-hub`  
 **Core Mission:** Restructure the desktop and mobile navigation dock to accommodate expanding portfolio sections (including the upcoming GitHub Activity engine), introducing macOS-inspired icon + micro-label horizontal navigation, consolidating theme, color, skin, and dock controls into a unified 3-column Bento "Interface Hub", and expanding dock positioning to mobile/tablet devices with bottom docking, vertical touch drag snapping, and an upward-opening mobile menu drawer.
 
@@ -35,7 +35,7 @@
 - [x] **[Task 25.1: Dock Link Layout with Icon + Micro-Labels](task-25.1-dock-link-layout-icon-microlabels.md)** — Implement vertical stacked icon + micro-label layout for horizontal docks (Top/Bottom), retain pure icon with tooltips for vertical docks, and recalibrate the fluid scroll-spy indicator to embrace the new cell geometry.
 - [x] **[Task 25.2: Unified Interface Hub Popover](task-25.2-unified-interface-hub-popover.md)** — Unify Dark/Light mode, Color Palettes, Skins, and Dock Position into a single Sliders-triggered 3-column Bento popover on desktop and vertically stacked sheet on mobile.
 - [x] **[Task 25.3: Mobile Bottom Dock & Tablet Bounds](task-25.3-mobile-bottom-dock-and-tablet-bounds.md)** — Implement tablet viewport constraints (top/bottom only), mobile bottom dock positioning, upward-opening drawer with backdrop blur, and vertical touch drag snapping.
-- [ ] **[Task 25.4: Verification, Automated Testing & Documentation Sync](task-25.4-verification-tests-and-sync.md)** — Update Vitest unit tests for dock manager logic, automate Playwright E2E tests for mobile bottom drawer and interface hub, and update `docs/DESIGN_SYSTEM.md`, `README.md`, and `README.es.md`.
+- [x] **[Task 25.4: Verification, Automated Testing & Documentation Sync](task-25.4-verification-tests-and-sync.md)** — Update Vitest unit tests for dock manager logic, automate Playwright E2E tests for mobile bottom drawer and interface hub, and update `docs/DESIGN_SYSTEM.md`, `README.md`, and `README.es.md`.
 
 ---
 

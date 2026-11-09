@@ -8,17 +8,19 @@
 
 ## Active Phase
 
-- [ ] **[Phase 25: Dock Metamorphosis V2, Unified Interface Hub & Mobile Bottom Dock](tasks/phase-25-dock-v2-and-interface-hub/index.md)** — _In Progress_ (Restructure navigation links with icon + micro-labels macOS-dock style, consolidate theme, colors, and dock controls into a unified 3-column Bento Interface Hub, enforce tablet viewport docking bounds, enable mobile bottom dock with tactile vertical touch drag snapping, and implement upward-opening mobile navigation drawer).
+- [ ] **[Phase 26: GitHub Live Metrics Engine & Bento Showcase](tasks/phase-26-github-activity-metrics/index.md)** — _Active Sprint_ (Automated GitHub Actions daily cron fetching GraphQL contribution metrics into typed SSOT snapshot, native theme-adaptive contribution calendar heatmap, live streak statistics, top languages distribution bars, and portfolio flow integration between Certificaciones and Filosofía).
 
 ---
 
 ## Upcoming Phases (Backlog & Roadmapped)
 
-- [ ] **[Phase 26: GitHub Live Metrics Engine & Bento Showcase](tasks/phase-26-github-activity-metrics/index.md)** — _Roadmapped_ (Automated GitHub Actions daily cron fetching GraphQL contribution metrics into typed SSOT snapshot, native theme-adaptive contribution calendar heatmap, live streak statistics, top languages distribution bars, and portfolio flow integration between Certificaciones and Filosofía).
+_No pending upcoming phases in backlog. New phases will be roadmapped as requirements arise._
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+
+- [x] **[Phase 25: Dock Metamorphosis V2, Unified Interface Hub & Mobile Bottom Dock](tasks/phase-25-dock-v2-and-interface-hub/index.md)** — _Completed 2026-11-09_ (Restructure navigation links with icon + micro-labels macOS-dock style, consolidate theme, colors, skins and dock controls into a unified 3-column Bento Interface Hub, enforce tablet viewport docking bounds, enable mobile bottom dock with tactile vertical touch drag snapping, and implement upward-opening mobile navigation drawer).
 
 - [x] **[Phase 24: Desktop Dockable Navbar & Fluid Scroll-Spy Experience](tasks/phase-24-desktop-dockable-navbar-and-fluid-scrollspy/index.md)** — _Completed 2026-11-06_ (Desktop dockable navigation island with early magnetic edge snapping, layout metamorphosis with single-column vertical icon dock, directional flyout popovers in 4 orientations, page-level subtle backdrop blur keeping the dock visible, Hero origin indicator in horizontal and Beacon pulse in vertical, GPU-accelerated directional spring transitions for popovers, responsive colors fit without desktop scrollbar, continuous fluid scroll-spy indicator tracking exact scroll progress between sections at 60/120 FPS, and mobile navigation overlay drawer with zero layout shift, backdrop blur, and hardware-accelerated spring animations).
 

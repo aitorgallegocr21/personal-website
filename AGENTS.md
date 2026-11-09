@@ -90,7 +90,7 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 - `npm run check`: Check TypeScript and Astro types (`astro check && tsc --noEmit`).
 - `npm run lint`: Run ESLint checks across codebase.
 - `npm run format`: Check Prettier formatting and Tailwind class ordering.
-- `npm test`: Run Vitest unit tests (87 tests).
+- `npm test`: Run Vitest unit tests (94 tests).
 - `npm run test:e2e`: Run Playwright End-to-End browser tests.
 - `npm run build`: Type-check and compile static output to `/dist` and build PDF variants.
 - `npm run build:pdf`: Compile deterministic headless Chromium A4 PDFs across all 8 color palettes.
