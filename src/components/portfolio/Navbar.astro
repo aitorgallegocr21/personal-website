@@ -84,19 +84,19 @@ const navItems = [
       <!-- Fluid Scroll-Spy Animated Accent Pill -->
       <div
         id="navbar-fluid-indicator"
-        class="pointer-events-none absolute left-0 top-0 rounded-full opacity-0 z-0 bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)] shadow-[0_0_14px_var(--color-accent-glow)] transition-opacity duration-200"
+        class="pointer-events-none absolute left-0 top-0 rounded-xl opacity-0 z-0 bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)] shadow-[0_0_14px_var(--color-accent-glow)] transition-opacity duration-200"
         aria-hidden="true"
       >
-        <span class="indicator-bar absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--color-accent)] rounded-full shadow-[0_0_8px_var(--color-accent)] transition-all duration-300"></span>
+        <span class="indicator-bar absolute bottom-0.5 left-1/2 -translate-x-1/2 w-3.5 h-0.5 bg-[var(--color-accent)] rounded-full shadow-[0_0_8px_var(--color-accent)] transition-all duration-300"></span>
       </div>
 
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="nav-link group relative z-10 flex items-center justify-center px-3 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          class="nav-link group relative z-10 flex flex-col items-center justify-center px-2.5 py-1 min-w-[50px] rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
-          <item.icon class="nav-icon hidden w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110" />
-          <span class="nav-link-text transition-colors duration-150">
+          <item.icon class="nav-icon w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110" />
+          <span class="nav-link-text text-[9.5px] font-semibold tracking-wider uppercase transition-colors duration-150 leading-tight select-none mt-0.5">
             {item.label}
           </span>
           <span
@@ -234,9 +234,12 @@ const navItems = [
         href={item.href}
         class="mobile-nav-link group flex items-center justify-between min-h-[44px] px-3.5 py-2 rounded-xl text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
       >
-        <span class="group-hover:translate-x-1 transition-transform duration-150">
-          {item.label}
-        </span>
+        <div class="flex items-center gap-2.5">
+          <item.icon class="w-4 h-4 text-zinc-400 group-hover:text-[var(--color-accent)] transition-colors" />
+          <span class="group-hover:translate-x-1 transition-transform duration-150">
+            {item.label}
+          </span>
+        </div>
         <span class="text-xs text-zinc-400 dark:text-zinc-500 font-mono group-hover:text-[var(--color-accent)] transition-colors">
           {item.number}
         </span>
@@ -532,7 +535,20 @@ const navItems = [
     );
     text-shadow: 0 0 calc(var(--nav-glow, 0) * 8px) var(--color-accent-glow);
   }
+  .nav-link .nav-icon {
+    color: color-mix(
+      in srgb,
+      var(--color-accent) calc(var(--nav-glow, 0) * 100%),
+      currentColor
+    );
+    filter: drop-shadow(
+      0 0 calc(var(--nav-glow, 0) * 6px) var(--color-accent-glow)
+    );
+  }
   .nav-link[data-active='true'] {
+    color: var(--color-accent);
+  }
+  .nav-link[data-active='true'] .nav-icon {
     color: var(--color-accent);
   }
 
@@ -682,8 +698,12 @@ const navItems = [
     #site-header[data-dock='right'] .nav-link {
       width: 2.5rem;
       height: 2.5rem;
+      min-width: 0;
       padding: 0;
       border-radius: 0.875rem;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
 
     #site-header[data-dock='left'] .cv-btn,

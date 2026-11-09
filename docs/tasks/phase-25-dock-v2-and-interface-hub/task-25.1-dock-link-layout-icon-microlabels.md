@@ -1,6 +1,6 @@
 # Task 25.1: Dock Link Layout with Icon + Micro-Labels
 
-**Status:** Ready to Implement  
+**Status:** Completed  
 **Branch:** `feat/phase-25-dock-v2-and-interface-hub`  
 **Goal:** Transition the horizontal desktop navigation links to a modern macOS/iOS application dock design featuring a vertically stacked icon (`w-4 h-4`) and micro-label (`text-[10px]` uppercase or tabular text) to optimize horizontal space, while maintaining pure icon rails with tooltips for vertical docks, and recalibrating fluid scroll-spy calculations.
 
@@ -43,8 +43,9 @@ By adopting a stacked icon + micro-label structure:
 
 ## 3. Verification Checklist
 
-- [ ] Horizontal dock links show icon centered above the micro-label.
-- [ ] Hover transitions apply smoothly to both icon and label text.
-- [ ] Switching to vertical dock (Left/Right) cleanly hides the micro-label and renders pure icons with floating tooltips.
-- [ ] Fluid scroll-spy indicator glides and resizes accurately around the active link cell.
-- [ ] Astro build and TypeScript checks pass with 0 errors (`npm run check`).
+- [x] Horizontal dock links show icon centered above the micro-label.
+- [x] Hover transitions apply smoothly to both icon and label text.
+- [x] Switching to vertical dock (Left/Right) cleanly hides the micro-label and renders pure icons with floating tooltips.
+- [x] Fluid scroll-spy indicator glides and resizes accurately around the active link cell.
+- [x] Astro build and TypeScript checks pass with 0 errors (`npm run check`).
+- [x] Vitest unit test suite passes with 88/88 tests passing (`npm test`).
