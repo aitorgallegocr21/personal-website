@@ -524,10 +524,11 @@ A consolidated command center replacing multiple independent action buttons with
 
 ### D. Upward-Opening Mobile Menu Drawer & Touch Drag Snapping
 
-- **Upward Drawer:** When docked at the bottom on mobile, `#mobile-nav-menu` opens above the dock (`bottom-[calc(100%+0.5rem)]`) using `mobile-drawer-open-bottom` spring keyframes.
+- **Upward Drawer & Body Scroll Lock:** When docked at the bottom on mobile, `#mobile-nav-menu` opens above the dock (`bottom-[calc(100%+0.5rem)]`) using `mobile-drawer-open-bottom` spring keyframes. When any mobile navigation drawer deploys, background document scrolling is strictly locked (`overflow: hidden` on `html`/`body` and `touch-action: none` on the backdrop), preventing background bounce while preserving menu internal scroll (`overscroll-contain`).
 - **Vertical Touch Drag:** Tactile grip handle (`#dock-drag-handle`) with `touch-action: none` allows dragging the dock vertically along the Y-axis. Dragging past the viewport midpoint (`window.innerHeight / 2`) magnetically snaps to `top` or `bottom`.
+- **Top Dock Continuous Stickiness:** Uses `position: sticky; top: calc(0.75rem + env(safe-area-inset-top))` coupled with `html, body { overflow-x: clip; max-width: 100vw; }`. Unlike `overflow: hidden`, `overflow: clip` prevents horizontal overflow without generating an ancestor scroll container, ensuring the top dock remains permanently fixed and visible throughout the entire page scroll on both mobile and desktop.
 - **Tablet Anti-Collision Geometry (`768px – 850px`):** Responsive link padding (`px-1.5 min-w-[38px] text-[8px] sm:text-[8.5px] lg:text-[9.5px]`) and action scaling (`CV` label on tablet, `CV PDF` on desktop) ensuring dock controls never wrap or push action triggers outside the dock bounds.
-- **Global Zero-Scroll Guarantee:** Hidden tooltip defaults (`:global(.nav-tooltip) { display: none; }` on horizontal docks) and canvas clamping (`html, body { overflow-x: hidden; max-width: 100vw; }`) completely eliminate phantom horizontal scrollbars or blank right margins on resize.
+- **Global Zero-Scroll Guarantee:** Hidden tooltip defaults (`:global(.nav-tooltip) { display: none; }` on horizontal docks) and canvas clamping (`html, body { overflow-x: clip; max-width: 100vw; }`) completely eliminate phantom horizontal scrollbars or blank right margins on resize.
 
 ### E. Fluid Scroll-Spy Engine (`src/lib/scroll-spy.ts`)
 

@@ -144,7 +144,7 @@ const navItems = [
   <!-- Mobile Drawer Dropdown (Overlay) -->
   <div
     id="mobile-nav-menu"
-    class="hidden md:hidden absolute top-[calc(100%+0.5rem)] inset-x-0 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl shadow-2xl shadow-zinc-950/15 dark:shadow-black/60 p-3 space-y-1 z-50"
+    class="hidden md:hidden absolute top-[calc(100%+0.5rem)] inset-x-0 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl shadow-2xl shadow-zinc-950/15 dark:shadow-black/60 p-3 space-y-1 z-50 max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain"
     role="region"
     aria-label="Menú de navegación para dispositivos móviles"
   >
@@ -192,7 +192,7 @@ const navItems = [
       document.body.appendChild(backdrop);
     }
     backdrop.className =
-      'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200';
+      'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200 touch-none';
     backdrop.setAttribute('aria-hidden', 'true');
     return backdrop;
   }
@@ -219,6 +219,11 @@ const navItems = [
         return;
       }
 
+      // Unlock document scroll
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+
       toggleBtn.setAttribute('aria-expanded', 'false');
       toggleBtn.setAttribute('aria-label', 'Abrir menú de navegación');
       openIcon?.classList.remove('hidden');
@@ -243,6 +248,11 @@ const navItems = [
         clearTimeout(mobileCloseTimeout);
         mobileCloseTimeout = null;
       }
+
+      // Lock document scroll while mobile menu is open
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
 
       const backdrop = getOrCreateMobileBackdrop(closeMenu);
       backdrop.classList.remove('hidden');
@@ -491,6 +501,24 @@ const navItems = [
     transform: scale(0.98);
     user-select: none;
     pointer-events: none;
+  }
+
+  /* Top Dock: Sticky header sticking cleanly at top across all viewports */
+  #site-header[data-dock='top'] {
+    position: sticky;
+    top: calc(0.75rem + env(safe-area-inset-top, 0px));
+    bottom: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    #site-header[data-dock='top'] {
+      top: calc(1rem + env(safe-area-inset-top, 0px));
+    }
   }
 
   /* Bottom Dock: macOS-style floating dock across mobile, tablet & desktop */

@@ -86,6 +86,15 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const mobileBackdrop = page.locator('#mobile-nav-backdrop');
     await expect(mobileBackdrop).toBeVisible();
 
+    // Verify document scroll is locked when mobile menu is open
+    const isLockedFirst = await page.evaluate(() => {
+      return (
+        document.body.style.overflow === 'hidden' &&
+        document.documentElement.style.overflow === 'hidden'
+      );
+    });
+    expect(isLockedFirst).toBe(true);
+
     // Verify zero layout shift: header pill height stays constant and main offset is stationary
     const headerHeightAfter = await header.evaluate(
       (el: HTMLElement) => el.offsetHeight
@@ -105,6 +114,15 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
     await expect(mobileMenu).toBeHidden();
     await expect(mobileBackdrop).toBeHidden();
+
+    // Verify document scroll is restored
+    const isUnlockedFirst = await page.evaluate(() => {
+      return (
+        document.body.style.overflow === '' &&
+        document.documentElement.style.overflow === ''
+      );
+    });
+    expect(isUnlockedFirst).toBe(true);
 
     // Open again and click backdrop to test auto-close
     await mobileToggle.click();
@@ -574,5 +592,40 @@ test.describe('Web Portfolio Interactive E2E', () => {
     // 5. Reset back to Top
     await page.locator('#dock-drag-handle').dblclick();
     await expect(header).toHaveAttribute('data-dock', 'top');
+  });
+
+  test('dock remains fixed and visible at the top during page scroll (desktop & mobile)', async ({
+    page,
+  }) => {
+    // 1. Desktop
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const header = page.locator('#site-header');
+    await expect(header).toBeVisible();
+    await expect(header).toHaveAttribute('data-dock', 'top');
+
+    // Scroll down 1000px
+    await page.evaluate(() => window.scrollTo(0, 1000));
+    await page.waitForTimeout(100);
+
+    const desktopBox = await header.boundingBox();
+    expect(desktopBox).not.toBeNull();
+    // Bounding box Y must remain anchored near top of viewport (~16px)
+    expect(desktopBox?.y).toBeLessThan(35);
+    expect(desktopBox?.y).toBeGreaterThanOrEqual(8);
+    await expect(header).toBeVisible();
+
+    // 2. Mobile
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.evaluate(() => window.scrollTo(0, 1000));
+    await page.waitForTimeout(100);
+
+    const mobileBox = await header.boundingBox();
+    expect(mobileBox).not.toBeNull();
+    expect(mobileBox?.y).toBeLessThan(25);
+    expect(mobileBox?.y).toBeGreaterThanOrEqual(8);
+    await expect(header).toBeVisible();
   });
 });
