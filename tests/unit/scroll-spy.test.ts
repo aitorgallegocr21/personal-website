@@ -153,6 +153,19 @@ describe('Scroll-Spy Math Engine', () => {
       });
     });
 
+    it('interpolates accurately between stacked icon and micro-label link cells', () => {
+      const from: LinkCoords = { x: 10, y: 5, width: 52, height: 36 };
+      const to: LinkCoords = { x: 70, y: 5, width: 62, height: 36 };
+
+      const midpoint = interpolateGeometry(from, to, 0.5);
+      expect(midpoint).toEqual({
+        x: 40,
+        y: 5,
+        width: 57,
+        height: 36,
+      });
+    });
+
     it('clamps progress to [0, 1] range safely', () => {
       const from: LinkCoords = { x: 0, y: 0, width: 50, height: 30 };
       const to: LinkCoords = { x: 100, y: 0, width: 80, height: 30 };

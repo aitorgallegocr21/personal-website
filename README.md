@@ -76,7 +76,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **🎨 Dynamic Theming & Daily Rotation:** Multi-accent palette system with 7 daily weekday palettes (Amber, Emerald, Teal, Sky, Slate, Violet, Rose) with automatic live rotation, manual switching, and dark/light mode.
 - **🎭 Multi-Skin Architecture & Visual Switcher:** Modular skin engine (`bento-modern` default) allowing complete visual restyling from the same SSOT dataset, with local persistence (`localStorage`), zero-FOUC attribute injection, and UI switcher.
 - **🎴 Modern Bento Grid & Interactive Portrait:** 3D perspective tilt avatar card, real-time availability indicator, and GitHub/project direct links.
-- **🏝️ Dockable Desktop Island Navbar & Fluid Scroll-Spy:** Relocatable navigation island on desktop (>= 1024px) with magnetic edge snapping (Top, Bottom, Left, Right), layout metamorphosis into compact icon rails (~56px) with floating glassmorphic tooltips, double-click reset, 1-click quick-dock selector, and a continuous fluid scroll-spy indicator physically gliding along the link track at 60/120 FPS with real-time text glow cross-fading.
+- **🏝️ Metamorphic Dock, Unified Interface Hub & Mobile Bottom Dock:** Relocatable navigation island with macOS-style icon + micro-label layout in horizontal view and compact icon rails (~56px) in vertical view. Features a unified 3-column Bento Interface Hub on desktop (vertical sheet on mobile) consolidating Mode, 7-Day Live/Fixed Palettes, and Dock Placement. Supports mobile/tablet bottom docking with safe-area handling, an upward-opening mobile menu drawer, and tactile vertical touch drag snapping.
 - **📜 Multi-Document Credential & Deep-Linking Engine:** Mobile-first fullscreen dialog (`h-[100dvh]`), touch-friendly horizontal module tabs, resilient PDF fallback banner with direct native viewing, URL deep-linking (`?doc=<id>`), single PDF download, and one-click `.zip` batch export via JSZip.
 - **✨ Accent Polish & Structured Footer:** Responsive 3-column footer with dynamic availability indicator, project card glow micro-interactions, illuminated tech chips, and non-overlapping status badges.
 - **📰 Editorial 2-Column CV Layout:** Modern magazine-inspired 2-column printable A4 layout with prominent interactive portfolio badge, prioritized formal education (DAM with 9.2 average grade & SMR with 8.7) on the main column, technical experience, software projects with repository links, personal profile & virtues (organization, competitive tennis, reading), and driver's license/technical English competencies.
@@ -85,7 +85,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and streamlined contact badges with anti-scraping defense.
 - **🔍 Rich Schema.org & Automated SEO:** JSON-LD structured data (`Person` & `ProfilePage`), auto-generated `sitemap-index.xml` via `@astrojs/sitemap`, search crawler directives in `robots.txt`, and dedicated 1200x630 Open Graph preview card for social sharing.
 - **🖼️ Native Asset Optimization Pipeline:** Astro's built-in `<Image />` component powered by Sharp, transcoding project previews and portraits to lightweight WebP with zero Cumulative Layout Shift (CLS) and a 97% image payload reduction.
-- **🧪 Comprehensive Test Suite (Unit & E2E):** 87 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state, scroll-spy calculations, dock manager, schema-org, clipboard) paired with 19 End-to-End browser tests via Playwright automated in GitHub Actions CI with resilient system Chrome detection.
+- **🧪 Comprehensive Test Suite (Unit & E2E):** 94 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state, scroll-spy calculations, dock manager, schema-org, clipboard) paired with 20 End-to-End browser tests via Playwright automated in GitHub Actions CI with resilient system Chrome detection.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
 ---
@@ -106,7 +106,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) with CSS Custom Properties
 - **Runtime Validation:** [Zod](https://zod.dev/) for deterministic data schema verification
 - **Code Quality & Formatting:** ESLint (Flat Config), Prettier with `prettier-plugin-tailwindcss` & `@astrojs/check`
-- **Testing & Quality Assurance:** Vitest (87 unit tests), Playwright (19 E2E browser tests & A4 print calibration)
+- **Testing & Quality Assurance:** Vitest (94 unit tests), Playwright (20 E2E browser tests & A4 print calibration)
 - **PDF & Asset Engine:** Puppeteer Core (Chromium headless A4 print engine), Sharp (WebP optimization), JSZip (batch exports)
 - **SEO & Discovery:** `@astrojs/sitemap` (automated sitemap), rich Schema.org JSON-LD
 - **Deployment:** GitHub Pages automated via GitHub Actions (`.github/workflows/deploy.yml`)
@@ -122,7 +122,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 ├── docs/                        # Complete project documentation & specifications
 │   ├── DESIGN_SYSTEM.md         # Design tokens, color palettes & print layout specs
 │   ├── DOSSIER_PROFESIONAL.md   # Raw candidate history, achievements & reference data
-│   ├── tasks/                   # Comprehensive phase & micro-task specifications (Phases 0-24)
+│   ├── tasks/                   # Comprehensive phase & micro-task specifications (Phases 0-25)
 │   └── TASKS.md                 # Sprint tracking index & phase roadmap
 ├── public/                      # Static assets served at root
 │   ├── cv/                      # Precompiled A4 PDFs in 8 distinct color palettes

@@ -1,9 +1,11 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {
   isValidDockPosition,
+  getAllowedDockPositions,
   getStoredDockPosition,
   saveDockPosition,
   detectSnapEdge,
+  syncDockUI,
   DOCK_STORAGE_KEY,
   DEFAULT_DOCK_POSITION,
   type DockPosition,
@@ -48,6 +50,29 @@ describe('Dock Manager Helper Functions', () => {
     });
   });
 
+  describe('getAllowedDockPositions', () => {
+    it('returns top and bottom only for viewports < 1024px', () => {
+      expect(getAllowedDockPositions(375)).toEqual(['top', 'bottom']);
+      expect(getAllowedDockPositions(768)).toEqual(['top', 'bottom']);
+      expect(getAllowedDockPositions(1023)).toEqual(['top', 'bottom']);
+    });
+
+    it('returns all 4 positions for viewports >= 1024px', () => {
+      expect(getAllowedDockPositions(1024)).toEqual([
+        'top',
+        'bottom',
+        'left',
+        'right',
+      ]);
+      expect(getAllowedDockPositions(1920)).toEqual([
+        'top',
+        'bottom',
+        'left',
+        'right',
+      ]);
+    });
+  });
+
   describe('Storage persistence', () => {
     it('returns default position when storage is empty', () => {
       expect(getStoredDockPosition(mockStorage)).toBe(DEFAULT_DOCK_POSITION);
@@ -61,6 +86,17 @@ describe('Dock Manager Helper Functions', () => {
     it('falls back to default if stored value is invalid', () => {
       mockStorage.setItem(DOCK_STORAGE_KEY, 'invalid-pos');
       expect(getStoredDockPosition(mockStorage)).toBe(DEFAULT_DOCK_POSITION);
+    });
+
+    it('falls back to top if stored value is lateral on viewports < 1024px', () => {
+      mockStorage.setItem(DOCK_STORAGE_KEY, 'left');
+      vi.stubGlobal('window', { innerWidth: 768 });
+      expect(getStoredDockPosition(mockStorage)).toBe('top');
+
+      mockStorage.setItem(DOCK_STORAGE_KEY, 'bottom');
+      expect(getStoredDockPosition(mockStorage)).toBe('bottom');
+
+      vi.unstubAllGlobals();
     });
 
     it('saves dock position to storage correctly', () => {
@@ -109,6 +145,71 @@ describe('Dock Manager Helper Functions', () => {
 
       // normX = -100/960 ≈ -0.10, normY = -300/540 ≈ -0.55 -> dominant vertical top
       expect(detectSnapEdge(860, 240, width, height, deadzone)).toBe('top');
+    });
+
+    it('strictly constrains to top/bottom on viewports < 1024px (mobile/tablet)', () => {
+      const mobileWidth = 390;
+      const mobileHeight = 844;
+
+      // Above center -> top
+      expect(detectSnapEdge(50, 200, mobileWidth, mobileHeight, deadzone)).toBe(
+        'top'
+      );
+      // Below center -> bottom
+      expect(
+        detectSnapEdge(350, 700, mobileWidth, mobileHeight, deadzone)
+      ).toBe('bottom');
+      // Deadzone around center -> null
+      expect(
+        detectSnapEdge(195, 422, mobileWidth, mobileHeight, deadzone)
+      ).toBe(null);
+    });
+  });
+
+  describe('syncDockUI', () => {
+    it('updates active styles for dock target buttons', () => {
+      const createMockBtn = (target: string) => {
+        const classes = new Set<string>();
+        return {
+          getAttribute: (attr: string) =>
+            attr === 'data-dock-target' ? target : null,
+          classList: {
+            add: (...cls: string[]) => cls.forEach((c) => classes.add(c)),
+            remove: (...cls: string[]) => cls.forEach((c) => classes.delete(c)),
+            contains: (c: string) => classes.has(c),
+          },
+        };
+      };
+
+      const buttons = [
+        createMockBtn('top'),
+        createMockBtn('bottom'),
+        createMockBtn('left'),
+        createMockBtn('right'),
+      ];
+
+      vi.stubGlobal('document', {
+        querySelectorAll: () => buttons,
+      });
+
+      syncDockUI('bottom');
+
+      expect(buttons[1].classList.contains('text-[var(--color-accent)]')).toBe(
+        true
+      );
+      expect(buttons[0].classList.contains('text-[var(--color-accent)]')).toBe(
+        false
+      );
+
+      syncDockUI('left');
+      expect(buttons[2].classList.contains('text-[var(--color-accent)]')).toBe(
+        true
+      );
+      expect(buttons[1].classList.contains('text-[var(--color-accent)]')).toBe(
+        false
+      );
+
+      vi.unstubAllGlobals();
     });
   });
 });
