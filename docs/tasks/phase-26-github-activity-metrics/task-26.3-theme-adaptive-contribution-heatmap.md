@@ -1,6 +1,6 @@
 # Task 26.3: Theme-Adaptive Contribution Heatmap Component
 
-**Status:** Planned  
+**Status:** Completed  
 **Branch:** `feat/phase-26-github-activity-metrics`  
 **Goal:** Build a native SVG/CSS Grid contribution calendar component (`src/components/portfolio/GitHubHeatmap.astro`) that dynamically adapts to the portfolio's active color palette (`--color-accent`), calculates streaks with pure algorithmic utilities (`src/utils/github.ts`), and includes accessible date/count tooltips with 0 KB unnecessary client JS.
 
@@ -60,9 +60,9 @@ By crafting a custom, native Astro component:
 
 ## 3. Verification Checklist
 
-- [ ] Heatmap renders 52 weeks of GitHub activity cleanly without layout shifts.
-- [ ] Cells accurately reflect intensity levels 0 through 4 based on GitHub contribution volume.
-- [ ] Colors dynamically adopt the active palette CSS tokens (`--color-accent`, etc.) across all 8 themes.
-- [ ] Hover/focus on any day cell reveals an accessible tooltip with the exact date and contribution count.
-- [ ] Mobile viewports (< 640px) allow smooth horizontal swiping without page horizontal scroll overflow.
-- [ ] Pure utility functions in `src/utils/github.ts` achieve 100% test coverage in `tests/unit/github-utils.test.ts`.
+- [x] Heatmap renders 52 weeks of GitHub activity cleanly without layout shifts.
+- [x] Cells accurately reflect intensity levels 0 through 4 based on GitHub contribution volume.
+- [x] Colors dynamically adopt the active palette CSS tokens (`--color-accent`, etc.) across all 8 themes.
+- [x] Hover/focus on any day cell reveals an accessible tooltip with the exact date and contribution count.
+- [x] Mobile viewports (< 640px) allow smooth horizontal swiping without page horizontal scroll overflow.
+- [x] Pure utility functions in `src/utils/github.ts` achieve 100% test coverage in `tests/unit/github-utils.test.ts`.
