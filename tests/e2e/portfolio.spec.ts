@@ -30,6 +30,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
       '#proyectos',
       '#trayectoria',
       '#certificaciones',
+      '#github',
       '#filosofia',
       '#contacto',
     ];
@@ -86,6 +87,15 @@ test.describe('Web Portfolio Interactive E2E', () => {
     const mobileBackdrop = page.locator('#mobile-nav-backdrop');
     await expect(mobileBackdrop).toBeVisible();
 
+    // Verify document scroll is locked when mobile menu is open
+    const isLockedFirst = await page.evaluate(() => {
+      return (
+        document.body.style.overflow === 'hidden' &&
+        document.documentElement.style.overflow === 'hidden'
+      );
+    });
+    expect(isLockedFirst).toBe(true);
+
     // Verify zero layout shift: header pill height stays constant and main offset is stationary
     const headerHeightAfter = await header.evaluate(
       (el: HTMLElement) => el.offsetHeight
@@ -98,13 +108,22 @@ test.describe('Web Portfolio Interactive E2E', () => {
 
     // Check all mobile links exist
     const mobileLinks = mobileMenu.locator('.mobile-nav-link');
-    await expect(mobileLinks).toHaveCount(6); // 5 sections + CV button
+    await expect(mobileLinks).toHaveCount(7); // 6 sections + CV button
 
     // Close on Escape
     await page.keyboard.press('Escape');
     await expect(mobileToggle).toHaveAttribute('aria-expanded', 'false');
     await expect(mobileMenu).toBeHidden();
     await expect(mobileBackdrop).toBeHidden();
+
+    // Verify document scroll is restored
+    const isUnlockedFirst = await page.evaluate(() => {
+      return (
+        document.body.style.overflow === '' &&
+        document.documentElement.style.overflow === ''
+      );
+    });
+    expect(isUnlockedFirst).toBe(true);
 
     // Open again and click backdrop to test auto-close
     await mobileToggle.click();
@@ -369,7 +388,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(twitterCard).toHaveAttribute('content', 'summary_large_image');
   });
 
-  test('supports desktop dock repositioning to left, right, bottom and reset to top', async ({
+  test('supports desktop dock repositioning to left, right, bottom and reset to top via interface hub', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
@@ -380,14 +399,14 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(header).toBeVisible();
     await expect(header).toHaveAttribute('data-dock', 'top');
 
-    const dockMenuBtn = page.locator('#dock-menu-btn');
-    await expect(dockMenuBtn).toBeVisible();
+    const interfaceHubBtn = page.locator('#palette-menu-btn');
+    await expect(interfaceHubBtn).toBeVisible();
 
-    const popover = page.locator('#dock-menu-popover');
+    const popover = page.locator('#palette-dropdown');
     await expect(popover).toBeHidden();
 
-    // 1. Open quick-dock menu and select Left
-    await dockMenuBtn.click();
+    // 1. Open interface hub popover and select Left
+    await interfaceHubBtn.click();
     await expect(popover).toBeVisible();
     await page.locator('[data-dock-target="left"]').click();
     await expect(header).toHaveAttribute('data-dock', 'left');
@@ -411,7 +430,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
     expect(savedPosReset).toBe('top');
 
     // 3. Switch to Bottom dock and reload to verify state persistence
-    await dockMenuBtn.click();
+    await interfaceHubBtn.click();
     await page.locator('[data-dock-target="bottom"]').click();
     await expect(header).toHaveAttribute('data-dock', 'bottom');
 
@@ -451,24 +470,62 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(timelineLink).toHaveAttribute('data-active', 'true');
   });
 
-  test('preserves mobile top navigation and drawer on mobile viewports without docking overhead', async ({
+  test('supports mobile bottom docking and upward mobile drawer navigation', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('./');
     await page.waitForLoadState('networkidle');
 
-    // Dock drag handle and quick dock button must remain hidden on mobile
-    await expect(page.locator('#dock-drag-handle')).toBeHidden();
-    await expect(page.locator('#dock-menu-btn')).toBeHidden();
+    const header = page.locator('#site-header');
+    await expect(header).toHaveAttribute('data-dock', 'top');
 
-    // Standard header remains at top with mobile toggle
+    // Drag handle is tactile and visible on mobile
+    const dragHandle = page.locator('#dock-drag-handle');
+    await expect(dragHandle).toBeVisible();
+
+    // Standard header starts at top with mobile toggle
     const mobileToggle = page.locator('#mobile-nav-toggle');
     await expect(mobileToggle).toBeVisible();
-    await expect(page.locator('#site-header')).toHaveAttribute(
-      'data-dock',
-      'top'
-    );
+
+    // Open Interface Hub and switch to Bottom dock
+    const interfaceHubBtn = page.locator('#palette-menu-btn');
+    await interfaceHubBtn.click();
+    const dropdown = page.locator('#palette-dropdown');
+    await expect(dropdown).toBeVisible();
+
+    // Left and Right buttons are hidden on mobile
+    const leftDockBtn = page.locator('[data-dock-target="left"]');
+    await expect(leftDockBtn).toBeHidden();
+
+    // Click Bottom dock
+    await page.locator('[data-dock-target="bottom"]').click();
+    await expect(header).toHaveAttribute('data-dock', 'bottom');
+    await expect(dropdown).toBeHidden();
+
+    // Open mobile menu while docked at bottom
+    await mobileToggle.click();
+    const mobileMenu = page.locator('#mobile-nav-menu');
+    await expect(mobileMenu).toBeVisible();
+
+    // Verify upward placement: mobile menu top is above header top
+    const headerBox = await header.boundingBox();
+    const menuBox = await mobileMenu.boundingBox();
+    expect(headerBox).not.toBeNull();
+    expect(menuBox).not.toBeNull();
+    if (headerBox && menuBox) {
+      expect(menuBox.y).toBeLessThan(headerBox.y);
+    }
+
+    // Close menu by clicking a link
+    const firstLink = mobileMenu.locator('.mobile-nav-link').first();
+    await firstLink.click();
+    await expect(mobileMenu).toBeHidden();
+
+    // Reset back to Top
+    await interfaceHubBtn.click();
+    await page.locator('[data-dock-target="top"]').first().click();
+    await expect(header).toHaveAttribute('data-dock', 'top');
   });
 
   test('supports directional palette popover, blurred page backdrop, vertical alignment and hero active indicator', async ({
@@ -484,8 +541,8 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(header).toHaveAttribute('data-hero-active', 'true');
 
     // 2. Switch to Left dock
-    const dockMenuBtn = page.locator('#dock-menu-btn');
-    await dockMenuBtn.click();
+    const interfaceHubBtn = page.locator('#palette-menu-btn');
+    await interfaceHubBtn.click();
     await page.locator('[data-dock-target="left"]').click();
     await expect(header).toHaveAttribute('data-dock', 'left');
     await expect(header).toHaveAttribute('data-hero-active', 'true');
@@ -502,6 +559,14 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await expect(dropdown).toBeVisible();
     await expect(dropdown).toHaveAttribute('data-state', 'open');
 
+    // Verify document scroll is locked when palette menu is open
+    const isScrollLocked = await page.evaluate(
+      () =>
+        document.body.style.overflow === 'hidden' &&
+        document.documentElement.style.overflow === 'hidden'
+    );
+    expect(isScrollLocked).toBe(true);
+
     // Verify colors list in desktop displays all colors without scrollbar overflow
     const colorsList = page.locator('.palette-colors-list');
     await expect(colorsList).toBeVisible();
@@ -517,6 +582,14 @@ test.describe('Web Portfolio Interactive E2E', () => {
     await backdrop.click({ position: { x: 50, y: 50 } });
     await expect(dropdown).toBeHidden();
     await expect(backdrop).toBeHidden();
+
+    // Verify document scroll is restored when palette menu closes
+    const isScrollUnlocked = await page.evaluate(
+      () =>
+        document.body.style.overflow === '' &&
+        document.documentElement.style.overflow === ''
+    );
+    expect(isScrollUnlocked).toBe(true);
 
     // Reopen palette and select a palette color: must close both dropdown & backdrop
     await paletteBtn.click();
@@ -536,5 +609,154 @@ test.describe('Web Portfolio Interactive E2E', () => {
     // 5. Reset back to Top
     await page.locator('#dock-drag-handle').dblclick();
     await expect(header).toHaveAttribute('data-dock', 'top');
+  });
+
+  test('dock remains fixed and visible at the top during page scroll (desktop & mobile)', async ({
+    page,
+  }) => {
+    // 1. Desktop
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const header = page.locator('#site-header');
+    await expect(header).toBeVisible();
+    await expect(header).toHaveAttribute('data-dock', 'top');
+
+    // Scroll down 1000px
+    await page.evaluate(() => window.scrollTo(0, 1000));
+    await page.waitForTimeout(100);
+
+    const desktopBox = await header.boundingBox();
+    expect(desktopBox).not.toBeNull();
+    // Bounding box Y must remain anchored near top of viewport (~16px)
+    expect(desktopBox?.y).toBeLessThan(35);
+    expect(desktopBox?.y).toBeGreaterThanOrEqual(8);
+    await expect(header).toBeVisible();
+
+    // 2. Mobile
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.evaluate(() => window.scrollTo(0, 1000));
+    await page.waitForTimeout(100);
+
+    const mobileBox = await header.boundingBox();
+    expect(mobileBox).not.toBeNull();
+    expect(mobileBox?.y).toBeLessThan(25);
+    expect(mobileBox?.y).toBeGreaterThanOrEqual(8);
+    await expect(header).toBeVisible();
+  });
+
+  test('Interface Hub displays 1 column on screens < 768px (including 640px-767px) and 3 columns on >= 768px', async ({
+    page,
+  }) => {
+    // 1. Tablet 700px (between 640px and 767px)
+    await page.setViewportSize({ width: 700, height: 800 });
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    const paletteBtn = page.locator('#palette-menu-btn');
+    await paletteBtn.click();
+    const dropdown = page.locator('#palette-dropdown');
+    await expect(dropdown).toBeVisible();
+
+    const gridEl = dropdown.locator('> div');
+    const cols700 = await gridEl.evaluate((el) => {
+      return window.getComputedStyle(el).gridTemplateColumns.split(' ').length;
+    });
+    // Must be 1 column on 700px (not 3!)
+    expect(cols700).toBe(1);
+
+    // 2. Desktop 1024px
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.waitForTimeout(100);
+
+    const cols1024 = await gridEl.evaluate((el) => {
+      return window.getComputedStyle(el).gridTemplateColumns.split(' ').length;
+    });
+    // Must be 3 columns on 1024px
+    expect(cols1024).toBe(3);
+  });
+
+  test('renders GitHub activity bento section with interactive heatmap and language breakdown', async ({
+    page,
+  }) => {
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    // Section exists and is visible
+    const githubSection = page.locator('#github');
+    await expect(githubSection).toBeAttached();
+    await expect(githubSection).toBeVisible();
+
+    // Verify heatmap canvas exists and contains cells
+    const heatmapScroll = githubSection.locator('[data-heatmap-scroll]');
+    await expect(heatmapScroll).toBeVisible();
+
+    const cells = heatmapScroll.locator('.heatmap-cell');
+    const cellCount = await cells.count();
+    expect(cellCount).toBeGreaterThan(300);
+
+    // Verify metrics cards exist
+    await expect(
+      githubSection.getByText('Contribuciones', { exact: true })
+    ).toBeVisible();
+    await expect(
+      githubSection.getByText('Racha Actual', { exact: true })
+    ).toBeVisible();
+    await expect(
+      githubSection.getByText('Racha Máxima', { exact: true })
+    ).toBeVisible();
+    await expect(
+      githubSection.getByText('Repositorios', { exact: true })
+    ).toBeVisible();
+
+    // Verify language distribution including Python and TypeScript
+    await expect(
+      githubSection.getByText('Distribución de Lenguajes')
+    ).toBeVisible();
+    await expect(githubSection.getByText('Python').first()).toBeVisible();
+    await expect(githubSection.getByText('TypeScript').first()).toBeVisible();
+
+    // Verify section header does not prefix section number
+    await expect(
+      githubSection.locator('span', { hasText: '// Open Source & Actividad' })
+    ).toBeVisible();
+
+    // Verify highlights do not include obsidian
+    await expect(githubSection.getByText(/obsidian/i)).toHaveCount(0);
+
+    // Verify hovering cell displays floating tooltip
+    const cellWithTooltip = heatmapScroll
+      .locator('.heatmap-cell[data-tooltip]')
+      .first();
+    await cellWithTooltip.hover();
+    const tooltip = page.locator('#heatmap-floating-tooltip');
+    await expect(tooltip).toBeVisible();
+
+    // Verify profile CTA button
+    const profileCta = githubSection.locator('a', {
+      hasText: /Visitar Perfil en GitHub/i,
+    });
+    await expect(profileCta).toBeVisible();
+    await expect(profileCta).toHaveAttribute('href', /github\.com/);
+  });
+
+  test('opens interface hub popover from sticky top dock even after page scroll', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.evaluate(() => window.scrollTo(0, 600));
+    await page.waitForTimeout(100);
+
+    const btn = page.locator('#palette-menu-btn');
+    await btn.click();
+    const popover = page.locator('#palette-dropdown');
+    await expect(popover).toBeVisible();
+
+    const rect = await popover.boundingBox();
+    expect(rect).not.toBeNull();
+    expect(rect!.y).toBeGreaterThan(0);
+    expect(rect!.y).toBeLessThan(400);
   });
 });

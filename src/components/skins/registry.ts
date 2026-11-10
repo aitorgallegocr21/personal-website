@@ -6,30 +6,30 @@ export const SKINS: readonly SkinMetadata[] = [
   {
     id: 'bento-modern',
     name: 'Bento Modern',
-    tagline: 'Estructura modular en cuadrícula Bento de alta densidad',
+    tagline: 'Cuadrícula modular',
     description:
       'Diseño visual contemporáneo con tarjetas interactivas, paletas dinámicas y estética tecnológica oscura.',
-    badge: 'Predeterminado',
+    badge: 'Activo',
     author: 'Aitor Gallego',
     isAvailable: true,
   },
   {
     id: 'retro-terminal',
     name: 'Retro Terminal',
-    tagline: 'Consola hacker CRT interactiva con tipografía monospace',
+    tagline: 'Consola CRT hacker',
     description:
       'Estética CLI inspirada en emuladores de terminal con comandos ejecutables y modo fósforo verde.',
-    badge: 'Próximamente',
+    badge: 'Próx.',
     author: 'Aitor Gallego',
     isAvailable: false,
   },
   {
     id: 'editorial-paper',
     name: 'Editorial Paper',
-    tagline: 'Composición clásica inspirada en diseño gráfico suizo',
+    tagline: 'Tipografía suiza',
     description:
       'Estilo minimalista de alta densidad tipográfica con contrastes refinados y lectura relajada.',
-    badge: 'Próximamente',
+    badge: 'Próx.',
     author: 'Aitor Gallego',
     isAvailable: false,
   },

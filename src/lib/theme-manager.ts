@@ -57,6 +57,44 @@ export function getStoredTheme(): ThemeMode {
 }
 
 /**
+ * Synchronizes the visual state of the segmented Light/Dark toggle buttons.
+ */
+export function syncThemeModeUI(
+  container: HTMLElement | Document = document
+): void {
+  if (typeof document === 'undefined') return;
+  const isDark = document.documentElement.classList.contains('dark');
+  const lightBtn = container.querySelector(
+    '#theme-mode-light-btn, [data-theme-set="light"]'
+  );
+  const darkBtn = container.querySelector(
+    '#theme-mode-dark-btn, [data-theme-set="dark"]'
+  );
+
+  const activeClasses = [
+    'bg-white',
+    'dark:bg-zinc-900',
+    'text-zinc-950',
+    'dark:text-zinc-100',
+    'shadow-xs',
+    'font-semibold',
+  ];
+  const inactiveClasses = ['text-zinc-600', 'dark:text-zinc-400'];
+
+  if (isDark) {
+    darkBtn?.classList.add(...activeClasses);
+    darkBtn?.classList.remove(...inactiveClasses);
+    lightBtn?.classList.remove(...activeClasses);
+    lightBtn?.classList.add(...inactiveClasses);
+  } else {
+    lightBtn?.classList.add(...activeClasses);
+    lightBtn?.classList.remove(...inactiveClasses);
+    darkBtn?.classList.remove(...activeClasses);
+    darkBtn?.classList.add(...inactiveClasses);
+  }
+}
+
+/**
  * Applies and persists theme mode (light or dark).
  */
 export function setTheme(theme: ThemeMode): void {
@@ -69,6 +107,7 @@ export function setTheme(theme: ThemeMode): void {
       document.documentElement.classList.remove('dark');
     }
     document.documentElement.setAttribute('data-theme', theme);
+    syncThemeModeUI();
   }
   const storage = getLocalStorage();
   storage?.setItem(THEME_STORAGE_KEY, theme);
@@ -170,7 +209,7 @@ export function syncPaletteUI(
       autoCheckContainer.classList.remove('hidden');
     }
     if (autoStatusText) {
-      autoStatusText.textContent = `Activa · Hoy: ${today.label} (${today.day})`;
+      autoStatusText.textContent = `Activa · ${today.day}`;
       autoStatusText.className =
         'text-[10.5px] font-semibold text-[var(--color-accent)] truncate';
     }
@@ -210,7 +249,7 @@ export function syncPaletteUI(
       autoCheckContainer.classList.add('hidden');
     }
     if (autoStatusText) {
-      autoStatusText.textContent = 'Pulsa para activar la rotación diaria';
+      autoStatusText.textContent = 'Fijado manual';
       autoStatusText.className =
         'text-[10.5px] text-zinc-500 dark:text-zinc-400 truncate';
     }
@@ -243,6 +282,68 @@ export function syncPaletteUI(
   }
 }
 
+let isScrollLocked = false;
+
+function onScrollLockEvent(e: Event) {
+  const target = e.target as HTMLElement | null;
+  if (target?.closest('#palette-dropdown, #mobile-nav-menu')) {
+    return;
+  }
+  e.preventDefault();
+}
+
+/**
+ * Locks page scroll with full backdrop coverage, keeping sticky header on screen
+ * even when the page was scrolled down before opening.
+ */
+export function lockBackgroundScroll(): void {
+  if (typeof window === 'undefined' || isScrollLocked) return;
+  isScrollLocked = true;
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+  document.body.style.touchAction = 'none';
+
+  // If page was scrolled down and header is in sticky top dock, anchor it to viewport so overflow:hidden doesn't push it offscreen
+  const header = document.getElementById('site-header');
+  if (
+    header &&
+    header.getAttribute('data-dock') === 'top' &&
+    window.scrollY > 0
+  ) {
+    header.style.position = 'fixed';
+    header.style.top = window.innerWidth >= 640 ? '1rem' : '0.75rem';
+    header.style.left = '50%';
+    header.style.transform = 'translateX(-50%)';
+    header.setAttribute('data-scroll-locked-fixed', 'true');
+  }
+
+  window.addEventListener('wheel', onScrollLockEvent, { passive: false });
+  window.addEventListener('touchmove', onScrollLockEvent, { passive: false });
+}
+
+/**
+ * Restores normal background page scrolling.
+ */
+export function unlockBackgroundScroll(): void {
+  if (typeof window === 'undefined' || !isScrollLocked) return;
+  isScrollLocked = false;
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
+  document.body.style.touchAction = '';
+
+  const header = document.getElementById('site-header');
+  if (header && header.getAttribute('data-scroll-locked-fixed') === 'true') {
+    header.style.position = '';
+    header.style.top = '';
+    header.style.left = '';
+    header.style.transform = '';
+    header.removeAttribute('data-scroll-locked-fixed');
+  }
+
+  window.removeEventListener('wheel', onScrollLockEvent);
+  window.removeEventListener('touchmove', onScrollLockEvent);
+}
+
 /**
  * Ensures the palette backdrop overlay exists directly under <body> to prevent
  * stacking context and containing block traps from transformed header ancestors.
@@ -257,7 +358,7 @@ export function getOrCreatePaletteBackdrop(): HTMLElement {
     document.body.appendChild(backdrop);
   }
   backdrop.className =
-    'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200';
+    'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200 touch-none';
   backdrop.setAttribute('aria-hidden', 'true');
   return backdrop;
 }
@@ -271,6 +372,18 @@ export function closePaletteMenu(): void {
   const paletteDropdown = document.getElementById('palette-dropdown');
   const paletteBackdrop = document.getElementById('palette-backdrop');
   const paletteBtn = document.getElementById('palette-menu-btn');
+
+  // Unlock document scroll unless mobile drawer is actively open
+  if (typeof document !== 'undefined') {
+    const mobileMenu = document.getElementById('mobile-nav-menu');
+    const isMobileMenuOpen =
+      mobileMenu &&
+      !mobileMenu.classList.contains('hidden') &&
+      mobileMenu.getAttribute('data-state') === 'open';
+    if (!isMobileMenuOpen) {
+      unlockBackgroundScroll();
+    }
+  }
 
   if (!paletteDropdown || paletteDropdown.classList.contains('hidden')) {
     paletteBackdrop?.classList.add('hidden');
@@ -310,6 +423,9 @@ export function openPaletteMenu(): void {
     paletteCloseTimeout = null;
   }
 
+  // Lock document scroll without destroying sticky positioning on scroll
+  lockBackgroundScroll();
+
   paletteDropdown?.classList.remove('hidden');
   paletteDropdown?.setAttribute('data-state', 'open');
   backdrop.classList.remove('hidden');
@@ -323,6 +439,14 @@ export function openPaletteMenu(): void {
 export function bindThemeControls(
   container: HTMLElement | Document = document
 ): void {
+  if (container instanceof HTMLElement) {
+    if (container.dataset.themeBound === 'true') {
+      syncThemeModeUI(container);
+      return;
+    }
+    container.dataset.themeBound = 'true';
+  }
+
   const themeBtn = container.querySelector('#theme-toggle-btn');
   const paletteBtn = container.querySelector('#palette-menu-btn');
   const paletteDropdown = container.querySelector('#palette-dropdown');
@@ -335,6 +459,23 @@ export function bindThemeControls(
     const newTheme: ThemeMode = isDark ? 'light' : 'dark';
     setTheme(newTheme);
   });
+
+  const lightBtn = container.querySelector(
+    '#theme-mode-light-btn, [data-theme-set="light"]'
+  );
+  const darkBtn = container.querySelector(
+    '#theme-mode-dark-btn, [data-theme-set="dark"]'
+  );
+
+  lightBtn?.addEventListener('click', () => {
+    setTheme('light');
+  });
+
+  darkBtn?.addEventListener('click', () => {
+    setTheme('dark');
+  });
+
+  syncThemeModeUI(container);
 
   const backdrop = getOrCreatePaletteBackdrop();
 

@@ -115,6 +115,15 @@ export function syncSkinUI(
 export function bindSkinControls(
   container: HTMLElement | Document = document
 ): void {
+  if (container instanceof HTMLElement) {
+    if (container.dataset.skinBound === 'true') {
+      const active = getStoredSkin();
+      syncSkinUI(container, active);
+      return;
+    }
+    container.dataset.skinBound = 'true';
+  }
+
   const skinButtons = container.querySelectorAll<HTMLButtonElement>(
     '.skin-select-option'
   );

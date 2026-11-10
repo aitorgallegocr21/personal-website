@@ -6,6 +6,8 @@
  * Strictly scoped to desktop viewports (>= 1024px).
  */
 
+import { closePaletteMenu } from '@/lib/theme-manager';
+
 export type DockPosition = 'top' | 'bottom' | 'left' | 'right';
 
 export interface DockManagerOptions {
@@ -35,7 +37,22 @@ export function isValidDockPosition(val: unknown): val is DockPosition {
 }
 
 /**
+ * Returns allowed dock positions based on viewport width capability tiers:
+ * - < 1024px (Tablets & Mobile): ['top', 'bottom']
+ * - >= 1024px (Desktop): ['top', 'bottom', 'left', 'right']
+ */
+export function getAllowedDockPositions(
+  viewportWidth: number
+): readonly DockPosition[] {
+  return viewportWidth < 1024
+    ? (['top', 'bottom'] as const)
+    : (['top', 'bottom', 'left', 'right'] as const);
+}
+
+/**
  * Reads the persisted dock position from storage with fallback.
+ * Automatically falls back to 'top' if stored value is 'left' or 'right'
+ * on viewports smaller than 1024px.
  */
 export function getStoredDockPosition(storage?: Storage): DockPosition {
   try {
@@ -44,7 +61,15 @@ export function getStoredDockPosition(storage?: Storage): DockPosition {
       (typeof window !== 'undefined' ? window.localStorage : undefined);
     if (!s) return DEFAULT_DOCK_POSITION;
     const item = s.getItem(DOCK_STORAGE_KEY);
-    return isValidDockPosition(item) ? item : DEFAULT_DOCK_POSITION;
+    if (!isValidDockPosition(item)) return DEFAULT_DOCK_POSITION;
+    if (
+      typeof window !== 'undefined' &&
+      window.innerWidth < 1024 &&
+      (item === 'left' || item === 'right')
+    ) {
+      return DEFAULT_DOCK_POSITION;
+    }
+    return item;
   } catch {
     return DEFAULT_DOCK_POSITION;
   }
@@ -67,8 +92,8 @@ export function saveDockPosition(pos: DockPosition, storage?: Storage): void {
 
 /**
  * Detects the nearest viewport snap edge using early magnetic attraction.
- * Divides the viewport into normalized directional attraction quadrants
- * relative to the center, with an optional deadzone in the exact center.
+ * Divides the viewport into normalized directional attraction quadrants.
+ * On viewports < 1024px (tablets & mobile), docking is strictly constrained to 'top' and 'bottom'.
  */
 export function detectSnapEdge(
   x: number,
@@ -77,11 +102,19 @@ export function detectSnapEdge(
   viewportHeight: number,
   deadzoneRadius = 40
 ): DockPosition | null {
-  const centerX = viewportWidth / 2;
   const centerY = viewportHeight / 2;
-
-  const dx = x - centerX;
   const dy = y - centerY;
+
+  // Tablet & Mobile viewport (< 1024px): Strictly constrain to vertical top/bottom
+  if (viewportWidth < 1024) {
+    if (Math.abs(dy) < deadzoneRadius) {
+      return null;
+    }
+    return dy < 0 ? 'top' : 'bottom';
+  }
+
+  const centerX = viewportWidth / 2;
+  const dx = x - centerX;
   const distance = Math.hypot(dx, dy);
 
   if (distance < deadzoneRadius) {
@@ -135,17 +168,17 @@ function updateSnapIndicator(
       indicator.style.right = 'auto';
       indicator.style.bottom = 'auto';
       indicator.style.transform = 'translateX(-50%)';
-      indicator.style.width = 'min(1024px, calc(100% - 2rem))';
+      indicator.style.width = 'min(1024px, calc(100% - 1.5rem))';
       indicator.style.height = '60px';
       indicator.style.borderRadius = '9999px';
       break;
     case 'bottom':
-      indicator.style.bottom = '16px';
+      indicator.style.bottom = 'calc(16px + env(safe-area-inset-bottom, 0px))';
       indicator.style.left = '50%';
       indicator.style.top = 'auto';
       indicator.style.right = 'auto';
       indicator.style.transform = 'translateX(-50%)';
-      indicator.style.width = 'min(1024px, calc(100% - 2rem))';
+      indicator.style.width = 'min(1024px, calc(100% - 1.5rem))';
       indicator.style.height = '60px';
       indicator.style.borderRadius = '9999px';
       break;
@@ -173,6 +206,33 @@ function updateSnapIndicator(
 }
 
 /**
+ * Synchronizes the visual active state on dock position selector buttons.
+ */
+export function syncDockUI(currentPos: DockPosition): void {
+  if (typeof document === 'undefined') return;
+  const buttons =
+    document.querySelectorAll<HTMLButtonElement>('[data-dock-target]');
+  buttons.forEach((btn) => {
+    const target = btn.getAttribute('data-dock-target');
+    if (target === currentPos) {
+      btn.classList.add(
+        'border-[var(--color-accent-border)]',
+        'bg-[var(--color-accent-subtle)]',
+        'text-[var(--color-accent)]'
+      );
+      btn.classList.remove('bg-zinc-50/50', 'dark:bg-zinc-800/30');
+    } else {
+      btn.classList.remove(
+        'border-[var(--color-accent-border)]',
+        'bg-[var(--color-accent-subtle)]',
+        'text-[var(--color-accent)]'
+      );
+      btn.classList.add('bg-zinc-50/50', 'dark:bg-zinc-800/30');
+    }
+  });
+}
+
+/**
  * Initializes desktop dock management.
  */
 export function initDockManager(
@@ -189,34 +249,60 @@ export function initDockManager(
   let currentPosition: DockPosition = getStoredDockPosition();
 
   function applyPosition(pos: DockPosition, persist = true) {
-    currentPosition = pos;
-    header.setAttribute('data-dock', pos);
+    let resolvedPos = pos;
+    if (
+      typeof window !== 'undefined' &&
+      window.innerWidth < 1024 &&
+      (pos === 'left' || pos === 'right')
+    ) {
+      resolvedPos = 'top';
+    }
+
+    currentPosition = resolvedPos;
+    header.setAttribute('data-dock', resolvedPos);
 
     if (persist) {
-      saveDockPosition(pos);
+      saveDockPosition(resolvedPos);
     }
+
+    syncDockUI(resolvedPos);
 
     if (options.onPositionChange) {
-      options.onPositionChange(pos);
+      options.onPositionChange(resolvedPos);
     }
 
-    // Close popover if open
+    // Close popovers if open
     closeMenu();
+    closePaletteMenu();
   }
 
   // Initial application
   applyPosition(currentPosition, false);
 
+  // Resize monitor: automatically fallback to 'top' if resized to tablet/mobile while docked left/right
+  function onWindowResize() {
+    if (
+      typeof window !== 'undefined' &&
+      window.innerWidth < 1024 &&
+      (currentPosition === 'left' || currentPosition === 'right')
+    ) {
+      applyPosition('top', false);
+    }
+  }
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', onWindowResize);
+  }
+
   // Drag Interaction
   let isDragging = false;
   let startX = 0;
   let startY = 0;
+  let touchStartY = 0;
   let candidateEdge: DockPosition | null = null;
   let snapIndicator: HTMLElement | null = null;
 
   function onPointerDown(e: PointerEvent) {
-    if (e.button !== 0) return; // Primary button only
-    if (window.innerWidth < 1024) return; // Desktop only
+    if (e.button !== 0 && e.pointerType === 'mouse') return; // Primary button only for mouse
 
     isDragging = true;
     startX = e.clientX;
@@ -286,9 +372,58 @@ export function initDockManager(
     }
   }
 
+  // Dedicated touch event listeners for tactile mobile/tablet drag
+  function onTouchStart(e: TouchEvent) {
+    if (e.touches.length !== 1) return;
+    isDragging = true;
+    touchStartY = e.touches[0].clientY;
+    candidateEdge = detectSnapEdge(
+      e.touches[0].clientX,
+      e.touches[0].clientY,
+      window.innerWidth,
+      window.innerHeight,
+      deadzoneRadius
+    );
+    snapIndicator = getOrCreateSnapIndicator();
+    header.classList.add('is-dragging');
+  }
+
+  function onTouchMove(e: TouchEvent) {
+    if (!isDragging || e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    const dy = Math.abs(touch.clientY - touchStartY);
+
+    if (dy >= 4) {
+      candidateEdge = detectSnapEdge(
+        touch.clientX,
+        touch.clientY,
+        window.innerWidth,
+        window.innerHeight,
+        deadzoneRadius
+      );
+
+      if (snapIndicator) {
+        updateSnapIndicator(snapIndicator, candidateEdge);
+      }
+    }
+  }
+
+  function onTouchEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    header.classList.remove('is-dragging');
+
+    if (snapIndicator) {
+      updateSnapIndicator(snapIndicator, null);
+    }
+
+    if (candidateEdge && candidateEdge !== currentPosition) {
+      applyPosition(candidateEdge, true);
+    }
+  }
+
   // Double click reset on handle
   function onDoubleClick() {
-    if (window.innerWidth < 1024) return;
     applyPosition('top', true);
   }
 
@@ -297,6 +432,10 @@ export function initDockManager(
     dragHandle.addEventListener('pointermove', onPointerMove);
     dragHandle.addEventListener('pointerup', onPointerUp);
     dragHandle.addEventListener('pointercancel', onPointerUp);
+    dragHandle.addEventListener('touchstart', onTouchStart, { passive: true });
+    dragHandle.addEventListener('touchmove', onTouchMove, { passive: true });
+    dragHandle.addEventListener('touchend', onTouchEnd, { passive: true });
+    dragHandle.addEventListener('touchcancel', onTouchEnd, { passive: true });
     dragHandle.addEventListener('dblclick', onDoubleClick);
   }
 
@@ -369,17 +508,21 @@ export function initDockManager(
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onKeyDown);
 
-  // Wire dock option buttons in popover
+  // Wire dock option buttons across popover and document
   const optionButtons =
-    menuPopover?.querySelectorAll<HTMLButtonElement>('[data-dock-target]');
-  optionButtons?.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
+    document.querySelectorAll<HTMLButtonElement>('[data-dock-target]');
+  const optionCleanups: Array<() => void> = [];
+
+  optionButtons.forEach((btn) => {
+    const onOptionClick = (e: MouseEvent) => {
       e.stopPropagation();
       const target = btn.getAttribute('data-dock-target');
       if (isValidDockPosition(target)) {
         applyPosition(target, true);
       }
-    });
+    };
+    btn.addEventListener('click', onOptionClick);
+    optionCleanups.push(() => btn.removeEventListener('click', onOptionClick));
   });
 
   return {
@@ -387,15 +530,24 @@ export function initDockManager(
     setPosition: (pos: DockPosition) => applyPosition(pos, true),
     reset: () => applyPosition('top', true),
     destroy: () => {
+      optionCleanups.forEach((cleanup) => cleanup());
+      optionCleanups.length = 0;
       if (menuCloseTimeout !== null) {
         window.clearTimeout(menuCloseTimeout);
         menuCloseTimeout = null;
+      }
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', onWindowResize);
       }
       if (dragHandle) {
         dragHandle.removeEventListener('pointerdown', onPointerDown);
         dragHandle.removeEventListener('pointermove', onPointerMove);
         dragHandle.removeEventListener('pointerup', onPointerUp);
         dragHandle.removeEventListener('pointercancel', onPointerUp);
+        dragHandle.removeEventListener('touchstart', onTouchStart);
+        dragHandle.removeEventListener('touchmove', onTouchMove);
+        dragHandle.removeEventListener('touchend', onTouchEnd);
+        dragHandle.removeEventListener('touchcancel', onTouchEnd);
         dragHandle.removeEventListener('dblclick', onDoubleClick);
       }
       if (menuButton) {

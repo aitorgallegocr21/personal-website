@@ -73,19 +73,20 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 ## ✨ Key Features
 
 - **🎯 Centralized SSOT Data:** Biography, project catalog, tech skills, work experience, and educational credentials configured in one place.
-- **🎨 Dynamic Theming & Daily Rotation:** Multi-accent palette system (Emerald, Sky, Violet, Rose, Amber) with automatic weekday rotation, manual switching, and dark/light mode.
+- **🎨 Dynamic Theming & Daily Rotation:** Multi-accent palette system with 7 daily weekday palettes (Amber, Emerald, Teal, Sky, Slate, Violet, Rose) with automatic live rotation, manual switching, and dark/light mode.
 - **🎭 Multi-Skin Architecture & Visual Switcher:** Modular skin engine (`bento-modern` default) allowing complete visual restyling from the same SSOT dataset, with local persistence (`localStorage`), zero-FOUC attribute injection, and UI switcher.
 - **🎴 Modern Bento Grid & Interactive Portrait:** 3D perspective tilt avatar card, real-time availability indicator, and GitHub/project direct links.
-- **🏝️ Dockable Desktop Island Navbar & Fluid Scroll-Spy:** Relocatable navigation island on desktop (>= 1024px) with magnetic edge snapping (Top, Bottom, Left, Right), layout metamorphosis into compact icon rails (~56px) with floating glassmorphic tooltips, double-click reset, 1-click quick-dock selector, and a continuous fluid scroll-spy indicator physically gliding along the link track at 60/120 FPS with real-time text glow cross-fading.
+- **🏝️ Metamorphic Dock, Unified Interface Hub & Mobile Bottom Dock:** Relocatable navigation island with macOS-style icon + micro-label layout in horizontal view and compact icon rails (~56px) in vertical view. Features a unified 3-column Bento Interface Hub on desktop (vertical sheet on mobile) consolidating Mode, 7-Day Live/Fixed Palettes, and Dock Placement. Supports mobile/tablet bottom docking with safe-area handling, an upward-opening mobile menu drawer, and tactile vertical touch drag snapping.
 - **📜 Multi-Document Credential & Deep-Linking Engine:** Mobile-first fullscreen dialog (`h-[100dvh]`), touch-friendly horizontal module tabs, resilient PDF fallback banner with direct native viewing, URL deep-linking (`?doc=<id>`), single PDF download, and one-click `.zip` batch export via JSZip.
 - **✨ Accent Polish & Structured Footer:** Responsive 3-column footer with dynamic availability indicator, project card glow micro-interactions, illuminated tech chips, and non-overlapping status badges.
 - **📰 Editorial 2-Column CV Layout:** Modern magazine-inspired 2-column printable A4 layout with prominent interactive portfolio badge, prioritized formal education (DAM with 9.2 average grade & SMR with 8.7) on the main column, technical experience, software projects with repository links, personal profile & virtues (organization, competitive tennis, reading), and driver's license/technical English competencies.
 - **🧠 Engineering Philosophy & Work Approach:** Dedicated portfolio section reflecting foundational systems mastery, deep curiosity over black-box abstractions, and a pragmatic balance preventing over-engineering while delivering real value.
-- **🖨️ Multi-Palette Headless PDF Build Engine & Dual-Action Print Bar:** Automated build-time generation of 100% deterministic A4 PDFs across all 6 color palettes via headless Chromium, paired with an interactive 1-click download button and an accessible print layout warning modal.
+- **🖨️ Multi-Palette Headless PDF Build Engine & Dual-Action Print Bar:** Automated build-time generation of 100% deterministic A4 PDFs across all 8 color palettes (7 weekday colors + monochrome) via headless Chromium, paired with an interactive 1-click download button and an accessible print layout warning modal.
 - **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and streamlined contact badges with anti-scraping defense.
 - **🔍 Rich Schema.org & Automated SEO:** JSON-LD structured data (`Person` & `ProfilePage`), auto-generated `sitemap-index.xml` via `@astrojs/sitemap`, search crawler directives in `robots.txt`, and dedicated 1200x630 Open Graph preview card for social sharing.
 - **🖼️ Native Asset Optimization Pipeline:** Astro's built-in `<Image />` component powered by Sharp, transcoding project previews and portraits to lightweight WebP with zero Cumulative Layout Shift (CLS) and a 97% image payload reduction.
-- **🧪 Comprehensive Test Suite (Unit & E2E):** 86 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state, scroll-spy calculations, dock manager) paired with 19 End-to-End browser tests via Playwright automated in GitHub Actions CI with resilient system Chrome detection.
+- **📊 GitHub Live Metrics & Contribution Heatmap:** Automated build-time GraphQL ingestion via GitHub Actions daily cron (`00:00 UTC`), generating a native theme-adaptive contribution calendar heatmap, live streaks, repository statistics, and top languages distribution with zero runtime JS overhead and full offline fallback.
+- **🧪 Comprehensive Test Suite (Unit & E2E):** 122 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state, scroll-spy calculations, dock manager, schema-org, clipboard, github schemas and metrics algorithms) paired with 26 End-to-End browser tests via Playwright automated in GitHub Actions CI with resilient system Chrome detection.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
 ---
@@ -104,9 +105,12 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **Core Framework:** [Astro 5.x](https://astro.build/) (Static Site Generation / SSG)
 - **Language:** [TypeScript 5.x](https://www.typescriptlang.org/) (Strict Mode enabled)
 - **Styling:** [Tailwind CSS 4.x](https://tailwindcss.com/) with CSS Custom Properties
-- **Code Quality & Validation:** ESLint (Flat Config), Prettier with `prettier-plugin-tailwindcss`, Zod runtime schemas & `@astrojs/check`
-- **Testing & SEO:** Vitest (Unit testing), Playwright (E2E browser tests & A4 print calibration), `@astrojs/sitemap` (automated sitemap)
-- **Deployment:** GitHub Pages automated via GitHub Actions workflow (`.github/workflows/deploy.yml`)
+- **Runtime Validation:** [Zod](https://zod.dev/) for deterministic data schema verification
+- **Code Quality & Formatting:** ESLint (Flat Config), Prettier with `prettier-plugin-tailwindcss` & `@astrojs/check`
+- **Testing & Quality Assurance:** Vitest (94 unit tests), Playwright (20 E2E browser tests & A4 print calibration)
+- **PDF & Asset Engine:** Puppeteer Core (Chromium headless A4 print engine), Sharp (WebP optimization), JSZip (batch exports)
+- **SEO & Discovery:** `@astrojs/sitemap` (automated sitemap), rich Schema.org JSON-LD
+- **Deployment:** GitHub Pages automated via GitHub Actions (`.github/workflows/deploy.yml`)
 
 ---
 
@@ -114,32 +118,44 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 
 ```text
 .
-├── .agents/skills/              # Specialized agent workflows for Antigravity AI
+├── .agents/skills/              # Specialized agent skills (Antigravity AI workflows)
+├── .github/                     # GitHub Actions CI/CD workflows, issue/PR templates
 ├── docs/                        # Complete project documentation & specifications
 │   ├── DESIGN_SYSTEM.md         # Design tokens, color palettes & print layout specs
 │   ├── DOSSIER_PROFESIONAL.md   # Raw candidate history, achievements & reference data
-│   ├── tasks/                   # Comprehensive phase & micro-task breakdown
+│   ├── tasks/                   # Comprehensive phase & micro-task specifications (Phases 0-25)
 │   └── TASKS.md                 # Sprint tracking index & phase roadmap
+├── public/                      # Static assets served at root
+│   ├── cv/                      # Precompiled A4 PDFs in 8 distinct color palettes
+│   ├── docs/certificates/       # PDF certificates and verification records
+│   ├── images/                  # Profile avatars, project screenshots, OG banner
+│   └── _headers                 # Cache control rules for static assets
+├── scripts/                     # Automation scripts (PDF generation, OG image, runners)
 ├── src/
+│   ├── assets/                  # Optimized media processed by astro:assets pipeline
 │   ├── components/              # Modular Astro components
 │   │   ├── cv/                  # A4 print-optimized layout components
-│   │   └── portfolio/           # Interactive portfolio sections (Hero, Bento, Modal)
+│   │   ├── portfolio/           # Interactive portfolio sections (Hero, Bento, Modal, Dock Navbar)
+│   │   ├── seo/                 # Structured data (JsonLd.astro)
+│   │   ├── skins/               # Multi-skin visual architecture (bento-modern, registry)
+│   │   └── ui/                  # Shared UI components (PhoneContact.astro)
 │   ├── data/
 │   │   └── cv-data.ts           # 🌟 SSOT: Centralized resume and profile dataset
 │   ├── layouts/
 │   │   ├── BaseLayout.astro     # Global HTML shell, theme scripts, and metadata
 │   │   └── PrintLayout.astro    # Dedicated @page print document wrapper
+│   ├── lib/                     # Decoupled client logic (dock, scrollspy, theme, modal, skin)
 │   ├── pages/
 │   │   ├── index.astro          # Web portfolio view (/)
 │   │   └── cv.astro             # Printable A4 CV view (/cv)
+│   ├── schemas/
+│   │   └── resume.schema.ts     # Zod runtime schemas validating cvData
 │   ├── styles/                  # Global CSS, Tailwind setup & dynamic theme variables
-│   ├── types/
-│   │   └── resume.ts            # TypeScript interfaces & data contracts
+│   ├── types/                   # TypeScript interfaces & data contracts (resume.ts, skin.ts)
 │   └── utils/                   # Reusable formatters (dates, age calculation)
-├── public/                      # Static assets served at root
-│   ├── docs/certificates/       # PDF certificates and verification records
-│   ├── images/                  # Profile avatars, project screenshots, icons
-│   └── _headers                 # Cache control rules for static assets
+├── tests/
+│   ├── e2e/                     # Playwright End-to-End browser test specs
+│   └── unit/                    # Vitest unit test suites (87 tests)
 ├── AGENTS.md                    # Inviolable agent rules, execution loops & commit guide
 ├── README.md                    # English documentation (this file)
 └── README.es.md                 # Spanish documentation
@@ -172,19 +188,33 @@ cp .env.example .env
 
 ---
 
+## 🌿 Git Branching & Integration Model
+
+The project enforces a clean, deterministic two-branch strategy:
+
+- **`main` (Production):** Protected production release branch. Always deployable and strictly synced with live GitHub Pages.
+- **`develop` (Active Development):** Primary integration branch. All active development, feature branches (`feat/...`), bug fixes (`fix/...`), and documentation updates (`docs/...`) branch off and PR into `develop`. Once verified, `develop` merges into `main`.
+
+---
+
 ## 💻 Development Workflow & Scripts
 
-| Command                  | Action                                                                                                       |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `npm run dev`            | Starts local development server at `http://localhost:4321`.                                                  |
-| `astro dev --background` | Runs development server in background mode.                                                                  |
-| `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                                            |
-| `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                                         |
-| `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter.                                         |
-| `npm test`               | Runs the Vitest unit test suite (59 tests covering SSOT, dates, themes, self-hosted fonts, and Zod schemas). |
-| `npm run test:e2e`       | Runs Playwright End-to-End test suite (12 tests verifying live interactions and A4 print containment).       |
-| `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                                   |
-| `npm run preview`        | Spins up a local server to preview production output from `dist/`.                                           |
+| Command                  | Action                                                                                                                            |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run verify`         | Full deterministic quality gate (`check` + `lint` + `format` + `test` + `build`).                                                 |
+| `npm run verify:fast`    | Quick quality gate (`check` + `lint` + `format` + `test`).                                                                        |
+| `npm run dev`            | Starts local development server at `http://localhost:4321`.                                                                       |
+| `astro dev --background` | Runs development server in background mode.                                                                                       |
+| `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                                                                 |
+| `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                                                              |
+| `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter (`npm run format:fix` to apply).                              |
+| `npm test`               | Runs the Vitest unit test suite (122 tests covering SSOT, dates, themes, dock manager, scrollspy, github utils, and Zod schemas). |
+| `npm run test:e2e`       | Runs Playwright End-to-End test suite (26 tests verifying live interactions and A4 print containment).                            |
+| `npm run sync:github`    | Fetches latest GitHub metrics & calendar via GraphQL API and updates `src/data/github-data.json`.                                 |
+| `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                                                        |
+| `npm run build:pdf`      | Generates deterministic A4 PDFs across all 8 color palettes using headless Chromium.                                              |
+| `npm run build:og`       | Generates 1200x630 Open Graph banner image for social sharing.                                                                    |
+| `npm run preview`        | Spins up a local server to preview production output from `dist/`.                                                                |
 
 ---
 
@@ -211,8 +241,9 @@ If you are developing features or using AI pair-programming agents on this codeb
 
 - **Follow [AGENTS.md](AGENTS.md):** Respect the mandatory 5-step loop (`Spec` ➔ `Code` ➔ `npm run build` ➔ `Docs Sync` ➔ `Semantic Commit`).
 - **Never hardcode static data:** Update `src/data/cv-data.ts` and ensure types exist in `src/types/resume.ts`.
-- **Zero Ambiguity:** Backlog status and next actions must always be traceable in [`docs/TASKS.md`](docs/TASKS.md).
-- **Audit Documentation:** After tasks affecting architecture, interfaces, or configs, evaluate and update corresponding doc files.
+- **Inviolable Documentation Sync (Zero Loss of Context):** On **EVERY** change made to code, schemas, architecture, tokens, or scripts, the corresponding documentation (`docs/TASKS.md`, `docs/tasks/`, `docs/DESIGN_SYSTEM.md`, `README.md`, `README.es.md`, and/or `AGENTS.md`) MUST be updated in the same iteration. No task or PR is considered complete without updated documentation.
+- **Zero Ambiguity:** Backlog status and active tasks must always be decipherable from [`docs/TASKS.md`](docs/TASKS.md).
+- **Mobile-First & Quality Gate:** Always run `npm run verify:fast` or `npm run check` and verify 375px mobile viewports before proposing changes.
 
 ---
 

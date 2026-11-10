@@ -1,0 +1,41 @@
+name: GitHub Activity Sync
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch GitHub metrics snapshot
+        run: node scripts/fetch-github-data.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push snapshot updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data/github-data.json)" ]; then
+            git add src/data/github-data.json
+            git commit -m "chore(data): update github live metrics snapshot [skip ci]"
+            git push origin develop
+          else
+            echo "No changes detected in GitHub metrics snapshot."
+          fi

@@ -3,8 +3,6 @@
  * Handles dialog display, multi-document tab navigation, deep linking, and ZIP batch export.
  */
 
-import JSZip from 'jszip';
-
 export interface DocItem {
   title: string;
   url: string;
@@ -33,6 +31,7 @@ export async function downloadDocsZip(
   onStatusUpdate?.('Generando ZIP...');
 
   try {
+    const { default: JSZip } = await import('jszip');
     const zip = new JSZip();
     const cleanFileName = `Certificados_${folderTitle.replace(/[^a-zA-Z0-9_\u00C0-\u017F-]/g, '_')}.zip`;
 

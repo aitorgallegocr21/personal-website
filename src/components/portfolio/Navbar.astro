@@ -5,15 +5,10 @@ import {
   Menu,
   X,
   GripVertical,
-  PanelTop,
-  PanelBottom,
-  PanelLeft,
-  PanelRight,
-  RotateCcw,
-  SlidersHorizontal,
   FolderGit2,
   Briefcase,
   Award,
+  Github,
   Sparkles,
   Mail,
 } from 'lucide-astro';
@@ -30,8 +25,9 @@ const navItems = [
     number: '03',
     icon: Award,
   },
-  { label: 'Filosofía', href: '#filosofia', number: '04', icon: Sparkles },
-  { label: 'Contacto', href: '#contacto', number: '05', icon: Mail },
+  { label: 'GitHub', href: '#github', number: '04', icon: Github },
+  { label: 'Filosofía', href: '#filosofia', number: '05', icon: Sparkles },
+  { label: 'Contacto', href: '#contacto', number: '06', icon: Mail },
 ];
 ---
 
@@ -43,14 +39,14 @@ const navItems = [
 >
   <div
     id="site-header-inner"
-    class="px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300"
+    class="px-3 sm:px-4 lg:px-6 h-14 sm:h-16 flex items-center justify-between gap-1.5 sm:gap-2 lg:gap-4 transition-all duration-300"
   >
     <!-- Left Cluster: Tactile Drag Grip & Brand Logo -->
     <div class="brand-cluster flex items-center gap-1 sm:gap-2 shrink-0">
-      <!-- Desktop Drag Grip Handle -->
+      <!-- Tactile Drag Grip Handle -->
       <div
         id="dock-drag-handle"
-        class="hidden lg:flex items-center justify-center w-6 h-8 rounded-lg text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 cursor-grab active:cursor-grabbing hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors touch-none select-none -ml-2"
+        class="flex items-center justify-center w-5 sm:w-6 h-7 sm:h-8 rounded-lg text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 cursor-grab active:cursor-grabbing hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors touch-none select-none -ml-1 sm:-ml-2"
         role="button"
         tabindex="0"
         aria-label="Arrastrar dock (Doble clic para restaurar arriba)"
@@ -62,14 +58,14 @@ const navItems = [
       <!-- Brand / Logo -->
       <a
         href={import.meta.env.BASE_URL}
-        class="brand-logo group flex items-center gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-2.5 -ml-1 shrink-0"
+        class="brand-logo group flex items-center gap-2 lg:gap-2.5 font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-full py-1 px-1.5 sm:px-2.5 -ml-1 shrink-0"
         aria-label={`Inicio - Portfolio de ${personal.name}`}
       >
         <span class="brand-beacon relative flex h-2.5 w-2.5 items-center justify-center">
           <span class="beacon-pulse absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-40 duration-1000"></span>
           <span class="beacon-dot relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)] transition-all duration-300"></span>
         </span>
-        <span class="brand-text text-sm sm:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-all duration-300">
+        <span class="brand-text text-xs sm:text-sm lg:text-base font-bold tracking-tight group-hover:text-[var(--color-accent)] transition-all duration-300">
           Portfolio
         </span>
       </a>
@@ -78,25 +74,25 @@ const navItems = [
     <!-- Desktop Navigation Links -->
     <nav
       id="desktop-nav"
-      class="hidden md:flex relative items-center gap-1 lg:gap-1.5 text-xs lg:text-sm font-medium text-zinc-600 dark:text-zinc-400 transition-all duration-300"
+      class="hidden md:flex relative items-center gap-0.5 lg:gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 transition-all duration-300"
       aria-label="Navegación principal"
     >
       <!-- Fluid Scroll-Spy Animated Accent Pill -->
       <div
         id="navbar-fluid-indicator"
-        class="pointer-events-none absolute left-0 top-0 rounded-full opacity-0 z-0 bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)] shadow-[0_0_14px_var(--color-accent-glow)] transition-opacity duration-200"
+        class="pointer-events-none absolute left-0 top-0 rounded-xl opacity-0 z-0 bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)] shadow-[0_0_14px_var(--color-accent-glow)] transition-opacity duration-200"
         aria-hidden="true"
       >
-        <span class="indicator-bar absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[var(--color-accent)] rounded-full shadow-[0_0_8px_var(--color-accent)] transition-all duration-300"></span>
+        <span class="indicator-bar absolute bottom-0.5 left-1/2 -translate-x-1/2 w-3.5 h-0.5 bg-[var(--color-accent)] rounded-full shadow-[0_0_8px_var(--color-accent)] transition-all duration-300"></span>
       </div>
 
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="nav-link group relative z-10 flex items-center justify-center px-3 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          class="nav-link group relative z-10 flex flex-col items-center justify-center px-1.5 lg:px-2.5 py-1 min-w-[38px] lg:min-w-[50px] rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
-          <item.icon class="nav-icon hidden w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110" />
-          <span class="nav-link-text transition-colors duration-150">
+          <item.icon class="nav-icon w-3.5 h-3.5 lg:w-4 lg:h-4 shrink-0 transition-transform duration-150 group-hover:scale-110" />
+          <span class="nav-link-text text-[8px] sm:text-[8.5px] lg:text-[9.5px] font-semibold tracking-wider uppercase transition-colors duration-150 leading-tight select-none mt-0.5">
             {item.label}
           </span>
           <span
@@ -110,17 +106,17 @@ const navItems = [
     </nav>
 
     <!-- Action Controls: CV PDF, Theme Picker, Quick Dock & Mobile Menu Toggle -->
-    <div class="header-actions flex items-center gap-1.5 sm:gap-2 shrink-0">
+    <div class="header-actions flex items-center gap-1 sm:gap-1.5 lg:gap-2 shrink-0">
       <!-- CV PDF Link -->
       <a
         href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cv`}
-        class="cv-btn group relative inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-[0_0_12px_var(--color-accent-glow)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        class="cv-btn group relative inline-flex items-center justify-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-full text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent)] hover:text-white hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-[0_0_12px_var(--color-accent-glow)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         aria-label="Ver y descargar currículum en PDF"
         title="Ver y descargar CV (PDF A4)"
       >
         <FileDown class="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-        <span class="cv-text hidden sm:inline">CV PDF</span>
-        <span class="cv-mobile-text sm:hidden font-mono text-[11px]">CV</span>
+        <span class="cv-text hidden lg:inline">CV PDF</span>
+        <span class="cv-mobile-text lg:hidden font-mono text-[11px]">CV</span>
         <span
           class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
           role="tooltip"
@@ -129,83 +125,8 @@ const navItems = [
         </span>
       </a>
 
-      <!-- Theme & Accent Controls -->
+      <!-- Interface Hub (Theme, Palettes, Skins & Dock Controls) -->
       <ThemeToggle />
-
-      <!-- Quick Dock Trigger & Popover -->
-      <div class="relative group hidden lg:block">
-        <button
-          type="button"
-          id="dock-menu-btn"
-          class="inline-flex items-center justify-center w-8 h-8 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] cursor-pointer"
-          aria-expanded="false"
-          aria-controls="dock-menu-popover"
-          aria-label="Opciones de anclaje del dock"
-          title="Cambiar posición del dock"
-        >
-          <SlidersHorizontal class="w-3.5 h-3.5" />
-        </button>
-        <span
-          class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
-          role="tooltip"
-        >
-          Posición del dock
-        </span>
-
-        <!-- Popover -->
-        <div
-          id="dock-menu-popover"
-          class="hidden absolute z-50 p-2 rounded-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl shadow-zinc-950/20 min-w-[170px] text-xs font-medium space-y-0.5"
-          role="dialog"
-          aria-label="Posición de anclaje del dock"
-        >
-          <div class="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 border-b border-zinc-100 dark:border-zinc-800/60 mb-1">
-            Posición del dock
-          </div>
-          <button
-            type="button"
-            data-dock-target="top"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelTop class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Arriba (Top)</span>
-          </button>
-          <button
-            type="button"
-            data-dock-target="bottom"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelBottom class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Abajo (Bottom)</span>
-          </button>
-          <button
-            type="button"
-            data-dock-target="left"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelLeft class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Izquierda (Left)</span>
-          </button>
-          <button
-            type="button"
-            data-dock-target="right"
-            class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left"
-          >
-            <PanelRight class="w-3.5 h-3.5 text-[var(--color-accent)]" />
-            <span>Derecha (Right)</span>
-          </button>
-          <div class="border-t border-zinc-100 dark:border-zinc-800/60 pt-1 mt-1">
-            <button
-              type="button"
-              data-dock-target="top"
-              class="dock-option-btn w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-left font-mono text-[11px]"
-            >
-              <RotateCcw class="w-3.5 h-3.5" />
-              <span>Restaurar posición</span>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Mobile Hamburger Button -->
       <button
@@ -225,7 +146,7 @@ const navItems = [
   <!-- Mobile Drawer Dropdown (Overlay) -->
   <div
     id="mobile-nav-menu"
-    class="hidden md:hidden absolute top-[calc(100%+0.5rem)] inset-x-0 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl shadow-2xl shadow-zinc-950/15 dark:shadow-black/60 p-3 space-y-1 z-50"
+    class="hidden md:hidden absolute top-[calc(100%+0.5rem)] inset-x-0 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl shadow-2xl shadow-zinc-950/15 dark:shadow-black/60 p-3 space-y-1 z-50 max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain"
     role="region"
     aria-label="Menú de navegación para dispositivos móviles"
   >
@@ -234,9 +155,12 @@ const navItems = [
         href={item.href}
         class="mobile-nav-link group flex items-center justify-between min-h-[44px] px-3.5 py-2 rounded-xl text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
       >
-        <span class="group-hover:translate-x-1 transition-transform duration-150">
-          {item.label}
-        </span>
+        <div class="flex items-center gap-2.5">
+          <item.icon class="w-4 h-4 text-zinc-400 group-hover:text-[var(--color-accent)] transition-colors" />
+          <span class="group-hover:translate-x-1 transition-transform duration-150">
+            {item.label}
+          </span>
+        </div>
         <span class="text-xs text-zinc-400 dark:text-zinc-500 font-mono group-hover:text-[var(--color-accent)] transition-colors">
           {item.number}
         </span>
@@ -257,6 +181,11 @@ const navItems = [
 </header>
 
 <script>
+  import {
+    lockBackgroundScroll,
+    unlockBackgroundScroll,
+  } from '@/lib/theme-manager';
+
   function getOrCreateMobileBackdrop(onClose?: () => void): HTMLElement {
     let backdrop = document.getElementById('mobile-nav-backdrop');
     if (!backdrop) {
@@ -270,7 +199,7 @@ const navItems = [
       document.body.appendChild(backdrop);
     }
     backdrop.className =
-      'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200';
+      'fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200 touch-none';
     backdrop.setAttribute('aria-hidden', 'true');
     return backdrop;
   }
@@ -297,6 +226,16 @@ const navItems = [
         return;
       }
 
+      // Unlock document scroll unless palette menu is open
+      const paletteDropdown = document.getElementById('palette-dropdown');
+      const isPaletteOpen =
+        paletteDropdown &&
+        !paletteDropdown.classList.contains('hidden') &&
+        paletteDropdown.getAttribute('data-state') === 'open';
+      if (!isPaletteOpen) {
+        unlockBackgroundScroll();
+      }
+
       toggleBtn.setAttribute('aria-expanded', 'false');
       toggleBtn.setAttribute('aria-label', 'Abrir menú de navegación');
       openIcon?.classList.remove('hidden');
@@ -321,6 +260,9 @@ const navItems = [
         clearTimeout(mobileCloseTimeout);
         mobileCloseTimeout = null;
       }
+
+      // Lock document scroll while mobile menu is open without breaking sticky header
+      lockBackgroundScroll();
 
       const backdrop = getOrCreateMobileBackdrop(closeMenu);
       backdrop.classList.remove('hidden');
@@ -465,37 +407,31 @@ const navItems = [
     });
   }
 
-  function setupDesktopDock() {
+  function setupDock() {
     dockController?.destroy();
     dockController = null;
-
-    if (window.innerWidth < 1024) return;
 
     const header = document.getElementById('site-header');
     if (!header) return;
 
     const dragHandle = document.getElementById('dock-drag-handle');
-    const menuBtn = document.getElementById('dock-menu-btn');
-    const menuPopover = document.getElementById('dock-menu-popover');
 
     dockController = initDockManager({
       header,
       dragHandle,
-      menuButton: menuBtn,
-      menuPopover,
       onPositionChange: () => {
         scrollSpyController?.refresh();
       },
     });
   }
 
-  function setupAllDesktopNav() {
+  function setupAllNav() {
     setupDesktopScrollSpy();
-    setupDesktopDock();
+    setupDock();
   }
 
-  setupAllDesktopNav();
-  document.addEventListener('astro:after-swap', setupAllDesktopNav);
+  setupAllNav();
+  document.addEventListener('astro:after-swap', setupAllNav);
 
   const desktopMq = window.matchMedia('(min-width: 768px)');
   desktopMq.addEventListener('change', (e) => {
@@ -504,18 +440,6 @@ const navItems = [
     } else {
       scrollSpyController?.destroy();
       scrollSpyController = null;
-    }
-  });
-
-  const desktopDockMq = window.matchMedia('(min-width: 1024px)');
-  desktopDockMq.addEventListener('change', (e) => {
-    if (e.matches) {
-      setupDesktopDock();
-    } else {
-      dockController?.destroy();
-      dockController = null;
-      const header = document.getElementById('site-header');
-      header?.setAttribute('data-dock', 'top');
     }
   });
 </script>
@@ -532,7 +456,20 @@ const navItems = [
     );
     text-shadow: 0 0 calc(var(--nav-glow, 0) * 8px) var(--color-accent-glow);
   }
+  .nav-link .nav-icon {
+    color: color-mix(
+      in srgb,
+      var(--color-accent) calc(var(--nav-glow, 0) * 100%),
+      currentColor
+    );
+    filter: drop-shadow(
+      0 0 calc(var(--nav-glow, 0) * 6px) var(--color-accent-glow)
+    );
+  }
   .nav-link[data-active='true'] {
+    color: var(--color-accent);
+  }
+  .nav-link[data-active='true'] .nav-icon {
     color: var(--color-accent);
   }
 
@@ -560,47 +497,120 @@ const navItems = [
     box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
   }
 
-  /* Desktop Metamorphic Dock Positions & Geometry (>= 1024px) */
-  @media (min-width: 1024px) {
-    #site-header {
-      transition:
-        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-        border-radius 0.3s ease,
-        box-shadow 0.3s ease,
-        background-color 0.3s ease;
-    }
+  /* Universal Dock Positions: Top & Bottom available across all viewports */
+  #site-header {
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      border-radius 0.3s ease,
+      box-shadow 0.3s ease,
+      background-color 0.3s ease;
+  }
 
-    #site-header.is-dragging {
-      opacity: 0.85;
-      transform: scale(0.98);
-      user-select: none;
-      pointer-events: none;
-    }
+  #site-header.is-dragging {
+    opacity: 0.85;
+    transform: scale(0.98);
+    user-select: none;
+    pointer-events: none;
+  }
 
-    /* Bottom Dock: macOS-style floating dock */
+  /* Top Dock: Sticky header sticking cleanly at top across all viewports */
+  #site-header[data-dock='top'] {
+    position: sticky;
+    top: calc(0.75rem + env(safe-area-inset-top, 0px));
+    bottom: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    #site-header[data-dock='top'] {
+      top: calc(1rem + env(safe-area-inset-top, 0px));
+    }
+  }
+
+  /* Bottom Dock: macOS-style floating dock across mobile, tablet & desktop */
+  #site-header[data-dock='bottom'] {
+    position: fixed;
+    top: auto;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    margin: 0;
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (min-width: 640px) {
     #site-header[data-dock='bottom'] {
-      position: fixed;
-      top: auto;
-      bottom: 1.25rem;
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
-      margin: 0;
-      box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.35);
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
     }
-    #site-header[data-dock='bottom'] #dock-menu-popover {
-      bottom: calc(100% + 0.5rem);
-      top: auto;
-      right: 0;
-    }
+  }
 
-    /* Top Dock Popover Placement */
-    #site-header[data-dock='top'] #dock-menu-popover {
-      top: calc(100% + 0.5rem);
-      bottom: auto;
-      right: 0;
+  /* Mobile & Small Screens (< 768px): Popover stays centered and safely inset within viewport margins */
+  @media (max-width: 767px) {
+    :global(#palette-dropdown) {
+      position: fixed !important;
+      left: 0.75rem !important;
+      right: 0.75rem !important;
+      width: auto !important;
+      max-width: 26rem !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
     }
+    #site-header[data-dock='bottom'] :global(#palette-dropdown) {
+      bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
+      top: auto !important;
+    }
+    #site-header[data-dock='top'] :global(#palette-dropdown) {
+      top: calc(4.75rem + env(safe-area-inset-top, 0px)) !important;
+      bottom: auto !important;
+    }
+  }
 
+  /* Bottom Dock: Palette popover flies upwards */
+  #site-header[data-dock='bottom'] :global(#palette-dropdown) {
+    bottom: calc(100% + 0.5rem);
+    top: auto;
+    right: 0;
+    left: auto;
+    margin: 0;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  /* Bottom Dock: Mobile Nav Drawer opens upwards */
+  #site-header[data-dock='bottom'] #mobile-nav-menu {
+    top: auto;
+    bottom: calc(100% + 0.5rem);
+  }
+
+  /* Top Dock: Palette popover flies downwards */
+  #site-header[data-dock='top'] :global(#palette-dropdown) {
+    top: calc(100% + 0.5rem);
+    bottom: auto;
+    right: 0;
+    left: auto;
+    margin: 0;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  /* Top Dock: Mobile Nav Drawer opens downwards */
+  #site-header[data-dock='top'] #mobile-nav-menu {
+    top: calc(100% + 0.5rem);
+    bottom: auto;
+  }
+
+  /* By default, hide tooltips on horizontal docks to eliminate accidental horizontal overflow */
+  :global(.nav-tooltip) {
+    display: none;
+  }
+
+  /* Desktop-Only Lateral Docks (>= 1024px) */
+  @media (min-width: 1024px) {
     /* Left & Right Vertical Docks: Compact Icon-First Rail (~56-60px wide) */
     #site-header[data-dock='left'],
     #site-header[data-dock='right'] {
@@ -682,8 +692,12 @@ const navItems = [
     #site-header[data-dock='right'] .nav-link {
       width: 2.5rem;
       height: 2.5rem;
+      min-width: 0;
       padding: 0;
       border-radius: 0.875rem;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
 
     #site-header[data-dock='left'] .cv-btn,
@@ -722,28 +736,6 @@ const navItems = [
       display: inline-flex;
       align-items: center;
       justify-content: center;
-    }
-
-    /* Bottom Dock: Palette popover flies upwards */
-    #site-header[data-dock='bottom'] :global(#palette-dropdown) {
-      bottom: calc(100% + 0.5rem);
-      top: auto;
-      right: 0;
-      left: auto;
-      margin: 0;
-      max-height: calc(100vh - 6rem);
-      overflow-y: auto;
-    }
-
-    /* Top Dock: Palette popover flies downwards */
-    #site-header[data-dock='top'] :global(#palette-dropdown) {
-      top: calc(100% + 0.5rem);
-      bottom: auto;
-      right: 0;
-      left: auto;
-      margin: 0;
-      max-height: calc(100vh - 6rem);
-      overflow-y: auto;
     }
 
     /* Left Dock: Palette popover flies to the right */
@@ -803,12 +795,6 @@ const navItems = [
       top: 50%;
       transform: translateY(-50%) scale(0.95);
     }
-    #site-header[data-dock='left'] #dock-menu-popover {
-      left: calc(100% + 0.75rem);
-      right: auto;
-      top: 50%;
-      transform: translateY(-50%);
-    }
 
     /* Tooltip flyouts for Right dock */
     #site-header[data-dock='right'] :global(.group:hover .nav-tooltip) {
@@ -821,12 +807,6 @@ const navItems = [
       left: auto;
       top: 50%;
       transform: translateY(-50%) scale(0.95);
-    }
-    #site-header[data-dock='right'] #dock-menu-popover {
-      right: calc(100% + 0.75rem);
-      left: auto;
-      top: 50%;
-      transform: translateY(-50%);
     }
 
     /* Hide tooltips when popovers or menus are open */
@@ -959,47 +939,40 @@ const navItems = [
   }
 
   /* Default Top & Mobile: Directional Popover Animation */
-  :global(#palette-dropdown[data-state='open']),
-  #dock-menu-popover[data-state='open'] {
+  :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-top 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-  :global(#palette-dropdown[data-state='closed']),
-  #dock-menu-popover[data-state='closed'] {
+  :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-top 120ms ease forwards;
   }
 
   /* Bottom Dock: Popovers emerge upwards */
   #site-header[data-dock='bottom']
-    :global(#palette-dropdown[data-state='open']),
-  #site-header[data-dock='bottom'] #dock-menu-popover[data-state='open'] {
+    :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-bottom 180ms cubic-bezier(0.16, 1, 0.3, 1)
       forwards;
   }
   #site-header[data-dock='bottom']
-    :global(#palette-dropdown[data-state='closed']),
-  #site-header[data-dock='bottom'] #dock-menu-popover[data-state='closed'] {
+    :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-bottom 120ms ease forwards;
   }
 
   /* Left Dock: Popovers emerge to the right */
-  #site-header[data-dock='left'] :global(#palette-dropdown[data-state='open']),
-  #site-header[data-dock='left'] #dock-menu-popover[data-state='open'] {
+  #site-header[data-dock='left'] :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-left 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   #site-header[data-dock='left']
-    :global(#palette-dropdown[data-state='closed']),
-  #site-header[data-dock='left'] #dock-menu-popover[data-state='closed'] {
+    :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-left 120ms ease forwards;
   }
 
   /* Right Dock: Popovers emerge to the left */
-  #site-header[data-dock='right'] :global(#palette-dropdown[data-state='open']),
-  #site-header[data-dock='right'] #dock-menu-popover[data-state='open'] {
+  #site-header[data-dock='right']
+    :global(#palette-dropdown[data-state='open']) {
     animation: popover-spring-right 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   #site-header[data-dock='right']
-    :global(#palette-dropdown[data-state='closed']),
-  #site-header[data-dock='right'] #dock-menu-popover[data-state='closed'] {
+    :global(#palette-dropdown[data-state='closed']) {
     animation: popover-exit-right 120ms ease forwards;
   }
 
@@ -1042,12 +1015,43 @@ const navItems = [
     }
   }
 
+  @keyframes mobile-drawer-open-bottom {
+    0% {
+      opacity: 0;
+      transform: translateY(8px) scale(0.97);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes mobile-drawer-close-bottom {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(6px) scale(0.98);
+    }
+  }
+
   #mobile-nav-menu[data-state='open'] {
     animation: mobile-drawer-open 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   #mobile-nav-menu[data-state='closed'] {
     animation: mobile-drawer-close 120ms ease forwards;
+  }
+
+  #site-header[data-dock='bottom'] #mobile-nav-menu[data-state='open'] {
+    animation: mobile-drawer-open-bottom 180ms cubic-bezier(0.16, 1, 0.3, 1)
+      forwards;
+  }
+
+  #site-header[data-dock='bottom'] #mobile-nav-menu[data-state='closed'] {
+    animation: mobile-drawer-close-bottom 120ms ease forwards;
   }
 
   @media (max-height: 600px) {

@@ -1,5 +1,17 @@
 ---
-import { Sun, Moon, Palette, Sparkles, Check, LayoutGrid } from 'lucide-astro';
+import {
+  Sun,
+  Moon,
+  Sparkles,
+  Check,
+  LayoutGrid,
+  Sliders,
+  PanelTop,
+  PanelBottom,
+  PanelLeft,
+  PanelRight,
+  RotateCcw,
+} from 'lucide-astro';
 import { SKINS } from '@/components/skins/registry';
 import { getTodayPalette } from '@/lib/theme-manager';
 
@@ -58,211 +70,286 @@ const palettes = [
 ];
 ---
 
-<div class="relative flex items-center gap-1.5" id="theme-controls-container">
-  <!-- Palette & Skin Picker Button -->
+<div class="relative flex items-center" id="theme-controls-container">
+  <!-- Interface Hub Trigger Button (Sliders with dynamic accent dot) -->
   <div class="relative group">
     <button
       type="button"
       id="palette-menu-btn"
-      class="group relative inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-200/60 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900/60 dark:hover:text-zinc-100"
-      aria-label="Seleccionar estilo y paleta de acento"
-      aria-haspopup="true"
+      class="group relative inline-flex cursor-pointer items-center justify-center rounded-full p-2 text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/80 dark:hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+      aria-label="Ajustes de interfaz, apariencia y dock"
+      aria-haspopup="dialog"
       aria-expanded="false"
-      title="Personalizar colores y estilo"
+      aria-controls="palette-dropdown"
+      title="Ajustes de interfaz y apariencia"
     >
-      <Palette class="h-4 w-4 transition-transform group-hover:scale-110" />
+      <Sliders class="h-4 w-4 transition-transform group-hover:scale-110" />
       <span
         id="palette-indicator-dot"
-        class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full border border-white bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent-glow)] transition-colors dark:border-zinc-950"
+        class="absolute top-1 right-1 h-2 w-2 rounded-full border border-white bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent-glow)] transition-colors dark:border-zinc-950"
       ></span>
     </button>
     <span
       class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
       role="tooltip"
     >
-      Estilos y colores
+      Ajustes de Interfaz
     </span>
 
     <!-- Backdrop blur overlay when dropdown is open -->
     <div
       id="palette-backdrop"
-      class="fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200"
+      class="fixed inset-0 z-40 hidden bg-black/25 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-200 touch-none"
       aria-hidden="true"
     ></div>
 
-    <!-- Settings Dropdown Popover -->
+    <!-- Interface Hub Popover (3-Column Bento on Desktop >= 768px, 1-Column Vertical Stack on < 768px) -->
     <div
       id="palette-dropdown"
-      class="absolute right-0 z-50 mt-2 hidden w-72 rounded-2xl border border-zinc-200 bg-white/95 p-2.5 text-xs font-medium shadow-2xl shadow-zinc-950/15 backdrop-blur-md sm:w-80 dark:border-zinc-800 dark:bg-zinc-900/95 dark:shadow-zinc-950/60"
-      role="menu"
+      class="absolute right-0 z-50 mt-2 hidden w-[calc(100vw-2rem)] max-w-sm md:max-w-none md:w-[680px] lg:w-[720px] rounded-3xl border border-zinc-200/90 bg-white/95 p-3.5 md:p-4 text-xs font-medium shadow-2xl shadow-zinc-950/20 backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-900/95 dark:shadow-zinc-950/60"
+      role="dialog"
+      aria-label="Panel de control de interfaz general"
     >
-      <!-- Section: Estilo Visual / Skins -->
-      <div class="flex items-center justify-between px-2 py-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
-        <span>Estilo Visual</span>
-        <span class="rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-0.2 text-[9.5px] font-semibold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
-          Skins
-        </span>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-zinc-200/70 dark:divide-zinc-800/70 max-h-[80dvh] md:max-h-none overflow-y-auto md:overflow-visible">
+        <!-- ============================================ -->
+        <!-- COLUMNA 1: MODO & APARIENCIA (Theme & Skin)  -->
+        <!-- ============================================ -->
+        <div class="space-y-3 pb-3 md:pb-0 md:pr-4">
+          <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
+            <span>Modo & Aspecto</span>
+            <span class="rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-0.2 text-[9.5px] font-semibold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
+              Tema
+            </span>
+          </div>
 
-      <div class="mt-1 space-y-1">
-        {SKINS.map((skin) => (
+          <!-- Segmented Light/Dark Switcher -->
+          <div class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-800/70 border border-zinc-200/70 dark:border-zinc-700/50">
+            <button
+              type="button"
+              id="theme-mode-light-btn"
+              data-theme-set="light"
+              class="theme-mode-btn flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-medium transition-all cursor-pointer text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+              title="Activar modo claro"
+            >
+              <Sun class="w-3.5 h-3.5" />
+              <span>Claro</span>
+            </button>
+            <button
+              type="button"
+              id="theme-mode-dark-btn"
+              data-theme-set="dark"
+              class="theme-mode-btn flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-medium transition-all cursor-pointer text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+              title="Activar modo oscuro"
+            >
+              <Moon class="w-3.5 h-3.5" />
+              <span>Oscuro</span>
+            </button>
+          </div>
+
+          <!-- Visual Skin Selector -->
+          <div class="space-y-1.5 pt-1">
+            <div class="px-1 font-mono text-[10px] text-zinc-400 dark:text-zinc-500">
+              Diseño Visual (Skin)
+            </div>
+            {SKINS.map((skin) => (
+              <button
+                type="button"
+                class:list={[
+                  'skin-select-option group flex w-full items-center justify-between rounded-xl border px-2.5 py-2 text-left transition-all',
+                  skin.isAvailable
+                    ? 'cursor-pointer border-transparent bg-zinc-50 dark:bg-zinc-800/40 text-zinc-700 hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800'
+                    : 'cursor-not-allowed border-transparent text-zinc-400 opacity-60 dark:text-zinc-500',
+                ]}
+                data-skin-id={skin.id}
+                data-available={skin.isAvailable ? 'true' : 'false'}
+                role="menuitem"
+                disabled={!skin.isAvailable}
+                title={skin.description}
+              >
+                <div class="flex min-w-0 items-center gap-2">
+                  <LayoutGrid class="h-3.5 w-3.5 shrink-0 text-zinc-400 transition-colors group-hover:text-[var(--color-accent)]" />
+                  <div class="flex min-w-0 flex-col">
+                    <span class="truncate text-xs font-semibold">
+                      {skin.name}
+                    </span>
+                    <span class="truncate text-[9.5px] text-zinc-400 dark:text-zinc-500">
+                      {skin.tagline}
+                    </span>
+                  </div>
+                </div>
+                <div class="flex shrink-0 items-center gap-1.5 pl-1">
+                  {skin.badge && (
+                    <span class="rounded-full border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] px-1.5 py-0.2 font-mono text-[9px] font-medium text-[var(--color-accent)]">
+                      {skin.badge}
+                    </span>
+                  )}
+                  <Check
+                    class="skin-check-icon hidden h-3.5 w-3.5 stroke-[2.5] text-[var(--color-accent)]"
+                    data-check-id={skin.id}
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- COLUMNA 2: ACENTO CROMÁTICO (Colors & Days)  -->
+        <!-- ============================================ -->
+        <div class="space-y-2.5 py-3 md:py-0 md:px-4">
+          <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
+            <span>Color de Acento</span>
+            <span class="rounded-full border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] px-1.5 py-0.2 text-[9.5px] font-semibold text-[var(--color-accent)]">
+              7 Días
+            </span>
+          </div>
+
+          <!-- Live Rotation Toggle Card -->
           <button
             type="button"
-            class:list={[
-              'skin-select-option group flex w-full items-center justify-between rounded-lg border px-2.5 py-1.5 text-left transition-all',
-              skin.isAvailable
-                ? 'cursor-pointer border-transparent text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800'
-                : 'cursor-not-allowed border-transparent text-zinc-400 opacity-60 dark:text-zinc-500',
-            ]}
-            data-skin-id={skin.id}
-            data-available={skin.isAvailable ? 'true' : 'false'}
+            id="palette-auto-rotate-btn"
+            class="group flex w-full cursor-pointer items-center justify-between rounded-xl border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] p-2 text-left shadow-xs transition-all"
             role="menuitem"
-            disabled={!skin.isAvailable}
-            title={skin.description}
           >
             <div class="flex min-w-0 items-center gap-2">
-              <LayoutGrid class="h-3.5 w-3.5 shrink-0 text-zinc-400 transition-colors group-hover:text-[var(--color-accent)]" />
-              <div class="flex min-w-0 flex-col">
-                <span class="truncate text-xs font-medium">{skin.name}</span>
-                <span class="truncate text-[9.5px] text-zinc-400 dark:text-zinc-500">
-                  {skin.tagline}
-                </span>
-              </div>
-            </div>
-            <div class="flex shrink-0 items-center gap-1.5 pl-1">
-              {skin.badge && (
-                <span
-                  class:list={[
-                    'rounded-full px-1.5 py-0.2 font-mono text-[9px] font-medium',
-                    skin.isAvailable
-                      ? 'border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] text-[var(--color-accent)]'
-                      : 'border border-zinc-200 bg-zinc-100 text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400',
-                  ]}
-                >
-                  {skin.badge}
-                </span>
-              )}
-              <Check
-                class="skin-check-icon hidden h-3.5 w-3.5 stroke-[2.5] text-[var(--color-accent)]"
-                data-check-id={skin.id}
-              />
-            </div>
-          </button>
-        ))}
-      </div>
-
-      <!-- Divider -->
-      <div class="my-2 border-t border-zinc-200/80 dark:border-zinc-800/80"></div>
-
-      <!-- Section: Modo dinámico -->
-      <div class="flex items-center justify-between px-2 py-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
-        <span>Modo dinámico</span>
-        <span class="rounded-full border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] px-1.5 py-0.2 text-[9.5px] font-semibold text-[var(--color-accent)]">
-          7 Días
-        </span>
-      </div>
-
-      <div class="mt-1">
-        <button
-          type="button"
-          id="palette-auto-rotate-btn"
-          class="group flex w-full cursor-pointer items-center justify-between rounded-xl border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] p-2 text-left shadow-xs transition-all"
-          role="menuitem"
-        >
-          <div class="flex min-w-0 items-center gap-2.5">
-            <div
-              id="auto-icon-box"
-              class="shrink-0 rounded-lg bg-[var(--color-accent)] p-1.5 text-[var(--color-accent-contrast)] shadow-xs transition-colors"
-            >
-              <Sparkles class="h-4 w-4" />
-            </div>
-            <div class="flex min-w-0 flex-col">
-              <div class="flex items-center gap-1.5">
-                <span class="text-xs font-bold text-zinc-900 dark:text-zinc-100">
-                  Rotación viva
-                </span>
-                <span id="auto-live-indicator" class="relative flex h-2 w-2">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75"></span>
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]"></span>
-                </span>
-              </div>
-              <span
-                id="auto-status-text"
-                class="truncate text-[10.5px] font-semibold text-[var(--color-accent)]"
+              <div
+                id="auto-icon-box"
+                class="shrink-0 rounded-lg bg-[var(--color-accent)] p-1.5 text-[var(--color-accent-contrast)] shadow-xs transition-colors"
               >
-                Activa · Hoy: {today.label} ({today.day})
-              </span>
+                <Sparkles class="h-3.5 w-3.5" />
+              </div>
+              <div class="flex min-w-0 flex-col">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                    Rotación viva
+                  </span>
+                  <span
+                    id="auto-live-indicator"
+                    class="relative flex h-1.5 w-1.5"
+                  >
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75"></span>
+                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"></span>
+                  </span>
+                </div>
+                <span
+                  id="auto-status-text"
+                  class="truncate text-[10px] font-semibold text-[var(--color-accent)]"
+                >
+                  Activa · {today.day}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div id="auto-check-container" class="shrink-0 pl-1.5">
-            <Check class="h-4 w-4 stroke-[2.5] text-[var(--color-accent)]" />
-          </div>
-        </button>
-      </div>
-
-      <!-- Divider -->
-      <div class="my-2 border-t border-zinc-200/80 dark:border-zinc-800/80"></div>
-
-      <!-- Section: Colores fijos -->
-      <div class="flex items-center justify-between px-2 py-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
-        <span>Colores fijos</span>
-        <span class="text-[10px] font-normal text-zinc-400 dark:text-zinc-500">
-          7 paletas
-        </span>
-      </div>
-
-      <div class="palette-colors-list mt-0.5 space-y-1 max-h-52 sm:max-h-none overflow-y-auto sm:overflow-visible pr-0.5">
-        {palettes.map((p) => (
-          <button
-            type="button"
-            class="palette-select-option group flex w-full cursor-pointer items-center justify-between rounded-lg border border-transparent px-2.5 py-1.5 text-zinc-700 transition-all hover:border-zinc-200 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-white"
-            data-palette-id={p.id}
-            data-palette-label={p.label}
-            role="menuitem"
-          >
-            <span class="flex min-w-0 items-center gap-2.5">
-              <span
-                class="h-3.5 w-3.5 shrink-0 rounded-full shadow-xs ring-1 ring-black/10 dark:ring-white/10"
-                style={`background-color: ${p.color}`}
-              />
-              <span class="palette-option-label truncate text-xs font-medium">
-                {p.label}
-              </span>
-            </span>
-            <div class="flex shrink-0 items-center gap-1.5">
-              <span class="font-mono text-[9.5px] text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300">
-                {p.day}
-              </span>
-              <Check
-                class="palette-check-icon hidden h-3.5 w-3.5 stroke-[2.5] text-[var(--color-accent)]"
-                data-check-id={p.id}
-              />
+            <div id="auto-check-container" class="shrink-0 pl-1">
+              <Check class="h-3.5 w-3.5 stroke-[2.5] text-[var(--color-accent)]" />
             </div>
           </button>
-        ))}
+
+          <!-- 7 Fixed Palettes Grid / List -->
+          <div class="palette-colors-list space-y-1 max-h-44 md:max-h-52 overflow-y-auto pr-0.5">
+            {palettes.map((p) => (
+              <button
+                type="button"
+                class="palette-select-option group flex w-full cursor-pointer items-center justify-between rounded-lg border border-transparent px-2 py-1 text-zinc-700 transition-all hover:border-zinc-200 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-white"
+                data-palette-id={p.id}
+                data-palette-label={p.label}
+                role="menuitem"
+              >
+                <span class="flex min-w-0 items-center gap-2">
+                  <span
+                    class="h-3 w-3 shrink-0 rounded-full shadow-xs ring-1 ring-black/10 dark:ring-white/10"
+                    style={`background-color: ${p.color}`}
+                  />
+                  <span class="palette-option-label truncate text-[11.5px] font-medium">
+                    {p.label}
+                  </span>
+                </span>
+                <div class="flex shrink-0 items-center gap-1.5">
+                  <span class="font-mono text-[9px] text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300">
+                    {p.day}
+                  </span>
+                  <Check
+                    class="palette-check-icon hidden h-3 w-3 stroke-[2.5] text-[var(--color-accent)]"
+                    data-check-id={p.id}
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- COLUMNA 3: DISPOSICIÓN DOCK (Dock Position)  -->
+        <!-- ============================================ -->
+        <div class="space-y-2.5 pt-3 md:pt-0 md:pl-4">
+          <div class="flex items-center justify-between px-1 font-mono text-[10.5px] font-semibold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
+            <span>Posición del Dock</span>
+            <span class="rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-0.2 text-[9.5px] font-semibold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
+              Disposición
+            </span>
+          </div>
+
+          <!-- 4-Quadrant Visual Position Selector -->
+          <div class="grid grid-cols-2 gap-1.5">
+            <button
+              type="button"
+              data-dock-target="top"
+              class="dock-option-btn group flex flex-col items-center justify-center gap-1 p-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] text-zinc-700 dark:text-zinc-300 transition-all cursor-pointer text-center"
+              title="Anclar en borde superior"
+            >
+              <PanelTop class="w-4 h-4 text-[var(--color-accent)] transition-transform group-hover:-translate-y-0.5" />
+              <span class="text-[11px] font-semibold">Arriba</span>
+            </button>
+
+            <button
+              type="button"
+              data-dock-target="bottom"
+              class="dock-option-btn group flex flex-col items-center justify-center gap-1 p-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] text-zinc-700 dark:text-zinc-300 transition-all cursor-pointer text-center"
+              title="Anclar en borde inferior"
+            >
+              <PanelBottom class="w-4 h-4 text-[var(--color-accent)] transition-transform group-hover:translate-y-0.5" />
+              <span class="text-[11px] font-semibold">Abajo</span>
+            </button>
+
+            <button
+              type="button"
+              data-dock-target="left"
+              class="dock-option-btn dock-side-btn group hidden lg:flex flex-col items-center justify-center gap-1 p-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] text-zinc-700 dark:text-zinc-300 transition-all cursor-pointer text-center"
+              title="Anclar en lateral izquierdo"
+            >
+              <PanelLeft class="w-4 h-4 text-[var(--color-accent)] transition-transform group-hover:-translate-x-0.5" />
+              <span class="text-[11px] font-semibold">Izquierda</span>
+            </button>
+
+            <button
+              type="button"
+              data-dock-target="right"
+              class="dock-option-btn dock-side-btn group hidden lg:flex flex-col items-center justify-center gap-1 p-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] text-zinc-700 dark:text-zinc-300 transition-all cursor-pointer text-center"
+              title="Anclar en lateral derecho"
+            >
+              <PanelRight class="w-4 h-4 text-[var(--color-accent)] transition-transform group-hover:translate-x-0.5" />
+              <span class="text-[11px] font-semibold">Derecha</span>
+            </button>
+          </div>
+
+          <p class="block lg:hidden text-[9px] text-zinc-400 dark:text-zinc-500 text-center font-mono pt-0.5">
+            Laterales en &ge; 1024px
+          </p>
+
+          <!-- Reset to Top Action -->
+          <div class="pt-1">
+            <button
+              type="button"
+              data-dock-target="top"
+              class="dock-option-btn flex w-full items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200/60 dark:border-zinc-800/60 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors font-mono text-[10.5px] cursor-pointer"
+            >
+              <RotateCcw class="w-3.5 h-3.5" />
+              <span>Restaurar posición</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Light / Dark Mode Toggle Button -->
-  <div class="relative group">
-    <button
-      type="button"
-      id="theme-toggle-btn"
-      class="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-200/60 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900/60 dark:hover:text-zinc-100"
-      aria-label="Cambiar entre modo claro y oscuro"
-      title="Alternar tema claro/oscuro"
-    >
-      <Sun class="theme-icon-sun hidden h-4 w-4 dark:block" />
-      <Moon class="theme-icon-moon block h-4 w-4 dark:hidden" />
-    </button>
-    <span
-      class="nav-tooltip pointer-events-none absolute py-1 px-2.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-zinc-900/95 dark:bg-zinc-800/95 text-white backdrop-blur-md shadow-lg border border-zinc-700/60 opacity-0 transition-all duration-150 scale-95 z-50"
-      role="tooltip"
-    >
-      Tema claro/oscuro
-    </span>
   </div>
 </div>
 

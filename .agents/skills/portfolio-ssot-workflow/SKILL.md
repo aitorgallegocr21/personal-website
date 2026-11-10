@@ -65,6 +65,8 @@ Before concluding any iteration or proposing a commit:
 1. Run `npm run check` (`astro check && tsc --noEmit`).
 2. Run `npm run build` (`astro check && astro build`).
 3. Confirm zero TypeScript errors, zero warnings, and zero broken assets in `dist/`.
-4. **Documentation Audit:**
-   - **Task-level:** If interfaces, props, styling tokens, or commands were added or changed, check whether `README.md`, `README.es.md`, `DESIGN_SYSTEM.md`, or task files need updating. Update only if there is an actual delta.
-   - **Phase-level:** On completing a phase, synchronize `docs/TASKS.md`, the corresponding `docs/tasks/` folder, and project summaries in both README files.
+4. **Documentation Audit & Context Preservation:**
+   - **Continuous Zero-Loss Rule:** It is strictly required to update documentation on **EVERY** change made to code, types, schemas, styles, components, or tasks.
+   - **Task-level:** If interfaces, props, styling tokens, routes, or commands were added or modified, update the relevant documentation (`docs/TASKS.md`, `docs/tasks/`, `docs/DESIGN_SYSTEM.md`, `README.md`, `README.es.md`, and/or `AGENTS.md`) in the exact same iteration.
+   - **Phase-level:** On completing a phase, synchronize `docs/TASKS.md` (archive phase to Completed Phases), the corresponding `docs/tasks/` folder, and feature summaries in both README files.
+5. **Git Branches:** Develop exclusively on `develop` (or feature branches targeting `develop`). Never commit unverified changes directly to `main`.

@@ -223,6 +223,12 @@
   --color-accent-contrast: #09090b;
 }
 
+html,
+body {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
 /* Smooth surface and text transitions */
 body,
 header,

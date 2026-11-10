@@ -32,3 +32,8 @@ chrome/
 # test outputs
 test-results/
 playwright-report/
+
+# generated printable cv pdf binaries
+public/cv/*.pdf
+!public/cv/.gitkeep
+

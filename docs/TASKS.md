@@ -8,11 +8,21 @@
 
 ## Active Phase
 
-- _None (All current backlog phases completed. Ready for next sprint/phase specification)._
+_No active phase currently in progress. All roadmap phases through Phase 26 are successfully delivered._
+
+---
+
+## Upcoming Phases (Backlog & Roadmapped)
+
+_No pending upcoming phases in backlog. New phases will be roadmapped as requirements arise._
 
 ---
 
 ## Completed Phases (Archive & Changelog)
+
+- [x] **[Phase 26: GitHub Live Metrics Engine & Bento Showcase](tasks/phase-26-github-activity-metrics/index.md)** — _Completed 2026-11-10_ (Automated GitHub Actions daily cron fetching GraphQL contribution metrics into typed SSOT snapshot, Zod runtime validation, native theme-adaptive contribution calendar heatmap with delegated floating tooltips, live streak statistics, top languages distribution bars, and portfolio flow integration at `#github` between Certificaciones and Filosofía).
+
+- [x] **[Phase 25: Dock Metamorphosis V2, Unified Interface Hub & Mobile Bottom Dock](tasks/phase-25-dock-v2-and-interface-hub/index.md)** — _Completed 2026-11-09_ (Restructure navigation links with icon + micro-labels macOS-dock style, consolidate theme, colors, skins and dock controls into a unified 3-column Bento Interface Hub, enforce tablet viewport docking bounds, enable mobile bottom dock with tactile vertical touch drag snapping, and implement upward-opening mobile navigation drawer).
 
 - [x] **[Phase 24: Desktop Dockable Navbar & Fluid Scroll-Spy Experience](tasks/phase-24-desktop-dockable-navbar-and-fluid-scrollspy/index.md)** — _Completed 2026-11-06_ (Desktop dockable navigation island with early magnetic edge snapping, layout metamorphosis with single-column vertical icon dock, directional flyout popovers in 4 orientations, page-level subtle backdrop blur keeping the dock visible, Hero origin indicator in horizontal and Beacon pulse in vertical, GPU-accelerated directional spring transitions for popovers, responsive colors fit without desktop scrollbar, continuous fluid scroll-spy indicator tracking exact scroll progress between sections at 60/120 FPS, and mobile navigation overlay drawer with zero layout shift, backdrop blur, and hardware-accelerated spring animations).
 
