@@ -85,7 +85,8 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **📐 Retrato Editorial & Columna de Contacto:** Insignia de retrato rectangular en proporción nativa, encabezado estructurado `// CONTACTO` con icono telefónico alineado e insignias de contacto optimizadas con defensa anti-scraping.
 - **🔍 Schema.org Enriquecido & SEO Automatizado:** Datos estructurados JSON-LD (`Person` y `ProfilePage`), `sitemap-index.xml` autogenerado con `@astrojs/sitemap`, directivas para motores de búsqueda en `robots.txt` y tarjeta social Open Graph dedicada de 1200x630 para compartir en redes.
 - **🖼️ Pipeline Nativo de Optimización de Assets:** Uso del componente nativo `<Image />` de Astro potenciado por Sharp, transcodificando capturas y retratos a WebP sin Cumulative Layout Shift (CLS) y reduciendo el peso de imágenes en un 97%.
-- **🧪 Suite Completa de Pruebas (Unitarias & E2E):** 94 tests unitarios con Vitest (integridad SSOT, cálculo de fechas, esquemas Zod, estado de skins, motor de scroll-spy, gestor de dock, schema-org, portapapeles) junto a 20 tests End-to-End en navegador real con Playwright automatizados en GitHub Actions CI con resolución elástica de Chromium.
+- **📊 Métricas en Vivo de GitHub & Heatmap de Contribuciones:** Ingestión automatizada en build mediante cron diario de GitHub Actions (`00:00 UTC`) y GraphQL, renderizando un mapa de calor nativo que se adapta al color de la paleta activa, rachas de actividad, estadísticas de repositorios y desglose de lenguajes con 0 KB de JS innecesario en cliente y soporte offline.
+- **🧪 Suite Completa de Pruebas (Unitarias & E2E):** 122 tests unitarios con Vitest (integridad SSOT, cálculo de fechas, esquemas Zod, estado de skins, motor de scroll-spy, gestor de dock, schema-org, portapapeles, esquemas y algoritmos de métricas de GitHub) junto a 26 tests End-to-End en navegador real con Playwright automatizados en GitHub Actions CI con resolución elástica de Chromium.
 - **🛡️ Privacidad & Protección Anti-Scraping:** El teléfono se inyecta en tiempo de compilación (`PUBLIC_PHONE`) mediante variables de entorno y se protege contra rastreadores web.
 
 ---
@@ -198,21 +199,22 @@ El proyecto sigue una estrategia estricta y limpia de dos ramas:
 
 ## 💻 Flujo de Desarrollo & Scripts
 
-| Comando                  | Acción                                                                                                                      |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| `npm run verify`         | Puerta de calidad completa y determinista (`check` + `lint` + `format` + `test` + `build`).                                 |
-| `npm run verify:fast`    | Puerta de calidad rápida (`check` + `lint` + `format` + `test`).                                                            |
-| `npm run dev`            | Inicia el servidor de desarrollo local en `http://localhost:4321`.                                                          |
-| `astro dev --background` | Arranca el servidor de desarrollo en segundo plano.                                                                         |
-| `npm run check`          | Valida tipos TypeScript y diagnóstico en archivos `.astro` sin compilar.                                                    |
-| `npm run lint`           | Ejecuta ESLint (flat config) validando reglas TypeScript, Astro y accesibilidad JSX.                                        |
-| `npm run format`         | Verifica el formateo del código con Prettier y ordenamiento de clases Tailwind CSS (`npm run format:fix` para corregir).    |
-| `npm test`               | Ejecuta la suite de pruebas unitarias con Vitest (87 tests cubriendo SSOT, fechas, temas, gestor de dock, scrollspy y Zod). |
-| `npm run test:e2e`       | Ejecuta la suite de pruebas End-to-End con Playwright (19 tests verificando interacciones y contención A4).                 |
-| `npm run build`          | Compila el bundle de producción estático en `/dist` tras verificar tipos y compilar PDFs headless.                          |
-| `npm run build:pdf`      | Genera los PDFs A4 deterministas para las 8 paletas de color con Chromium headless.                                         |
-| `npm run build:og`       | Genera la tarjeta Open Graph de 1200x630 para compartir en redes sociales.                                                  |
-| `npm run preview`        | Levanta un servidor local para previsualizar el contenido generado en `/dist`.                                              |
+| Comando                  | Acción                                                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run verify`         | Puerta de calidad completa y determinista (`check` + `lint` + `format` + `test` + `build`).                                                |
+| `npm run verify:fast`    | Puerta de calidad rápida (`check` + `lint` + `format` + `test`).                                                                           |
+| `npm run dev`            | Inicia el servidor de desarrollo local en `http://localhost:4321`.                                                                         |
+| `astro dev --background` | Arranca el servidor de desarrollo en segundo plano.                                                                                        |
+| `npm run check`          | Valida tipos TypeScript y diagnóstico en archivos `.astro` sin compilar.                                                                   |
+| `npm run lint`           | Ejecuta ESLint (flat config) validando reglas TypeScript, Astro y accesibilidad JSX.                                                       |
+| `npm run format`         | Verifica el formateo del código con Prettier y ordenamiento de clases Tailwind CSS (`npm run format:fix` para corregir).                   |
+| `npm test`               | Ejecuta la suite de pruebas unitarias con Vitest (122 tests cubriendo SSOT, fechas, temas, gestor de dock, scrollspy, github utils y Zod). |
+| `npm run test:e2e`       | Ejecuta la suite de pruebas End-to-End con Playwright (26 tests verificando interacciones y contención A4).                                |
+| `npm run sync:github`    | Obtiene las últimas métricas y calendario de GitHub vía GraphQL API y actualiza `src/data/github-data.json`.                               |
+| `npm run build`          | Compila el bundle de producción estático en `/dist` tras verificar tipos y compilar PDFs headless.                                         |
+| `npm run build:pdf`      | Genera los PDFs A4 deterministas para las 8 paletas de color con Chromium headless.                                                        |
+| `npm run build:og`       | Genera la tarjeta Open Graph de 1200x630 para compartir en redes sociales.                                                                 |
+| `npm run preview`        | Levanta un servidor local para previsualizar el contenido generado en `/dist`.                                                             |
 
 ---
 

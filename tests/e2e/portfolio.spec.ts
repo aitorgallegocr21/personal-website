@@ -676,4 +676,51 @@ test.describe('Web Portfolio Interactive E2E', () => {
     // Must be 3 columns on 1024px
     expect(cols1024).toBe(3);
   });
+
+  test('renders GitHub activity bento section with interactive heatmap and language breakdown', async ({
+    page,
+  }) => {
+    await page.goto('./');
+    await page.waitForLoadState('networkidle');
+
+    // Section exists and is visible
+    const githubSection = page.locator('#github');
+    await expect(githubSection).toBeAttached();
+    await expect(githubSection).toBeVisible();
+
+    // Verify heatmap canvas exists and contains cells
+    const heatmapScroll = githubSection.locator('[data-heatmap-scroll]');
+    await expect(heatmapScroll).toBeVisible();
+
+    const cells = heatmapScroll.locator('.heatmap-cell');
+    const cellCount = await cells.count();
+    expect(cellCount).toBeGreaterThan(300);
+
+    // Verify metrics cards exist
+    await expect(
+      githubSection.getByText('Contribuciones', { exact: true })
+    ).toBeVisible();
+    await expect(
+      githubSection.getByText('Racha Actual', { exact: true })
+    ).toBeVisible();
+    await expect(
+      githubSection.getByText('Racha Máxima', { exact: true })
+    ).toBeVisible();
+    await expect(
+      githubSection.getByText('Repositorios', { exact: true })
+    ).toBeVisible();
+
+    // Verify language distribution
+    await expect(
+      githubSection.getByText('Distribución de Lenguajes')
+    ).toBeVisible();
+    await expect(githubSection.getByText('TypeScript')).toBeVisible();
+
+    // Verify profile CTA button
+    const profileCta = githubSection.locator('a', {
+      hasText: /Visitar Perfil en GitHub/i,
+    });
+    await expect(profileCta).toBeVisible();
+    await expect(profileCta).toHaveAttribute('href', /github\.com/);
+  });
 });

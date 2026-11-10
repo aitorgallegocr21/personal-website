@@ -93,21 +93,13 @@ weeks.forEach((week, index) => {
 
                 return (
                   <div
-                    class="heatmap-cell group/cell relative h-[11px] w-[11px] rounded-xs transition-transform duration-100 hover:scale-125 hover:z-20 sm:h-[12px] sm:w-[12px] sm:rounded-xs"
+                    class="heatmap-cell relative h-[11px] w-[11px] rounded-xs transition-transform duration-100 hover:z-20 hover:scale-125 sm:h-[12px] sm:w-[12px] sm:rounded-xs cursor-pointer"
                     data-level={day.level}
+                    data-tooltip={tooltipText}
                     role="gridcell"
                     aria-label={tooltipText}
                     title={tooltipText}
-                  >
-                    <!-- Pure CSS Accessible Hover Tooltip -->
-                    <div
-                      role="tooltip"
-                      class="pointer-events-none absolute bottom-full left-1/2 z-50 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-zinc-900 px-2 py-1 text-[10px] font-mono text-zinc-100 opacity-0 shadow-lg transition-opacity duration-150 group-hover/cell:opacity-100 group-focus-visible/cell:opacity-100 dark:bg-zinc-100 dark:text-zinc-900"
-                    >
-                      {tooltipText}
-                      <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-900 dark:border-t-zinc-100" />
-                    </div>
-                  </div>
+                  />
                 );
               })}
             </div>
@@ -159,11 +151,21 @@ weeks.forEach((week, index) => {
       <span class="text-zinc-400">Más</span>
     </div>
   </div>
+
+  <!-- Floating Accessible Hover Tooltip -->
+  <div
+    id="heatmap-floating-tooltip"
+    role="tooltip"
+    class="pointer-events-none fixed z-50 hidden -translate-x-1/2 -translate-y-full rounded-md bg-zinc-900 px-2 py-1 text-[10px] font-mono text-zinc-100 shadow-lg dark:bg-zinc-100 dark:text-zinc-900"
+  >
+    <span id="heatmap-tooltip-text"></span>
+    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-900 dark:border-t-zinc-100"></div>
+  </div>
 </div>
 
 <script>
-  // Ensure calendar scrolls to right edge on small devices so recent activity is visible
-  function initHeatmapScroll() {
+  function initHeatmap() {
+    // 1. Ensure calendar scrolls to right edge on small devices so recent activity is visible
     const containers = document.querySelectorAll<HTMLElement>(
       '[data-heatmap-scroll]'
     );
@@ -172,15 +174,45 @@ weeks.forEach((week, index) => {
         container.scrollLeft = container.scrollWidth - container.clientWidth;
       }
     });
+
+    // 2. Delegate hover tooltip positioning
+    const tooltip = document.getElementById('heatmap-floating-tooltip');
+    const tooltipText = document.getElementById('heatmap-tooltip-text');
+
+    if (!tooltip || !tooltipText) return;
+
+    document.addEventListener('pointerover', (e) => {
+      const target = (e.target as HTMLElement)?.closest<HTMLElement>(
+        '.heatmap-cell[data-tooltip]'
+      );
+      if (!target) return;
+      const text = target.getAttribute('data-tooltip');
+      if (!text) return;
+
+      tooltipText.textContent = text;
+      const rect = target.getBoundingClientRect();
+      tooltip.style.left = `${rect.left + rect.width / 2}px`;
+      tooltip.style.top = `${rect.top - 6}px`;
+      tooltip.classList.remove('hidden');
+    });
+
+    document.addEventListener('pointerout', (e) => {
+      const target = (e.target as HTMLElement)?.closest<HTMLElement>(
+        '.heatmap-cell[data-tooltip]'
+      );
+      if (target) {
+        tooltip.classList.add('hidden');
+      }
+    });
   }
 
   // Run on page load and astro page transitions
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeatmapScroll);
+    document.addEventListener('DOMContentLoaded', initHeatmap);
   } else {
-    initHeatmapScroll();
+    initHeatmap();
   }
-  document.addEventListener('astro:page-load', initHeatmapScroll);
+  document.addEventListener('astro:page-load', initHeatmap);
 </script>
 
 <style>

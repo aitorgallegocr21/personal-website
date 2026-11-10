@@ -1,6 +1,6 @@
 # Phase 26: GitHub Live Metrics Engine & Bento Showcase
 
-**Status:** Planned (Next Phase following Phase 25)  
+**Status:** Completed (2026-11-10)  
 **Target Branch:** `feat/phase-26-github-activity-metrics`  
 **Core Mission:** Implement a dedicated, rich GitHub Activity and Open Source metrics section in the portfolio web flow, positioned between Certificaciones and Filosofía, featuring a native theme-colored contribution calendar heatmap, live streak statistics, top languages distribution, repository highlights, and automated build-time data ingestion via GitHub Actions GraphQL daily cron.
 
@@ -46,4 +46,4 @@
 - [x] **[Task 26.2: Data Schema, Zod Validation & SSOT Typing](task-26.2-github-data-schema-and-zod-validation.md):** TypeScript interfaces (`src/types/github.ts`), runtime Zod schema (`src/schemas/github.schema.ts`), data loader, and unit tests (`tests/unit/github-schema.test.ts`).
 - [x] **[Task 26.3: Theme-Adaptive Contribution Heatmap Component](task-26.3-theme-adaptive-contribution-heatmap.md):** Native SVG/Grid calendar consuming CSS theme tokens (`--color-accent`), streak calculation algorithms (`src/utils/github.ts`), and unit test suite (`tests/unit/github-utils.test.ts`).
 - [x] **[Task 26.4: GitHub Bento Grid Section & Navigation Link Integration](task-26.4-github-bento-section-and-navigation-integration.md):** Bento showcase card assembly (`src/components/skins/bento/BentoGitHub.astro`), inclusion between Certificaciones and Filosofía, `#github` (04) navigation dock item in `Navbar.astro`, and fluid scroll-spy integration.
-- [ ] **[Task 26.5: Verification, Unit Testing & Documentation Sync](task-26.5-verification-e2e-and-docs-sync.md):** Playwright E2E tests, mobile 375px/390px audit, 0-overflow verification, documentation updates (`TASKS.md`, `README.md`, `README.es.md`), and branch merge.
+- [x] **[Task 26.5: Verification, Unit Testing & Documentation Sync](task-26.5-verification-e2e-and-docs-sync.md):** Playwright E2E tests, mobile 375px/390px audit, 0-overflow verification, documentation updates (`TASKS.md`, `README.md`, `README.es.md`), and branch merge.
