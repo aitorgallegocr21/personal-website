@@ -121,6 +121,8 @@ const { personal } = cvData;
     const btn = document.getElementById('copy-email-btn');
     const label = document.getElementById('copy-email-label');
     if (btn && label) {
+      if (btn.dataset.bound === 'true') return;
+      btn.dataset.bound = 'true';
       bindCopyButton(btn, {
         getText: () => btn.getAttribute('data-email'),
         labelElement: label,

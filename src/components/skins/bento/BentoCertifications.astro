@@ -165,83 +165,91 @@ const categories = [
 </section>
 
 <script>
-  const buttons =
-    document.querySelectorAll<HTMLButtonElement>('.cert-filter-btn');
-  const cards = document.querySelectorAll<HTMLElement>('.cert-card');
+  function setupCertFilters() {
+    const buttons =
+      document.querySelectorAll<HTMLButtonElement>('.cert-filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.cert-card');
 
-  const activeClasses = [
-    'active',
-    'bg-[var(--color-accent)]',
-    'text-[var(--color-accent-contrast)]',
-    'border-[var(--color-accent)]',
-    'font-semibold',
-    'shadow-xs',
-    'ring-1',
-    'ring-[var(--color-accent-border)]',
-  ];
+    if (buttons.length === 0 || buttons[0]?.dataset.bound === 'true') return;
 
-  const inactiveClasses = [
-    'bg-zinc-100',
-    'dark:bg-zinc-900/60',
-    'text-zinc-600',
-    'dark:text-zinc-400',
-    'border-zinc-200',
-    'dark:border-zinc-800',
-    'font-medium',
-  ];
+    const activeClasses = [
+      'active',
+      'bg-[var(--color-accent)]',
+      'text-[var(--color-accent-contrast)]',
+      'border-[var(--color-accent)]',
+      'font-semibold',
+      'shadow-xs',
+      'ring-1',
+      'ring-[var(--color-accent-border)]',
+    ];
 
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-filter');
-      if (!filter) return;
+    const inactiveClasses = [
+      'bg-zinc-100',
+      'dark:bg-zinc-900/60',
+      'text-zinc-600',
+      'dark:text-zinc-400',
+      'border-zinc-200',
+      'dark:border-zinc-800',
+      'font-medium',
+    ];
 
-      // Update active button state
-      buttons.forEach((b) => {
-        const isCurrent = b === btn;
-        const countSpan = b.querySelector('.cert-filter-count');
+    buttons.forEach((btn) => {
+      btn.dataset.bound = 'true';
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        if (!filter) return;
 
-        if (isCurrent) {
-          b.classList.remove(...inactiveClasses);
-          b.classList.add(...activeClasses);
-          if (countSpan) {
-            countSpan.classList.remove(
-              'bg-zinc-200',
-              'dark:bg-zinc-800',
-              'text-zinc-600',
-              'dark:text-zinc-400'
-            );
-            countSpan.classList.add(
-              'bg-black/20',
-              'text-[var(--color-accent-contrast)]'
-            );
+        // Update active button state
+        buttons.forEach((b) => {
+          const isCurrent = b === btn;
+          const countSpan = b.querySelector('.cert-filter-count');
+
+          if (isCurrent) {
+            b.classList.remove(...inactiveClasses);
+            b.classList.add(...activeClasses);
+            if (countSpan) {
+              countSpan.classList.remove(
+                'bg-zinc-200',
+                'dark:bg-zinc-800',
+                'text-zinc-600',
+                'dark:text-zinc-400'
+              );
+              countSpan.classList.add(
+                'bg-black/20',
+                'text-[var(--color-accent-contrast)]'
+              );
+            }
+          } else {
+            b.classList.remove(...activeClasses);
+            b.classList.add(...inactiveClasses);
+            if (countSpan) {
+              countSpan.classList.remove(
+                'bg-black/20',
+                'text-[var(--color-accent-contrast)]'
+              );
+              countSpan.classList.add(
+                'bg-zinc-200',
+                'dark:bg-zinc-800',
+                'text-zinc-600',
+                'dark:text-zinc-400'
+              );
+            }
           }
-        } else {
-          b.classList.remove(...activeClasses);
-          b.classList.add(...inactiveClasses);
-          if (countSpan) {
-            countSpan.classList.remove(
-              'bg-black/20',
-              'text-[var(--color-accent-contrast)]'
-            );
-            countSpan.classList.add(
-              'bg-zinc-200',
-              'dark:bg-zinc-800',
-              'text-zinc-600',
-              'dark:text-zinc-400'
-            );
-          }
-        }
-      });
+        });
 
-      // Show/hide cards
-      cards.forEach((card) => {
-        const category = card.getAttribute('data-category');
-        if (filter === 'Todas' || category === filter) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
+        // Show/hide cards
+        cards.forEach((card) => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'Todas' || category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
       });
     });
-  });
+  }
+
+  setupCertFilters();
+  document.addEventListener('astro:after-swap', setupCertFilters);
 </script>

@@ -134,6 +134,8 @@ const age = personal.birthDate ? calculateAge(personal.birthDate) : 19;
     const copyIcon = document.getElementById('hero-copy-icon');
 
     if (copyBtn && copyText && copyIcon) {
+      if (copyBtn.dataset.bound === 'true') return;
+      copyBtn.dataset.bound = 'true';
       bindCopyButton(copyBtn, {
         getText: () => copyBtn.getAttribute('data-email'),
         labelElement: copyText,

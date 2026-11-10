@@ -439,6 +439,14 @@ export function openPaletteMenu(): void {
 export function bindThemeControls(
   container: HTMLElement | Document = document
 ): void {
+  if (container instanceof HTMLElement) {
+    if (container.dataset.themeBound === 'true') {
+      syncThemeModeUI(container);
+      return;
+    }
+    container.dataset.themeBound = 'true';
+  }
+
   const themeBtn = container.querySelector('#theme-toggle-btn');
   const paletteBtn = container.querySelector('#palette-menu-btn');
   const paletteDropdown = container.querySelector('#palette-dropdown');

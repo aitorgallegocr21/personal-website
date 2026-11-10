@@ -164,6 +164,8 @@ weeks.forEach((week, index) => {
 </div>
 
 <script>
+  let isHeatmapTooltipBound = false;
+
   function initHeatmap() {
     // 1. Ensure calendar scrolls to right edge on small devices so recent activity is visible
     const containers = document.querySelectorAll<HTMLElement>(
@@ -185,6 +187,9 @@ weeks.forEach((week, index) => {
     if (tooltip.parentElement !== document.body) {
       document.body.appendChild(tooltip);
     }
+
+    if (isHeatmapTooltipBound) return;
+    isHeatmapTooltipBound = true;
 
     document.addEventListener('pointerover', (e) => {
       const target = (e.target as HTMLElement)?.closest<HTMLElement>(

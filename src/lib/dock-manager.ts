@@ -511,14 +511,18 @@ export function initDockManager(
   // Wire dock option buttons across popover and document
   const optionButtons =
     document.querySelectorAll<HTMLButtonElement>('[data-dock-target]');
+  const optionCleanups: Array<() => void> = [];
+
   optionButtons.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
+    const onOptionClick = (e: MouseEvent) => {
       e.stopPropagation();
       const target = btn.getAttribute('data-dock-target');
       if (isValidDockPosition(target)) {
         applyPosition(target, true);
       }
-    });
+    };
+    btn.addEventListener('click', onOptionClick);
+    optionCleanups.push(() => btn.removeEventListener('click', onOptionClick));
   });
 
   return {
@@ -526,6 +530,8 @@ export function initDockManager(
     setPosition: (pos: DockPosition) => applyPosition(pos, true),
     reset: () => applyPosition('top', true),
     destroy: () => {
+      optionCleanups.forEach((cleanup) => cleanup());
+      optionCleanups.length = 0;
       if (menuCloseTimeout !== null) {
         window.clearTimeout(menuCloseTimeout);
         menuCloseTimeout = null;

@@ -70,8 +70,8 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 - **Mandatory Print Configuration:**
   ```css
   @page {
-    size: A4;
-    margin: 10mm 12mm;
+    size: A4 portrait;
+    margin: 8mm 10mm;
   }
   ```
 - **Page Break Avoidance:** Always apply `break-inside-avoid` to experience cards, projects, and education items.
@@ -90,7 +90,7 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 - `npm run check`: Check TypeScript and Astro types (`astro check && tsc --noEmit`).
 - `npm run lint`: Run ESLint checks across codebase.
 - `npm run format`: Check Prettier formatting and Tailwind class ordering.
-- `npm test`: Run Vitest unit tests (94 tests).
+- `npm test`: Run Vitest unit tests (122 tests).
 - `npm run test:e2e`: Run Playwright End-to-End browser tests.
 - `npm run build`: Type-check and compile static output to `/dist` and build PDF variants.
 - `npm run build:pdf`: Compile deterministic headless Chromium A4 PDFs across all 8 color palettes.
@@ -114,6 +114,7 @@ On EVERY task or change executed by an agent, strictly follow this loop:
 4. **Anti-Scraping Defenses:**
    - On web interactive view (`/`), visually obfuscate phone or render via user interaction (click-to-reveal or CSS reverse rendering `[direction:rtl] [unicode-bidi:bidi-override]`).
    - On print view (`/cv`), ensure clean semantic `tel:` link for PDF export.
+5. **PDF Binary Privacy:** Precompiled PDF binaries in `public/cv/*.pdf` are strictly gitignored to guarantee that builds generated with local `.env` never leak sensitive phone numbers into git history. Production PDFs are compiled deterministically during CI/CD in `dist/cv/` via GitHub Actions secrets.
 
 ---
 
