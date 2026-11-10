@@ -181,6 +181,11 @@ const navItems = [
 </header>
 
 <script>
+  import {
+    lockBackgroundScroll,
+    unlockBackgroundScroll,
+  } from '@/lib/theme-manager';
+
   function getOrCreateMobileBackdrop(onClose?: () => void): HTMLElement {
     let backdrop = document.getElementById('mobile-nav-backdrop');
     if (!backdrop) {
@@ -228,9 +233,7 @@ const navItems = [
         !paletteDropdown.classList.contains('hidden') &&
         paletteDropdown.getAttribute('data-state') === 'open';
       if (!isPaletteOpen) {
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-        document.body.style.touchAction = '';
+        unlockBackgroundScroll();
       }
 
       toggleBtn.setAttribute('aria-expanded', 'false');
@@ -258,10 +261,8 @@ const navItems = [
         mobileCloseTimeout = null;
       }
 
-      // Lock document scroll while mobile menu is open
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
+      // Lock document scroll while mobile menu is open without breaking sticky header
+      lockBackgroundScroll();
 
       const backdrop = getOrCreateMobileBackdrop(closeMenu);
       backdrop.classList.remove('hidden');
