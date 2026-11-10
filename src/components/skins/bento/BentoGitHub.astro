@@ -1,0 +1,253 @@
+---
+import { getGitHubMetrics } from '@/data/github';
+import { cvData } from '@/data/cv-data';
+import GitHubHeatmap from '@/components/portfolio/GitHubHeatmap.astro';
+import {
+  Github,
+  GitCommit,
+  Flame,
+  Trophy,
+  BookMarked,
+  ExternalLink,
+  Code2,
+} from 'lucide-astro';
+
+const data = getGitHubMetrics();
+const { personal } = cvData;
+const githubProfileUrl =
+  personal.github || `https://github.com/${data.username}`;
+const githubReposUrl = `${githubProfileUrl}?tab=repositories`;
+
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+---
+
+<section id="github" class="scroll-mt-20 py-12 sm:scroll-mt-24 sm:py-16">
+  <!-- Section Header -->
+  <div class="mb-8 sm:mb-10">
+    <div class="mb-1 inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+      <span>// 04. Open Source &amp; Actividad</span>
+    </div>
+    <h2 class="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-100">
+      Actividad en GitHub &amp; Métricas de Código
+    </h2>
+    <p class="mt-1 max-w-2xl text-sm text-zinc-600 sm:text-base dark:text-zinc-400">
+      Compromiso diario con el código, desarrollo continuo en ecosistemas
+      frontend y backend, y contribuciones activas en proyectos open source.
+    </p>
+  </div>
+
+  <!-- Bento Grid Container -->
+  <div class="grid grid-cols-12 gap-4 sm:gap-6">
+    <!-- Card A: Full Contribution Heatmap Showcase (col-span-12) -->
+    <div class="col-span-12 flex flex-col gap-2">
+      <div class="flex items-center justify-between px-1">
+        <div class="flex items-center gap-2">
+          <span class="inline-block h-2 w-2 animate-pulse rounded-full bg-[var(--color-accent)]"></span>
+          <span class="font-mono text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+            Calendario de Contribuciones
+          </span>
+        </div>
+        <span class="font-mono text-[11px] text-zinc-400 dark:text-zinc-500">
+          Sincronizado vía GitHub Actions (GraphQL API)
+        </span>
+      </div>
+      <GitHubHeatmap calendar={data.calendar} />
+    </div>
+
+    <!-- Card B: Key Metrics Ribbon (4 Cards, col-span-12) -->
+    <div class="col-span-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+      <!-- 1. Total Contributions -->
+      <div class="flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-xs backdrop-blur-md sm:p-5 dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:shadow-none">
+        <div class="mb-2 flex items-center justify-between text-zinc-400 dark:text-zinc-500">
+          <span class="font-mono text-xs font-medium">Contribuciones</span>
+          <GitCommit class="h-4 w-4 text-[var(--color-accent)]" />
+        </div>
+        <div>
+          <div class="font-mono text-2xl font-bold text-zinc-900 sm:text-3xl dark:text-zinc-100">
+            {data.totalContributions}
+          </div>
+          <p class="mt-0.5 text-[11px] text-zinc-500 dark:text-zinc-400">
+            Últimos 365 días
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Current Streak -->
+      <div class="flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-xs backdrop-blur-md sm:p-5 dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:shadow-none">
+        <div class="mb-2 flex items-center justify-between text-zinc-400 dark:text-zinc-500">
+          <span class="font-mono text-xs font-medium">Racha Actual</span>
+          <Flame class="h-4 w-4 text-[var(--color-accent)]" />
+        </div>
+        <div>
+          <div class="font-mono text-2xl font-bold text-zinc-900 sm:text-3xl dark:text-zinc-100">
+            {data.currentStreak}
+            <span class="font-sans text-xs font-normal text-zinc-500 dark:text-zinc-400">
+              días
+            </span>
+          </div>
+          <p class="mt-0.5 text-[11px] text-zinc-500 dark:text-zinc-400">
+            Días consecutivos activos
+          </p>
+        </div>
+      </div>
+
+      <!-- 3. Longest Streak -->
+      <div class="flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-xs backdrop-blur-md sm:p-5 dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:shadow-none">
+        <div class="mb-2 flex items-center justify-between text-zinc-400 dark:text-zinc-500">
+          <span class="font-mono text-xs font-medium">Racha Máxima</span>
+          <Trophy class="h-4 w-4 text-[var(--color-accent)]" />
+        </div>
+        <div>
+          <div class="font-mono text-2xl font-bold text-zinc-900 sm:text-3xl dark:text-zinc-100">
+            {data.longestStreak}
+            <span class="font-sans text-xs font-normal text-zinc-500 dark:text-zinc-400">
+              días
+            </span>
+          </div>
+          <p class="mt-0.5 text-[11px] text-zinc-500 dark:text-zinc-400">
+            Récord de constancia
+          </p>
+        </div>
+      </div>
+
+      <!-- 4. Public Repositories -->
+      <a
+        href={githubReposUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-xs backdrop-blur-md transition-all duration-200 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] sm:p-5 dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:shadow-none"
+      >
+        <div class="mb-2 flex items-center justify-between text-zinc-400 dark:text-zinc-500">
+          <span class="font-mono text-xs font-medium">Repositorios</span>
+          <ExternalLink class="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--color-accent)]" />
+        </div>
+        <div>
+          <div class="font-mono text-2xl font-bold text-zinc-900 transition-colors group-hover:text-[var(--color-accent)] sm:text-3xl dark:text-zinc-100">
+            {data.totalRepositories}
+          </div>
+          <p class="mt-0.5 flex items-center gap-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+            <span>Públicos en GitHub</span>
+            <span class="text-[var(--color-accent)] opacity-0 transition-opacity group-hover:opacity-100">
+              ↗
+            </span>
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Card C: Top Languages Distribution Card (col-span-12 lg:col-span-7) -->
+    <div class="col-span-12 flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white/70 p-5 shadow-xs backdrop-blur-md sm:p-6 lg:col-span-7 dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:shadow-none">
+      <div>
+        <div class="mb-1 flex items-center gap-2">
+          <Code2 class="h-4 w-4 text-[var(--color-accent)]" />
+          <h3 class="text-base font-bold text-zinc-900 dark:text-zinc-100">
+            Distribución de Lenguajes
+          </h3>
+        </div>
+        <p class="mb-5 text-xs text-zinc-500 dark:text-zinc-400">
+          Porcentaje acumulado por volumen de código en repositorios públicos.
+        </p>
+
+        <!-- Multi-segment Stacked Bar -->
+        <div class="mb-5 flex h-3.5 w-full gap-0.5 overflow-hidden rounded-full bg-zinc-100 p-0.5 dark:bg-zinc-800">
+          {data.topLanguages.map((lang) => (
+            <div
+              class="h-full first:rounded-l-full last:rounded-r-full transition-all duration-300 hover:opacity-80"
+              style={`width: ${lang.percentage}%; background-color: ${lang.color};`}
+              title={`${lang.name}: ${lang.percentage}% (${formatBytes(lang.size)})`}
+            />
+          ))}
+        </div>
+
+        <!-- Languages Breakdown Chips -->
+        <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+          {data.topLanguages.map((lang) => (
+            <div class="flex items-center justify-between rounded-xl border border-zinc-200/60 bg-zinc-50/50 p-2 text-xs dark:border-zinc-800/60 dark:bg-zinc-900/40">
+              <div class="flex min-w-0 items-center gap-2">
+                <span
+                  class="h-2.5 w-2.5 shrink-0 rounded-full"
+                  style={`background-color: ${lang.color};`}
+                />
+                <span class="truncate font-medium text-zinc-800 dark:text-zinc-200">
+                  {lang.name}
+                </span>
+              </div>
+              <span class="ml-1 shrink-0 font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+                {lang.percentage}%
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Card D: Profile & Repository Highlights CTA (col-span-12 lg:col-span-5) -->
+    <div class="col-span-12 flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white/70 p-5 shadow-xs backdrop-blur-md sm:p-6 lg:col-span-5 dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:shadow-none">
+      <div>
+        <div class="mb-1 flex items-center gap-2">
+          <Github class="h-4 w-4 text-[var(--color-accent)]" />
+          <h3 class="text-base font-bold text-zinc-900 dark:text-zinc-100">
+            Perfil &amp; Repositorios
+          </h3>
+        </div>
+        <p class="mb-4 text-xs text-zinc-500 dark:text-zinc-400">
+          Código abierto, arquitecturas modulares y experimentación técnica
+          continua.
+        </p>
+
+        <!-- Highlights mini-list -->
+        <div class="mb-5 space-y-2">
+          {data.highlights.slice(0, 3).map((repo) => (
+            <a
+              href={repo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center justify-between rounded-xl border border-zinc-200/60 bg-zinc-50/50 p-2.5 transition-all duration-200 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)] dark:border-zinc-800/60 dark:bg-zinc-900/40"
+            >
+              <div class="flex min-w-0 items-center gap-2">
+                <BookMarked class="h-3.5 w-3.5 shrink-0 text-zinc-400 transition-colors group-hover:text-[var(--color-accent)]" />
+                <span class="truncate font-mono text-xs font-medium text-zinc-800 transition-colors group-hover:text-[var(--color-accent)] dark:text-zinc-200">
+                  {repo.name}
+                </span>
+              </div>
+              {repo.language && (
+                <span
+                  class="shrink-0 rounded-full border px-2 py-0.5 font-mono text-[10px]"
+                  style={`color: ${repo.languageColor || 'inherit'}; border-color: ${repo.languageColor ? repo.languageColor + '40' : 'rgba(161,161,170,0.3)'};`}
+                >
+                  {repo.language}
+                </span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col gap-2.5 pt-2 sm:flex-row">
+        <a
+          href={githubProfileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] px-4 py-2.5 text-xs font-medium text-[var(--color-accent-contrast)] shadow-xs transition-all duration-200 hover:bg-[var(--color-accent-hover)]"
+        >
+          <Github class="h-3.5 w-3.5" />
+          <span>Visitar Perfil en GitHub</span>
+          <ExternalLink class="ml-0.5 h-3 w-3 opacity-80" />
+        </a>
+        <a
+          href={githubReposUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-1.5 rounded-xl border border-zinc-300 bg-white/50 px-3.5 py-2.5 text-xs font-medium text-zinc-700 transition-all duration-200 hover:border-[var(--color-accent-border)] hover:text-[var(--color-accent)] dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300"
+        >
+          <span>Ver Todos ({data.totalRepositories})</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

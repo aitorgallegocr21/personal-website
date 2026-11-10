@@ -30,6 +30,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
       '#proyectos',
       '#trayectoria',
       '#certificaciones',
+      '#github',
       '#filosofia',
       '#contacto',
     ];
@@ -107,7 +108,7 @@ test.describe('Web Portfolio Interactive E2E', () => {
 
     // Check all mobile links exist
     const mobileLinks = mobileMenu.locator('.mobile-nav-link');
-    await expect(mobileLinks).toHaveCount(6); // 5 sections + CV button
+    await expect(mobileLinks).toHaveCount(7); // 6 sections + CV button
 
     // Close on Escape
     await page.keyboard.press('Escape');
