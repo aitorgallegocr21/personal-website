@@ -1,6 +1,6 @@
 # Phase 26: GitHub Live Metrics Engine & Bento Showcase
 
-**Status:** Planned (Next Phase following Phase 25)  
+**Status:** Completed (2026-11-10)  
 **Target Branch:** `feat/phase-26-github-activity-metrics`  
 **Core Mission:** Implement a dedicated, rich GitHub Activity and Open Source metrics section in the portfolio web flow, positioned between Certificaciones and Filosofía, featuring a native theme-colored contribution calendar heatmap, live streak statistics, top languages distribution, repository highlights, and automated build-time data ingestion via GitHub Actions GraphQL daily cron.
 
@@ -36,14 +36,14 @@
    - **Contribution Heatmap Card:** Full annual interactive calendar grid with hover tooltips showing date and contributions count.
    - **Metrics Ribbon:** 4 highlight cards: Total Contributions, Current Streak (días en racha), Longest Streak (máxima racha), and Public Repositories.
    - **Languages Breakdown Card:** Horizontal stacked bar and chip list showing top languages (TypeScript, Java, Python, Astro, etc.) with accurate percentages.
-   - **Direct Profile Card / CTA:** Quick links to visit GitHub profile `@aitorgcr`, follow, or view latest commits.
+   - **Direct Profile Card / CTA:** Quick links to visit GitHub profile `@aitorgallegocr21`, follow, or view latest commits.
 
 ---
 
 ## 2. Planned Task Breakdown
 
-- **Task 26.1: GitHub GraphQL Fetcher & Daily CI Automation Engine:** Ingestion script, GraphQL queries, SSOT JSON storage, and GitHub Actions cron workflow.
-- **Task 26.2: Data Schema, Zod Validation & SSOT Typing:** TypeScript interfaces (`src/types/github.ts`) and Zod schema (`src/schemas/github.schema.ts`).
-- **Task 26.3: Theme-Adaptive Contribution Heatmap Component:** Native SVG/Grid calendar consuming CSS theme tokens with tooltips and streak calculations.
-- **Task 26.4: GitHub Bento Grid Section & Navigation Link Integration:** Assembly of metrics cards, language breakdown, profile CTA, and integration into the navbar/dock item `#github` (`04`).
-- **Task 26.5: Verification, Unit Testing & Documentation Sync:** Unit tests for streak/stats algorithms, responsive mobile audit, and documentation updates.
+- [x] **[Task 26.1: GitHub GraphQL Fetcher & Daily CI Automation Engine](task-26.1-github-graphql-fetcher-and-ci-cron.md):** Ingestion script (`scripts/fetch-github-data.mjs`), GraphQL queries, SSOT fallback snapshot (`src/data/github-data.json`), and GitHub Actions daily cron workflow (`.github/workflows/github-sync.yml`).
+- [x] **[Task 26.2: Data Schema, Zod Validation & SSOT Typing](task-26.2-github-data-schema-and-zod-validation.md):** TypeScript interfaces (`src/types/github.ts`), runtime Zod schema (`src/schemas/github.schema.ts`), data loader, and unit tests (`tests/unit/github-schema.test.ts`).
+- [x] **[Task 26.3: Theme-Adaptive Contribution Heatmap Component](task-26.3-theme-adaptive-contribution-heatmap.md):** Native SVG/Grid calendar consuming CSS theme tokens (`--color-accent`), streak calculation algorithms (`src/utils/github.ts`), and unit test suite (`tests/unit/github-utils.test.ts`).
+- [x] **[Task 26.4: GitHub Bento Grid Section & Navigation Link Integration](task-26.4-github-bento-section-and-navigation-integration.md):** Bento showcase card assembly (`src/components/skins/bento/BentoGitHub.astro`), inclusion between Certificaciones and Filosofía, `#github` (04) navigation dock item in `Navbar.astro`, and fluid scroll-spy integration.
+- [x] **[Task 26.5: Verification, Unit Testing & Documentation Sync](task-26.5-verification-e2e-and-docs-sync.md):** Playwright E2E tests, mobile 375px/390px audit, 0-overflow verification, documentation updates (`TASKS.md`, `README.md`, `README.es.md`), and branch merge.

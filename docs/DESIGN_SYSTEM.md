@@ -539,3 +539,38 @@ Replaces discrete threshold toggling with continuous mathematical interpolation 
 - **Dynamic Text Glow:** Real-time CSS property `--nav-glow` interpolating typography brightness with `color-mix(in srgb, var(--color-accent) calc(var(--nav-glow) * 100%), currentColor)`.
 - **Zero-Jank Guarantee:** Caches section tops and relative link bounding boxes via `ResizeObserver`; updates exclusively inside passive `requestAnimationFrame`.
 - **Viewport Isolation:** Gated strictly to tablet/desktop viewports (`min-width: 768px` for scroll-spy), maintaining mobile drawer simplicity.
+
+---
+
+## 7. GitHub Live Metrics & Contribution Heatmap System
+
+### A. Section Topology & Anchor Geometry
+
+- **Section ID & Ordering:** `#github` (Position `04`), situated in sequence between `#certificaciones` (03) and `#filosofia` (05).
+- **Navigation Dock Item:** Displays Lucide `Github` icon with label `GITHUB` (or `GIT` on tablet viewports) and numeric index `04`.
+
+### B. Contribution Intensity Palette Tokens
+
+Heatmap cells dynamically consume active theme CSS variables (`--color-accent` and `--color-accent-subtle`), adapting instantly whenever the user or live rotation switches palette:
+
+| Activity Level | Contributions Range | Tailwind / CSS Token Implementation                                      |
+| :------------- | :------------------ | :----------------------------------------------------------------------- |
+| **Level 0**    | `0`                 | `bg-zinc-100 dark:bg-zinc-800/80`                                        |
+| **Level 1**    | `1 - 3`             | `bg-[var(--color-accent-subtle)] border border-[var(--color-accent)]/20` |
+| **Level 2**    | `4 - 6`             | `bg-[var(--color-accent)] opacity-50`                                    |
+| **Level 3**    | `7 - 9`             | `bg-[var(--color-accent)] opacity-80`                                    |
+| **Level 4**    | `10+`               | `bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-glow)]`     |
+
+### C. Bento Showcase Composition
+
+1. **Annual Contribution Heatmap Canvas (`GitHubHeatmap.astro`):**
+   - 53-week matrix of contribution cells (11px mobile, 12px desktop) with 3px gutters.
+   - Spanish localized weekday labels (`Lun`, `Mié`, `Vie`) and dynamically computed month column offsets.
+   - Delegated singleton floating tooltip (`#heatmap-floating-tooltip`) providing zero layout shift, viewport boundary clamping, and zero DOM pollution.
+   - Contained inside `overflow-x-auto` with auto-scroll to the current week on mobile devices.
+2. **Metrics Highlight Ribbon (4 KPI Cards):**
+   - Total Contributions (`GitCommit`), Current Streak (`Flame`), Longest Streak (`Trophy`), and Public Repositories (`BookMarked`).
+3. **Languages Distribution Bar:**
+   - Stacked percentage bar with colored segments and pill legend showing byte shares and percentages.
+4. **Interactive Profile & Repository CTAs:**
+   - Links to GitHub profile `@aitorgallegocr21`, repositories list, and live sync status.

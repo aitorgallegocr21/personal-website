@@ -23,6 +23,10 @@ test.describe('Horizontal Viewport Overflow & Dock Layout Checks', () => {
         const overflowing = [];
         const all = document.querySelectorAll('*');
         for (const el of all) {
+          // Allow internal elements within deliberate horizontal scroll containers
+          if (el.closest('[data-heatmap-scroll], [data-horizontal-scroll]')) {
+            continue;
+          }
           const rect = el.getBoundingClientRect();
           if (rect.right > width + 0.5) {
             overflowing.push({

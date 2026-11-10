@@ -85,7 +85,8 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **📐 Editorial Portrait & Contact Column:** Crisp rectangular portrait badge, `// CONTACTO` section header aligned with dedicated phone icon, and streamlined contact badges with anti-scraping defense.
 - **🔍 Rich Schema.org & Automated SEO:** JSON-LD structured data (`Person` & `ProfilePage`), auto-generated `sitemap-index.xml` via `@astrojs/sitemap`, search crawler directives in `robots.txt`, and dedicated 1200x630 Open Graph preview card for social sharing.
 - **🖼️ Native Asset Optimization Pipeline:** Astro's built-in `<Image />` component powered by Sharp, transcoding project previews and portraits to lightweight WebP with zero Cumulative Layout Shift (CLS) and a 97% image payload reduction.
-- **🧪 Comprehensive Test Suite (Unit & E2E):** 94 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state, scroll-spy calculations, dock manager, schema-org, clipboard) paired with 20 End-to-End browser tests via Playwright automated in GitHub Actions CI with resilient system Chrome detection.
+- **📊 GitHub Live Metrics & Contribution Heatmap:** Automated build-time GraphQL ingestion via GitHub Actions daily cron (`00:00 UTC`), generating a native theme-adaptive contribution calendar heatmap, live streaks, repository statistics, and top languages distribution with zero runtime JS overhead and full offline fallback.
+- **🧪 Comprehensive Test Suite (Unit & E2E):** 122 unit tests with Vitest (SSOT integrity, date math, Zod schemas, skin state, scroll-spy calculations, dock manager, schema-org, clipboard, github schemas and metrics algorithms) paired with 26 End-to-End browser tests via Playwright automated in GitHub Actions CI with resilient system Chrome detection.
 - **🛡️ Privacy & Anti-Scraping Protection:** Phone numbers are injected via build-time environment variables (`PUBLIC_PHONE`) and protected from automated crawlers.
 
 ---
@@ -198,21 +199,22 @@ The project enforces a clean, deterministic two-branch strategy:
 
 ## 💻 Development Workflow & Scripts
 
-| Command                  | Action                                                                                                             |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `npm run verify`         | Full deterministic quality gate (`check` + `lint` + `format` + `test` + `build`).                                  |
-| `npm run verify:fast`    | Quick quality gate (`check` + `lint` + `format` + `test`).                                                         |
-| `npm run dev`            | Starts local development server at `http://localhost:4321`.                                                        |
-| `astro dev --background` | Runs development server in background mode.                                                                        |
-| `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                                                  |
-| `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                                               |
-| `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter (`npm run format:fix` to apply).               |
-| `npm test`               | Runs the Vitest unit test suite (87 tests covering SSOT, dates, themes, dock manager, scrollspy, and Zod schemas). |
-| `npm run test:e2e`       | Runs Playwright End-to-End test suite (19 tests verifying live interactions and A4 print containment).             |
-| `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                                         |
-| `npm run build:pdf`      | Generates deterministic A4 PDFs across all 8 color palettes using headless Chromium.                               |
-| `npm run build:og`       | Generates 1200x630 Open Graph banner image for social sharing.                                                     |
-| `npm run preview`        | Spins up a local server to preview production output from `dist/`.                                                 |
+| Command                  | Action                                                                                                                            |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run verify`         | Full deterministic quality gate (`check` + `lint` + `format` + `test` + `build`).                                                 |
+| `npm run verify:fast`    | Quick quality gate (`check` + `lint` + `format` + `test`).                                                                        |
+| `npm run dev`            | Starts local development server at `http://localhost:4321`.                                                                       |
+| `astro dev --background` | Runs development server in background mode.                                                                                       |
+| `npm run check`          | Runs `@astrojs/check` and TypeScript validation without building.                                                                 |
+| `npm run lint`           | Runs ESLint (flat config) for TypeScript, Astro, and JSX a11y rules.                                                              |
+| `npm run format`         | Checks code formatting using Prettier and Tailwind CSS class sorter (`npm run format:fix` to apply).                              |
+| `npm test`               | Runs the Vitest unit test suite (122 tests covering SSOT, dates, themes, dock manager, scrollspy, github utils, and Zod schemas). |
+| `npm run test:e2e`       | Runs Playwright End-to-End test suite (26 tests verifying live interactions and A4 print containment).                            |
+| `npm run sync:github`    | Fetches latest GitHub metrics & calendar via GraphQL API and updates `src/data/github-data.json`.                                 |
+| `npm run build`          | Full production build (`astro check && astro build && npm run build:pdf`).                                                        |
+| `npm run build:pdf`      | Generates deterministic A4 PDFs across all 8 color palettes using headless Chromium.                                              |
+| `npm run build:og`       | Generates 1200x630 Open Graph banner image for social sharing.                                                                    |
+| `npm run preview`        | Spins up a local server to preview production output from `dist/`.                                                                |
 
 ---
 

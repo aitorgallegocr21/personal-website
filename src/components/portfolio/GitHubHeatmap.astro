@@ -1,0 +1,266 @@
+---
+import type { ContributionCalendar } from '@/types/github';
+import { formatContributionDate, SHORT_MONTHS_ES } from '@/utils/github';
+
+interface Props {
+  calendar: ContributionCalendar;
+  class?: string;
+}
+
+const { calendar, class: className = '' } = Astro.props;
+const weeks = calendar?.weeks || [];
+
+// Calculate month header indicators
+interface MonthLabel {
+  weekIndex: number;
+  name: string;
+}
+
+const monthLabels: MonthLabel[] = [];
+let lastLabeledMonth = -1;
+
+weeks.forEach((week, index) => {
+  const firstDay = week.days?.[0];
+  if (!firstDay) return;
+
+  const parts = firstDay.date.split('-');
+  const month = Number(parts[1]) - 1;
+  const day = Number(parts[2]);
+
+  // Mark month label if it's the beginning of a month and sufficiently spaced
+  if (month !== lastLabeledMonth && (day <= 14 || index === 0)) {
+    const rawMonth = SHORT_MONTHS_ES[month] || '';
+    const name = rawMonth.charAt(0).toUpperCase() + rawMonth.slice(1);
+    monthLabels.push({ weekIndex: index, name });
+    lastLabeledMonth = month;
+  }
+});
+---
+
+<div
+  class:list={[
+    'rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-xs backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-900/60 dark:shadow-none sm:p-5',
+    className,
+  ]}
+>
+  <!-- Scrollable Heatmap Canvas -->
+  <div
+    data-heatmap-scroll
+    class="custom-scrollbar overflow-x-auto pt-7 pb-2"
+    role="region"
+    aria-label="Calendario de actividad de GitHub del último año"
+  >
+    <div class="inline-flex flex-col gap-1.5 min-w-max select-none">
+      <!-- Month Header Labels Row -->
+      <div class="relative mb-1 flex h-4 text-[10px] font-mono text-zinc-400 dark:text-zinc-500">
+        <!-- Spacer for weekday labels column -->
+        <div class="w-7 shrink-0"></div>
+        <div class="relative flex-1">
+          {monthLabels.map((m) => (
+            <span
+              class="absolute -top-1 font-mono tracking-wider"
+              style={`left: calc(${m.weekIndex} * 14px);`}
+            >
+              {m.name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Main Calendar Grid: Weekdays + Weeks Matrix -->
+      <div class="flex items-start gap-1">
+        <!-- Weekday Labels (Lun, Mié, Vie) -->
+        <div class="flex flex-col gap-[3px] pr-1.5 text-[9px] font-mono leading-[11px] text-zinc-400 dark:text-zinc-500 sm:text-[10px] sm:leading-[12px]">
+          <span class="h-[11px] sm:h-[12px]"></span>
+          <span class="h-[11px] sm:h-[12px]">Lun</span>
+          <span class="h-[11px] sm:h-[12px]"></span>
+          <span class="h-[11px] sm:h-[12px]">Mié</span>
+          <span class="h-[11px] sm:h-[12px]"></span>
+          <span class="h-[11px] sm:h-[12px]">Vie</span>
+          <span class="h-[11px] sm:h-[12px]"></span>
+        </div>
+
+        <!-- Weeks Matrix -->
+        <div class="flex gap-[3px]">
+          {weeks.map((week) => (
+            <div class="flex flex-col gap-[3px]">
+              {week.days.map((day) => {
+                const formattedDate = formatContributionDate(day.date);
+                const tooltipText =
+                  day.count === 0
+                    ? `Sin contribuciones el ${formattedDate}`
+                    : `${day.count} ${day.count === 1 ? 'contribución' : 'contribuciones'} el ${formattedDate}`;
+
+                return (
+                  <div
+                    class="heatmap-cell relative h-[11px] w-[11px] rounded-xs transition-transform duration-100 hover:z-20 hover:scale-125 sm:h-[12px] sm:w-[12px] sm:rounded-xs cursor-pointer"
+                    data-level={day.level}
+                    data-tooltip={tooltipText}
+                    role="gridcell"
+                    aria-label={tooltipText}
+                    title={tooltipText}
+                  />
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend & Footer Info -->
+  <div class="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-zinc-100 pt-3 text-xs text-zinc-500 dark:border-zinc-800/70 dark:text-zinc-400">
+    <div class="flex items-center gap-2 font-mono text-[11px]">
+      <span class="inline-block h-2 w-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+      <span>
+        {calendar?.totalContributions ?? 0} contribuciones en el último año
+      </span>
+    </div>
+
+    <!-- Levels Legend -->
+    <div class="flex items-center gap-1.5 font-mono text-[11px]">
+      <span class="text-zinc-400">Menos</span>
+      <div class="flex gap-[3px]">
+        <div
+          class="heatmap-cell h-[10px] w-[10px] rounded-xs"
+          data-level="0"
+          title="Nivel 0: Sin actividad"
+        ></div>
+        <div
+          class="heatmap-cell h-[10px] w-[10px] rounded-xs"
+          data-level="1"
+          title="Nivel 1: Actividad ligera"
+        ></div>
+        <div
+          class="heatmap-cell h-[10px] w-[10px] rounded-xs"
+          data-level="2"
+          title="Nivel 2: Actividad moderada"
+        ></div>
+        <div
+          class="heatmap-cell h-[10px] w-[10px] rounded-xs"
+          data-level="3"
+          title="Nivel 3: Actividad alta"
+        ></div>
+        <div
+          class="heatmap-cell h-[10px] w-[10px] rounded-xs"
+          data-level="4"
+          title="Nivel 4: Pico de actividad"
+        ></div>
+      </div>
+      <span class="text-zinc-400">Más</span>
+    </div>
+  </div>
+
+  <!-- Floating Accessible Hover Tooltip -->
+  <div
+    id="heatmap-floating-tooltip"
+    role="tooltip"
+    class="pointer-events-none fixed z-50 hidden -translate-x-1/2 -translate-y-full rounded-md bg-zinc-900 px-2 py-1 text-[10px] font-mono text-zinc-100 shadow-lg dark:bg-zinc-100 dark:text-zinc-900"
+  >
+    <span id="heatmap-tooltip-text"></span>
+    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-900 dark:border-t-zinc-100"></div>
+  </div>
+</div>
+
+<script>
+  function initHeatmap() {
+    // 1. Ensure calendar scrolls to right edge on small devices so recent activity is visible
+    const containers = document.querySelectorAll<HTMLElement>(
+      '[data-heatmap-scroll]'
+    );
+    containers.forEach((container) => {
+      if (container.scrollWidth > container.clientWidth) {
+        container.scrollLeft = container.scrollWidth - container.clientWidth;
+      }
+    });
+
+    // 2. Delegate hover tooltip positioning
+    const tooltip = document.getElementById('heatmap-floating-tooltip');
+    const tooltipText = document.getElementById('heatmap-tooltip-text');
+
+    if (!tooltip || !tooltipText) return;
+
+    document.addEventListener('pointerover', (e) => {
+      const target = (e.target as HTMLElement)?.closest<HTMLElement>(
+        '.heatmap-cell[data-tooltip]'
+      );
+      if (!target) return;
+      const text = target.getAttribute('data-tooltip');
+      if (!text) return;
+
+      tooltipText.textContent = text;
+      const rect = target.getBoundingClientRect();
+      tooltip.style.left = `${rect.left + rect.width / 2}px`;
+      tooltip.style.top = `${rect.top - 6}px`;
+      tooltip.classList.remove('hidden');
+    });
+
+    document.addEventListener('pointerout', (e) => {
+      const target = (e.target as HTMLElement)?.closest<HTMLElement>(
+        '.heatmap-cell[data-tooltip]'
+      );
+      if (target) {
+        tooltip.classList.add('hidden');
+      }
+    });
+  }
+
+  // Run on page load and astro page transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeatmap);
+  } else {
+    initHeatmap();
+  }
+  document.addEventListener('astro:page-load', initHeatmap);
+</script>
+
+<style>
+  /* Theme-adaptive contribution levels consuming dynamic palette custom properties */
+  .heatmap-cell[data-level='0'] {
+    background-color: rgba(228, 228, 231, 0.7); /* zinc-200 */
+    border: 1px solid rgba(212, 212, 216, 0.5); /* zinc-300 */
+  }
+
+  :global(.dark) .heatmap-cell[data-level='0'],
+  :global([data-theme='dark']) .heatmap-cell[data-level='0'] {
+    background-color: rgba(39, 39, 42, 0.7); /* zinc-800 */
+    border: 1px solid rgba(63, 63, 70, 0.5); /* zinc-700 */
+  }
+
+  .heatmap-cell[data-level='1'] {
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-accent-border);
+  }
+
+  .heatmap-cell[data-level='2'] {
+    background-color: var(--color-accent);
+    opacity: 0.52;
+  }
+
+  .heatmap-cell[data-level='3'] {
+    background-color: var(--color-accent);
+    opacity: 0.82;
+  }
+
+  .heatmap-cell[data-level='4'] {
+    background-color: var(--color-accent);
+    box-shadow: 0 0 6px var(--color-accent-glow);
+  }
+
+  /* Custom subtle scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(161, 161, 170, 0.3);
+    border-radius: 9999px;
+  }
+  :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb,
+  :global([data-theme='dark']) .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(82, 82, 91, 0.4);
+  }
+</style>
