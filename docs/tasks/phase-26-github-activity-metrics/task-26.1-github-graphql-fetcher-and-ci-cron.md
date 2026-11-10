@@ -1,6 +1,6 @@
 # Task 26.1: GitHub GraphQL Fetcher & Daily CI Automation Engine
 
-**Status:** Planned  
+**Status:** Completed  
 **Branch:** `feat/phase-26-github-activity-metrics`  
 **Goal:** Build a robust, offline-resilient build-time data ingestion engine (`scripts/fetch-github-data.mjs`) that queries the GitHub GraphQL API for user `aitorgallegocr21`, stores an SSOT snapshot in `src/data/github-data.json`, provides a fallback mock for offline/local builds, and configures a GitHub Actions daily cron workflow (`.github/workflows/github-sync.yml`).
 
@@ -116,8 +116,8 @@ By moving metric ingestion to build-time via GitHub Actions and static compilati
 
 ## 3. Verification Checklist
 
-- [ ] `scripts/fetch-github-data.mjs` runs safely without `GITHUB_TOKEN` and falls back cleanly without crashing.
-- [ ] Running with a valid token retrieves accurate metrics for `aitorgallegocr21` and writes `src/data/github-data.json`.
-- [ ] Aggregation logic correctly sorts top programming languages by percentage and total bytes.
-- [ ] `.github/workflows/github-sync.yml` workflow syntax is valid and passes CI linting.
-- [ ] `npm run check` and `npm run build` pass with 0 errors.
+- [x] `scripts/fetch-github-data.mjs` runs safely without `GITHUB_TOKEN` and falls back cleanly without crashing.
+- [x] Running with a valid token retrieves accurate metrics for `aitorgallegocr21` and writes `src/data/github-data.json`.
+- [x] Aggregation logic correctly sorts top programming languages by percentage and total bytes.
+- [x] `.github/workflows/github-sync.yml` workflow syntax is valid and passes CI linting.
+- [x] `npm run check` and `npm run build` pass with 0 errors.
