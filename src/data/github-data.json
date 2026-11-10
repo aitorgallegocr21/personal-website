@@ -1,59 +1,77 @@
 {
   "username": "aitorgallegocr21",
-  "updatedAt": "2026-11-10T09:14:27.250Z",
+  "updatedAt": "2026-11-10T11:14:36.456Z",
   "totalContributions": 614,
   "currentStreak": 0,
   "longestStreak": 7,
-  "totalRepositories": 6,
-  "totalStars": 0,
+  "totalRepositories": 8,
+  "totalStars": 1,
   "totalForks": 0,
   "topLanguages": [
+    {
+      "name": "Python",
+      "color": "#3572A5",
+      "size": 471791,
+      "percentage": 39.2
+    },
     {
       "name": "TypeScript",
       "color": "#3178c6",
       "size": 231348,
-      "percentage": 32.5
+      "percentage": 19.2
     },
     {
       "name": "Astro",
       "color": "#ff5a03",
       "size": 163037,
-      "percentage": 22.9
+      "percentage": 13.6
     },
     {
       "name": "HTML",
       "color": "#e34c26",
       "size": 143717,
-      "percentage": 20.2
+      "percentage": 11.9
     },
     {
       "name": "CSS",
       "color": "#663399",
       "size": 98861,
-      "percentage": 13.9
+      "percentage": 8.2
     },
     {
       "name": "JavaScript",
       "color": "#f1e05a",
       "size": 64998,
-      "percentage": 9.1
+      "percentage": 5.4
+    },
+    {
+      "name": "C#",
+      "color": "#7355dd",
+      "size": 20413,
+      "percentage": 1.7
     },
     {
       "name": "Java",
       "color": "#b07219",
       "size": 8808,
-      "percentage": 1.2
+      "percentage": 0.7
+    },
+    {
+      "name": "Shell",
+      "color": "#89e051",
+      "size": 239,
+      "percentage": 0
     }
   ],
   "highlights": [
     {
-      "name": "aitorgallegocr21",
+      "name": "Music_Engine",
       "description": null,
-      "url": "https://github.com/aitorgallegocr21/aitorgallegocr21",
-      "stars": 0,
+      "url": "https://github.com/jorgefernandezmc-cpu/Music_Engine",
+      "stars": 1,
       "forks": 0,
-      "language": null,
-      "languageColor": null
+      "language": "Python",
+      "languageColor": "#3572A5"
     },
     {
       "name": "bookstack",
@@ -63,15 +81,6 @@
       "forks": 0,
       "language": "HTML",
       "languageColor": "#e34c26"
-    },
-    {
-      "name": "obsidian-reading-stats",
-      "description": null,
-      "url": "https://github.com/aitorgallegocr21/obsidian-reading-stats",
-      "stars": 0,
-      "forks": 0,
-      "language": "JavaScript",
-      "languageColor": "#f1e05a"
     },
     {
       "name": "personal-website",
@@ -99,6 +108,15 @@
       "forks": 0,
       "language": "CSS",
       "languageColor": "#663399"
+    },
+    {
+      "name": "VIS02_GALERIA_MULTIMEDIA",
+      "description": null,
+      "url": "https://github.com/guillermoalbercatorres/VIS02_GALERIA_MULTIMEDIA",
+      "stars": 0,
+      "forks": 0,
+      "language": "C#",
+      "languageColor": "#7355dd"
     }
   ],
   "calendar": {

@@ -282,6 +282,68 @@ export function syncPaletteUI(
   }
 }
 
+let isScrollLocked = false;
+
+function onScrollLockEvent(e: Event) {
+  const target = e.target as HTMLElement | null;
+  if (target?.closest('#palette-dropdown, #mobile-nav-menu')) {
+    return;
+  }
+  e.preventDefault();
+}
+
+/**
+ * Locks page scroll with full backdrop coverage, keeping sticky header on screen
+ * even when the page was scrolled down before opening.
+ */
+export function lockBackgroundScroll(): void {
+  if (typeof window === 'undefined' || isScrollLocked) return;
+  isScrollLocked = true;
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+  document.body.style.touchAction = 'none';
+
+  // If page was scrolled down and header is in sticky top dock, anchor it to viewport so overflow:hidden doesn't push it offscreen
+  const header = document.getElementById('site-header');
+  if (
+    header &&
+    header.getAttribute('data-dock') === 'top' &&
+    window.scrollY > 0
+  ) {
+    header.style.position = 'fixed';
+    header.style.top = window.innerWidth >= 640 ? '1rem' : '0.75rem';
+    header.style.left = '50%';
+    header.style.transform = 'translateX(-50%)';
+    header.setAttribute('data-scroll-locked-fixed', 'true');
+  }
+
+  window.addEventListener('wheel', onScrollLockEvent, { passive: false });
+  window.addEventListener('touchmove', onScrollLockEvent, { passive: false });
+}
+
+/**
+ * Restores normal background page scrolling.
+ */
+export function unlockBackgroundScroll(): void {
+  if (typeof window === 'undefined' || !isScrollLocked) return;
+  isScrollLocked = false;
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
+  document.body.style.touchAction = '';
+
+  const header = document.getElementById('site-header');
+  if (header && header.getAttribute('data-scroll-locked-fixed') === 'true') {
+    header.style.position = '';
+    header.style.top = '';
+    header.style.left = '';
+    header.style.transform = '';
+    header.removeAttribute('data-scroll-locked-fixed');
+  }
+
+  window.removeEventListener('wheel', onScrollLockEvent);
+  window.removeEventListener('touchmove', onScrollLockEvent);
+}
+
 /**
  * Ensures the palette backdrop overlay exists directly under <body> to prevent
  * stacking context and containing block traps from transformed header ancestors.
@@ -319,9 +381,7 @@ export function closePaletteMenu(): void {
       !mobileMenu.classList.contains('hidden') &&
       mobileMenu.getAttribute('data-state') === 'open';
     if (!isMobileMenuOpen) {
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      document.body.style.touchAction = '';
+      unlockBackgroundScroll();
     }
   }
 
@@ -363,12 +423,8 @@ export function openPaletteMenu(): void {
     paletteCloseTimeout = null;
   }
 
-  // Lock document scroll while interface hub popover is open
-  if (typeof document !== 'undefined') {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    document.body.style.touchAction = 'none';
-  }
+  // Lock document scroll without destroying sticky positioning on scroll
+  lockBackgroundScroll();
 
   paletteDropdown?.classList.remove('hidden');
   paletteDropdown?.setAttribute('data-state', 'open');

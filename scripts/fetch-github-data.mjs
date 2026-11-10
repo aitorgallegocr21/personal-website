@@ -21,12 +21,38 @@ query ($username: String!) {
     }
     repositories(
       first: 100
-      ownerAffiliations: OWNER
+      ownerAffiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER]
       privacy: PUBLIC
       isFork: false
       orderBy: { field: STARGAZERS, direction: DESC }
     ) {
       totalCount
+      nodes {
+        name
+        description
+        url
+        stargazerCount
+        forkCount
+        primaryLanguage {
+          name
+          color
+        }
+        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+          edges {
+            size
+            node {
+              name
+              color
+            }
+          }
+        }
+      }
+    }
+    repositoriesContributedTo(
+      first: 50
+      privacy: PUBLIC
+      contributionTypes: [COMMIT, PULL_REQUEST, REPOSITORY]
+    ) {
       nodes {
         name
         description
@@ -144,14 +170,27 @@ function transformGitHubData(user) {
   const weeks = user.contributionsCollection?.contributionCalendar?.weeks || [];
   const { currentStreak, longestStreak } = calculateStreaks(weeks);
 
-  const repos = user.repositories?.nodes || [];
+  // Merge owner/collaborator repositories with contributed repositories
+  const repoMap = new Map();
+  for (const repo of user.repositories?.nodes || []) {
+    if (repo?.url) {
+      repoMap.set(repo.url, repo);
+    }
+  }
+  for (const repo of user.repositoriesContributedTo?.nodes || []) {
+    if (repo?.url && !repoMap.has(repo.url)) {
+      repoMap.set(repo.url, repo);
+    }
+  }
+
+  const allRepos = Array.from(repoMap.values());
 
   let totalStars = 0;
   let totalForks = 0;
   const languageMap = new Map();
   let totalBytes = 0;
 
-  for (const repo of repos) {
+  for (const repo of allRepos) {
     totalStars += repo.stargazerCount ?? 0;
     totalForks += repo.forkCount ?? 0;
 
@@ -184,7 +223,14 @@ function transformGitHubData(user) {
           : 0,
     }));
 
-  const highlights = repos
+  // Exclude unwanted repos: obsidian, profile READMEs, or generic practice repos
+  const EXCLUDED_PATTERNS = ['obsidian', 'aitorgallegocr21', 'practica-git'];
+
+  const highlights = allRepos
+    .filter((repo) => {
+      const name = (repo.name || '').toLowerCase();
+      return !EXCLUDED_PATTERNS.some((pattern) => name.includes(pattern));
+    })
     .map((repo) => ({
       name: repo.name,
       description: repo.description ?? null,

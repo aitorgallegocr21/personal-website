@@ -710,11 +710,28 @@ test.describe('Web Portfolio Interactive E2E', () => {
       githubSection.getByText('Repositorios', { exact: true })
     ).toBeVisible();
 
-    // Verify language distribution
+    // Verify language distribution including Python and TypeScript
     await expect(
       githubSection.getByText('Distribución de Lenguajes')
     ).toBeVisible();
-    await expect(githubSection.getByText('TypeScript')).toBeVisible();
+    await expect(githubSection.getByText('Python').first()).toBeVisible();
+    await expect(githubSection.getByText('TypeScript').first()).toBeVisible();
+
+    // Verify section header does not prefix section number
+    await expect(
+      githubSection.locator('span', { hasText: '// Open Source & Actividad' })
+    ).toBeVisible();
+
+    // Verify highlights do not include obsidian
+    await expect(githubSection.getByText(/obsidian/i)).toHaveCount(0);
+
+    // Verify hovering cell displays floating tooltip
+    const cellWithTooltip = heatmapScroll
+      .locator('.heatmap-cell[data-tooltip]')
+      .first();
+    await cellWithTooltip.hover();
+    const tooltip = page.locator('#heatmap-floating-tooltip');
+    await expect(tooltip).toBeVisible();
 
     // Verify profile CTA button
     const profileCta = githubSection.locator('a', {
@@ -722,5 +739,24 @@ test.describe('Web Portfolio Interactive E2E', () => {
     });
     await expect(profileCta).toBeVisible();
     await expect(profileCta).toHaveAttribute('href', /github\.com/);
+  });
+
+  test('opens interface hub popover from sticky top dock even after page scroll', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('./');
+    await page.evaluate(() => window.scrollTo(0, 600));
+    await page.waitForTimeout(100);
+
+    const btn = page.locator('#palette-menu-btn');
+    await btn.click();
+    const popover = page.locator('#palette-dropdown');
+    await expect(popover).toBeVisible();
+
+    const rect = await popover.boundingBox();
+    expect(rect).not.toBeNull();
+    expect(rect!.y).toBeGreaterThan(0);
+    expect(rect!.y).toBeLessThan(400);
   });
 });

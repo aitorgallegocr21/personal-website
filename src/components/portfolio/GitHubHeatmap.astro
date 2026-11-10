@@ -156,10 +156,10 @@ weeks.forEach((week, index) => {
   <div
     id="heatmap-floating-tooltip"
     role="tooltip"
-    class="pointer-events-none fixed z-50 hidden -translate-x-1/2 -translate-y-full rounded-md bg-zinc-900 px-2 py-1 text-[10px] font-mono text-zinc-100 shadow-lg dark:bg-zinc-100 dark:text-zinc-900"
+    class="pointer-events-none fixed z-[9999] hidden -translate-x-1/2 -translate-y-full rounded-md bg-zinc-900/95 px-2.5 py-1 text-[11px] font-mono text-zinc-100 shadow-xl border border-zinc-700/60 backdrop-blur-md dark:bg-zinc-100/95 dark:text-zinc-900 dark:border-zinc-300 whitespace-nowrap"
   >
     <span id="heatmap-tooltip-text"></span>
-    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-900 dark:border-t-zinc-100"></div>
+    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-900/95 dark:border-t-zinc-100/95"></div>
   </div>
 </div>
 
@@ -181,6 +181,11 @@ weeks.forEach((week, index) => {
 
     if (!tooltip || !tooltipText) return;
 
+    // Attach directly to body to avoid containing block traps from card backdrop-filter
+    if (tooltip.parentElement !== document.body) {
+      document.body.appendChild(tooltip);
+    }
+
     document.addEventListener('pointerover', (e) => {
       const target = (e.target as HTMLElement)?.closest<HTMLElement>(
         '.heatmap-cell[data-tooltip]'
@@ -191,8 +196,13 @@ weeks.forEach((week, index) => {
 
       tooltipText.textContent = text;
       const rect = target.getBoundingClientRect();
-      tooltip.style.left = `${rect.left + rect.width / 2}px`;
-      tooltip.style.top = `${rect.top - 6}px`;
+      const x = Math.max(
+        16,
+        Math.min(window.innerWidth - 16, rect.left + rect.width / 2)
+      );
+      const y = rect.top - 8;
+      tooltip.style.left = `${x}px`;
+      tooltip.style.top = `${y}px`;
       tooltip.classList.remove('hidden');
     });
 
