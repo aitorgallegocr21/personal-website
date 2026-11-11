@@ -1,8 +1,8 @@
 {
   "username": "aitorgallegocr21",
-  "updatedAt": "2026-11-10T11:14:36.456Z",
-  "totalContributions": 614,
-  "currentStreak": 0,
+  "updatedAt": "2026-11-11T04:02:07.491Z",
+  "totalContributions": 639,
+  "currentStreak": 7,
   "longestStreak": 7,
   "totalRepositories": 8,
   "totalStars": 1,
@@ -12,43 +12,43 @@
       "name": "Python",
       "color": "#3572A5",
       "size": 471791,
-      "percentage": 39.2
+      "percentage": 36.6
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "size": 231348,
-      "percentage": 19.2
+      "size": 275837,
+      "percentage": 21.4
     },
     {
       "name": "Astro",
       "color": "#ff5a03",
-      "size": 163037,
-      "percentage": 13.6
+      "size": 189442,
+      "percentage": 14.7
     },
     {
       "name": "HTML",
       "color": "#e34c26",
       "size": 143717,
-      "percentage": 11.9
+      "percentage": 11.1
     },
     {
       "name": "CSS",
       "color": "#663399",
-      "size": 98861,
-      "percentage": 8.2
+      "size": 98917,
+      "percentage": 7.7
     },
     {
       "name": "JavaScript",
       "color": "#f1e05a",
-      "size": 64998,
-      "percentage": 5.4
+      "size": 75238,
+      "percentage": 5.8
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "size": 20413,
-      "percentage": 1.7
+      "size": 26769,
+      "percentage": 2.1
     },
     {
       "name": "Java",
@@ -88,8 +88,8 @@
       "url": "https://github.com/aitorgallegocr21/personal-website",
       "stars": 0,
       "forks": 0,
-      "language": "Astro",
-      "languageColor": "#ff5a03"
+      "language": "TypeScript",
+      "languageColor": "#3178c6"
     },
     {
       "name": "proyecto-ntt-data",
@@ -120,7 +120,7 @@
     }
   ],
   "calendar": {
-    "totalContributions": 614,
+    "totalContributions": 639,
     "weeks": [
       {
         "days": [
@@ -2524,15 +2524,21 @@
           },
           {
             "date": "2026-11-09",
-            "count": 0,
-            "level": 0,
+            "count": 11,
+            "level": 2,
             "weekday": 1
           },
           {
             "date": "2026-11-10",
+            "count": 14,
+            "level": 2,
+            "weekday": 2
+          },
+          {
+            "date": "2026-11-11",
             "count": 0,
             "level": 0,
-            "weekday": 2
+            "weekday": 3
           }
         ]
       }
