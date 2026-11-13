@@ -1,8 +1,8 @@
 {
   "username": "aitorgallegocr21",
-  "updatedAt": "2026-11-12T05:14:18.224Z",
-  "totalContributions": 639,
-  "currentStreak": 0,
+  "updatedAt": "2026-11-13T04:29:24.784Z",
+  "totalContributions": 683,
+  "currentStreak": 1,
   "longestStreak": 7,
   "totalRepositories": 8,
   "totalStars": 1,
@@ -12,49 +12,49 @@
       "name": "Python",
       "color": "#3572A5",
       "size": 471791,
-      "percentage": 36.6
+      "percentage": 33
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "size": 275837,
-      "percentage": 21.4
+      "size": 387375,
+      "percentage": 27.1
     },
     {
       "name": "Astro",
       "color": "#ff5a03",
       "size": 189442,
-      "percentage": 14.7
+      "percentage": 13.2
     },
     {
       "name": "HTML",
       "color": "#e34c26",
-      "size": 143717,
-      "percentage": 11.1
+      "size": 176156,
+      "percentage": 12.3
     },
     {
       "name": "CSS",
       "color": "#663399",
-      "size": 98917,
-      "percentage": 7.7
+      "size": 93486,
+      "percentage": 6.5
     },
     {
       "name": "JavaScript",
       "color": "#f1e05a",
-      "size": 75238,
-      "percentage": 5.8
+      "size": 76869,
+      "percentage": 5.4
     },
     {
       "name": "C#",
       "color": "#7355dd",
       "size": 26769,
-      "percentage": 2.1
+      "percentage": 1.9
     },
     {
       "name": "Java",
       "color": "#b07219",
       "size": 8808,
-      "percentage": 0.7
+      "percentage": 0.6
     },
     {
       "name": "Shell",
@@ -79,8 +79,8 @@
       "url": "https://github.com/aitorgallegocr21/bookstack",
       "stars": 0,
       "forks": 0,
-      "language": "HTML",
-      "languageColor": "#e34c26"
+      "language": "TypeScript",
+      "languageColor": "#3178c6"
     },
     {
       "name": "personal-website",
@@ -120,7 +120,7 @@
     }
   ],
   "calendar": {
-    "totalContributions": 639,
+    "totalContributions": 683,
     "weeks": [
       {
         "days": [
@@ -2128,14 +2128,14 @@
           },
           {
             "date": "2026-09-10",
-            "count": 0,
-            "level": 0,
+            "count": 1,
+            "level": 1,
             "weekday": 4
           },
           {
             "date": "2026-09-11",
-            "count": 0,
-            "level": 0,
+            "count": 10,
+            "level": 2,
             "weekday": 5
           },
           {
@@ -2150,20 +2150,20 @@
         "days": [
           {
             "date": "2026-09-13",
-            "count": 0,
-            "level": 0,
+            "count": 22,
+            "level": 3,
             "weekday": 0
           },
           {
             "date": "2026-09-14",
-            "count": 0,
-            "level": 0,
+            "count": 1,
+            "level": 1,
             "weekday": 1
           },
           {
             "date": "2026-09-15",
-            "count": 0,
-            "level": 0,
+            "count": 1,
+            "level": 1,
             "weekday": 2
           },
           {
@@ -2542,9 +2542,15 @@
           },
           {
             "date": "2026-11-12",
+            "count": 9,
+            "level": 2,
+            "weekday": 4
+          },
+          {
+            "date": "2026-11-13",
             "count": 0,
             "level": 0,
-            "weekday": 4
+            "weekday": 5
           }
         ]
       }
