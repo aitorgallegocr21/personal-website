@@ -134,3 +134,34 @@ When requested to progress on the project (e.g., _"next task"_ or _"do task X"_)
    ```bash
    git add . && git commit -m "type(scope): descriptive message"
    ```
+
+---
+
+## 8. Autonomous Pull Request & Release Protocol
+
+When requested to create and manage a Pull Request (e.g., _"crea la PR y gestiónala"_ or _"release develop to main"_):
+
+1. **Diff & Scope Analysis:**
+   - Run `git diff main..develop --stat` and `git log main..develop --oneline` to identify all delivered phases, components, and fixes.
+2. **Pull Request Template Adherence:**
+   - Strictly populate `.github/pull_request_template.md` without omitting any section:
+     - `## 📋 Summary of Changes`: Explicitly link related phases from `docs/tasks/` and select appropriate change type checkboxes (`feat`, `fix`, `perf`, `docs`, etc.).
+     - `## 🔍 Key Architectural Changes`: Detail modifications to data schemas, components, and layout contracts.
+     - `## ✅ Quality Gate & Inviolable Rules Checklist`: Mark all verified checks (`[x]`) ensuring SSOT compliance, strict typing, A4 budget, mobile touch ergonomics, and documentation sync.
+3. **Automated PR Creation:**
+   - Execute PR creation using GitHub CLI:
+     ```bash
+     gh pr create --base main --head develop --title "release: <scope>" --body "..."
+     ```
+4. **CI Workflow Monitoring:**
+   - Track GitHub Actions workflow progress using `gh pr checks` or `gh run watch`.
+   - **If any check fails:** Inspect failed step logs via `gh run view --log-failed`, diagnose root cause, fix directly on `develop`, push updates, and resume monitoring.
+   - **Never bypass failed checks:** Do not merge with failing CI gates.
+5. **Automated Merge & Release Deployment:**
+   - Once all CI workflows succeed in green, execute standard merge:
+     ```bash
+     gh pr merge --merge
+     ```
+   - Monitor post-merge GitHub Pages deployment workflow (`deploy.yml`) on `main` to verify static assets and multi-palette PDFs compile and deploy cleanly in production.
+6. **Local Synchronization:**
+   - Checkout `main`, pull latest commits (`git pull origin main`), and switch back to `develop` if active development continues.

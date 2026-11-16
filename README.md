@@ -110,7 +110,7 @@ This repository powers both an interactive web portfolio and a printable, ATS-fr
 - **Testing & Quality Assurance:** Vitest (94 unit tests), Playwright (20 E2E browser tests & A4 print calibration)
 - **PDF & Asset Engine:** Puppeteer Core (Chromium headless A4 print engine), Sharp (WebP optimization), JSZip (batch exports)
 - **SEO & Discovery:** `@astrojs/sitemap` (automated sitemap), rich Schema.org JSON-LD
-- **Deployment:** GitHub Pages automated via GitHub Actions (`.github/workflows/deploy.yml`)
+- **Deployment:** GitHub Pages automated via GitHub Actions (`.github/workflows/deploy.yml`), handling continuous deployment on `main` and daily `00:00 UTC` scheduled rebuilds with live GitHub GraphQL metrics
 
 ---
 

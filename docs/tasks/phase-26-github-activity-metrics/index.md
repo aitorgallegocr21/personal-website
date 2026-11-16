@@ -14,7 +14,7 @@
 
 2. **Automated Daily Ingestion & Zero-Runtime Overhead:**
    - Instead of making unauthenticated client-side requests from the visitor's browser (vulnerable to strict rate-limits, CORS issues, slow third-party servers, and layout shifts):
-   - A dedicated GitHub Actions workflow runs on a **daily cron schedule (00:00 UTC) and on every git push**, executing an ingestion script (`scripts/fetch-github-data.mjs`).
+   - The GitHub Pages deployment workflow (`.github/workflows/deploy.yml`) runs on **every push to `main`, a daily cron schedule (`00:00 UTC`), and `workflow_dispatch`**, executing the ingestion script (`npm run sync:github` / `scripts/fetch-github-data.mjs`) at build time before compiling and publishing to GitHub Pages.
    - The script calls the **GitHub GraphQL API** using the repo's secure `GITHUB_TOKEN` to retrieve:
      - Exact contribution calendar matrix (weeks, days, contribution counts, and intensity levels 0–4).
      - Streak calculations (current streak, longest streak, total contributions in past year).
@@ -42,7 +42,7 @@
 
 ## 2. Planned Task Breakdown
 
-- [x] **[Task 26.1: GitHub GraphQL Fetcher & Daily CI Automation Engine](task-26.1-github-graphql-fetcher-and-ci-cron.md):** Ingestion script (`scripts/fetch-github-data.mjs`), GraphQL queries, SSOT fallback snapshot (`src/data/github-data.json`), and GitHub Actions daily cron workflow (`.github/workflows/github-sync.yml`).
+- [x] **[Task 26.1: GitHub GraphQL Fetcher & Daily CI Automation Engine](task-26.1-github-graphql-fetcher-and-ci-cron.md):** Ingestion script (`scripts/fetch-github-data.mjs`), GraphQL queries, SSOT fallback snapshot (`src/data/github-data.json`), and daily GitHub Actions cron build-time sync integrated into `.github/workflows/deploy.yml`.
 - [x] **[Task 26.2: Data Schema, Zod Validation & SSOT Typing](task-26.2-github-data-schema-and-zod-validation.md):** TypeScript interfaces (`src/types/github.ts`), runtime Zod schema (`src/schemas/github.schema.ts`), data loader, and unit tests (`tests/unit/github-schema.test.ts`).
 - [x] **[Task 26.3: Theme-Adaptive Contribution Heatmap Component](task-26.3-theme-adaptive-contribution-heatmap.md):** Native SVG/Grid calendar consuming CSS theme tokens (`--color-accent`), streak calculation algorithms (`src/utils/github.ts`), and unit test suite (`tests/unit/github-utils.test.ts`).
 - [x] **[Task 26.4: GitHub Bento Grid Section & Navigation Link Integration](task-26.4-github-bento-section-and-navigation-integration.md):** Bento showcase card assembly (`src/components/skins/bento/BentoGitHub.astro`), inclusion between Certificaciones and Filosofía, `#github` (04) navigation dock item in `Navbar.astro`, and fluid scroll-spy integration.
