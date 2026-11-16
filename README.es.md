@@ -110,7 +110,7 @@ Este proyecto da vida de forma simultánea a un portfolio web moderno y a un cur
 - **Testing & Calibración:** Vitest (94 tests unitarios), Playwright (20 tests E2E y verificación A4 de impresión)
 - **Motor de PDFs & Assets:** Puppeteer Core (compilación Chromium headless de PDFs A4), Sharp (optimización WebP) y JSZip
 - **SEO & Indexación:** `@astrojs/sitemap` (sitemap automatizado) y metadatos Schema.org JSON-LD
-- **Despliegue Continuo:** GitHub Pages automatizado vía GitHub Actions (`.github/workflows/deploy.yml`)
+- **Despliegue Continuo:** GitHub Pages automatizado vía GitHub Actions (`.github/workflows/deploy.yml`), gestionando despliegues en `main` y recompilaciones diarias programadas (`00:00 UTC`) con métricas de GitHub GraphQL en vivo
 
 ---
 
